@@ -2,7 +2,7 @@ import React from "react";
 import { Segment, Item, Grid, Icon } from "semantic-ui-react";
 import classes from "./InventoryDashboard.module.css";
 
-export default function InventoryListItem({ item }) {
+export default function InventoryListItem({ item, selectItem, deleteItem }) {
   return (
     <Segment.Group>
       <Segment textAlign='center' className={classes.inventoryItemContainer}>
@@ -24,7 +24,7 @@ export default function InventoryListItem({ item }) {
             </Grid.Column>
             <Grid.Column width={2}>
               <Item>
-                <Item.Content >{item.name}</Item.Content>
+                <Item.Content>{item.name}</Item.Content>
               </Item>
             </Grid.Column>
             <Grid.Column width={2}>
@@ -45,14 +45,18 @@ export default function InventoryListItem({ item }) {
             <Grid.Column width={2}>
               <Item>
                 <Item.Content>
-                  <Icon name='edit' className={classes.editIcon}/>
+                  <Icon
+                    name='edit'
+                    className={classes.editIcon}
+                    onClick={() => selectItem(item)}
+                  />
                 </Item.Content>
               </Item>
             </Grid.Column>
             <Grid.Column width={2}>
               <Item>
                 <Item.Content>
-                  <Icon name='delete' className={classes.deleteIcon}/>
+                  <Icon name='delete' className={classes.deleteIcon}  onClick={() => deleteItem(item.id)} />
                 </Item.Content>
               </Item>
             </Grid.Column>

@@ -16,16 +16,16 @@
 
 .editIcon {
     position: relative;
-    left: 50px;
+    /* left: 50px; */
 }
 
 .addIcon {
     position: relative;
-    left: 60px;
+    /* left: 60px; */
     bottom: 2px;
 }
 
 .deleteIcon, .filterIcon {
     position: relative;
-    right: 50px;
+    /* right: 50px; */
 }
