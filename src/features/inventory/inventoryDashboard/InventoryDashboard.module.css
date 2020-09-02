@@ -1,0 +1,31 @@
+.inventoryTitlesContainer {
+    border: none!important;
+    font-weight: bold;
+}
+
+
+
+.itemImage {
+    width: 20%!important;
+    height: 20%!important;
+}
+
+.inventoryListContainer {
+    background-color: #eeeeee!important;
+}
+
+.editIcon {
+    position: relative;
+    left: 50px;
+}
+
+.addIcon {
+    position: relative;
+    left: 60px;
+    bottom: 2px;
+}
+
+.deleteIcon, .filterIcon {
+    position: relative;
+    right: 50px;
+}

@@ -1,0 +1,29 @@
+.logo {
+    margin-right: 15px;
+    color: #fff;
+}
+
+.NavBar {
+    background-image: linear-gradient(
+            135deg,
+            #006a71 0%,
+            #1dd3bd 69%,
+            #2bb2bb 89%
+    ) !important;
+  }
+
+  .NavLink, .NavBarBrand {
+      color: white !important;
+  }
+
+  .DropdownMenu {
+      background-color: transparent !important;
+      border-color: transparent !important;
+      margin-right: 30px;
+  }
+
+  .DropdownMenu:focus {
+    background-color: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+  }
