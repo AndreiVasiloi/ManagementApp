@@ -1,21 +1,10 @@
 import React from "react";
-import { Segment, Item, Grid, Icon, Dropdown } from "semantic-ui-react";
+import { Segment, Item, Grid, Icon, Button } from "semantic-ui-react";
 import classes from "./InventoryDashboard.module.css";
 import { NavLink } from "react-router-dom";
 
-export default function InventoryListTitles({ setFormOpen }) {
-  const tagOptions = [
-    {
-      key: "Category",
-      text: "Category",
-      value: "Category",
-    },
-    {
-      key: "Item",
-      text: "Item",
-      value: "Item",
-    },
-  ];
+export default function InventoryListTitles() {
+
   return (
     <Segment.Group className={classes.inventoryTitlesContainer}>
       <Segment textAlign='center'>
@@ -54,21 +43,8 @@ export default function InventoryListTitles({ setFormOpen }) {
               </Item>
             </Grid.Column>
             <Grid.Column width={2}>
-              <Dropdown
-                multiple
-                icon='add'
-                className={classes.addIcon}
-                as={NavLink}
-                to='/createItem'
-              >
-                <Dropdown.Menu>
-                  <Dropdown.Menu scrolling>
-                    {tagOptions.map((option) => (
-                      <Dropdown.Item key={option.value} {...option} />
-                    ))}
-                  </Dropdown.Menu>
-                </Dropdown.Menu>
-              </Dropdown>
+              <Button content='Add category' color='blue' />
+              <Button content='Add item' color='teal' as={NavLink} to='/createItem'/>
             </Grid.Column>
             <Grid.Column width={2}>
               <Icon name='filter' className={classes.filterIcon} />

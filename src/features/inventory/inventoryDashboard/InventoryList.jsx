@@ -6,20 +6,15 @@ import classes from "./InventoryDashboard.module.css";
 
 export default function InventoryList({
   items,
-  setFormOpen,
-  selectItem,
-  deleteItem,
 }) {
   return (
     <Segment.Group>
       <Segment className={classes.inventoryListContainer}>
-        <InventoryListTitles setFormOpen={setFormOpen} />
+        <InventoryListTitles/>
         {items.map((item) => (
           <InventoryListItem
             item={item}
             key={item.id}
-            selectItem={selectItem}
-            deleteItem={deleteItem}
           />
         ))}
       </Segment>
