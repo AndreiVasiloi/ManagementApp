@@ -45,6 +45,7 @@ export default function InventoryListItem({ item, selectItem, deleteItem }) {
             <Grid.Column width={2}>
               <Item>
                 <Item.Content>
+                {/* as={Link} to={`/editItem/${item.id}`} */}
                   <Icon
                     name='edit'
                     className={classes.editIcon}

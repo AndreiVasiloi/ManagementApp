@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Segment, Form, Header, Button } from "semantic-ui-react";
 import cuid from "cuid";
+import { NavLink } from "react-router-dom";
 
 export default function InventoryItemForm({
   setFormOpen,
@@ -83,7 +84,8 @@ export default function InventoryItemForm({
           type='submit'
           floated='right'
           content='Cancel'
-          onClick={() => setFormOpen(false)}
+          as={NavLink} 
+          to='/inventory'
         />
       </Form>
     </Segment>

@@ -1,20 +1,21 @@
 import React from "react";
 import { Segment, Item, Grid, Icon, Dropdown } from "semantic-ui-react";
 import classes from "./InventoryDashboard.module.css";
+import { NavLink } from "react-router-dom";
 
 export default function InventoryListTitles({ setFormOpen }) {
   const tagOptions = [
     {
-      key: 'Category',
-      text: 'Category',
-      value: 'Category',
+      key: "Category",
+      text: "Category",
+      value: "Category",
     },
     {
-      key: 'Item',
-      text: 'Item',
-      value: 'Item',
-    }
-  ]
+      key: "Item",
+      text: "Item",
+      value: "Item",
+    },
+  ];
   return (
     <Segment.Group className={classes.inventoryTitlesContainer}>
       <Segment textAlign='center'>
@@ -53,7 +54,13 @@ export default function InventoryListTitles({ setFormOpen }) {
               </Item>
             </Grid.Column>
             <Grid.Column width={2}>
-              <Dropdown multiple icon='add' className={classes.addIcon} onClick={() => setFormOpen(true)}>
+              <Dropdown
+                multiple
+                icon='add'
+                className={classes.addIcon}
+                as={NavLink}
+                to='/createItem'
+              >
                 <Dropdown.Menu>
                   <Dropdown.Menu scrolling>
                     {tagOptions.map((option) => (
