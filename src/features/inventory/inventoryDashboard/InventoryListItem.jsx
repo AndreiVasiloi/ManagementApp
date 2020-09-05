@@ -4,6 +4,7 @@ import classes from "./InventoryDashboard.module.css";
 import { useDispatch } from "react-redux";
 import { deleteItem } from "../inventoryItemsActions";
 import { Link } from "react-router-dom";
+import {format} from 'date-fns';
 
 export default function InventoryListItem({ item }) {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ export default function InventoryListItem({ item }) {
             </Grid.Column>
             <Grid.Column width={2}>
               <Item>
-                <Item.Content>{item.expirationDate}</Item.Content>
+                <Item.Content>{format(item.expirationDate, 'MMMM d, yyyy h:mm a')}</Item.Content>
               </Item>
             </Grid.Column>
             <Grid.Column width={2}>

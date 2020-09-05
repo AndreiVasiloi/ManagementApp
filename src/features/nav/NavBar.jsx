@@ -1,19 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import classes from "./NavBar.module.css";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import EventAvailableIcon from "@material-ui/icons/EventAvailable";
 import SignedInMenu from "./SignedInMenu";
 import SignedOutMenu from "./SignedOutMenu";
+import { useSelector } from "react-redux";
 
 export default function NavBar() {
-  const history = useHistory();
-  const [authenticated, setAuthenticated] = useState(false);
-
-  function handleSignOut() {
-    setAuthenticated(false);
-    history.push("/");
-  }
+  const {authenticated} = useSelector(state => state.auth);
 
   return (
     <>
@@ -61,9 +56,9 @@ export default function NavBar() {
             </Nav.Link>
           </Nav>
           {authenticated ? (
-            <SignedInMenu signOut={handleSignOut} />
+            <SignedInMenu />
           ) : (
-            <SignedOutMenu setAuthenticated={setAuthenticated} />
+            <SignedOutMenu />
           )}
         </Navbar.Collapse>
       </Navbar>

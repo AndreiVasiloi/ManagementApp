@@ -10,21 +10,23 @@ import AppointmentsDashboard from "../../features/appointments/appointmentsDashb
 import ProfitDashboard from "../../features/profit/profitDashboard/ProfitDashboard";
 import InventoryItemForm from "../../features/inventory/inventoryForm/InventoryItemForm";
 import Sandbox from "../../features/sandbox/Sandbox";
+import ModalManager from "../common/modals/ModalManager";
 
 function App() {
   const { key } = useLocation();
   return (
     <>
-      <Route path="/" exact component={HomePage} />
+      <ModalManager />
+      <Route path='/' exact component={HomePage} />
       <Route
         path={"/(.+)"}
         render={() => (
           <>
             <NavBar />
-            <Route path="/appointments" component={AppointmentsDashboard} />
-            <Route path="/inventory" component={InventoryDashboard} />
-            <Route path="/sandbox" component={Sandbox} />
-            <Route path="/profit" component={ProfitDashboard} />
+            <Route path='/appointments' component={AppointmentsDashboard} />
+            <Route path='/inventory' component={InventoryDashboard} />
+            <Route path='/sandbox' component={Sandbox} />
+            <Route path='/profit' component={ProfitDashboard} />
             <Route
               path={["/createItem", "/editItem/:id"]}
               component={InventoryItemForm}

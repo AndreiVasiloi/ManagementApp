@@ -8,7 +8,7 @@ export default function InventoryList({
   items,
 }) {
   return (
-    <Segment.Group>
+    <Segment.Group style={{marginTop: '50px'}}>
       <Segment className={classes.inventoryListContainer}>
         <InventoryListTitles/>
         {items.map((item) => (
