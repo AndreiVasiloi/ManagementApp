@@ -2,7 +2,6 @@ import React from "react";
 import { Segment, Item, Grid, Icon } from "semantic-ui-react";
 import classes from "./InventoryDashboard.module.css";
 import { Link } from "react-router-dom";
-import { format } from "date-fns";
 import { deleteItemInFirestore } from "../../../app/firestore/firestoreService";
 
 export default function InventoryListItem({ item }) {
@@ -23,13 +22,13 @@ export default function InventoryListItem({ item }) {
             </Grid.Column>
             <Grid.Column width={2}>
               <Item>
-                <Item.Content>{item.price} RON</Item.Content>
+                <Item.Content>{item.displayPrice}</Item.Content>
               </Item>
             </Grid.Column>
             <Grid.Column width={3}>
               <Item>
                 <Item.Content>
-                  {format(item.expirationDate, "MMMM d, yyyy")}
+                  {item.displayExpirationDate}
                 </Item.Content>
               </Item>
             </Grid.Column>

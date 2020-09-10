@@ -23,6 +23,11 @@ export function dataFromSnapshot(snapshot) {
 
 export function listenToItemsFromFirestore(predicate) {
   const itemsRef = db.collection("items");
+
+  var sortBy = predicate.get("sort");
+  return itemsRef.orderBy(sortBy);
+
+  /*
   switch (predicate.get("sort")) {
     case "category":
       return itemsRef.orderBy("category");
@@ -37,6 +42,7 @@ export function listenToItemsFromFirestore(predicate) {
     default:
       return itemsRef.orderBy("expirationDate");
   }
+  */
 }
 
 export function listenToItemFromFirestore(itemId) {

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Grid } from "semantic-ui-react";
+import { format } from "date-fns";
 import InventoryList from "./InventoryList";
 import { useSelector, useDispatch } from "react-redux";
 import InventoryListItemPlaceholder from "./InventoryListItemPlaceholder";
@@ -8,6 +9,16 @@ import { listenToItems } from "../inventoryItemsActions";
 import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import classes from "./InventoryDashboard.module.css";
 import InventoryNavbar from "../inventoryNav/InventoryNavbar";
+
+function onFilter(item, text) {
+  const keys = Object.keys(item).filter(key => key !== 'id');
+  const values = keys.map((key) => {
+    const value = item[key];
+    return value.toString().toLowerCase();
+  });
+
+  return values.some((value) => value.includes(text));
+}
 
 export default function InventoryDashboard() {
   const dispatch = useDispatch();
@@ -20,11 +31,9 @@ export default function InventoryDashboard() {
 
   const [text, setText] = useState("");
 
-  const filterBy = text.trim().toLowerCase();
+  const textLowered = text.trim().toLowerCase();
   const filteredItems =
-    text === ""
-      ? items
-      : items.filter((item) => item.category.toLowerCase().includes(filterBy));
+    text === "" ? items : items.filter((item) => onFilter(item, textLowered));
 
   function handleSearch(text) {
     console.log("you searched for ", text);
