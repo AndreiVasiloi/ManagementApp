@@ -4,32 +4,35 @@ import classes from "./InventoryNavbar.module.css";
 import { FormField, Icon } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 
-export default function InventoryNavbar() {
+export default function InventoryNavbar({ onSearch }) {
+  const ENTER = 13;
 
-  function handleGetValueFromSearch(event) {
-    const {value} = event.target;
-    console.log(value);
+  function handleSearch(event) {
+    if (event.which === ENTER) {
+      const { value } = event.target;
+      onSearch(value);
+    }
   }
 
   return (
-    <Navbar fixed='top' className={classes.inventoryNav}>
-      <Navbar.Brand className={classes.inventoryNavBrand} href='#home'>
+    <Navbar fixed="top" className={classes.inventoryNav}>
+      <Navbar.Brand className={classes.inventoryNavBrand} href="#home">
         Inventory
       </Navbar.Brand>
       <FormField className={`ui icon input ${classes.inventoryNavSearch}`}>
-        <input type='text' placeholder='Search...'  onChange={handleGetValueFromSearch} />
-        <Icon name='search' className={classes.inventoryNavSearchIcon} />
+        <input type="text" placeholder="Search..." onKeyPress={handleSearch} />
+        <Icon name="search" className={classes.inventoryNavSearchIcon} />
       </FormField>
       <Nav className={classes.inventoryNavDropdown}>
         <NavDropdown
-          title='Add'
-          id='basic-nav-dropdown'
+          title="Add"
+          id="basic-nav-dropdown"
           className={classes.inventoryNavDropdownTitle}
         >
           <NavDropdown.Item
             className={classes.inventoryNavDropdownLink}
             as={NavLink}
-            to='/createItem'
+            to="/createItem"
           >
             Add Item
           </NavDropdown.Item>
@@ -37,7 +40,7 @@ export default function InventoryNavbar() {
           <NavDropdown.Item
             className={classes.inventoryNavDropdownLink}
             as={NavLink}
-            to='/inventoryCategories'
+            to="/inventoryCategories"
           >
             Manage Categories
           </NavDropdown.Item>

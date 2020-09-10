@@ -15,10 +15,21 @@ export default function InventoryDashboard() {
   const { loading } = useSelector((state) => state.async);
 
   const [predicate, setPredicate] = useState(
-    new Map([
-      ["sort", "expirationDate"]
-    ])
+    new Map([["sort", "expirationDate"]])
   );
+
+  const [text, setText] = useState("");
+
+  const filterBy = text.trim().toLowerCase();
+  const filteredItems =
+    text === ""
+      ? items
+      : items.filter((item) => item.category.toLowerCase().includes(filterBy));
+
+  function handleSearch(text) {
+    console.log("you searched for ", text);
+    setText(text);
+  }
 
   function handleSetPredicate(key, value) {
     setPredicate(new Map(predicate.set(key, value)));
@@ -37,6 +48,7 @@ export default function InventoryDashboard() {
           <InventoryNavbar
             predicate={predicate}
             setPredicate={handleSetPredicate}
+            onSearch={handleSearch}
           />
           {loading ? (
             <>
@@ -45,7 +57,7 @@ export default function InventoryDashboard() {
             </>
           ) : (
             <InventoryList
-              items={items}
+              items={filteredItems}
               predicate={predicate}
               setPredicate={handleSetPredicate}
               loading={loading}
