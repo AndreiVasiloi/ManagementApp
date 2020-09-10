@@ -1,12 +1,10 @@
-import {CREATE_ITEM, UPDATE_ITEM, DELETE_ITEM } from "./inventoryConstants";
-
-const { sampleData } = require("../../app/api/sampleData");
+import {CREATE_ITEM, UPDATE_ITEM, DELETE_ITEM, FETCH_ITEM } from "./inventoryConstants";
 
 const initialState = {
-  items: sampleData,
+  items: [],
 };
 
-export default function inventoryReducer(
+export default function inventoryItemsReducer(
   state = initialState,
   { type, payload }
 ) {
@@ -26,6 +24,11 @@ export default function inventoryReducer(
         ...state,
         items: [...state.items.filter(itm => itm.id !== payload)],
       };
+      case FETCH_ITEM:
+        return {
+          ...state,
+          items: payload,
+        };
     default:
       return state;
   }

@@ -1,21 +1,35 @@
 import React from "react";
 import { Segment, Header, Button } from "semantic-ui-react";
-import cuid from "cuid";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { updateItem, createItem } from "../inventoryItemsActions";
+import { listenToItems } from "../inventoryItemsActions";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import MyTextInput from "../../../app/common/form/MyTextInput";
 import MySelectInput from "../../../app/common/form/MySelectInput";
-import { categoryData } from "../../../app/api/categoryOptions";
 import MyDateInput from "../../../app/common/form/MyDateInput";
+import MyNumberInput from "../../../app/common/form/MyNumberInput";
+import useFirestoreDoc from "../../../app/hooks/useFirestoreDoc";
+import {
+  listenToItemFromFirestore,
+  updateItemInFirestore,
+  addItemToFirestore,
+  listenToCategoriesFromFirestore,
+} from "../../../app/firestore/firestoreService";
+import LoadingComponent from "../../../app/layout/LoadingComponent";
+import { toast } from "react-toastify";
+import classes from "./InventoryForm.module.css";
+import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
+import { listenToCategories } from "../inventoryCategoriesActions";
 
 export default function InventoryItemForm({ match, history }) {
   const dispatch = useDispatch();
+  const categories = useSelector(state => state.category.categories);
   const selectedItem = useSelector((state) =>
     state.item.items.find((i) => i.id === match.params.id)
   );
+
+  const { loading, error } = useSelector((state) => state.async);
 
   const initialValues = selectedItem ?? {
     category: "",
@@ -33,41 +47,61 @@ export default function InventoryItemForm({ match, history }) {
     amount: Yup.string().required(),
   });
 
+  useFirestoreCollection({
+    query: () => listenToCategoriesFromFirestore(),
+    data: (categories) => dispatch(listenToCategories(categories)),
+    deps: [dispatch],
+  });
+
+
+  useFirestoreDoc({
+    shouldExecute: !!match.params.id,
+    query: () => listenToItemFromFirestore(match.params.id),
+    data: (item) => dispatch(listenToItems([item])),
+    deps: [match.params.id, dispatch],
+  });
+
+  if (loading) return <LoadingComponent content='Loading event...' />;
+
+  if (error) return <Redirect to='/error' />;
+
   return (
-    <Segment clearing style={{ marginTop: "50px" }}>
+    <Segment clearing className={classes.inventoryFormContainer}>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          selectedItem
-            ? dispatch(updateItem({ ...selectedItem, ...values }))
-            : dispatch(createItem({ ...values, id: cuid() }));
-          history.push("/inventory");
+        onSubmit={async (values, { setSubmitting }) => {
+          try {
+            selectedItem
+              ? await updateItemInFirestore(values)
+              : await addItemToFirestore(values);
+            history.push("/inventory");
+          } catch (error) {
+            toast.error(error.message);
+            setSubmitting(false);
+          }
         }}
       >
         {({ isSubmitting, dirty, isValid }) => (
           <Form className='ui form'>
-            <Header sub color='teal' content='Add item' />
+            <Header sub color='teal' content= {selectedItem ? 'Edit item' : 'Add item'}  />
             <MySelectInput
               name='category'
               placeholder='Category'
-              options={categoryData}
+              options={categories}
             />
             <MyTextInput name='name' placeholder='Name' />
-            <MyTextInput name='price' placeholder='Price' />
+            <MyNumberInput name='price' placeholder='Price' />
             <MyDateInput
               name='expirationDate'
               placeholderText='Expiration Date'
-              timeFormat='HH:mm'
-              showTimeSelect
-              timeCaption='time'
-              dateFormat='MMMM d, yyyy h:mm a'
+              dateFormat='MMMM d, yyyy'
             />
-            <MyTextInput name='amount' placeholder='Amount' />
+            <MyNumberInput name='amount' placeholder='Amount' />
             <Button
               type='submit'
               floated='right'
-              positive
+              className={classes.inventoryFormSubmitBtn}
               content='Submit'
               loading={isSubmitting}
               disabled={!isValid || !dirty || isSubmitting}
@@ -75,6 +109,7 @@ export default function InventoryItemForm({ match, history }) {
             <Button
               disabled={isSubmitting}
               type='submit'
+              className={classes.inventoryFormCancelBtn}
               floated='right'
               content='Cancel'
               as={NavLink}

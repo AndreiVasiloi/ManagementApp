@@ -1,14 +1,9 @@
 .inventoryTitlesContainer {
     border: none!important;
     font-weight: bold;
+    color: #14b1ab;
 }
 
-
-
-.itemImage {
-    width: 20%!important;
-    height: 20%!important;
-}
 
 .inventoryListContainer {
     background-color: #eeeeee!important;
@@ -16,16 +11,23 @@
 
 .editIcon {
     position: relative;
-    /* left: 50px; */
+    color: #14b1ab;
 }
 
-.addIcon {
+
+.deleteIcon {
     position: relative;
-    /* left: 60px; */
-    bottom: 2px;
+    color: #14b1ab;
 }
 
-.deleteIcon, .filterIcon {
-    position: relative;
-    /* right: 50px; */
+.inventoryContainer {
+    margin-left: 200px;
+    padding-top: 3% !important;
 }
+
+@media screen and (max-width: 700px) {
+    .inventoryContainer {
+      margin: 0;
+    }
+  }
+

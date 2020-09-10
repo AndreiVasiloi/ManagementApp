@@ -1,5 +1,5 @@
-const OPEN_MODAL = "OPEN_MODAL";
-const CLOSE_MODAL = "CLOSE_MODAL";
+const OPEN_MODAL = 'OPEN_MODAL';
+const CLOSE_MODAL = 'CLOSE_MODAL';
 
 export function openModal(payload) {
   return {
@@ -8,10 +8,9 @@ export function openModal(payload) {
   };
 }
 
-export function closeModal(payload) {
+export function closeModal() {
   return {
     type: CLOSE_MODAL,
-    payload,
   };
 }
 

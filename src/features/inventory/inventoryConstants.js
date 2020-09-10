@@ -1,3 +1,8 @@
 export const CREATE_ITEM = 'CREATE_ITEM';
 export const UPDATE_ITEM = 'UPDATE_ITEM';
 export const DELETE_ITEM = 'DELETE_ITEM';
+export const FETCH_ITEM = 'FETCH_ITEM';
+export const CREATE_CATEGORY = 'CREATE_CATEGORY';
+export const UPDATE_CATEGORY = 'UPDATE_CATEGORY';
+export const DELETE_CATEGORY = 'DELETE_CATEGORY';
+export const FETCH_CATEGORY = 'FETCH_CATEGORY';

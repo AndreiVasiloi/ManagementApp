@@ -1,0 +1,42 @@
+.inventoryNav {
+  margin-left: 200px;
+  background-color: #fff;
+  border-bottom: 2px solid #14b1ab;
+}
+
+.inventoryNavBrand {
+  color: #14b1ab !important;
+  font-weight: bold;
+}
+
+.inventoryNavDropdown {
+  background-color: #14b1ab;
+  border-radius: .28571429rem;
+  position: relative;
+  left: 57.7%;
+}
+
+.inventoryNavSearch {
+  position: relative;
+  left: 1.5%;
+}
+
+.inventoryNavSearch > input {
+    border:  1px solid #14b1ab !important;
+}
+
+.inventoryNavSearch > input::placeholder {
+    color: #14b1ab !important;
+}
+
+.inventoryNavSearchIcon {
+    color: #14b1ab !important;
+}
+
+.inventoryNavDropdownLink {
+    color: #14b1ab !important;
+}
+
+.inventoryNavDropdownTitle > a {
+    color: #fff !important;
+}

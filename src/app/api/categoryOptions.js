@@ -1,5 +1,5 @@
 export const categoryData = [
-    {key: 'fructe', text: 'Fructe', value: 'Fructe'},
-    {key: 'legume', text: 'Legume', value: 'Legume'},
-    {key: 'carne', text: 'Carne', value: 'Carne'},
-]
+  { key: "1", text: "Fructe", value: "Fructe" },
+  { key: "2", text: "Legume", value: "Legume" },
+  { key: "3", text: "Carne", value: "Carne" },
+];

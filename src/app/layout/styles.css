@@ -1,5 +1,4 @@
 body {
-  text-align: center;
   font-family: 'Montserrat', sans-serif;
   background-color: #eaeaea;
 }
@@ -7,3 +6,11 @@ body {
 .react-datepicker-wrapper {
   width: 100%;
 }
+
+/* .visible.transition {
+  margin-top: auto !important;
+  display: inline-block !important;
+  position: relative;
+  top: 20%;
+} */
+

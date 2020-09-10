@@ -1,4 +1,4 @@
-.logo {
+/* .logo {
     margin-right: 15px;
     color: #fff;
 }
@@ -15,6 +15,11 @@
   .NavLink {
       color: white !important;
   }
+*/
+
+.DropdownMenuItem {
+  color: black;
+}
 
   .DropdownMenu {
       background-color: transparent !important;
@@ -26,4 +31,53 @@
     background-color: transparent !important;
     border-color: transparent !important;
     box-shadow: none !important;
+  } 
+
+  .sidebar {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #14b1ab;
+    position: fixed;
+    height: 110%;
+    overflow: auto;
+  }
+  
+  .sidebar a {
+    display: block;
+    color: #f4f6ff;
+    padding: 16px;
+    text-decoration: none;
+  }
+   
+  .sidebar a.active {
+    color: white;
+    font-size: large;
+  }
+  
+  .sidebar a:hover:not(.active) {
+    color: white;
+    font-size: large;
+  }
+  
+  div.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: 1000px;
+  }
+  
+  @media screen and (max-width: 700px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+    .sidebar a {float: left;}
+  }
+  
+  @media screen and (max-width: 400px) {
+    .sidebar a {
+      text-align: center;
+      float: none;
+    }
   }
