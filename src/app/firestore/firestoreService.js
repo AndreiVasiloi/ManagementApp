@@ -21,13 +21,22 @@ export function dataFromSnapshot(snapshot) {
 
 //items
 
-export function orderItems(orderItem) {
-  return db.collection("items").orderBy(orderItem);
-}
-
-export function listenToItemsFromFirestore(orderItem) {
-    debugger
-  return db.collection("items").orderBy(orderItem);
+export function listenToItemsFromFirestore(predicate) {
+  const itemsRef = db.collection("items");
+  switch (predicate.get("sort")) {
+    case "category":
+      return itemsRef.orderBy("category");
+    case "name":
+      return itemsRef.orderBy("name");
+    case "price":
+      return itemsRef.orderBy("price");
+    case "expirationDate":
+      return itemsRef.orderBy("expirationDate");
+    case "amount":
+      return itemsRef.orderBy("amount");
+    default:
+      return itemsRef.orderBy("expirationDate");
+  }
 }
 
 export function listenToItemFromFirestore(itemId) {

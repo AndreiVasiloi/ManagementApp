@@ -5,13 +5,19 @@ import { FormField, Icon } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 
 export default function InventoryNavbar() {
+
+  function handleGetValueFromSearch(event) {
+    const {value} = event.target;
+    console.log(value);
+  }
+
   return (
     <Navbar fixed='top' className={classes.inventoryNav}>
       <Navbar.Brand className={classes.inventoryNavBrand} href='#home'>
         Inventory
       </Navbar.Brand>
       <FormField className={`ui icon input ${classes.inventoryNavSearch}`}>
-        <input type='text' placeholder='Search...' />
+        <input type='text' placeholder='Search...'  onChange={handleGetValueFromSearch} />
         <Icon name='search' className={classes.inventoryNavSearchIcon} />
       </FormField>
       <Nav className={classes.inventoryNavDropdown}>

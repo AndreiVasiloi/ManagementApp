@@ -40,3 +40,14 @@
 .inventoryNavDropdownTitle > a {
     color: #fff !important;
 }
+
+.addCatBtnContainer {
+  position: relative !important;
+  left: 71.5% !important;
+}
+
+.addCatBtn {
+
+  background-color: #14b1ab !important;
+  border: 1px solid #14b1ab;
+}

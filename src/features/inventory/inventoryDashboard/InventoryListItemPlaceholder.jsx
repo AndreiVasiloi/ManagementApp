@@ -1,8 +1,8 @@
-import React from 'react';
-import {Segment, Button, Placeholder} from 'semantic-ui-react';
+import React from "react";
+import { Segment, Button, Placeholder } from "semantic-ui-react";
 export default function InventoryListItemPlaceholder() {
-    return (
-        <Placeholder fluid >
+  return (
+    <Placeholder fluid >
             <Segment.Group>
                 <Segment style={{minHeight: 110}}>
                     <Placeholder>
@@ -27,5 +27,5 @@ export default function InventoryListItemPlaceholder() {
                 </Segment>
             </Segment.Group>
         </Placeholder>
-    );
-};
+  );
+}

@@ -10,31 +10,46 @@ import classes from "./InventoryDashboard.module.css";
 import InventoryNavbar from "../inventoryNav/InventoryNavbar";
 
 export default function InventoryDashboard() {
-  debugger
   const dispatch = useDispatch();
   const { items } = useSelector((state) => state.item);
   const { loading } = useSelector((state) => state.async);
 
-  const [orderItem, setOrderItem] = useState('expirationDate');
+  const [predicate, setPredicate] = useState(
+    new Map([
+      ["sort", "expirationDate"]
+    ])
+  );
+
+  function handleSetPredicate(key, value) {
+    setPredicate(new Map(predicate.set(key, value)));
+  }
 
   useFirestoreCollection({
-    query: () => listenToItemsFromFirestore(orderItem),
+    query: () => listenToItemsFromFirestore(predicate),
     data: (items) => dispatch(listenToItems(items)),
-    deps: [dispatch],
+    deps: [dispatch, predicate],
   });
 
   return (
     <div className={classes.inventoryContainer}>
       <Grid>
         <Grid.Column width={16}>
-          <InventoryNavbar />
+          <InventoryNavbar
+            predicate={predicate}
+            setPredicate={handleSetPredicate}
+          />
           {loading ? (
             <>
               <InventoryListItemPlaceholder />
               <InventoryListItemPlaceholder />
             </>
           ) : (
-            <InventoryList items={items} setOrderItem={setOrderItem}/>
+            <InventoryList
+              items={items}
+              predicate={predicate}
+              setPredicate={handleSetPredicate}
+              loading={loading}
+            />
           )}
         </Grid.Column>
       </Grid>
