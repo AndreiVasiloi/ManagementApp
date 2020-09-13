@@ -26,23 +26,6 @@ export function listenToItemsFromFirestore(predicate) {
 
   var sortBy = predicate.get("sort");
   return itemsRef.orderBy(sortBy);
-
-  /*
-  switch (predicate.get("sort")) {
-    case "category":
-      return itemsRef.orderBy("category");
-    case "name":
-      return itemsRef.orderBy("name");
-    case "price":
-      return itemsRef.orderBy("price");
-    case "expirationDate":
-      return itemsRef.orderBy("expirationDate");
-    case "amount":
-      return itemsRef.orderBy("amount");
-    default:
-      return itemsRef.orderBy("expirationDate");
-  }
-  */
 }
 
 export function listenToItemFromFirestore(itemId) {

@@ -1,37 +1,3 @@
-/* .logo {
-    margin-right: 15px;
-    color: #fff;
-}
-
-.NavBar {
-    background-image: linear-gradient(
-            135deg,
-            #006a71 0%,
-            #1dd3bd 69%,
-            #2bb2bb 89%
-    ) !important;
-  }
-
-  .NavLink {
-      color: white !important;
-  }
-*/
-
-.DropdownMenuItem {
-  color: black;
-}
-
-  .DropdownMenu {
-      background-color: transparent !important;
-      border-color: transparent !important;
-      margin-right: 30px;
-  }
-
-  .DropdownMenu:focus {
-    background-color: transparent !important;
-    border-color: transparent !important;
-    box-shadow: none !important;
-  } 
 
   .sidebar {
     margin: 0;
@@ -65,19 +31,39 @@
     padding: 1px 16px;
     height: 1000px;
   }
+
+  .iconLink {
+    display: none !important;
+  }
   
-  @media screen and (max-width: 700px) {
+   @media screen and (max-width: 700px) {
     .sidebar {
       width: 100%;
       height: auto;
       position: relative;
     }
     .sidebar a {float: left;}
+    .sidebar .navLink:not(:first-child) {display: none;}
+    .iconLink {
+      float: right !important;
+      display: block !important;
+    }
   }
-  
+  /*
   @media screen and (max-width: 400px) {
     .sidebar a {
       text-align: center;
       float: none;
     }
+  } */
+
+  
+  @media screen and (max-width: 700px) {
+    .sidebar.responsive {position: relative;}
+    .sidebar.responsive .iconLink {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
   }
+

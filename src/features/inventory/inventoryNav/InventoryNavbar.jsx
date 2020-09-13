@@ -4,13 +4,13 @@ import classes from "./InventoryNavbar.module.css";
 import { FormField, Icon } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 
-export default function InventoryNavbar({ onSearch }) {
+export default function InventoryNavbar({ setText }) {
   const ENTER = 13;
 
   function handleSearch(event) {
     if (event.which === ENTER) {
       const { value } = event.target;
-      onSearch(value);
+      setText(value);
     }
   }
 
