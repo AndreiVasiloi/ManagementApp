@@ -1,7 +1,22 @@
+
 .inventoryNav {
   margin-left: 200px;
   background-color: #fff;
   border-bottom: 2px solid #14b1ab;
+}
+
+.inventoryNavContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.inventoryNavLeftCol {
+ flex: 20%;
+}
+
+.inventoryNavRightCol {
+  flex: 80%;
+  text-align: right;
 }
 
 .inventoryNavBrand {
@@ -12,17 +27,13 @@
 .inventoryNavDropdown {
   background-color: #14b1ab;
   border-radius: .28571429rem;
-  position: relative;
-  left: 57.7%;
-}
-
-.inventoryNavSearch {
-  position: relative;
-  left: 1.5%;
 }
 
 .inventoryNavSearch > input {
     border:  1px solid #14b1ab !important;
+    height: 32px!important;
+    position: relative;
+    top: 2px;
 }
 
 .inventoryNavSearch > input::placeholder {
@@ -33,8 +44,11 @@
     color: #14b1ab !important;
 }
 
-.inventoryNavDropdownLink {
-    color: #14b1ab !important;
+.inventoryNavButton {
+    background-color: #14b1ab !important;
+    border:  1px solid #14b1ab !important;
+    margin-left: 10px;
+    height: 32px!important;
 }
 
 .inventoryNavDropdownTitle > a {
@@ -50,4 +64,21 @@
 
   background-color: #14b1ab !important;
   border: 1px solid #14b1ab;
+}
+
+@media screen and (max-width: 700px) {
+  .inventoryNav {
+    margin: 55px 0 0 0;
+  }
+  .inventoryNavLeftCol {
+    flex: 20%;
+  }
+  .inventoryNavRightCol {
+    flex: 80%;
+   
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .inventoryNav.responsive {margin-top: 324px;}
 }

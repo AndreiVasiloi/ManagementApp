@@ -76,3 +76,30 @@ export function updateCategoryInFirestore(category) {
 export function deleteCategoryInFirestore(categoryId) {
   return db.collection("categories").doc(categoryId).delete();
 }
+
+//appointments
+
+export function listenToAppointmentsFromFirestore() {
+  return db.collection("appointments");
+}
+
+export function addAppointmentToFirestore(appointment) {
+  return db.collection("appointments").add({
+    ...appointment,
+  });
+}
+
+export function updateAppointmentInFirestore(appointment) {
+  return db.collection("appointments").doc(appointment.id).update(appointment);
+}
+
+export function deleteAppointmentInFirestore(appointmentId) {
+  return db.collection("appointments").doc(appointmentId).delete();
+}
+
+//reasons
+
+export function listenToReasonsFromFirestore() {
+  return db.collection("reasons");
+}
+

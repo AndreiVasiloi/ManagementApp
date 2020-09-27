@@ -1,54 +1,89 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import classes from "./NavBar.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { signOutUser } from "../auth/authActions";
 import { useHistory, Link } from "react-router-dom";
 import { Icon } from "semantic-ui-react";
+import { Nav } from "react-bootstrap";
+import {
+  addActiveClass,
+  addResponsiveClass,
+} from "../inventory/inventoryNavActions";
 
 export default function SignedInMenu() {
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.auth);
+  const { responsiveClass } = useSelector((state) => state.addClass);
+  const { activeClass } = useSelector((state) => state.addClass);
   const history = useHistory();
-  const [selectClass, setSelectClass] = useState();
 
-  function handleChangeClass() {
-    debugger
-    setSelectClass(false);
-  }
-  // const selectNav = useRef(null);
-  
-  // function handleNavIcon() {
-  //   selectNav.current.focus();
-  // }
-
-  
-  // function handleResponsiveNav() {
-    
-  //   console.log(selectNav.current.toString() === 'div.NavBar_sidebar__3OH7H');
-  //   if (selectNav.className === "sidebar") {
-  //     selectNav.className += " responsive";
-  //   } else {
-  //     selectNav.className = "sidebar";
-  //   }
-  // }
   return (
-    <div className={selectClass ?  `${classes.sidebar}` : `responsive ${classes.sidebar}`}>
-      <Link className={classes.navLink} to="/">
+    <div
+      className={
+        responsiveClass
+          ? `${classes.sidebar}`
+          : `${classes.sidebar} ${classes.responsive}`
+      }
+    >
+      <Nav.Item
+        as={Link}
+        className={`${classes.navLink} ${classes.navLinkHeader}`}
+        to="/"
+      >
         <Icon name="user" />
         {currentUser.email}
-      </Link>
-      <Link className={classes.navLink} to="/appointments">
+      </Nav.Item>
+      <Nav.Item
+        onClick={() => dispatch(addActiveClass("appointments"))}
+        as={Link}
+        className={
+          activeClass === "appointments"
+            ? `${classes.navLink} ${classes.active}`
+            : `${classes.navLink} `
+        }
+        to="/appointments"
+      >
         <Icon name="book" /> Appointments
-      </Link>
-      <Link className={classes.navLink} to="/inventory">
+      </Nav.Item>
+      <Nav.Item
+        onClick={() => dispatch(addActiveClass("inventory"))}
+        as={Link}
+        className={
+          activeClass === "inventory"
+            ? `${classes.navLink} ${classes.active}`
+            : `${classes.navLink} `
+        }
+        to="/inventory"
+      >
         <Icon name="archive" /> Inventory
-      </Link>
-      <Link className={classes.navLink} to="/profit">
+      </Nav.Item>
+      <Nav.Item
+        onClick={() => dispatch(addActiveClass("profit"))}
+        as={Link}
+        className={
+          activeClass === "profit"
+            ? `${classes.navLink} ${classes.active}`
+            : `${classes.navLink} `
+        }
+        to="/profit"
+      >
         <Icon name="percent" /> Profit
-      </Link>
-      <Link className={classes.navLink} to="/sandbox">Sandbox</Link>
-      <Link
-      className={classes.navLink}
+      </Nav.Item>
+      <Nav.Item
+        onClick={() => dispatch(addActiveClass("sandbox"))}
+        as={Link}
+        className={
+          activeClass === "sandbox"
+            ? `${classes.navLink} ${classes.active}`
+            : `${classes.navLink} `
+        }
+        to="/sandbox"
+      >
+        Sandbox
+      </Nav.Item>
+      <Nav.Item
+        as={Link}
+        className={classes.navLink}
         to="/"
         onClick={() => {
           dispatch(signOutUser());
@@ -56,10 +91,15 @@ export default function SignedInMenu() {
         }}
       >
         <Icon name="log out" /> Sign out
-      </Link >
-      <a href="a" className={classes.iconLink} onClick={handleChangeClass}>
-        <Icon className={classes.icon} name="bars" />
-      </a>
+      </Nav.Item>
+      <Nav.Item
+        className={classes.navLinkIcon}
+        onClick={() => {
+          dispatch(addResponsiveClass(!responsiveClass));
+        }}
+      >
+        <Icon className={classes.iconLink} name="bars" />
+      </Nav.Item>
     </div>
   );
 }

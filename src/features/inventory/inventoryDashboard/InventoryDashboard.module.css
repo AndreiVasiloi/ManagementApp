@@ -9,15 +9,15 @@
     background-color: #eeeeee!important;
 }
 
-.editIcon {
+.edit {
     position: relative;
     color: #14b1ab;
 }
 
 
-.deleteIcon {
+.delete {
     position: relative;
-    color: #14b1ab;
+    color: #ff414d;
 }
 
 .inventoryContainer {
@@ -25,9 +25,38 @@
     padding-top: 3% !important;
 }
 
+.inventoryButton::after {
+content: none!important;
+}
+
+.inventoryButton {
+    background-color: transparent!important;
+    border: none!important;
+    color:  #14b1ab!important;
+    outline: 0 !important;
+}
+
+.inventoryButton:focus, .inventoryButton:active {
+border: none !important;
+outline: none !important;
+box-shadow: none !important;
+}
+
+.expirationDateRed {
+    color: red;
+}
+
+.expirationDateBlack {
+    color: black;
+}
+
 @media screen and (max-width: 700px) {
     .inventoryContainer {
-      margin: 0;
+      margin: 45px 0 0 0;
+    }
+    .inventoryButton {
+        position: relative;
+        right: 10px;
     }
   }
 

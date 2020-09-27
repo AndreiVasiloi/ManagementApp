@@ -15,6 +15,7 @@ import { Container } from "semantic-ui-react";
 import {ToastContainer} from 'react-toastify';
 import ErrorComponent from "../common/errors/ErrorComponent";
 import InventoryCategoriesDashboard from "../../features/inventory/inventoryCategoriesDashboard/InventoryCategoriesDashboard";
+import AppointmentsForm from '../../features/appointments/appointmentsForm/AppointmentsForm';
 
 function App() {
   const { key } = useLocation();
@@ -27,7 +28,7 @@ function App() {
         path={"/(.+)"}
         render={() => (
           <>
-            <NavBar />
+            <NavBar/>
             <Container className='main'>
             <Route path='/appointments' component={AppointmentsDashboard} />
             <Route path='/inventory' component={InventoryDashboard} />
@@ -43,6 +44,10 @@ function App() {
              <Route
               path={["/createCategory", "/editCategory/:id"]}
               component={InventoryCategoryForm}
+            />
+               <Route
+              path={["/createAppointment", "/editAppointment/:id"]}
+              component={AppointmentsForm}
             />
             </Container>
            

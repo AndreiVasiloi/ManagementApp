@@ -9,7 +9,6 @@ import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import classes from "./InventoryDashboard.module.css";
 import InventoryNavbar from "../inventoryNav/InventoryNavbar";
 
-
 export default function InventoryDashboard() {
   const dispatch = useDispatch();
   const { items } = useSelector((state) => state.item);
@@ -17,7 +16,9 @@ export default function InventoryDashboard() {
   const [text, setText] = useState("");
   const textLowered = text.trim().toLowerCase();
   const filteredItems =
-    text === "" ? items : items.filter((item) => handleFilter(item, textLowered));
+    text === ""
+      ? items
+      : items.filter((item) => handleFilter(item, textLowered));
 
   const [predicate, setPredicate] = useState(
     new Map([["sort", "expirationDate"]])
@@ -29,11 +30,9 @@ export default function InventoryDashboard() {
       const value = item[key];
       return value.toString().toLowerCase();
     });
-  
+
     return values.some((value) => value.includes(text));
   }
-
- 
 
   function handleSetPredicate(key, value) {
     setPredicate(new Map(predicate.set(key, value)));
@@ -49,12 +48,12 @@ export default function InventoryDashboard() {
     <div className={classes.inventoryContainer}>
       <Grid>
         <Grid.Column width={16}>
-          {/* <InventoryNavbar
+          <InventoryNavbar
             predicate={predicate}
             setPredicate={handleSetPredicate}
             setText={setText}
-          /> */}
-          {/* {loading ? (
+          />
+          {loading ? (
             <>
               <InventoryListItemPlaceholder />
               <InventoryListItemPlaceholder />
@@ -66,7 +65,7 @@ export default function InventoryDashboard() {
               setPredicate={handleSetPredicate}
               loading={loading}
             />
-          )} */}
+          )}
         </Grid.Column>
       </Grid>
     </div>

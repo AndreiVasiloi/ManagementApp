@@ -4,15 +4,14 @@ import SignedOutMenu from "./SignedOutMenu";
 import { useSelector } from "react-redux";
 
 export default function NavBar() {
-  const {authenticated} = useSelector(state => state.auth);
-
+  const { authenticated } = useSelector((state) => state.auth);
   return (
     <>
-     {authenticated ? (
-            <SignedInMenu />
-          ) : (
-            <SignedOutMenu />
-          )}
+      {authenticated ? (
+        <SignedInMenu />
+      ) : (
+        <SignedOutMenu />
+      )}
     </>
   );
 }

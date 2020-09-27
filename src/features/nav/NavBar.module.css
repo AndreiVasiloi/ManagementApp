@@ -1,69 +1,88 @@
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #14b1ab;
+  position: fixed;
+  height: 110%;
+  overflow: auto;
+}
 
+.sidebar a {
+  display: block;
+  color: #fff;
+  opacity: 0.7;
+  padding: 16px;
+  text-decoration: none;
+}
+
+.sidebar a.active {
+  opacity: 1;
+}
+
+.sidebar a:hover:not(.active) {
+  opacity: 1;
+}
+
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+.navLinkIcon {
+  display: none !important;
+}
+
+.navLinkHeader {
+  margin-bottom: 50px;
+  font-size: large;
+  opacity: 1 !important;
+}
+
+@media screen and (max-width: 700px) {
   .sidebar {
-    margin: 0;
-    padding: 0;
-    width: 200px;
-    background-color: #14b1ab;
+    width: 100%;
+    height: auto;
     position: fixed;
-    height: 110%;
-    overflow: auto;
+    top: 0;
+    z-index: 1;
   }
-  
-  .sidebar a {
-    display: block;
-    color: #f4f6ff;
+  .sidebar .navLink {
+    float: left;
+  }
+  .sidebar .navLink:not(:first-child) {
+    display: none;
+  }
+  .sidebar .navLinkIcon {
+    float: right !important;
+    display: block !important;
     padding: 16px;
-    text-decoration: none;
   }
-   
-  .sidebar a.active {
-    color: white;
-    font-size: large;
-  }
-  
-  .sidebar a:hover:not(.active) {
-    color: white;
-    font-size: large;
-  }
-  
-  div.content {
-    margin-left: 200px;
-    padding: 1px 16px;
-    height: 1000px;
-  }
-
   .iconLink {
-    display: none !important;
+    color: #fff;
   }
-  
-   @media screen and (max-width: 700px) {
-    .sidebar {
-      width: 100%;
-      height: auto;
-      position: relative;
-    }
-    .sidebar a {float: left;}
-    .sidebar .navLink:not(:first-child) {display: none;}
-    .iconLink {
-      float: right !important;
-      display: block !important;
-    }
-  }
-  /*
-  @media screen and (max-width: 400px) {
-    .sidebar a {
-      text-align: center;
-      float: none;
-    }
-  } */
+}
 
-  
-  @media screen and (max-width: 700px) {
-    .sidebar.responsive {position: relative;}
-    .sidebar.responsive .iconLink {
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
+@media screen and (max-width: 700px) {
+  .sidebar.responsive {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+  }
+  .sidebar.responsive .navLinkIcon {
+    position: absolute;
+    right: 0;
+    top: 0;
   }
 
+  .sidebar.responsive .navLink {
+    float: none !important;
+    display: block !important;
+    text-align: left !important;
+  }
+
+  .navLinkHeader {
+    margin-bottom: 0;
+  }
+}

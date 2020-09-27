@@ -5,6 +5,10 @@ import modalReducer from '../common/modals/modalReducer';
 import authReducer from '../../features/auth/authReducer';
 import asyncReducer from '../async/asyncReducer';
 import inventoryCategoriesReducer from '../../features/inventory/inventoryCategoriesReducer';
+import inventoryNavReducer from '../../features/inventory/inventoryNavReducer';
+import appointmentsReducer from '../../features/appointments/appointmentsReducer';
+import reasonsReducer from '../../features/appointments/reasonsReducer';
+
 
 const rootReducer = combineReducers({
     test: testReducer,
@@ -12,7 +16,10 @@ const rootReducer = combineReducers({
     category: inventoryCategoriesReducer,
     modals: modalReducer,
     auth: authReducer,
-    async: asyncReducer
+    async: asyncReducer,
+    addClass: inventoryNavReducer,
+    appointment: appointmentsReducer,
+    reason: reasonsReducer,
 })
 
 export default rootReducer;

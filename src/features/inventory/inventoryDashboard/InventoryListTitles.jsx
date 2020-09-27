@@ -1,5 +1,7 @@
 import React from "react";
-import { Segment, Item, Grid } from "semantic-ui-react";
+import { useDispatch, useSelector } from "react-redux";
+import { Segment, Item, Grid, Popup, Icon } from "semantic-ui-react";
+import { addFilterIcon } from "../inventoryNavActions";
 import classes from "./InventoryDashboard.module.css";
 
 export default function InventoryListTitles({
@@ -7,60 +9,124 @@ export default function InventoryListTitles({
   setPredicate,
   loading,
 }) {
+  const { filterIcon } = useSelector((state) => state.addClass);
+  const dispatch = useDispatch();
   return (
     <Segment.Group className={classes.inventoryTitlesContainer}>
-      <Segment textAlign='center'>
+      <Segment textAlign="center">
         <Item.Group>
           <Grid>
             <Grid.Column width={3}>
               <Item.Content
-                onClick={() => setPredicate("sort", "category")}
+                onClick={() => {
+                  setPredicate("sort", "category");
+                  dispatch(addFilterIcon("category"));
+                }}
                 disabled={loading}
               >
-                <Item.Header>CATEGORY</Item.Header>
+                <Popup
+                  trigger={
+                    <Item.Header>
+                      CATEGORY
+                      {filterIcon === "category" && <Icon name="caret down" />}
+                    </Item.Header>
+                  }
+                  content="Sort items by category"
+                  position="top center"
+                />
               </Item.Content>
             </Grid.Column>
             <Grid.Column width={3}>
               <Item>
                 <Item.Content
-                  onClick={() => setPredicate("sort", "name")}
+                  onClick={() => {
+                    setPredicate("sort", "name");
+                    dispatch(addFilterIcon("name"));
+                  }}
                   disabled={loading}
                 >
-                  NAME
+                  <Popup
+                    trigger={
+                      <Item.Header>
+                        NAME{" "}
+                        {filterIcon === "name" && <Icon name="caret down" />}
+                      </Item.Header>
+                    }
+                    content="Sort items by name"
+                    position="top center"
+                  />
                 </Item.Content>
               </Item>
             </Grid.Column>
             <Grid.Column width={2}>
               <Item>
                 <Item.Content
-                  onClick={() => setPredicate("sort", "price")}
+                  onClick={() => {
+                    setPredicate("sort", "price");
+                    dispatch(addFilterIcon("price"));
+                  }}
                   disabled={loading}
                 >
-                  PRICE
+                  <Popup
+                    trigger={
+                      <Item.Header>
+                        PRICE{" "}
+                        {filterIcon === "price" && <Icon name="caret down" />}
+                      </Item.Header>
+                    }
+                    content="Sort items by price"
+                    position="top center"
+                  />
+                </Item.Content>
+              </Item>
+            </Grid.Column>
+            <Grid.Column width={4}>
+              <Item>
+                <Item.Content
+                  onClick={() => {
+                    setPredicate("sort", "expirationDate");
+                    dispatch(addFilterIcon("expirationDate"));
+                  }}
+                  disabled={loading}
+                >
+                  <Popup
+                    trigger={
+                      <Item.Header>
+                        EXPIRATION DATE{" "}
+                        {filterIcon === "expirationDate" && (
+                          <Icon name="caret down" />
+                        )}
+                      </Item.Header>
+                    }
+                    content="Sort items by expiration date"
+                    position="top center"
+                  />
                 </Item.Content>
               </Item>
             </Grid.Column>
             <Grid.Column width={3}>
               <Item>
                 <Item.Content
-                  onClick={() => setPredicate("sort", "expirationDate")}
+                  onClick={() => {
+                    setPredicate("sort", "amount");
+                    dispatch(addFilterIcon("amount"));
+                  }}
                   disabled={loading}
                 >
-                  EXPIRATION DATE
+                  <Popup
+                    trigger={
+                      <Item.Header>
+                        AMOUNT{" "}
+                        {filterIcon === "amount" && <Icon name="caret down" />}
+                      </Item.Header>
+                    }
+                    content="Sort items by amount"
+                    position="top center"
+                  />
                 </Item.Content>
               </Item>
             </Grid.Column>
-            <Grid.Column width={3}>
-              <Item>
-                <Item.Content
-                  onClick={() => setPredicate("sort", "amount")}
-                  disabled={loading}
-                >
-                  AMOUNT
-                </Item.Content>
-              </Item>
-            </Grid.Column>
-            <Grid.Column width={2}></Grid.Column>
+            <Grid.Column width={1}></Grid.Column>
           </Grid>
         </Item.Group>
       </Segment>

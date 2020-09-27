@@ -1,13 +1,24 @@
 import React from "react";
-import { Segment, Item, Grid, Icon } from "semantic-ui-react";
+import { Segment, Item, Grid, Icon, Popup } from "semantic-ui-react";
 import classes from "./InventoryDashboard.module.css";
 import { Link } from "react-router-dom";
 import { deleteItemInFirestore } from "../../../app/firestore/firestoreService";
+import { Dropdown } from "react-bootstrap";
 
 export default function InventoryListItem({ item }) {
+  const currentDay = new Date();
+  const itemExpirationDate = new Date(item.displayExpirationDate);
+  const expirationDateDifferenceInTime =
+    itemExpirationDate.getTime() - currentDay.getTime();
+  const expirationDateDifferenceInDays = Math.floor(
+    expirationDateDifferenceInTime / (1000 * 3600 * 24) + 1
+  );
+  const checkIfIsAboutToExpire = expirationDateDifferenceInDays <= 7;
+  const checkIfExpired = expirationDateDifferenceInDays < 0;
+
   return (
     <Segment.Group>
-      <Segment textAlign='center' className={classes.inventoryItemContainer}>
+      <Segment textAlign="center" className={classes.inventoryItemContainer}>
         <Item.Group>
           <Grid>
             <Grid.Column width={3}>
@@ -25,10 +36,18 @@ export default function InventoryListItem({ item }) {
                 <Item.Content>{item.displayPrice}</Item.Content>
               </Item>
             </Grid.Column>
-            <Grid.Column width={3}>
+            <Grid.Column width={4}>
               <Item>
-                <Item.Content>
-                  {item.displayExpirationDate}
+                <Item.Content
+                  className={
+                    checkIfExpired
+                      ? `${classes.expirationDateRed}`
+                      : checkIfIsAboutToExpire
+                      ? `${classes.expirationDateRed}`
+                      : `${classes.expirationDateBlack}`
+                  }
+                >
+                  {checkIfExpired ? "Expired" : item.displayExpirationDate}
                 </Item.Content>
               </Item>
             </Grid.Column>
@@ -38,22 +57,31 @@ export default function InventoryListItem({ item }) {
               </Item>
             </Grid.Column>
             <Grid.Column width={1}>
-              <Item>
-                <Item.Content as={Link} to={`/editItem/${item.id}`}>
-                  <Icon name='edit' className={classes.editIcon} />
-                </Item.Content>
-              </Item>
-            </Grid.Column>
-            <Grid.Column width={1}>
-              <Item>
-                <Item.Content>
-                  <Icon
-                    name='delete'
-                    className={classes.deleteIcon}
+              <Dropdown>
+                <Dropdown.Toggle
+                  variant="success"
+                  className={classes.inventoryButton}
+                >
+                  <Icon name="ellipsis horizontal" />
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item
+                    as={Link}
+                    to={`/editItem/${item.id}`}
+                    className={classes.edit}
+                  >
+                    <Icon name="edit" />
+                    Edit Item
+                  </Dropdown.Item>
+                  <Dropdown.Item
                     onClick={() => deleteItemInFirestore(item.id)}
-                  />
-                </Item.Content>
-              </Item>
+                    className={classes.delete}
+                  >
+                    <Icon name="delete" />
+                    Delete Item
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </Grid.Column>
           </Grid>
         </Item.Group>
