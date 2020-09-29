@@ -2,7 +2,7 @@ import React from "react";
 import InventoryListItem from "./InventoryListItem";
 import { Segment } from "semantic-ui-react";
 import InventoryListTitles from "./InventoryListTitles";
-import classes from "./InventoryDashboard.module.css";
+import classes from "../../../css/Dashboard.module.css";
 
 export default function InventoryList({
   items,
@@ -12,7 +12,7 @@ export default function InventoryList({
 }) {
   return (
     <Segment.Group style={{ marginTop: "50px" }}>
-      <Segment className={classes.inventoryListContainer}>
+      <Segment className={classes.DashboardListContainer}>
         <InventoryListTitles
           predicate={predicate}
           setPredicate={setPredicate}

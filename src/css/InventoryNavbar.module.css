@@ -1,0 +1,79 @@
+
+.topNavbar {
+  margin-left: 200px;
+  background-color: #fff;
+  border-bottom: 2px solid #14b1ab;
+}
+
+.topNavbarLeftCol {
+ flex: 20%;
+}
+
+.topNavbarRightCol {
+  flex: 80%;
+  text-align: right;
+}
+
+.topNavbarBrand {
+  color: #14b1ab !important;
+  font-weight: bold;
+}
+
+/* .inventoryNavDropdown {
+  background-color: #14b1ab;
+  border-radius: .28571429rem;
+} */
+
+.topNavbarSearch > input {
+    border:  1px solid #14b1ab !important;
+    height: 32px!important;
+    position: relative;
+    top: 2px;
+}
+
+.topNavbarSearch > input::placeholder {
+    color: #14b1ab !important;
+}
+
+.topNavbarSearchIcon {
+    color: #14b1ab !important;
+}
+
+.topNavbarButton {
+    background-color: #14b1ab !important;
+    border:  1px solid #14b1ab !important;
+    margin-left: 10px;
+    height: 32px!important;
+}
+
+/* .inventoryNavDropdownTitle > a {
+    color: #fff !important;
+} */
+
+/* .addCatBtnContainer {
+  position: relative !important;
+  left: 71.5% !important;
+}
+
+.addCatBtn {
+
+  background-color: #14b1ab !important;
+  border: 1px solid #14b1ab;
+} */
+
+@media screen and (max-width: 700px) {
+  .topNavbar {
+    margin: 55px 0 0 0;
+  }
+  .topNavbarLeftCol {
+    flex: 20%;
+  }
+  .topNavbarRightCol {
+    flex: 80%;
+   
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .topNavbar.responsive {margin-top: 324px;}
+}

@@ -6,7 +6,7 @@ import InventoryListItemPlaceholder from "./InventoryListItemPlaceholder";
 import { listenToItemsFromFirestore } from "../../../app/firestore/firestoreService";
 import { listenToItems } from "../inventoryItemsActions";
 import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
-import classes from "./InventoryDashboard.module.css";
+import classes from "../../../css/Dashboard.module.css";
 import InventoryNavbar from "../inventoryNav/InventoryNavbar";
 
 export default function InventoryDashboard() {
@@ -45,7 +45,7 @@ export default function InventoryDashboard() {
   });
 
   return (
-    <div className={classes.inventoryContainer}>
+    <div className={classes.dashboardContainer}>
       <Grid>
         <Grid.Column width={16}>
           <InventoryNavbar

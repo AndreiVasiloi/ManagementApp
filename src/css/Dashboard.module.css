@@ -1,0 +1,75 @@
+/* containers */
+
+.inventoryTitlesContainer {
+    border: none!important;
+    font-weight: bold;
+    color: #14b1ab;
+}
+
+
+.DashboardListContainer {
+    background-color: #eeeeee!important;
+}
+
+.dashboardContainer {
+    margin-left: 200px;
+    padding-top: 3% !important;
+}
+
+/* dashboard dropdown button */
+
+.edit {
+    position: relative;
+    color: #14b1ab;
+}
+
+
+.delete {
+    position: relative;
+    color: #ff414d;
+}
+
+.DashboardDropdownButton::after {
+content: none!important;
+}
+
+.DashboardDropdownButton {
+    background-color: transparent!important;
+    border: none!important;
+    color:  #14b1ab!important;
+    outline: 0 !important;
+}
+
+.DashboardDropdownButton:focus, .DashboardDropdownButton:active {
+border: none !important;
+outline: none !important;
+box-shadow: none !important;
+}
+
+/* expired or not */
+
+.expirationDateRed {
+    color: red;
+}
+
+.expirationDateBlack {
+    color: black;
+}
+
+/* appointments */
+.hour {
+    border-right: 4px solid  #14b1ab;
+}
+
+/* media queries */
+
+@media screen and (max-width: 700px) {
+    .dashboardContainer {
+      margin: 45px 0 0 0;
+    }
+    .DashboardDropdownButton {
+        position: relative;
+        right: 10px;
+    }
+  }
+

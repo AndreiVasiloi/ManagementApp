@@ -16,6 +16,8 @@ import {ToastContainer} from 'react-toastify';
 import ErrorComponent from "../common/errors/ErrorComponent";
 import InventoryCategoriesDashboard from "../../features/inventory/inventoryCategoriesDashboard/InventoryCategoriesDashboard";
 import AppointmentsForm from '../../features/appointments/appointmentsForm/AppointmentsForm';
+import AppointmentsReasonsDashboard from "../../features/appointments/appointmentsReasons/AppointmentsReasonsDashboard";
+import AppointmentsReasonsForm from "../../features/appointments/appointmentsForm/AppointmentsReasonsForm";
 
 function App() {
   const { key } = useLocation();
@@ -33,6 +35,7 @@ function App() {
             <Route path='/appointments' component={AppointmentsDashboard} />
             <Route path='/inventory' component={InventoryDashboard} />
             <Route path='/inventoryCategories' component={InventoryCategoriesDashboard} />
+            <Route path='/appointmentsReasons' component={AppointmentsReasonsDashboard} />
             <Route path='/sandbox' component={Sandbox} />
             <Route path='/profit' component={ProfitDashboard} />
             <Route
@@ -44,6 +47,10 @@ function App() {
              <Route
               path={["/createCategory", "/editCategory/:id"]}
               component={InventoryCategoryForm}
+            />
+             <Route
+              path={["/createReason", "/editReason/:id"]}
+              component={AppointmentsReasonsForm}
             />
                <Route
               path={["/createAppointment", "/editAppointment/:id"]}

@@ -1,24 +1,24 @@
-import React from 'react'
-import { Segment, Item, Grid, Icon } from 'semantic-ui-react';
-import classes from '../../../css/Dashboard.module.css';
+import React from "react";
 import { Link } from "react-router-dom";
-import { deleteCategoryInFirestore } from '../../../app/firestore/firestoreService';
+import { Grid, Icon, Item, Segment } from "semantic-ui-react";
+import { deleteReasonInFirestore } from "../../../app/firestore/firestoreService";
+import classes from "../appointmentsDashboard/AppointmentsDashboard.module.css";
 
-export default function InventoryCategoriesListItem({category}) {
-    return (
-        <Segment.Group>
+export default function AppointmentsReasonsListItem({ reason }) {
+  return (
+    <Segment.Group>
         <Segment textAlign='center' className={classes.inventoryItemContainer}>
           <Item.Group>
             <Grid>
               <Grid.Column width={14}>
                 <Item>
-                  <Item.Content>{category.text}</Item.Content>
+                  <Item.Content>{reason.text}</Item.Content>
                 </Item>
               </Grid.Column>
               
               <Grid.Column width={1}>
                 <Item>
-                  <Item.Content as={Link} to={`/editCategory/${category.id}`}>
+                  <Item.Content as={Link} to={`/editReason/${reason.id}`}>
                     <Icon name='edit' className={classes.editIcon} />
                   </Item.Content>
                 </Item>
@@ -29,7 +29,7 @@ export default function InventoryCategoriesListItem({category}) {
                     <Icon
                       name='delete'
                       className={classes.deleteIcon}
-                      onClick={() => deleteCategoryInFirestore(category.id)}
+                      onClick={() => deleteReasonInFirestore(reason.id)}
                     />
                   </Item.Content>
                 </Item>
@@ -38,5 +38,5 @@ export default function InventoryCategoriesListItem({category}) {
           </Item.Group>
         </Segment>
       </Segment.Group>
-    )
+  );
 }

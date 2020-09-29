@@ -1,0 +1,15 @@
+.formContainer {
+  margin-left: 200px !important;
+}
+
+.formSubmitBtn {
+  background-color: #14b1ab !important;
+  border: 2px solid #14b1ab !important;
+  color: #fff !important;
+}
+
+.formCancelBtn {
+  background-color: #fff !important;
+  border: 2px solid #14b1ab !important;
+  color: #14b1ab !important;
+}

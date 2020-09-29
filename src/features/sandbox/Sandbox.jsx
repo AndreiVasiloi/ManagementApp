@@ -12,35 +12,40 @@ export default function Sandbox() {
 
   return (
     <>
-      <h1>Testing 123</h1>
-      <h3>The data is: {data}</h3>
-      <Button
-        name='increment'
-        loading={loading && target === 'increment'}
-        onClick={(e) => {
-          dispatch(increment(20));
-          setTarget(e.target.name)
-        }}
-        content='Increment'
-        color='green'
-      />
-      <Button
-        name='decrement'
-        loading={loading && target === 'decrement'}
-        onClick={(e) => {
-          dispatch(decrement(10));
-          setTarget(e.target.name)
-        }}
-        content='Decrement'
-        color='red'
-      />
-      <Button
-        onClick={() =>
-          dispatch(openModal({ modalType: "TestModal", modalProps: { data } }))
-        }
-        content='Open Modal'
-        color='teal'
-      />
+      <div style={{marginLeft: '200px'}}>
+        <h1>Testing 123</h1>
+        <h3>The data is: {data}</h3>
+        <Button
+          name='increment'
+          loading={loading && target === "increment"}
+          onClick={(e) => {
+            dispatch(increment(20));
+            setTarget(e.target.name);
+          }}
+          content='Increment'
+          color='green'
+        />
+        <Button
+          name='decrement'
+          loading={loading && target === "decrement"}
+          onClick={(e) => {
+            dispatch(decrement(10));
+            setTarget(e.target.name);
+          }}
+          content='Decrement'
+          color='red'
+        />
+        <Button
+          onClick={() =>
+            dispatch(
+              openModal({ modalType: "TestModal", modalProps: { data } })
+            )
+          }
+          content='Open Modal'
+          color='teal'
+        />
+
+      </div>
     </>
   );
 }

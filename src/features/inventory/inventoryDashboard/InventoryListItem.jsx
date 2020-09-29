@@ -1,6 +1,6 @@
 import React from "react";
 import { Segment, Item, Grid, Icon, Popup } from "semantic-ui-react";
-import classes from "./InventoryDashboard.module.css";
+import classes from "../../../css/Dashboard.module.css";
 import { Link } from "react-router-dom";
 import { deleteItemInFirestore } from "../../../app/firestore/firestoreService";
 import { Dropdown } from "react-bootstrap";
@@ -60,7 +60,7 @@ export default function InventoryListItem({ item }) {
               <Dropdown>
                 <Dropdown.Toggle
                   variant="success"
-                  className={classes.inventoryButton}
+                  className={classes.DashboardDropdownButton}
                 >
                   <Icon name="ellipsis horizontal" />
                 </Dropdown.Toggle>

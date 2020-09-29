@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./NavBar.module.css";
+import classes from "../../css/NavBar.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { signOutUser } from "../auth/authActions";
 import { useHistory, Link } from "react-router-dom";

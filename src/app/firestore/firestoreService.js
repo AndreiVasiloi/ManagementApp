@@ -79,8 +79,10 @@ export function deleteCategoryInFirestore(categoryId) {
 
 //appointments
 
-export function listenToAppointmentsFromFirestore() {
-  return db.collection("appointments");
+export function listenToAppointmentsFromFirestore(predicate) {
+  let appointmentsRef = db.collection("appointments");
+  // return appointmentsRef;
+  return appointmentsRef.where('date', '>=', predicate.get('startDate'))
 }
 
 export function addAppointmentToFirestore(appointment) {
@@ -103,3 +105,17 @@ export function listenToReasonsFromFirestore() {
   return db.collection("reasons");
 }
 
+export function addReasonToFirestore(reason) {
+  return db.collection("reasons").add({
+    ...reason,
+    value: { ...reason }.text,
+  });
+}
+
+export function updateReasonInFirestore(reason) {
+  return db.collection("reasons").doc(reason.id).update(reason);
+}
+
+export function deleteReasonInFirestore(reasonId) {
+  return db.collection("reasons").doc(reasonId).delete();
+}

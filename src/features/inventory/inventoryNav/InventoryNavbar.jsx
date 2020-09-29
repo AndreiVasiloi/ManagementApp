@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
-import classes from "./InventoryNavbar.module.css";
+import classes from "../../../css/InventoryNavbar.module.css";
 import { FormField, Icon } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -22,33 +22,33 @@ export default function InventoryNavbar({ setText }) {
         fixed="top"
         className={
           responsiveClass
-            ? `${classes.inventoryNav}`
-            : `${classes.inventoryNav} ${classes.responsive}`
+            ? `${classes.topNavbar}`
+            : `${classes.topNavbar} ${classes.responsive}`
         }
       >
-        <div className={classes.inventoryNavLeftCol}>
-          <Navbar.Brand className={classes.inventoryNavBrand} href="#home">
+        <div className={classes.topNavbarLeftCol}>
+          <Navbar.Brand className={classes.topNavbarBrand} href="#home">
             Inventory
           </Navbar.Brand>
         </div>
-        <div className={classes.inventoryNavRightCol}>
-        <FormField className={`ui icon input ${classes.inventoryNavSearch}`}>
+        <div className={classes.topNavbarRightCol}>
+        <FormField className={`ui icon input ${classes.topNavbarSearch}`}>
             <input
               type="text"
               placeholder="Search..."
               onKeyPress={handleSearch}
             />
-            <Icon name="search" className={classes.inventoryNavSearchIcon} />
+            <Icon name="search" className={classes.topNavbarSearchIcon} />
           </FormField>
           <Button
-            className={classes.inventoryNavButton}
+            className={classes.topNavbarButton}
             as={NavLink}
             to="/createItem"
           >
             Add Item
           </Button>
           <Button
-            className={classes.inventoryNavButton}
+            className={classes.topNavbarButton}
             as={NavLink}
             to="/inventoryCategories"
           >

@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Segment, Item, Grid, Popup, Icon } from "semantic-ui-react";
 import { addFilterIcon } from "../inventoryNavActions";
-import classes from "./InventoryDashboard.module.css";
+import classes from "../../../css/Dashboard.module.css";
 
 export default function InventoryListTitles({
   predicate,

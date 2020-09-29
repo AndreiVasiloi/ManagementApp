@@ -1,45 +1,47 @@
 import React from 'react'
 import { Button, Navbar } from 'react-bootstrap'
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom'
 import { FormField, Icon } from 'semantic-ui-react';
-import classes from './AppointmentsNav.module.css';
+import classes from "../../../css/InventoryNavbar.module.css";
 
 export default function AppointmentsNav() {
+  const { responsiveClass } = useSelector((state) => state.addClass);
     return (
          <div>
       <Navbar
         fixed="top"
-        // className={
-        //   responsiveClass
-        //     ? `${classes.inventoryNav}`
-        //     : `${classes.inventoryNav} ${classes.responsive}`
-        // }
+        className={
+          responsiveClass
+            ? `${classes.topNavbar}`
+            : `${classes.topNavbar} ${classes.responsive}`
+        }
       >
-        <div className={classes.inventoryNavLeftCol}>
-          <Navbar.Brand className={classes.inventoryNavBrand} href="#home">
-            Inventory
+        <div className={classes.topNavbarLeftCol}>
+          <Navbar.Brand className={classes.topNavbarBrand} href="#home">
+            Appointments
           </Navbar.Brand>
         </div>
-        <div className={classes.inventoryNavRightCol}>
-        <FormField className={`ui icon input ${classes.inventoryNavSearch}`}>
+        <div className={classes.topNavbarRightCol}>
+        <FormField className={`ui icon input ${classes.topNavbarSearch}`}>
             <input
               type="text"
               placeholder="Search..."
             //   onKeyPress={handleSearch}
             />
-            <Icon name="search" className={classes.inventoryNavSearchIcon} />
+            <Icon name="search" className={classes.topNavbarSearchIcon} />
           </FormField>
           <Button
-            className={classes.inventoryNavButton}
+            className={classes.topNavbarButton}
             as={NavLink}
             to="/createAppointment"
           >
             Add Appointment
           </Button>
           <Button
-            className={classes.inventoryNavButton}
+            className={classes.topNavbarButton}
             as={NavLink}
-            to="/inventoryCategories"
+            to="/appointmentsReasons"
           >
             Manage Reasons
           </Button>

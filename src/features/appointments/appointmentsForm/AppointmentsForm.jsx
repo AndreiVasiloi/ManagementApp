@@ -16,7 +16,7 @@ import {
 } from "../../../app/firestore/firestoreService";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { toast } from "react-toastify";
-import classes from "./AppointmentsForm.module.css";
+import classes from '../../../css/Form.module.css';
 import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import { listenToReasons } from "../reasonsActions";
 import { listenToAppointments } from "../appointmentsActions";
@@ -33,12 +33,14 @@ export default function AppointmentsForm({ match, history }) {
 
   const initialValues = selectedAppointment ?? {
     hour: "",
+    date: '',
     name: "",
     reason: "",
   };
 
   const validationSchema = Yup.object({
     hour: Yup.string().required("You must provide a hour"),
+    date: Yup.string().required("You must provide a hour"),
     name: Yup.string().required("You must provide a name"),
     reason: Yup.string().required("You must provide a reason"),
   });
@@ -61,7 +63,7 @@ export default function AppointmentsForm({ match, history }) {
 //   if (error) return <Redirect to="/error" />;
 
   return (
-    <Segment clearing className={classes.inventoryFormContainer}>
+    <Segment clearing className={classes.formContainer}>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -94,13 +96,25 @@ export default function AppointmentsForm({ match, history }) {
             <MyTextInput name="name" placeholder="Name" />
             <MyDateInput
               name="hour"
-              placeholderText="Appointment Date"
-              dateFormat="MMMM d, yyyy"
+              placeholderText="Appointment Hour"
+              timeFormat='HH:mm'
+              showTimeSelect
+              showTimeSelectOnly
+              timeIntervals={15}
+              timeCaption='time'
+              dateFormat="HH:mm"
+              autoComplete='off'
+            />
+                <MyDateInput
+              name='date'
+              placeholderText='Appointment date'
+              dateFormat='MMMM d, yyyy'
+              autoComplete='off'
             />
             <Button
               type="submit"
               floated="right"
-              className={classes.inventoryFormSubmitBtn}
+              className={classes.formSubmitBtn}
               content="Submit"
               loading={isSubmitting}
               disabled={!isValid || !dirty || isSubmitting}
@@ -108,7 +122,7 @@ export default function AppointmentsForm({ match, history }) {
             <Button
               disabled={isSubmitting}
               type="submit"
-              className={classes.inventoryFormCancelBtn}
+              className={classes.formCancelBtn}
               floated="right"
               content="Cancel"
               as={NavLink}

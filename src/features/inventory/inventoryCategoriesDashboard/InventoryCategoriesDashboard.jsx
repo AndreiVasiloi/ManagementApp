@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid } from "semantic-ui-react";
-import classes from "../inventoryDashboard/InventoryDashboard.module.css";
+import classes from '../../../css/Dashboard.module.css';
 import { useSelector, useDispatch } from "react-redux";
 import InventoryCategoriesList from "./InventoryCategoriesList";
 import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
@@ -19,7 +19,7 @@ export default function InventoryCategoriesDashboard() {
   });
 
   return (
-    <div className={classes.inventoryContainer}>
+    <div className={classes.dashboardContainer}>
       <Grid>
         <Grid.Column width={16}>
         <InventoryCategoriesNavbar/>

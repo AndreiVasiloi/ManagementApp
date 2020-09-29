@@ -18,7 +18,7 @@ import {
 } from "../../../app/firestore/firestoreService";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { toast } from "react-toastify";
-import classes from "./InventoryForm.module.css";
+import classes from '../../../css/Form.module.css';
 import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import { listenToCategories } from "../inventoryCategoriesActions";
 
@@ -66,7 +66,7 @@ export default function InventoryItemForm({ match, history }) {
   if (error) return <Redirect to='/error' />;
 
   return (
-    <Segment clearing className={classes.inventoryFormContainer}>
+    <Segment clearing className={classes.formContainer}>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -96,12 +96,13 @@ export default function InventoryItemForm({ match, history }) {
               name='expirationDate'
               placeholderText='Expiration Date'
               dateFormat='MMMM d, yyyy'
+              autoComplete='off'
             />
             <MyNumberInput name='amount' placeholder='Amount' />
             <Button
               type='submit'
               floated='right'
-              className={classes.inventoryFormSubmitBtn}
+              className={classes.formSubmitBtn}
               content='Submit'
               loading={isSubmitting}
               disabled={!isValid || !dirty || isSubmitting}
@@ -109,7 +110,7 @@ export default function InventoryItemForm({ match, history }) {
             <Button
               disabled={isSubmitting}
               type='submit'
-              className={classes.inventoryFormCancelBtn}
+              className={classes.formCancelBtn}
               floated='right'
               content='Cancel'
               as={NavLink}

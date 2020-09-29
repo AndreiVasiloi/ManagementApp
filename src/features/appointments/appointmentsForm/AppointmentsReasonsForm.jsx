@@ -1,58 +1,58 @@
 import React from "react";
 import { Segment, Header, Button } from "semantic-ui-react";
-import { NavLink, Redirect } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import MyTextInput from "../../../app/common/form/MyTextInput";
 import useFirestoreDoc from "../../../app/hooks/useFirestoreDoc";
-import { listenToCategoryFromFirestore, updateCategoryInFirestore, addCategoryToFirestore } from "../../../app/firestore/firestoreService";
+import { listenToReasonsFromFirestore, updateReasonInFirestore, addReasonToFirestore } from "../../../app/firestore/firestoreService";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { toast } from "react-toastify";
-import classes from '../../../css/Form.module.css';
-import { listenToCategories } from "../inventoryCategoriesActions";
+import classes from './AppointmentsForm.module.css';
+import { listenToReasons } from "../reasonsActions";
 
-export default function InventoryCategoryForm({ match, history }) {
+export default function AppointmentsReasonsForm({ match, history }) {
   const dispatch = useDispatch();
-  const selectedCategory = useSelector((state) =>
-    state.category.categories.find((c) => c.id === match.params.id)
+  const selectedReason = useSelector((state) =>
+    state.reason.reasons.find((c) => c.id === match.params.id)
   );
 
   const { loading, error } = useSelector((state) => state.async);
 
-  const initialValues = selectedCategory ?? {
+  const initialValues = selectedReason ?? {
     text: "",
     value: ''
   };
 
   const validationSchema = Yup.object({
-    text: Yup.string().required("You must provide a category"),
+    text: Yup.string().required("You must provide a reason"),
   });
 
 
   useFirestoreDoc({
     shouldExecute: !!match.params.id,
-    query: () => listenToCategoryFromFirestore(match.params.id),
-    data: (category) => dispatch(listenToCategories([category])),
+    query: () => listenToReasonsFromFirestore(match.params.id),
+    data: (reason) => dispatch(listenToReasons([reason])),
     deps: [match.params.id, dispatch],
   });
 
   if (loading)
   return <LoadingComponent content='Loading event...' />;
 
-if (error) return <Redirect to='/error' />;
+// if (error) return <Redirect to='/error' />;
 
   return (
-    <Segment clearing className={classes.formContainer}>
+    <Segment clearing className={classes.inventoryFormContainer}>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
           try {
-            selectedCategory
-              ? await updateCategoryInFirestore(values)
-              : await addCategoryToFirestore(values)
-            history.push("/inventoryCategories");
+            selectedReason
+              ? await updateReasonInFirestore(values)
+              : await addReasonToFirestore(values)
+            history.push("/appointmentsReasons");
           } catch (error) {
             toast.error(error.message);
             setSubmitting(false);
@@ -61,12 +61,12 @@ if (error) return <Redirect to='/error' />;
       >
         {({ isSubmitting, dirty, isValid }) => (
           <Form className='ui form' >
-            <Header sub color='teal' content= {selectedCategory ? 'Edit category' :'Add category' }/>
-            <MyTextInput name='text' placeholder='Category' />
+            <Header sub color='teal' content= {selectedReason ? 'Edit reason' :'Add reason' }/>
+            <MyTextInput name='text' placeholder='Reason' />
             <Button
               type='submit'
               floated='right'
-              className={classes.formSubmitBtn}
+              className={classes.inventoryFormSubmitBtn}
               content='Submit'
               loading={isSubmitting}
               disabled={!isValid || !dirty || isSubmitting}
@@ -74,7 +74,7 @@ if (error) return <Redirect to='/error' />;
             <Button
               disabled={isSubmitting}
               type='submit'
-              className={classes.formCancelBtn}
+              className={classes.inventoryFormCancelBtn}
               floated='right'
               content='Cancel'
               as={NavLink}

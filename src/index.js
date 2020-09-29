@@ -4,6 +4,7 @@ import "semantic-ui-css/semantic.min.css";
 import 'react-toastify/dist/ReactToastify.min.css';
 import "./index.css";
 import App from "./app/layout/App";
+import 'react-calendar/dist/Calendar.css';
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
