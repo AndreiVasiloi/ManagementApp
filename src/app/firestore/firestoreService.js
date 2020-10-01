@@ -46,11 +46,6 @@ export function deleteItemInFirestore(itemId) {
   return db.collection("items").doc(itemId).delete();
 }
 
-// export function cancelItemToggle(item) {
-//     return db.collection('events').doc(item.id).update({
-//         isCancelled: !item.isCancelled
-//     })
-// }
 
 //categories
 
@@ -80,9 +75,13 @@ export function deleteCategoryInFirestore(categoryId) {
 //appointments
 
 export function listenToAppointmentsFromFirestore(predicate) {
+  
   let appointmentsRef = db.collection("appointments");
-  // return appointmentsRef;
-  return appointmentsRef.where('date', '>=', predicate.get('startDate'))
+  if(typeof(predicate) === 'object'){
+    return appointmentsRef.where('date', '>=', predicate.get('startDate'))
+  }else {
+    return appointmentsRef;
+  }
 }
 
 export function addAppointmentToFirestore(appointment) {

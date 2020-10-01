@@ -61,6 +61,12 @@ box-shadow: none !important;
     border-right: 4px solid  #14b1ab;
 }
 
+.appointmentsName {
+    text-align: left !important;
+    position: relative;
+    top: 10px;
+}
+
 /* media queries */
 
 @media screen and (max-width: 700px) {

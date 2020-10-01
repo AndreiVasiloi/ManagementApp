@@ -8,6 +8,7 @@ import AppointmentsNav from "../appointmentsNav/AppointmentsNav";
 import AppointmentsList from "./AppointmentsList";
 import classes from "../../../css/Dashboard.module.css";
 import { Calendar } from "react-calendar";
+import AppointmentsCalendar from "../calendar/AppointmentsCalendar";
 
 export default function AppointmentsDashboard() {
   const { appointments } = useSelector((state) => state.appointment);
@@ -26,20 +27,20 @@ export default function AppointmentsDashboard() {
     data: (appointments) => dispatch(listenToAppointments(appointments)),
     deps: [dispatch, predicate ],
   });
+
   return (
     <>
       <div className={classes.dashboardContainer}>
         <Grid>
-          <Grid.Column width={10}>
+          <Grid.Column width={16}>
             <AppointmentsNav />
-            <AppointmentsList appointments={appointments} />
-          </Grid.Column>
-          <Grid.Column width={6} style={{ marginTop: "50px" }}>
+            {/* <AppointmentsCalendar setPredicate={handleSetPredicate} predicate={predicate} /> */}
             <Calendar
               onChange={(date) => handleSetPredicate("startDate", date)}
               value={predicate.get("startDate") || new Date()}
               tileDisabled={() => loading}
             />
+            <AppointmentsList appointments={appointments} />
           </Grid.Column>
         </Grid>
       </div>

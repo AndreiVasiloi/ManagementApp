@@ -6,6 +6,7 @@ import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import AppointmentsReasonsNav from "../appointmentsNav/AppointmentsReasonsNav";
 import { listenToReasons } from "../reasonsActions";
 import AppointmentsReasonsList from "./AppointmentsReasonsList";
+import classes from '../../../css/Dashboard.module.css';
 
 
 export default function AppointmentsReasonsDashboard() {
@@ -19,12 +20,14 @@ export default function AppointmentsReasonsDashboard() {
   });
   return (
     <>
-      <Grid>
+    <div className={classes.dashboardContainer}>
+    <Grid>
         <Grid.Column width={16}>
             <AppointmentsReasonsNav/>
           <AppointmentsReasonsList reasons={reasons} />
         </Grid.Column>
       </Grid>
+    </div>
     </>
   );
 }

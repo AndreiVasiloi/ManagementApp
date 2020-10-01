@@ -1,5 +1,7 @@
 .formContainer {
   margin-left: 200px !important;
+  position: relative;
+  top: 50px;
 }
 
 .formSubmitBtn {

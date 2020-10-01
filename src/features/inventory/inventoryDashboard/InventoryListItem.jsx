@@ -1,11 +1,21 @@
-import React from "react";
-import { Segment, Item, Grid, Icon, Popup } from "semantic-ui-react";
+import React, { useState } from "react";
+import {
+  Segment,
+  Item,
+  Grid,
+  Icon,
+  Popup,
+  Label,
+  Confirm,
+} from "semantic-ui-react";
 import classes from "../../../css/Dashboard.module.css";
 import { Link } from "react-router-dom";
 import { deleteItemInFirestore } from "../../../app/firestore/firestoreService";
-import { Dropdown } from "react-bootstrap";
+import { Button, Dropdown, Modal } from "react-bootstrap";
+import { toast } from "react-toastify";
 
 export default function InventoryListItem({ item }) {
+  const [confirmOpen, setConfirmOpen] = useState(false);
   const currentDay = new Date();
   const itemExpirationDate = new Date(item.displayExpirationDate);
   const expirationDateDifferenceInTime =
@@ -16,9 +26,18 @@ export default function InventoryListItem({ item }) {
   const checkIfIsAboutToExpire = expirationDateDifferenceInDays <= 7;
   const checkIfExpired = expirationDateDifferenceInDays < 0;
 
+  async function handleCancelToggle(itemId) {
+    setConfirmOpen(false);
+    try {
+      await deleteItemInFirestore(itemId);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
+
   return (
     <Segment.Group>
-      <Segment textAlign="center" className={classes.inventoryItemContainer}>
+      <Segment textAlign='center' className={classes.inventoryItemContainer}>
         <Item.Group>
           <Grid>
             <Grid.Column width={3}>
@@ -47,7 +66,14 @@ export default function InventoryListItem({ item }) {
                       : `${classes.expirationDateBlack}`
                   }
                 >
-                  {checkIfExpired ? "Expired" : item.displayExpirationDate}
+                  {checkIfExpired ? (
+                    <Popup
+                      content={item.displayExpirationDate}
+                      trigger={<Label basic color='red' content='Expired' />}
+                    />
+                  ) : (
+                    item.displayExpirationDate
+                  )}
                 </Item.Content>
               </Item>
             </Grid.Column>
@@ -59,10 +85,10 @@ export default function InventoryListItem({ item }) {
             <Grid.Column width={1}>
               <Dropdown>
                 <Dropdown.Toggle
-                  variant="success"
+                  variant='success'
                   className={classes.DashboardDropdownButton}
                 >
-                  <Icon name="ellipsis horizontal" />
+                  <Icon name='ellipsis horizontal' />
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item
@@ -70,14 +96,14 @@ export default function InventoryListItem({ item }) {
                     to={`/editItem/${item.id}`}
                     className={classes.edit}
                   >
-                    <Icon name="edit" />
+                    <Icon name='edit' />
                     Edit Item
                   </Dropdown.Item>
                   <Dropdown.Item
-                    onClick={() => deleteItemInFirestore(item.id)}
+                    onClick={() => setConfirmOpen(true)}
                     className={classes.delete}
                   >
-                    <Icon name="delete" />
+                    <Icon name='delete' />
                     Delete Item
                   </Dropdown.Item>
                 </Dropdown.Menu>
@@ -85,6 +111,20 @@ export default function InventoryListItem({ item }) {
             </Grid.Column>
           </Grid>
         </Item.Group>
+        <Modal show={confirmOpen}>
+          <Modal.Body>Do you really want to delete this item?</Modal.Body>
+          <Modal.Footer>
+            <Button variant='secondary' onClick={() => setConfirmOpen(false)}>
+              Close
+            </Button>
+            <Button
+              variant='danger'
+              onClick={() => handleCancelToggle(item.id)}
+            >
+              Delete item
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </Segment>
     </Segment.Group>
   );
