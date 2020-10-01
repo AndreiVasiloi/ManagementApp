@@ -9,6 +9,7 @@ import AppointmentsList from "./AppointmentsList";
 import classes from "../../../css/Dashboard.module.css";
 import { Calendar } from "react-calendar";
 import AppointmentsCalendar from "../calendar/AppointmentsCalendar";
+import { LineCalendar } from "../lineCalendar/LineCalendar";
 
 export default function AppointmentsDashboard() {
   const { appointments } = useSelector((state) => state.appointment);
@@ -25,7 +26,7 @@ export default function AppointmentsDashboard() {
   useFirestoreCollection({
     query: () => listenToAppointmentsFromFirestore(predicate),
     data: (appointments) => dispatch(listenToAppointments(appointments)),
-    deps: [dispatch, predicate ],
+    deps: [dispatch, predicate],
   });
 
   return (
@@ -34,12 +35,15 @@ export default function AppointmentsDashboard() {
         <Grid>
           <Grid.Column width={16}>
             <AppointmentsNav />
+            <div style={{marginTop: 40 }}>
+              <LineCalendar />
+            </div>
             {/* <AppointmentsCalendar setPredicate={handleSetPredicate} predicate={predicate} /> */}
-            <Calendar
+            {/* <Calendar
               onChange={(date) => handleSetPredicate("startDate", date)}
               value={predicate.get("startDate") || new Date()}
               tileDisabled={() => loading}
-            />
+            /> */}
             <AppointmentsList appointments={appointments} />
           </Grid.Column>
         </Grid>

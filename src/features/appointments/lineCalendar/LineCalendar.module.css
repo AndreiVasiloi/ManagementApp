@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    padding: 10px;
+    background-color: #fff;
+    justify-content: center;
+}
+
+.day {
+    background-color: #385EAF;
+    color: #fff;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+}
