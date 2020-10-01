@@ -5,10 +5,19 @@
     justify-content: center;
 }
 
+.dayContainer {
+    color: #E8E8E8;
+}
+
 .day {
-    background-color: #385EAF;
-    color: #fff;
+    background-color: #fff;
     border-radius: 50%;
     border: none;
     outline: none;
+    color: #46454A;
+}
+
+.selectedDay {
+    background-color: #385EAF;
+    color: #fff;
 }

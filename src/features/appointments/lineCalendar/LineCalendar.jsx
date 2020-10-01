@@ -1,5 +1,5 @@
-import React from 'react';
-import classes from './LineCalendar.module.css';
+import React, { Fragment } from "react";
+import classes from "./LineCalendar.module.css";
 
 const monthNames = [
   "January",
@@ -15,6 +15,8 @@ const monthNames = [
   "November",
   "December",
 ];
+
+var dayNames = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
 function getDaysInMonth(month, year) {
   // Here January is 1 based
@@ -34,31 +36,50 @@ function getDaysAsArray(lastDay) {
   return days;
 }
 
-export function LineCalendar() {
-  const today = new Date();
-  const year = today.getFullYear();
-  const currentMonth = today.getMonth();
-  const currentMonthName = monthNames[currentMonth];
+export function LineCalendar({ onNewDate, date }) {
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const monthName = monthNames[month];
 
-  const numberOfDays = getDaysInMonth(currentMonth + 1, year);
+  const numberOfDays = getDaysInMonth(month + 1, year);
   const days = getDaysAsArray(numberOfDays);
   const halfOfMonth = Math.floor(days.length / 2);
 
   return (
     <div className={classes.container}>
       {days.map((day) => {
+        const thisDate = new Date(year, month, day);
+        const dateName = dayNames[thisDate.getDay()];
+
+        const dayButton = (
+          <div className={classes.dayContainer}>
+            {dateName}
+            <button
+              key={day}
+              onClick={() => onNewDate(thisDate)}
+              className={
+                day === date.getDate()
+                  ? `${classes.day} ${classes.selectedDay}`
+                  : `${classes.day}`
+              }
+            >
+              {day}
+            </button>
+          </div>
+        );
+
         if (day === halfOfMonth) {
           return (
-            <>
-              <button className={classes.day}>{day}</button>
-              <div>
-                {currentMonthName} {year}
-              </div>
-            </>
+            <Fragment key={day}>
+              {dayButton}
+              <button onClick={() => alert("choose another month or year")}>
+                {monthName} {year}
+              </button>
+            </Fragment>
           );
         }
 
-        return <button className={classes.day}>{day}</button>;
+        return dayButton;
       })}
     </div>
   );

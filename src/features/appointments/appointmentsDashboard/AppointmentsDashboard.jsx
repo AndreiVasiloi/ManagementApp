@@ -29,14 +29,19 @@ export default function AppointmentsDashboard() {
     deps: [dispatch, predicate],
   });
 
+  const date = predicate.get("startDate");
+
   return (
     <>
       <div className={classes.dashboardContainer}>
         <Grid>
           <Grid.Column width={16}>
             <AppointmentsNav />
-            <div style={{marginTop: 40 }}>
-              <LineCalendar />
+            <div style={{ marginTop: 40 }}>
+              <LineCalendar
+                date={date}
+                onNewDate={(date) => handleSetPredicate("startDate", date)}
+              />
             </div>
             {/* <AppointmentsCalendar setPredicate={handleSetPredicate} predicate={predicate} /> */}
             {/* <Calendar
