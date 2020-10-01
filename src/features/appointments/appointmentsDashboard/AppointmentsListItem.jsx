@@ -12,6 +12,9 @@ export default function AppointmentsListItem({ appointment }) {
   const appointmentDate = new Date(appointment.displayAppointmentDate);
   const dateDifferenceInTime =
   appointmentDate.getTime() - currentDay.getTime();
+  const dateDifferenceInDays = Math.floor(
+    dateDifferenceInTime / (1000 * 3600 * 24) + 1
+  );
   const getNameFirstLetters = appointment.name
     .split(" ")
     .map((i) => i.charAt(0).toUpperCase())
@@ -26,9 +29,15 @@ export default function AppointmentsListItem({ appointment }) {
     }
   }
 
+  const datesAreOnSameDay = (first, second) =>
+    first.getFullYear() === second.getFullYear() &&
+    first.getMonth() === second.getMonth() &&
+    first.getDate() === second.getDate();
+  
+
   return (
     <Segment.Group>
-      {dateDifferenceInTime === 2347499885 ? (
+      {datesAreOnSameDay(currentDay, appointmentDate) ? (
         <Header content= {`Today ${appointment.displayAppointmentDate}`} />
       ) : (
         <Header content={appointment.displayAppointmentDate} />
