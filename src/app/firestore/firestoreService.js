@@ -75,16 +75,16 @@ export function deleteCategoryInFirestore(categoryId) {
 //appointments
 
 export function listenToAppointmentsFromFirestore(predicate) {
-  
   let appointmentsRef = db.collection("appointments");
   if(typeof(predicate) === 'object'){
-    return appointmentsRef.where('date', '>=', predicate.get('startDate'))
+    return appointmentsRef.where('date', '==', predicate.get('startDate'))
   }else {
     return appointmentsRef;
   }
 }
 
 export function addAppointmentToFirestore(appointment) {
+  
   return db.collection("appointments").add({
     ...appointment,
   });

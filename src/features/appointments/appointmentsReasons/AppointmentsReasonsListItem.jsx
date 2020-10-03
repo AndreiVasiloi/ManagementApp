@@ -24,12 +24,16 @@ export default function AppointmentsReasonsListItem({ reason }) {
         <Segment textAlign='center' className={classes.inventoryItemContainer}>
           <Item.Group>
             <Grid>
-              <Grid.Column width={14}>
+              <Grid.Column width={7}>
                 <Item>
                   <Item.Content>{reason.text}</Item.Content>
                 </Item>
               </Grid.Column>
-              
+              <Grid.Column width={7}>
+                <Item>
+                  <Item.Content>{reason.displayPrice}</Item.Content>
+                </Item>
+              </Grid.Column>
               <Grid.Column width={1}>
               <Dropdown>
                 <Dropdown.Toggle

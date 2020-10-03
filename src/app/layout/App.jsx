@@ -6,7 +6,7 @@ import NavBar from "../../features/nav/NavBar";
 import { Route, useLocation } from "react-router-dom";
 import HomePage from "../../features/home/HomePage";
 import AppointmentsDashboard from "../../features/appointments/appointmentsDashboard/AppointmentsDashboard";
-import ProfitDashboard from "../../features/profit/profitDashboard/ProfitDashboard";
+import ProfitDashboard from "../../features/profit/ProfitDashboard";
 import InventoryItemForm from "../../features/inventory/inventoryForm/InventoryItemForm";
 import InventoryCategoryForm from "../../features/inventory/inventoryForm/InventoryCategoryForm";
 import Sandbox from "../../features/sandbox/Sandbox";
@@ -31,7 +31,7 @@ function App() {
         render={() => (
           <>
             <NavBar/>
-            <Container className='main'>
+           
             <Route path='/appointments' component={AppointmentsDashboard} />
             <Route path='/inventory' component={InventoryDashboard} />
             <Route path='/inventoryCategories' component={InventoryCategoriesDashboard} />
@@ -56,7 +56,7 @@ function App() {
               path={["/createAppointment", "/editAppointment/:id"]}
               component={AppointmentsForm}
             />
-            </Container>
+
            
           </>
         )}

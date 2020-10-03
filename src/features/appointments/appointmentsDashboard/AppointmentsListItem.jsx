@@ -10,11 +10,7 @@ export default function AppointmentsListItem({ appointment }) {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const currentDay = new Date();
   const appointmentDate = new Date(appointment.displayAppointmentDate);
-  const dateDifferenceInTime =
-  appointmentDate.getTime() - currentDay.getTime();
-  const dateDifferenceInDays = Math.floor(
-    dateDifferenceInTime / (1000 * 3600 * 24) + 1
-  );
+  const [newDates, setNewDates] = useState();
   const getNameFirstLetters = appointment.name
     .split(" ")
     .map((i) => i.charAt(0).toUpperCase())
@@ -33,16 +29,24 @@ export default function AppointmentsListItem({ appointment }) {
     first.getFullYear() === second.getFullYear() &&
     first.getMonth() === second.getMonth() &&
     first.getDate() === second.getDate();
-  
+
+  //   if(newDates === undefined){
+  //     setNewDates(appointment.displayAppointmentDate)
+  //   }
+  // if(!newDates.includes(appointment.displayAppointmentDate)){ 
+  //   newDates.push(appointment.displayAppointmentDate);
+  // }else{}
+  // console.log('new dates: ' + newDates);
 
   return (
-    <Segment.Group>
-      {datesAreOnSameDay(currentDay, appointmentDate) ? (
+    <>
+     {datesAreOnSameDay(currentDay, appointmentDate) ? (
         <Header content= {`Today ${appointment.displayAppointmentDate}`} />
       ) : (
         <Header content={appointment.displayAppointmentDate} />
       )}
-
+      
+    <Segment.Group>
       <Segment textAlign='center'>
         <Item.Group>
           <Grid>
@@ -119,5 +123,6 @@ export default function AppointmentsListItem({ appointment }) {
         </Modal>
       </Segment>
     </Segment.Group>
+    </>
   );
 }

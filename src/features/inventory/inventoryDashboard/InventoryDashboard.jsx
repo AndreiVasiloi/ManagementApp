@@ -30,7 +30,6 @@ export default function InventoryDashboard() {
       const value = item[key];
       return value.toString().toLowerCase();
     });
-
     return values.some((value) => value.includes(text));
   }
 

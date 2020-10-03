@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Grid } from "semantic-ui-react";
+import { Grid, Segment } from "semantic-ui-react";
 import { listenToAppointmentsFromFirestore } from "../../../app/firestore/firestoreService";
 import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import { listenToAppointments } from "../appointmentsActions";
@@ -18,9 +18,26 @@ export default function AppointmentsDashboard() {
   const [predicate, setPredicate] = useState(
     new Map([["startDate", new Date()]])
   );
+  const date = predicate.get("startDate");
+  const [text, setText] = useState("");
+  const textLowered = text.trim().toLowerCase();
+  const filteredAppointments =
+    text === ""
+      ? appointments
+      : appointments.filter((appointment) => handleFilter(appointment, textLowered));
 
   function handleSetPredicate(key, value) {
     setPredicate(new Map(predicate.set(key, value)));
+  }
+
+  function handleFilter(appointment, text) {
+    const keys = Object.keys(appointment).filter((key) => key !== "id");
+    const values = keys.map((key) => {
+      const value = appointment[key];
+      return value.toString().toLowerCase();
+    });
+
+    return values.some((value) => value.includes(text));
   }
 
   useFirestoreCollection({
@@ -29,14 +46,13 @@ export default function AppointmentsDashboard() {
     deps: [dispatch, predicate],
   });
 
-  const date = predicate.get("startDate");
-
   return (
     <>
       <div className={classes.dashboardContainer}>
+        <Segment>
         <Grid>
           <Grid.Column width={16}>
-            <AppointmentsNav />
+            <AppointmentsNav setText={setText}/>
             <div style={{ marginTop: 40 }}>
               <LineCalendar
                 date={date}
@@ -49,9 +65,10 @@ export default function AppointmentsDashboard() {
               value={predicate.get("startDate") || new Date()}
               tileDisabled={() => loading}
             /> */}
-            <AppointmentsList appointments={appointments} />
+            <AppointmentsList appointments={filteredAppointments} />
           </Grid.Column>
         </Grid>
+        </Segment>
       </div>
     </>
   );

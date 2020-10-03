@@ -10,6 +10,27 @@ export default function Sandbox() {
   const data = useSelector((state) => state.test.data);
   const { loading } = useSelector((state) => state.async);
 
+  const numbers = [1,1,2,3];
+  let newNumbers = [];
+  // numbers.map(n => {
+    
+  //   if(numbers[n - 1] !== newNumbers[n - 1]){
+  //     newNumbers.push(n)
+  //   }
+    
+  //   console.log('newNumbers ' + newNumbers[n - 1]);
+  //   console.log('numbers ' + numbers[n - 1]);
+  //   console.log('n ' + n);
+  // })
+  for(let i = 0; i<numbers.length; i++){
+    // newNumbers.push(numbers[i])
+    if(numbers[i] !== newNumbers[newNumbers.length - 1]){
+      newNumbers.push(numbers[i])
+    }
+    console.log(numbers[i]);
+    
+  }
+  console.log(newNumbers);
   return (
     <>
       <div style={{marginLeft: '200px'}}>

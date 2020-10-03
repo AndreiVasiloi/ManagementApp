@@ -11,6 +11,7 @@ import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { toast } from "react-toastify";
 import classes from '../../../css/Form.module.css';
 import { listenToReasons } from "../reasonsActions";
+import MyNumberInput from "../../../app/common/form/MyNumberInput";
 
 export default function AppointmentsReasonsForm({ match, history }) {
   const dispatch = useDispatch();
@@ -22,7 +23,8 @@ export default function AppointmentsReasonsForm({ match, history }) {
 
   const initialValues = selectedReason ?? {
     text: "",
-    value: ''
+    value: '',
+    price: ''
   };
 
   const validationSchema = Yup.object({
@@ -63,6 +65,7 @@ export default function AppointmentsReasonsForm({ match, history }) {
           <Form className='ui form' >
             <Header sub color='teal' content= {selectedReason ? 'Edit reason' :'Add reason' }/>
             <MyTextInput name='text' placeholder='Reason' />
+            <MyNumberInput name='price' placeholder='Price' />
             <Button
               type='submit'
               floated='right'

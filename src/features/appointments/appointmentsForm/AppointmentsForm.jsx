@@ -50,6 +50,7 @@ export default function AppointmentsForm({ match, history }) {
     data: (reasons) => dispatch(listenToReasons(reasons)),
     deps: [dispatch],
   });
+  
 
   useFirestoreDoc({
     shouldExecute: !!match.params.id,

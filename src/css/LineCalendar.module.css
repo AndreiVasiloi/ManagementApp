@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  background-color: #fff;
+  border: 1px solid  #14b1ab;
+  border-radius: 12px;
+  padding: 5px;
+  justify-content: center;
+}
+
+.dayContainer {
+  color: #758584;
+  text-align: center;
+}
+
+.day {
+  background-color: #fff;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  color: black;
+}
+
+
+.selectedDay {
+  background-color: #14b1ab;
+  color: #fff;
+}
+
+.displayYearAndMonthContainer {
+  color:  #14b1ab;
+  margin: auto 10px;
+}
+
+.yearAndMonth {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 5px;
+}
+
+.changeDateContainer {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  text-align: center;
+  grid-gap: 2px;
+}

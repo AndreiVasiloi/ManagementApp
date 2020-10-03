@@ -5,8 +5,16 @@ import { NavLink } from "react-router-dom";
 import { FormField, Icon } from "semantic-ui-react";
 import classes from "../../../css/InventoryNavbar.module.css";
 
-export default function AppointmentsNav() {
+export default function AppointmentsNav({ setText }) {
   const { responsiveClass } = useSelector((state) => state.addClass);
+  const ENTER = 13;
+
+  function handleSearch(event) {
+    if (event.which === ENTER) {
+      const { value } = event.target;
+      setText(value);
+    }
+  }
   return (
     <div>
       <Navbar
@@ -27,7 +35,7 @@ export default function AppointmentsNav() {
             <input
               type='text'
               placeholder='Search...'
-              //   onKeyPress={handleSearch}
+              onKeyPress={handleSearch}
             />
             <Icon name='search' className={classes.topNavbarSearchIcon} />
           </FormField>
