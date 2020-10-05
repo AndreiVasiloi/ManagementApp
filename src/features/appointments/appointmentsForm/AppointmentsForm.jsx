@@ -69,6 +69,13 @@ export default function AppointmentsForm({ match, history }) {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
+          // function getPrice(reasontype) {
+          //   debugger
+          //   const reason = reasons.find(reason => reason.text === reasontype);
+          //   if(reason !== undefined){
+          //     return reason.price;
+          //   }
+          // }
           try {
             selectedAppointment
               ? await updateAppointmentInFirestore(values)

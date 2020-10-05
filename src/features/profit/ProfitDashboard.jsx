@@ -12,28 +12,56 @@ export default function ProfitDashboard() {
   const { appointments } = useSelector((state) => state.appointment);
   const { reasons } = useSelector((state) => state.reason);
   const dispatch = useDispatch();
-  const appointmentsReason = [];
-  const reasonFromReasons = [];
-  const text = 'cu oja semi;'
-  const filteredItems = reasons.filter((reason) => handleFilter(reason, appointmentsReason[0]));
+  const addAppointmentPrice = appointments.map(appointment => ({...appointment, price: getPrice(appointment.reason)}));
+  const getAllPrices = addAppointmentPrice.map(app => app.price);
+  const totalPrices = getTotalPrices();
+  const sortAppointments = appointments.map(app => app).sort(sortFunction);
+  const groupedAppointments = groupedObj(appointments, 'date');
 
+  var objKeys = Object.keys(groupedAppointments);
+// objKeys.sort();
+// objKeys.map( (value) => {
+//     console.log(value)
+// });
+console.log(groupedAppointments);
+console.log(objKeys);
+  function sortFunction(a,b){  
+    
+    var dateA = new Date(a.date).getTime();
+    var dateB = new Date(b.date).getTime();
+    return dateA > dateB ? 1 : -1;  
+}; 
 
-    appointments.map((appointment) => (
-    appointmentsReason.push(appointment.reason)
-  ))
+// console.log(groupedAppointments);
 
-  function handleFilter(item, text) {
-    const keys = Object.keys(item).filter((key) => key !== "id");
-    const values = keys.map((key) => {
-      const value = item[key];
-      return value.toString().toLowerCase();
-    });
-    // console.log(keys);
-    // values.map((value) => console.log(value))
-    console.log(text);
-    return values.some((value) => value.includes(text));
-  }
+  function groupedObj(objArray, property) {
+    return objArray.reduce((prev, cur) => {
+      if (!prev[cur[property]]) {
+        prev[cur[property]] = [];
+      }
+      prev[cur[property]].push(cur);
   
+      return prev;
+    }, {});
+  }
+
+  function getTotalPrices() {
+    if(getAllPrices.length > 0) {
+      return getAllPrices.reduce(addAppointmentsPrices);
+    }
+  }
+
+  function getPrice(reasontype) {
+    const reason = reasons.find(reason => reason.text === reasontype);
+    if(reason !== undefined){
+      return reason.price;
+    }
+  }
+
+  function addAppointmentsPrices(total, price){
+    return total + price;
+  }
+
   useFirestoreCollection({
     query: () => listenToAppointmentsFromFirestore(),
     data: (appointments) => dispatch(listenToAppointments(appointments)),
@@ -45,36 +73,6 @@ export default function ProfitDashboard() {
     data: (reasons) => dispatch(listenToReasons(reasons)),
     deps: [dispatch],
   });
-
-
-  // appointments.map((appointment) => {
-  //   if(appointment.reason === 'cu oja semi'){
-  //     console.log(appointment.reason);
-  //   }
-    
-  // })
-
-  
-
-  // appointments.map((appointment) => (
-  //   appointmentsReason.push(appointment.reason)
-  // ))
-
-  // appointmentsReason.map(appReason => {
-    
-  //   return appReason
-  // })
-
-  // reasons.map((reason) => (
-  //   reasonFromReasons.push(reason.reason)
-  // ))
-
-
-  // for (const reason of appointmentsReason) {
-    
-  //   console.log(reason);
-  // }
-
 
   return (
     <>

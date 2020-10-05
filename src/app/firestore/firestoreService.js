@@ -75,9 +75,9 @@ export function deleteCategoryInFirestore(categoryId) {
 //appointments
 
 export function listenToAppointmentsFromFirestore(predicate) {
-  let appointmentsRef = db.collection("appointments");
+  let appointmentsRef = db.collection("appointments").orderBy('date');
   if(typeof(predicate) === 'object'){
-    return appointmentsRef.where('date', '==', predicate.get('startDate'))
+    return appointmentsRef.where('date', '>=', predicate.get('startDate'))
   }else {
     return appointmentsRef;
   }
