@@ -25,6 +25,7 @@ export default function InventoryDashboard() {
   );
 
   function handleFilter(item, text) {
+    debugger
     const keys = Object.keys(item).filter((key) => key !== "id");
     const values = keys.map((key) => {
       const value = item[key];

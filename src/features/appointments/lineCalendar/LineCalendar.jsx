@@ -21,9 +21,7 @@ export function LineCalendar({ onNewDate, date }) {
   const dayNames = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
   const [year, setYear] = useState(date.getFullYear());
-  // const year = date.getFullYear();
   const [month, setMonth] = useState(date.getMonth());
-  // const month = date.getMonth();
   const monthName = monthNames[month];
   const numberOfDays = getDaysInMonth(month + 1, year);
   const days = getDaysAsArray(numberOfDays);

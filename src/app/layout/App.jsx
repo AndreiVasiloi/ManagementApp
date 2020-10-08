@@ -18,9 +18,16 @@ import InventoryCategoriesDashboard from "../../features/inventory/inventoryCate
 import AppointmentsForm from '../../features/appointments/appointmentsForm/AppointmentsForm';
 import AppointmentsReasonsDashboard from "../../features/appointments/appointmentsReasons/AppointmentsReasonsDashboard";
 import AppointmentsReasonsForm from "../../features/appointments/appointmentsForm/AppointmentsReasonsForm";
+import AccountPage from "../../features/auth/AccountPage";
+import { useSelector } from "react-redux";
+import LoadingComponent from "./LoadingComponent";
+import ProfilePage from "../../features/profiles/profilePage/ProfilePage";
 
 function App() {
   const { key } = useLocation();
+  const { initialized } = useSelector((state) => state.async);
+
+  if (!initialized) return <LoadingComponent content='Loading app...' />
   return (
     <>
       <ModalManager />
@@ -38,12 +45,14 @@ function App() {
             <Route path='/appointmentsReasons' component={AppointmentsReasonsDashboard} />
             <Route path='/sandbox' component={Sandbox} />
             <Route path='/profit' component={ProfitDashboard} />
+            <Route path='/profile/:id' component={ProfilePage} />
             <Route
               path={["/createItem", "/editItem/:id"]}
               component={InventoryItemForm}
               key={key}
             />
             <Route path='/error' component={ErrorComponent} />
+            <Route path='/account' component={AccountPage} />
              <Route
               path={["/createCategory", "/editCategory/:id"]}
               component={InventoryCategoryForm}

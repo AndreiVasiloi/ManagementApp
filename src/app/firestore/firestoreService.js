@@ -74,7 +74,8 @@ export function deleteCategoryInFirestore(categoryId) {
 
 //appointments
 
-export function listenToAppointmentsFromFirestore(predicate) {
+export function listenToAppointmentsFromFirestore(predicate, endDate) {
+  
   let appointmentsRef = db.collection("appointments").orderBy('date');
   if(typeof(predicate) === 'object'){
     return appointmentsRef.where('date', '>=', predicate.get('startDate'))
@@ -117,4 +118,32 @@ export function updateReasonInFirestore(reason) {
 
 export function deleteReasonInFirestore(reasonId) {
   return db.collection("reasons").doc(reasonId).delete();
+}
+
+
+export function setUserProfileData(user) {
+  return db.collection('users').doc(user.uid).set({
+      displayName: user.displayName,
+      email: user.email,
+      photoURL: user.photoURL || null,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  })
+}
+
+export function getUserProfile(userId) {
+  return db.collection('users').doc(userId);
+}
+
+export async function updateUserProfile(profile) {
+  const user = firebase.auth().currentUser;
+  try {
+      if (user.displayName !== profile.displayName) {
+          await user.updateProfile({
+              displayName: profile.displayName
+          })
+      }
+      return await db.collection('users').doc(user.uid).update(profile);
+  } catch (error) {
+      throw error;
+  }
 }

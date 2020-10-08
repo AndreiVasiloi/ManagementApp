@@ -1,7 +1,6 @@
 import React from "react";
 import classes from "../../css/NavBar.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { signOutUser } from "../auth/authActions";
 import { useHistory, Link } from "react-router-dom";
 import { Icon } from "semantic-ui-react";
 import { Nav } from "react-bootstrap";
@@ -9,13 +8,23 @@ import {
   addActiveClass,
   addResponsiveClass,
 } from "../inventory/inventoryNavActions";
+import { signOutFirebase } from "../../app/firestore/firebaseService";
 
 export default function SignedInMenu() {
   const dispatch = useDispatch();
-  const { currentUser } = useSelector((state) => state.auth);
+  const { currentUserProfile } = useSelector((state) => state.profile);
   const { responsiveClass } = useSelector((state) => state.addClass);
   const { activeClass } = useSelector((state) => state.addClass);
   const history = useHistory();
+
+  async function handleSignOut() {
+    try {
+      await signOutFirebase();
+      history.push('/')
+    } catch (error) {
+      
+    }
+  }
 
   return (
     <div
@@ -31,7 +40,7 @@ export default function SignedInMenu() {
         to="/"
       >
         <Icon name="user" />
-        {currentUser.email}
+        {currentUserProfile.displayName}
       </Nav.Item>
       <Nav.Item
         onClick={() => dispatch(addActiveClass("appointments"))}
@@ -82,13 +91,36 @@ export default function SignedInMenu() {
         Sandbox
       </Nav.Item>
       <Nav.Item
+      onClick={() => dispatch(addActiveClass("account"))}
+        as={Link}
+        className={
+          activeClass === "account"
+            ? `${classes.navLink} ${classes.active}`
+            : `${classes.navLink} `
+        }
+        to="/account"
+      >
+        <Icon name="settings" />
+        My Account
+      </Nav.Item>
+      <Nav.Item
+      onClick={() => dispatch(addActiveClass("profile"))}
+        as={Link}
+        className={
+          activeClass === "profile"
+            ? `${classes.navLink} ${classes.active}`
+            : `${classes.navLink} `
+        }
+        to={`/profile/${currentUserProfile.id}`}
+      >
+        <Icon name="user" />
+        My Profile
+      </Nav.Item>
+      <Nav.Item
         as={Link}
         className={classes.navLink}
         to="/"
-        onClick={() => {
-          dispatch(signOutUser());
-          history.push("/");
-        }}
+        onClick={handleSignOut}
       >
         <Icon name="log out" /> Sign out
       </Nav.Item>
