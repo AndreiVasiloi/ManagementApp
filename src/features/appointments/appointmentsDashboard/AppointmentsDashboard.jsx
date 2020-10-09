@@ -24,7 +24,9 @@ export default function AppointmentsDashboard() {
   const filteredAppointments =
     text === ""
       ? appointments
-      : appointments.filter((appointment) => handleFilter(appointment, textLowered));
+      : appointments.filter((appointment) =>
+          handleFilter(appointment, textLowered)
+        );
 
   function handleSetPredicate(key, value) {
     setPredicate(new Map(predicate.set(key, value)));
@@ -50,24 +52,26 @@ export default function AppointmentsDashboard() {
     <>
       <div className={classes.dashboardContainer}>
         <Segment>
-        <Grid>
-          <Grid.Column width={16}>
-            <AppointmentsNav setText={setText}/>
-            <div style={{ marginTop: 40 }}>
-              <LineCalendar
-                date={date}
-                onNewDate={(date) => handleSetPredicate("startDate", date)}
-              />
-            </div>
-            {/* <AppointmentsCalendar setPredicate={handleSetPredicate} predicate={predicate} /> */}
-            {/* <Calendar
+          <Grid>
+            <Grid.Column width={16}>
+              <AppointmentsNav setText={setText} />
+              <div style={{ marginTop: 40 }}>
+                <LineCalendar
+                  date={date}
+                  onNewDate={(date) => handleSetPredicate("startDate", date)}
+                />
+              </div>
+              {/* <AppointmentsCalendar setPredicate={handleSetPredicate} predicate={predicate} /> */}
+              {/* <Calendar
               onChange={(date) => handleSetPredicate("startDate", date)}
               value={predicate.get("startDate") || new Date()}
               tileDisabled={() => loading}
             /> */}
-            <AppointmentsList appointments={filteredAppointments} />
-          </Grid.Column>
-        </Grid>
+              <AppointmentsList
+                appointments={filteredAppointments}
+              />
+            </Grid.Column>
+          </Grid>
         </Segment>
       </div>
     </>

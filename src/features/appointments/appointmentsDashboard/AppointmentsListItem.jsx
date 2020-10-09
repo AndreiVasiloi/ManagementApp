@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Dropdown, Modal } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Grid, Header, Icon, Item, Label, Segment } from "semantic-ui-react";
@@ -9,6 +10,8 @@ import classes from "../../../css/Dashboard.module.css";
 export default function AppointmentsListItem({ appointment }) {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const currentDay = new Date();
+  const { currentUser } = useSelector((state) => state.auth);
+  const isCurrentUserAppointment = appointment?.userUid === currentUser.uid;
   const appointmentDate = new Date(appointment.displayAppointmentDate);
   const [newDates, setNewDates] = useState();
   const getNameFirstLetters = appointment.name
@@ -40,11 +43,12 @@ export default function AppointmentsListItem({ appointment }) {
 
   return (
     <>
-     {datesAreOnSameDay(currentDay, appointmentDate) ? (
-        <Header content= {`Today ${appointment.displayAppointmentDate}`} />
-      ) : (
-        <Header content={appointment.displayAppointmentDate} />
-      )}
+    {isCurrentUserAppointment && (
+    //  {datesAreOnSameDay(currentDay, appointmentDate) ? (
+    //     <Header content= {`Today ${appointment.displayAppointmentDate}`} />
+    //   ) : (
+    //     <Header content={appointment.displayAppointmentDate} />
+    //   )}
       
     <Segment.Group>
       <Segment textAlign='center'>
@@ -122,7 +126,7 @@ export default function AppointmentsListItem({ appointment }) {
           </Modal.Footer>
         </Modal>
       </Segment>
-    </Segment.Group>
+    </Segment.Group>)}
     </>
   );
 }

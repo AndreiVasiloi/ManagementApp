@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { FETCH_APPOINTMENT } from "./appointmentsConstants";
+import { FETCH_APPOINTMENT, LISTEN_TO_APPOINTMENTS_MONTH } from "./appointmentsConstants";
 
 export function listenToAppointments(appointments) {
     const parsedAppointments = appointments.map((appointment) => ({
@@ -11,5 +11,12 @@ export function listenToAppointments(appointments) {
     return {
       type: FETCH_APPOINTMENT,
       payload: parsedAppointments,
+    };
+  }
+
+  export function getAppointmentsMonth(month) {
+    return {
+      type: LISTEN_TO_APPOINTMENTS_MONTH,
+      payload: month,
     };
   }

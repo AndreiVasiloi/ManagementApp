@@ -2,7 +2,7 @@ import React from "react";
 import classes from "../../css/NavBar.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
-import { Icon } from "semantic-ui-react";
+import { Icon, Image } from "semantic-ui-react";
 import { Nav } from "react-bootstrap";
 import {
   addActiveClass,
@@ -39,8 +39,9 @@ export default function SignedInMenu() {
         className={`${classes.navLink} ${classes.navLinkHeader}`}
         to="/"
       >
-        <Icon name="user" />
-        {currentUserProfile.displayName}
+        {/* <Icon name="user" /> */}
+        <Image avatar spaced='right' src={currentUserProfile?.photoURL || '/assets/user.png'} />
+        {currentUserProfile?.displayName}
       </Nav.Item>
       <Nav.Item
         onClick={() => dispatch(addActiveClass("appointments"))}
@@ -111,7 +112,7 @@ export default function SignedInMenu() {
             ? `${classes.navLink} ${classes.active}`
             : `${classes.navLink} `
         }
-        to={`/profile/${currentUserProfile.id}`}
+        to={`/profile/${currentUserProfile?.id}`}
       >
         <Icon name="user" />
         My Profile

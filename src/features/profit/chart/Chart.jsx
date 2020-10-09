@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import './App.css';
 import classes from "../../../css/Dashboard.module.css";
 import { XYPlot, VerticalBarSeries, XAxis, YAxis } from "react-vis";
 import { Icon } from "semantic-ui-react";
+import useFirestoreCollection from '../../../app/hooks/useFirestoreCollection';
+import { getAppointmentsNumberInMonth } from "../../../app/firestore/firestoreService";
+import { useDispatch, useSelector } from "react-redux";
+import { getAppointmentsMonth } from "../../appointments/appointmentsActions";
 
-export default function Chart() {
+export default function Chart({month, year, setYear, setMonth, setFullDateFirstDay, firstDayInMonth}) {
+  const dispatch = useDispatch();
   const monthNames = [
     "January",
     "February",
@@ -20,73 +25,52 @@ export default function Chart() {
     "December",
   ];
   const data = [];
-  const date = new Date();
-  const [year, setYear] = useState(date.getFullYear());
-  const [month, setMonth] = useState(date.getMonth());
   const monthName = monthNames[month];
-  const numberOfDays = getDaysInMonth(month + 1, year);
-  const days = getDaysAsArray(numberOfDays);
-  const appDates = [
-    150,
-    200,
-    300,
-    19,
-    34,
-    65,
-    78,
-    99,
-    100,
-    10,
-    500,
-    430,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9
-  ];
+  // const numberOfDays = getDaysInMonth(month + 1, year);
+  // const days = getDaysAsArray(numberOfDays);
+  // const firstDayInMonth = days[0];
+  // const lastDayInMonth = days[days.length -1];
+  // const firstDay = setFullDateFirstDay(new Date(year, month, firstDayInMonth));
+  // const lastDay = setFullDateLastDay(new Date(year, month, lastDayInMonth));
+  const { appointmentsMonth } = useSelector((state) => state.appointment);
+  // const appDates = [];
+  // const [fullDateFirstDay, setFullDateFirstDay] = useState(new Date(year, month, firstDayInMonth));
+  // const [fullDateLastDay, setFullDateLastDay] = useState(new Date(year, month, lastDayInMonth));
+  // const [predicate, setPredicate] = useState(
+  //   new Map([["firstDay", fullDateFirstDay],['lastDay', fullDateLastDay]])
+  // );
 
-  for(let i = 0; i < days.length ; i++){
-    // debugger
-    if(appDates[i] === undefined){
-      appDates[i] = 0
-    }
-    data.push({ x: i, y: appDates[i] })
-  }
+  // for(let i = 0; i < days.length ; i++){
+  //   // debugger
+  //   if(appDates[i] === undefined){
+  //     appDates[i] = 0
+  //   }
+  //   data.push({ x: i, y: appDates[i] })
+  // }
 
   // appDates.map((date) => {
 
   //   data.push({ x: x++, y: date })
   // });
 
-  function getDaysInMonth(month, year) {
-    return new Date(year, month, 0).getDate();
-  }
+  // function getDaysInMonth(month, year) {
+  //   return new Date(year, month, 0).getDate();
+  // }
 
-  function getDaysAsArray(lastDay) {
-    let days = [];
+  // function getDaysAsArray(lastDay) {
+  //   let days = [];
 
-    for (let i = 1; i <= lastDay; i++) {
-      days.push(i);
-    }
+  //   for (let i = 1; i <= lastDay; i++) {
+  //     days.push(i);
+  //   }
 
-    return days;
-  }
+  //   return days;
+  // }
+
+
 
   function changeMonth(newMonth) {
+    
     if (newMonth === "prev") {
       if (month === 0) {
         setYear(year - 1);
@@ -102,8 +86,37 @@ export default function Chart() {
         setMonth(month + 1);
       }
     }
+    
+    // setPredicate(new Map(predicate.set('firstDay', fullDateFirstDay)));
+    // setPredicate(new Map(predicate.set('lastDay', fullDateLastDay)));
+    
   }
+    // setPredicate(new Map(predicate.set('firstDay', fullDateFirstDay)));
+    // setPredicate(new Map(predicate.set('lastDay', fullDateLastDay)));
+  // function getFirstAndLastDay(newYear ,newMonth){
+  //   // const numberOfDays = getDaysInMonth(newMonth + 1, newYear);
+  //   // const days = getDaysAsArray(numberOfDays);
+  //   const firstDay = days[0];
+  //   const lastDay = days[days.length -1];
+  //   // setFullDateFirstDay(new Date(year, month, firstDay))
+  //   // setFullDateLastDay(new Date(year, month, lastDay))
+  //   const fullDateFirstDay = new Date(newYear, newMonth, firstDay);
+  //   const fullDateLastDay = new Date(newYear, newMonth, lastDay);
+  //   setPredicate(new Map(predicate.set('firstDay', fullDateFirstDay)));
+  //   setPredicate(new Map(predicate.set('lastDay', fullDateLastDay)));
+    
+  // }
 
+  // getFirstAndLastDay(year, month)
+
+  // useFirestoreCollection({
+  //   query: () => getAppointmentsNumberInMonth(fullDateFirstDay, fullDateLastDay),
+  //   data: (appointmentsMonth) => dispatch(getAppointmentsMonth(appointmentsMonth)),
+  //   deps: [dispatch, fullDateFirstDay, fullDateLastDay],
+  // });
+  // console.log(fullDateFirstDay)
+  // console.log(fullDateLastDay)
+  // console.log(predicate)
   return (
     <>
     <XYPlot height={300} width={300}>
@@ -130,7 +143,13 @@ export default function Chart() {
                   <div className={classes.prevMonth}>
                     <Icon
                       name='angle left'
-                      onClick={() => changeMonth("prev")}
+                      onClick={() => {
+                        changeMonth("prev");
+                        setFullDateFirstDay(new Date(year, month, firstDayInMonth - 1))
+                        // setFullDateLastDay(new Date(year, month, lastDayInMonth));
+                        // setPredicate(new Map(predicate.set('firstDay', fullDateFirstDay)));   
+                        // setPredicate(new Map(predicate.set('lastDay', fullDateLastDay)));
+                      }}
                     />
                   </div>
                   <div className={classes.nextMonth}>

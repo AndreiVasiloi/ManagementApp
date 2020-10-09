@@ -46,7 +46,6 @@ export function deleteItemInFirestore(itemId) {
   return db.collection("items").doc(itemId).delete();
 }
 
-
 //categories
 
 export function listenToCategoriesFromFirestore() {
@@ -74,20 +73,20 @@ export function deleteCategoryInFirestore(categoryId) {
 
 //appointments
 
-export function listenToAppointmentsFromFirestore(predicate, endDate) {
-  
-  let appointmentsRef = db.collection("appointments").orderBy('date');
-  if(typeof(predicate) === 'object'){
-    return appointmentsRef.where('date', '>=', predicate.get('startDate'))
-  }else {
+export function listenToAppointmentsFromFirestore(predicate) {
+  let appointmentsRef = db.collection("appointments").orderBy("date");
+  if (typeof predicate === "object") {
+    return appointmentsRef.where("date", ">=", predicate.get("startDate"));
+  } else {
     return appointmentsRef;
   }
 }
 
 export function addAppointmentToFirestore(appointment) {
-  
+  const user = firebase.auth().currentUser;
   return db.collection("appointments").add({
     ...appointment,
+    userUid: user.uid,
   });
 }
 
@@ -97,6 +96,15 @@ export function updateAppointmentInFirestore(appointment) {
 
 export function deleteAppointmentInFirestore(appointmentId) {
   return db.collection("appointments").doc(appointmentId).delete();
+}
+
+export function getAppointmentsNumberInMonth(firstDay, lastDay) {
+  
+  let appointmentsRef = db.collection("appointments");
+  return appointmentsRef
+    .where("date", ">=", firstDay)
+    .where("date", "<=", lastDay)
+    .orderBy("date");
 }
 
 //reasons
@@ -120,30 +128,82 @@ export function deleteReasonInFirestore(reasonId) {
   return db.collection("reasons").doc(reasonId).delete();
 }
 
-
 export function setUserProfileData(user) {
-  return db.collection('users').doc(user.uid).set({
+  return db
+    .collection("users")
+    .doc(user.uid)
+    .set({
       displayName: user.displayName,
       email: user.email,
       photoURL: user.photoURL || null,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
-  })
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    });
 }
 
 export function getUserProfile(userId) {
-  return db.collection('users').doc(userId);
+  return db.collection("users").doc(userId);
 }
 
 export async function updateUserProfile(profile) {
   const user = firebase.auth().currentUser;
   try {
-      if (user.displayName !== profile.displayName) {
-          await user.updateProfile({
-              displayName: profile.displayName
-          })
-      }
-      return await db.collection('users').doc(user.uid).update(profile);
+    if (user.displayName !== profile.displayName) {
+      await user.updateProfile({
+        displayName: profile.displayName,
+      });
+    }
+    return await db.collection("users").doc(user.uid).update(profile);
   } catch (error) {
-      throw error;
+    throw error;
   }
+}
+
+export async function updateUserProfilePhoto(downloadURL, filename) {
+  const user = firebase.auth().currentUser;
+  const userDocRef = db.collection("users").doc(user.uid);
+  try {
+    const userDoc = await userDocRef.get();
+    if (!userDoc.data().photoURL) {
+      await db.collection("users").doc(user.uid).update({
+        photoURL: downloadURL,
+      });
+      await user.updateProfile({
+        photoURL: downloadURL,
+      });
+    }
+    return await db.collection("users").doc(user.uid).collection("photos").add({
+      name: filename,
+      url: downloadURL,
+    });
+  } catch (error) {
+    throw error;
+  }
+}
+
+export function getUserPhotos(userUid) {
+  return db.collection("users").doc(userUid).collection("photos");
+}
+
+export async function setMainPhoto(photo) {
+  const user = firebase.auth().currentUser;
+  try {
+    await db.collection("users").doc(user.uid).update({
+      photoURL: photo.url,
+    });
+    return await user.updateProfile({
+      photoURL: photo.url,
+    });
+  } catch (error) {
+    throw error;
+  }
+}
+
+export function deletePhotoFromCollection(photoId) {
+  const userUid = firebase.auth().currentUser.uid;
+  return db
+    .collection("users")
+    .doc(userUid)
+    .collection("photos")
+    .doc(photoId)
+    .delete();
 }

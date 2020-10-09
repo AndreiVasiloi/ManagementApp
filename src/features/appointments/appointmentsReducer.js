@@ -1,7 +1,8 @@
-import { FETCH_APPOINTMENT } from "./appointmentsConstants";
+import { FETCH_APPOINTMENT, LISTEN_TO_APPOINTMENTS_MONTH } from "./appointmentsConstants";
 
 const initialState = {
   appointments: [],
+  appointmentsMonth: []
 };
 
 export default function appointmentsReducer(
@@ -13,6 +14,11 @@ export default function appointmentsReducer(
         return {
           ...state,
           appointments: payload,
+        };
+        case LISTEN_TO_APPOINTMENTS_MONTH:
+        return {
+          ...state,
+          appointmentsMonth: payload,
         };
     default:
       return state;
