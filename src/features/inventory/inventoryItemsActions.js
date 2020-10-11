@@ -4,6 +4,7 @@ import {
   UPDATE_ITEM,
   DELETE_ITEM,
   FETCH_ITEM,
+  LISTEN_TO_ITEMS_MONTH,
 } from "./inventoryConstants";
 import {
   asyncActionStart,
@@ -35,6 +36,13 @@ export function listenToItems(items) {
   return {
     type: FETCH_ITEM,
     payload: parsedItems,
+  };
+}
+
+export function getItemsMonth(month) {
+  return {
+    type: LISTEN_TO_ITEMS_MONTH,
+    payload: month,
   };
 }
 

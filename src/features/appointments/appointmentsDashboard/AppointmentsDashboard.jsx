@@ -47,7 +47,7 @@ export default function AppointmentsDashboard() {
     data: (appointments) => dispatch(listenToAppointments(appointments)),
     deps: [dispatch, predicate],
   });
-
+console.log(appointments);
   return (
     <>
       <div className={classes.dashboardContainer}>

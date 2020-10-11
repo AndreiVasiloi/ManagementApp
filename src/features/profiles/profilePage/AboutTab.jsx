@@ -5,6 +5,7 @@ import ProfileForm from './ProfileForm';
 
 export default function AboutTab({ profile, isCurrentUser }) {
   const [editMode, setEditMode] = useState(false);
+  console.log(profile);
   return (
     <Tab.Pane>
       <Grid>

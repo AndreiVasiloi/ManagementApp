@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
 import Cropper from 'react-cropper';
-import 'cropperjs/dist/cropper.css'; 
+// import 'cropperjs/dist/cropper.css'; 
 
 export default function PhotoWidgetCropper({setImage, imagePreview}) {
     const cropperRef = useRef(null);

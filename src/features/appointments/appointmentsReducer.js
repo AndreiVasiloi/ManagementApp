@@ -2,7 +2,7 @@ import { FETCH_APPOINTMENT, LISTEN_TO_APPOINTMENTS_MONTH } from "./appointmentsC
 
 const initialState = {
   appointments: [],
-  appointmentsMonth: []
+  appointmentsMonth: [],
 };
 
 export default function appointmentsReducer(
