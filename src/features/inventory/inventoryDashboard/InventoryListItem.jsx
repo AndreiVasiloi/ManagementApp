@@ -13,8 +13,11 @@ import { Link } from "react-router-dom";
 import { deleteItemInFirestore } from "../../../app/firestore/firestoreService";
 import { Button, Dropdown, Modal } from "react-bootstrap";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 export default function InventoryListItem({ item }) {
+  const { currentUser } = useSelector((state) => state.auth);
+  const isCurrentUserAppointment = item?.userUid === currentUser?.uid;
   const [confirmOpen, setConfirmOpen] = useState(false);
   const currentDay = new Date();
   const itemExpirationDate = new Date(item.displayExpirationDate);
@@ -36,6 +39,8 @@ export default function InventoryListItem({ item }) {
   }
 
   return (
+    <>
+    {isCurrentUserAppointment && (
     <Segment.Group>
       <Segment textAlign='center' className={classes.inventoryItemContainer}>
         <Item.Group>
@@ -126,6 +131,7 @@ export default function InventoryListItem({ item }) {
           </Modal.Footer>
         </Modal>
       </Segment>
-    </Segment.Group>
+    </Segment.Group>)}
+    </>
   );
 }

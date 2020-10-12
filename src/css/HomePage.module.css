@@ -1,0 +1,144 @@
+.homePage::after {
+    display: flex;
+    align-items: center;
+    background-image: url('../images/homePage.jpg') !important;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    content: "";
+    opacity: 0.8;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;  
+  }
+  
+  .homePage {
+      position: relative
+  }
+  
+  .loginForm {
+      width: 300px;
+      margin: auto;
+  }
+  
+  .loginButton, .registerButton {
+    background-color: #006a71!important;
+    width: 300px;
+    border: 2px solid #006a71!important;
+    box-sizing: border-box;
+    color: #fff;
+    opacity: 1!important;
+  }
+  
+  .loginButton:hover, .registerButton:hover {
+    background-color: #006a71!important;
+    border: 2px solid #006a71;
+    color: #fff;
+    opacity: 0.8!important;
+  }
+  
+  .loginButton:active, .registerButton:active {
+    outline: 0!important;
+    box-shadow: none!important;
+    background-color: #006a71!important;
+  }
+  
+  .registerButton {
+    margin-left: 10px;
+  }
+  
+  
+  .socialButtonLogin {
+    display: flex;
+    box-sizing: border-box;
+  }
+  
+  .facebookLogin, .googleLogin {
+    width: 150px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+  }
+  
+  .facebookLogin {
+    background-color: #3B5998;
+    color: white;
+    border: 2px solid #3B5998;
+  }
+  
+  .googleLogin {
+    background-color: #dd4b39;
+    color: white;
+    border: 2px solid #dd4b39;
+  }
+  
+  .socialButtonsText {
+    text-align: center;
+    margin-top: 10px;
+    color: #006a71;
+    font-weight: bold;
+  }
+  
+  .facebookLogin:hover {
+    background-color: #3B5998;
+    color: white;
+    border: 2px solid #3B5998;
+    opacity: 0.8;
+  }
+  
+  .googleLogin:hover {
+    background-color: #dd4b39;
+    color: white;
+    border: 2px solid #dd4b39;
+    opacity: 0.8;
+  }
+  
+  .signupText {
+    display: flex;
+    margin-left: 3px;
+    font-size: 15px;
+    font-weight: bold;
+  }
+  
+  .signupTextFirstP {
+    color: #006a71;
+  }
+  
+  .signupTextSecondP {
+    color: #006a71;
+    margin-left: 10px;
+  }
+  
+  .loginFormContainer {
+    width: 350px;
+    height: 300px;
+    background-color: #fff;
+    margin: 0 auto;
+    position: relative;
+    top: 100px;
+    border-radius: 10px;
+  }
+
+  .input {
+    /* width: 300px; */
+    border: none;
+    border-bottom: 2px solid #006a71;
+    background-color: transparent;
+}
+
+.input:focus {
+    border: none;
+    border-bottom: 2px solid #006a71;
+    outline: 0;
+    box-shadow: none;
+    background-color: transparent;
+}
+
+.input::placeholder {
+    font-weight: bold;
+    color: #006a71;
+}

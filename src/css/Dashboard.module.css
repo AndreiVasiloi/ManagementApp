@@ -8,12 +8,21 @@
 
 
 .DashboardListContainer {
-    background-color: #eeeeee!important;
+   border: none !important;
+   box-shadow: none !important;
 }
 
 .dashboardContainer {
     margin-left: 200px;
     padding-top: 3% !important;
+}
+
+.DashboardListElement {
+    border: none !important;
+    box-shadow: none !important;
+    color: #697686 !important;
+    /* border: 1px solid  #14b1ab !important; */
+    /* box-shadow: 5px 5px  20px #14b1ab !important; */
 }
 
 /* dashboard dropdown button */
@@ -59,6 +68,10 @@ box-shadow: none !important;
 /* appointments */
 .hour {
     border-right: 4px solid  #14b1ab;
+}
+
+.clockIcon {
+    color: #14b1ab !important;
 }
 
 .appointmentsName {

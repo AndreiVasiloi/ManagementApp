@@ -11,7 +11,7 @@ export default function AppointmentsListItem({ appointment }) {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const currentDay = new Date();
   const { currentUser } = useSelector((state) => state.auth);
-  const isCurrentUserAppointment = appointment?.userUid === currentUser.uid;
+  const isCurrentUserAppointment = appointment?.userUid === currentUser?.uid;
   const appointmentDate = new Date(appointment.displayAppointmentDate);
   const [newDates, setNewDates] = useState();
   const getNameFirstLetters = appointment.name
@@ -50,13 +50,13 @@ export default function AppointmentsListItem({ appointment }) {
     //     <Header content={appointment.displayAppointmentDate} />
     //   )}
       
-    <Segment.Group>
+    <Segment.Group className={classes.DashboardListElement}>
       <Segment textAlign='center'>
         <Item.Group>
           <Grid>
             <Grid.Column width={2} className={classes.hour}>
               <Item>
-                <Icon name='clock outline' />
+                <Icon name='clock outline' className={classes.clockIcon}/>
                 <Item.Content>{appointment.displayHour}</Item.Content>
               </Item>
             </Grid.Column>

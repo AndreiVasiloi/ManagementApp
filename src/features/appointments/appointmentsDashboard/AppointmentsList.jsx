@@ -5,8 +5,8 @@ import classes from '../../../css/Dashboard.module.css';
 
 export default function AppointmentsList({ appointments }) {
   return (
-    <Segment.Group style={{ marginTop: "50px" }}>
-      <Segment className={classes.DashboardListContainer}>
+    <Segment.Group className={classes.DashboardListContainer}>
+      <Segment>
         {appointments.map((appointment) => (
           <AppointmentsListItem
             appointment={appointment}

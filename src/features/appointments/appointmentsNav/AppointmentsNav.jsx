@@ -26,7 +26,7 @@ export default function AppointmentsNav({ setText }) {
         }
       >
         <div className={classes.topNavbarLeftCol}>
-          <Navbar.Brand className={classes.topNavbarBrand} href='#home'>
+          <Navbar.Brand className={classes.topNavbarBrand}>
             Appointments
           </Navbar.Brand>
         </div>

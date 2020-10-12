@@ -49,7 +49,7 @@ export default function ProfitDashboard({match}) {
   const totalPrices = getTotalPrices();
   const totalCosts = getTotalCosts();
   const profit = totalPrices - totalCosts;
-
+debugger
   function getPrice(reasontype) {
     const reason = reasons.find((reason) => reason.text === reasontype);
     if (reason !== undefined) {

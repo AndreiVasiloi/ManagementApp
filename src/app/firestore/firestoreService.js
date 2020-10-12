@@ -22,7 +22,6 @@ export function dataFromSnapshot(snapshot) {
 //items
 
 export function listenToItemsFromFirestore(predicate) {
-  const user = firebase.auth().currentUser.uid;
   const itemsRef = db.collection("items");
   var sortBy = predicate.get("sort");
   return itemsRef.orderBy(sortBy);
@@ -33,10 +32,11 @@ export function listenToItemFromFirestore(itemId) {
 }
 
 export function addItemToFirestore(item) {
-  
+  const user = firebase.auth().currentUser;
   return db.collection("items").add({
     ...item,
-    creationDate: firebase.firestore.FieldValue.serverTimestamp()
+    creationDate: firebase.firestore.FieldValue.serverTimestamp(),
+    userUid: user.uid,
   });
 }
 

@@ -1,14 +1,12 @@
 .container {
   display: flex;
   background-color: #fff;
-  border: 1px solid  #14b1ab;
-  border-radius: 12px;
   padding: 5px;
   justify-content: center;
 }
 
 .dayContainer {
-  color: #758584;
+  color: #ECEDF0;
   text-align: center;
 }
 
@@ -19,13 +17,23 @@
   border-radius: 50%;
   border: none;
   outline: none;
-  color: black;
+  color: #ACADAD;
+}
+
+.day:focus {
+  border: none;
+  outline: none;
 }
 
 
 .selectedDay {
   background-color: #14b1ab;
   color: #fff;
+}
+
+.selectedDay:focus {
+  border: none;
+  outline: none;
 }
 
 .displayYearAndMonthContainer {
@@ -45,3 +53,4 @@
   text-align: center;
   grid-gap: 2px;
 }
+

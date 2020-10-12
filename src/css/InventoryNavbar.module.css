@@ -61,6 +61,17 @@
   border: 1px solid #14b1ab;
 } */
 
+
+/* icons  */
+
+/* .addIcon {
+  font-size: 30px !important;
+} */
+
+.addText {
+  display: none;
+}
+
 @media screen and (max-width: 700px) {
   .topNavbar {
     margin: 55px 0 0 0;
