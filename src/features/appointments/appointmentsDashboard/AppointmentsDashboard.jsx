@@ -11,7 +11,6 @@ import { LineCalendar } from "../lineCalendar/LineCalendar";
 
 export default function AppointmentsDashboard() {
   const { appointments } = useSelector((state) => state.appointment);
-  const { loading } = useSelector((state) => state.async);
   const dispatch = useDispatch();
   const [predicate, setPredicate] = useState(
     new Map([["startDate", new Date()]])

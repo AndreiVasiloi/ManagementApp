@@ -21,10 +21,17 @@ export function dataFromSnapshot(snapshot) {
 
 //items
 
-export function listenToItemsFromFirestore(predicate) {
-  const itemsRef = db.collection("items");
+// export function listenToItemsFromFirestore(predicate) {
+//   const itemsRef = db.collection("items");
+//   var sortBy = predicate.get("sort");
+//   return itemsRef.orderBy(sortBy);
+// }
+
+export function fetchItemsFromFirestore(predicate, limit, lastDocSnapshot = null) {
+  const itemsRef = db.collection("items").orderBy('expirationDate').startAfter(lastDocSnapshot).limit(limit);
   var sortBy = predicate.get("sort");
-  return itemsRef.orderBy(sortBy);
+  // return itemsRef.orderBy(sortBy);
+  return itemsRef
 }
 
 export function listenToItemFromFirestore(itemId) {

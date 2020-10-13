@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Nav, Button } from "react-bootstrap";
+import { Navbar, Button } from "react-bootstrap";
 import classes from "../../../css/InventoryNavbar.module.css";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";

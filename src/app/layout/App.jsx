@@ -11,7 +11,6 @@ import InventoryItemForm from "../../features/inventory/inventoryForm/InventoryI
 import InventoryCategoryForm from "../../features/inventory/inventoryForm/InventoryCategoryForm";
 import Sandbox from "../../features/sandbox/Sandbox";
 import ModalManager from "../common/modals/ModalManager";
-import { Container } from "semantic-ui-react";
 import {ToastContainer} from 'react-toastify';
 import ErrorComponent from "../common/errors/ErrorComponent";
 import InventoryCategoriesDashboard from "../../features/inventory/inventoryCategoriesDashboard/InventoryCategoriesDashboard";
@@ -38,7 +37,6 @@ function App() {
         render={() => (
           <>
             <NavBar/>
-           
             <Route path='/appointments' component={AppointmentsDashboard} />
             <Route path='/inventory' component={InventoryDashboard} />
             <Route path='/inventoryCategories' component={InventoryCategoriesDashboard} />
@@ -65,8 +63,6 @@ function App() {
               path={["/createAppointment", "/editAppointment/:id"]}
               component={AppointmentsForm}
             />
-
-           
           </>
         )}
       />

@@ -1,18 +1,21 @@
-import React, { useState } from "react";
-import { Grid } from "semantic-ui-react";
+import React, { useEffect, useState } from "react";
+import { Button, Grid, Loader } from "semantic-ui-react";
 import InventoryList from "./InventoryList";
 import { useSelector, useDispatch } from "react-redux";
 import InventoryListItemPlaceholder from "./InventoryListItemPlaceholder";
 import { listenToItemsFromFirestore } from "../../../app/firestore/firestoreService";
-import { listenToItems } from "../inventoryItemsActions";
+import { fetchItems, listenToItems } from "../inventoryItemsActions";
 import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import classes from "../../../css/Dashboard.module.css";
 import InventoryNavbar from "../inventoryNav/InventoryNavbar";
 
 export default function InventoryDashboard() {
+  const limit = 10;
   const dispatch = useDispatch();
-  const { items } = useSelector((state) => state.item);
+  const { items, moreItems } = useSelector((state) => state.item);
   const { loading } = useSelector((state) => state.async);
+  const [lastDocSnapshot, setLastDocSnapshot] = useState(null);
+  const [loadingInitial, setLoadingInitial] = useState(false);
   const [text, setText] = useState("");
   const textLowered = text.trim().toLowerCase();
   const filteredItems =
@@ -37,11 +40,25 @@ export default function InventoryDashboard() {
     setPredicate(new Map(predicate.set(key, value)));
   }
 
-  useFirestoreCollection({
-    query: () => listenToItemsFromFirestore(predicate),
-    data: (items) => dispatch(listenToItems(items)),
-    deps: [dispatch, predicate],
-  });
+  useEffect(() => {
+    setLoadingInitial(true);
+    dispatch(fetchItems(predicate, limit)).then(lastVisible => {
+      setLastDocSnapshot(lastVisible);
+      setLoadingInitial(false);
+    })
+  }, [dispatch, predicate])
+
+  function handleFetchNextItems() {
+    dispatch(fetchItems(predicate, limit, lastDocSnapshot)).then(lastVisible => {
+      setLastDocSnapshot(lastVisible);
+    })
+  }
+
+  // useFirestoreCollection({
+  //   query: () => listenToItemsFromFirestore(predicate),
+  //   data: (items) => dispatch(listenToItems(items)),
+  //   deps: [dispatch, predicate],
+  // });
 
   return (
     <div className={classes.dashboardContainer}>
@@ -52,19 +69,23 @@ export default function InventoryDashboard() {
             setPredicate={handleSetPredicate}
             setText={setText}
           />
-          {loading ? (
+          {loadingInitial && (
             <>
               <InventoryListItemPlaceholder />
               <InventoryListItemPlaceholder />
             </>
-          ) : (
+          )}
             <InventoryList
               items={filteredItems}
               predicate={predicate}
               setPredicate={handleSetPredicate}
               loading={loading}
+              getNextItem={handleFetchNextItems}
+              moreItems={moreItems}
             />
-          )}
+        </Grid.Column>
+        <Grid.Column width={10}>
+          <Loader active={loading}/>
         </Grid.Column>
       </Grid>
     </div>

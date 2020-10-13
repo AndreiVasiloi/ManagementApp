@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Icon } from "semantic-ui-react";
 import classes from "../../../css/LineCalendar.module.css";
 
@@ -71,7 +71,7 @@ export function LineCalendar({ onNewDate, date }) {
 
         const dayButton = (
           <div className={classes.dayContainer} key={day * 100}>
-            {dateName}
+            <div>{dateName}</div>
             <button
               key={day}
               onClick={() => onNewDate(thisDate)}
@@ -100,24 +100,24 @@ export function LineCalendar({ onNewDate, date }) {
                   </div>
                 </div>
                 <div className={classes.changeDateContainer}>
-                <div className={classes.prevYear}>
+                  <div className={classes.prevYear}>
                     <Icon
-                      name='angle double left'
+                      name="angle double left"
                       onClick={() => setYear(year - 1)}
                     />
                   </div>
                   <div className={classes.prevMonth}>
                     <Icon
-                      name='angle left'
+                      name="angle left"
                       onClick={() => changeMonth("prev")}
                     />
                   </div>
                   <div className={classes.nextMonth}>
-                    <Icon name='angle right' onClick={changeMonth} />
+                    <Icon name="angle right" onClick={changeMonth} />
                   </div>
                   <div className={classes.nextYear}>
                     <Icon
-                      name='angle double right'
+                      name="angle double right"
                       onClick={() => setYear(year + 1)}
                     />
                   </div>

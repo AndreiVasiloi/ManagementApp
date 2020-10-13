@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Segment, Header, Button } from "semantic-ui-react";
-import { NavLink, Redirect } from "react-router-dom";
+import { NavLink} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
@@ -20,7 +20,6 @@ import classes from "../../../css/Form.module.css";
 import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import { listenToReasons } from "../reasonsActions";
 import { listenToAppointments } from "../appointmentsActions";
-import MyColorPicker from "../../../app/common/form/MyColorPicker";
 
 export default function AppointmentsForm({ match, history }) {
   const dispatch = useDispatch();
@@ -29,7 +28,7 @@ export default function AppointmentsForm({ match, history }) {
     state.appointment.appointments.find((a) => a.id === match.params.id)
   );
 
-  const { loading, error } = useSelector((state) => state.async);
+  const { loading } = useSelector((state) => state.async);
 
   const initialValues = selectedAppointment ?? {
     hour: "",
@@ -59,8 +58,6 @@ export default function AppointmentsForm({ match, history }) {
   });
 
   if (loading) return <LoadingComponent content='Loading event...' />;
-
-  //   if (error) return <Redirect to="/error" />;
 
   return (
     <Segment clearing className={classes.formContainer}>

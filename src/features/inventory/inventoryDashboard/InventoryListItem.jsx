@@ -6,7 +6,6 @@ import {
   Icon,
   Popup,
   Label,
-  Confirm,
 } from "semantic-ui-react";
 import classes from "../../../css/Dashboard.module.css";
 import { Link } from "react-router-dom";

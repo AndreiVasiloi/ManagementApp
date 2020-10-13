@@ -14,6 +14,7 @@ import Chart from "./chart/Chart";
 import { MONTH_NAMES } from "../appointments/appointmentsConstants";
 import { getItemsMonth } from "../inventory/inventoryItemsActions";
 import { addActiveClass } from "../inventory/inventoryNavActions";
+import { Button } from "react-bootstrap";
 
 export default function ProfitDashboard({ match }) {
   const { reasons } = useSelector((state) => state.reason);
@@ -86,24 +87,6 @@ export default function ProfitDashboard({ match }) {
     return days;
   }
 
-  function changeMonth(newMonth) {
-    if (newMonth === "prev") {
-      if (month === 0) {
-        setYear(year - 1);
-        setMonth(11);
-      } else {
-        setMonth(month - 1);
-      }
-    } else {
-      if (month === 11) {
-        setYear(year + 1);
-        setMonth(0);
-      } else {
-        setMonth(month + 1);
-      }
-    }
-  }
-
   function handleSetPredicate(key, value) {
     setPredicate(new Map(predicate.set(key, value)));
   }
@@ -135,17 +118,20 @@ export default function ProfitDashboard({ match }) {
             <Grid.Column width={3}>
               <List className={classes.profitMonthsList}>
                 {MONTH_NAMES.map((month) => (
-                  
-                  <List.Item 
-                  onClick={() => {
-                    setMonth(MONTH_NAMES.indexOf(month))
-                    dispatch(addActiveClass(month));
-                  }} 
-                   className={
-                    activeClass === month
-                      ? `${classes.monthProfit} ${classes.activeMonth}`
-                      : `${classes.monthProfit} `
-                  }>{month}</List.Item>
+                  <List.Item
+                    key={month}
+                    onClick={() => {
+                      setMonth(MONTH_NAMES.indexOf(month));
+                      dispatch(addActiveClass(month));
+                    }}
+                    className={
+                      activeClass === month
+                        ? `${classes.monthProfit} ${classes.activeMonth}`
+                        : `${classes.monthProfit} `
+                    }
+                  >
+                    {month}
+                  </List.Item>
                 ))}
               </List>
             </Grid.Column>
@@ -154,7 +140,7 @@ export default function ProfitDashboard({ match }) {
                 <div className={classes.changeDateContainer}>
                   <div className={classes.prevYear}>
                     <Icon
-                      name='angle double left'
+                      name="angle double left"
                       onClick={() => setYear(year - 1)}
                     />
                   </div>
@@ -163,27 +149,31 @@ export default function ProfitDashboard({ match }) {
                   </div>
                   <div className={classes.nextYear}>
                     <Icon
-                      name='angle double right'
+                      name="angle double right"
                       onClick={() => setYear(year + 1)}
                     />
                   </div>
                 </div>
-                <button
-                  onClick={() => {
-                    handleSetPredicate("firstDay", fullDateFirstDay);
-                    handleSetPredicate("lastDay", fullDateLastDay);
-                  }}
-                >
-                  Change date
-                </button>
+                <div className={classes.changeDateBtnContainer}>
+                  <Button
+                  className={classes.changeDateBtn}
+                    onClick={() => {
+                      handleSetPredicate("firstDay", fullDateFirstDay);
+                      handleSetPredicate("lastDay", fullDateLastDay);
+                    }}
+                  >
+                    Change date
+                  </Button>
+                </div>
               </div>
-
-              <div>
+              <div className={classes.profitText}>
                 Your profit on {monthName} is {profit}
               </div>
             </Grid.Column>
             <Grid.Column width={10}>
-              <Chart month={appointmentsMonth} days={days} />
+              <div className={classes.chartContainer}>
+                <Chart month={appointmentsMonth} days={days} />
+              </div>
             </Grid.Column>
           </Grid>
         </Segment>

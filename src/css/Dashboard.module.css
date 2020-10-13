@@ -29,6 +29,15 @@
     justify-content: space-around;
 }
 
+.chartContainer {
+    position: relative;
+    left: 50px;
+}
+
+.changeDateBtnContainer {
+    text-align: center;
+}
+
 /* dashboard dropdown button */
 
 .edit {
@@ -95,9 +104,28 @@ box-shadow: none !important;
 
 /* profit */
 
+.changeDateBtn {
+    background-color: #14b1ab !important;
+    border:  1px solid #14b1ab !important;
+    margin-left: 10px;
+    height: 32px!important;
+}
+
+.changeDateBtn:focus, .changeDateBtn:active {
+    outline: none;
+    box-shadow: none;
+}
+
 .activeMonth {
-    background-color: #14b1ab;
+    color: #14b1ab;
+    font-weight: bold;
     width: 50%;
+}
+
+.profitText {
+    position: relative;
+    top: 100px;
+    text-align: center;
 }
 
 .profitMonthsList {

@@ -21,7 +21,7 @@ export default function Chart({ month, days }) {
 
   return (
     <>
-      <XYPlot height={300} width={600}>
+      <XYPlot height={500} width={900} >
         <VerticalGridLines />
         <HorizontalGridLines />
         <VerticalBarSeries data={data} />

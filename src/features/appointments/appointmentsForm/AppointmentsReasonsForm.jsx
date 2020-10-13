@@ -20,7 +20,7 @@ export default function AppointmentsReasonsForm({ match, history }) {
     state.reason.reasons.find((c) => c.id === match.params.id)
   );
 
-  const { loading, error } = useSelector((state) => state.async);
+  const { loading } = useSelector((state) => state.async);
 
   const initialValues = selectedReason ?? {
     text: "",
@@ -43,8 +43,6 @@ export default function AppointmentsReasonsForm({ match, history }) {
 
   if (loading)
   return <LoadingComponent content='Loading event...' />;
-
-// if (error) return <Redirect to='/error' />;
 
   return (
     <Segment clearing className={classes.formContainer}>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
+import { Navbar, Button } from "react-bootstrap";
 import classes from "../../../css/InventoryNavbar.module.css";
 import { FormField, Icon } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
@@ -54,29 +54,6 @@ export default function InventoryNavbar({ setText }) {
           >
             Manage Categories
           </Button>
-          {/* <Nav className={classes.inventoryNavDropdown}>
-            <NavDropdown
-              title="Manage"
-              id="basic-nav-dropdown"
-              className={classes.inventoryNavDropdownTitle}
-            >
-              <NavDropdown.Item
-                className={classes.inventoryNavDropdownLink}
-                as={NavLink}
-                to="/createItem"
-              >
-                Add Item
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item
-                className={classes.inventoryNavDropdownLink}
-                as={NavLink}
-                to="/inventoryCategories"
-              >
-                Manage Categories
-              </NavDropdown.Item>
-            </NavDropdown>
-          </Nav> */}
         </div>
       </Navbar>
     </div>

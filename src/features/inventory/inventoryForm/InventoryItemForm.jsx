@@ -2,7 +2,7 @@ import React from "react";
 import { Segment, Header, Button } from "semantic-ui-react";
 import { NavLink, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { listenToItems } from "../inventoryItemsActions";
+import { listenToItems, listenToSelectedItem } from "../inventoryItemsActions";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import MyTextInput from "../../../app/common/form/MyTextInput";
@@ -25,8 +25,8 @@ import { listenToCategories } from "../inventoryCategoriesActions";
 export default function InventoryItemForm({ match, history }) {
   const dispatch = useDispatch();
   const categories = useSelector(state => state.category.categories);
-  const selectedItem = useSelector((state) =>
-    state.item.items.find((i) => i.id === match.params.id)
+  const {selectedItem} = useSelector((state) =>
+    state.item
   );
 
   const { loading, error } = useSelector((state) => state.async);
@@ -57,7 +57,7 @@ export default function InventoryItemForm({ match, history }) {
   useFirestoreDoc({
     shouldExecute: !!match.params.id,
     query: () => listenToItemFromFirestore(match.params.id),
-    data: (item) => dispatch(listenToItems([item])),
+    data: (item) => dispatch(listenToSelectedItem(item)),
     deps: [match.params.id, dispatch],
   });
 

@@ -1,8 +1,10 @@
-import {CREATE_ITEM, UPDATE_ITEM, DELETE_ITEM, FETCH_ITEM, LISTEN_TO_ITEMS_MONTH } from "./inventoryConstants";
+import {CREATE_ITEM, UPDATE_ITEM, DELETE_ITEM, FETCH_ITEM, LISTEN_TO_ITEMS_MONTH, LISTEN_TO_SELECTED_ITEM } from "./inventoryConstants";
 
 const initialState = {
   items: [],
-  itemsMonth: []
+  itemsMonth: [],
+  moreItems: false,
+  selectedItem: null
 };
 
 export default function inventoryItemsReducer(
@@ -28,13 +30,19 @@ export default function inventoryItemsReducer(
       case FETCH_ITEM:
         return {
           ...state,
-          items: payload,
+          items: [...state.items, ...payload.items],
+          moreItems: payload.moreItems
         };
         case LISTEN_TO_ITEMS_MONTH:
         return {
           ...state,
           itemsMonth: payload,
         };
+        case LISTEN_TO_SELECTED_ITEM:
+          return {
+            ...state,
+            selectedItem: payload,
+          };
     default:
       return state;
   }
