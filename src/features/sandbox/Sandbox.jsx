@@ -3,34 +3,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { Button } from "semantic-ui-react";
 import { increment, decrement } from "./testReducer";
 import { openModal } from "../../app/common/modals/modalReducer";
+import InputColor from 'react-input-color';
 
 export default function Sandbox() {
   const dispatch = useDispatch();
   const [target, setTarget] = useState(null);
   const data = useSelector((state) => state.test.data);
   const { loading } = useSelector((state) => state.async);
-
-  const numbers = [1,1,2,3];
-  let newNumbers = [];
-  // numbers.map(n => {
-    
-  //   if(numbers[n - 1] !== newNumbers[n - 1]){
-  //     newNumbers.push(n)
-  //   }
-    
-  //   console.log('newNumbers ' + newNumbers[n - 1]);
-  //   console.log('numbers ' + numbers[n - 1]);
-  //   console.log('n ' + n);
-  // })
-  for(let i = 0; i<numbers.length; i++){
-    // newNumbers.push(numbers[i])
-    if(numbers[i] !== newNumbers[newNumbers.length - 1]){
-      newNumbers.push(numbers[i])
-    }
-    console.log(numbers[i]);
-    
-  }
-  console.log(newNumbers);
+  const [color, setColor] = useState({});
+ 
+ console.log(color.hex)
   return (
     <>
       <div style={{marginLeft: '200px'}}>
@@ -66,6 +48,21 @@ export default function Sandbox() {
           color='teal'
         />
 
+<div>
+      <InputColor
+        initialValue="#5e72e4"
+        onChange={setColor}
+        placement="right"
+      />
+      <div
+        style={{
+          width: 50,
+          height: 50,
+          marginTop: 20,
+          backgroundColor: color.hex
+        }}
+      />
+    </div>
       </div>
     </>
   );

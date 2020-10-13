@@ -12,8 +12,8 @@ export default function InventoryListTitles({
   const { filterIcon } = useSelector((state) => state.addClass);
   const dispatch = useDispatch();
   return (
-    <Segment.Group className={classes.inventoryTitlesContainer}>
-      <Segment textAlign="center">
+    <Segment.Group className={classes.dashboardListElement}>
+      <Segment textAlign="center" className={classes.inventoryTitlesContainer}>
         <Item.Group>
           <Grid>
             <Grid.Column width={3}>

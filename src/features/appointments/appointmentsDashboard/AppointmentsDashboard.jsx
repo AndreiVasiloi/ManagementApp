@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Grid, Segment } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import { listenToAppointmentsFromFirestore } from "../../../app/firestore/firestoreService";
 import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import { listenToAppointments } from "../appointmentsActions";
@@ -45,7 +45,7 @@ export default function AppointmentsDashboard() {
     data: (appointments) => dispatch(listenToAppointments(appointments)),
     deps: [dispatch, predicate],
   });
-console.log(appointments);
+
   return (
     <>
       <div className={classes.dashboardContainer}>

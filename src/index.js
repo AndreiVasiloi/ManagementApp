@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import '../node_modules/react-vis/dist/style.css';
 import "semantic-ui-css/semantic.min.css";
 import 'react-toastify/dist/ReactToastify.min.css';
 import "./index.css";

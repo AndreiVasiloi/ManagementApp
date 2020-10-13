@@ -1,5 +1,12 @@
 import React from "react";
-import { XYPlot, VerticalBarSeries, XAxis, YAxis } from "react-vis";
+import {
+  XYPlot,
+  VerticalBarSeries,
+  XAxis,
+  YAxis,
+  HorizontalGridLines,
+  VerticalGridLines,
+} from "react-vis";
 
 export default function Chart({ month, days }) {
   const data = [];
@@ -14,7 +21,9 @@ export default function Chart({ month, days }) {
 
   return (
     <>
-      <XYPlot height={300} width={300}>
+      <XYPlot height={300} width={600}>
+        <VerticalGridLines />
+        <HorizontalGridLines />
         <VerticalBarSeries data={data} />
         <XAxis />
         <YAxis />

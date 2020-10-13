@@ -41,8 +41,8 @@ export default function InventoryListItem({ item }) {
   return (
     <>
     {isCurrentUserAppointment && (
-    <Segment.Group>
-      <Segment textAlign='center' className={classes.inventoryItemContainer}>
+    <Segment.Group className={classes.dashboardListElement}>
+      <Segment textAlign='center'>
         <Item.Group>
           <Grid>
             <Grid.Column width={3}>

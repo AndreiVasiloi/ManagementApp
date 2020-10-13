@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Segment, Header, Button } from "semantic-ui-react";
 import { NavLink, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -16,13 +16,13 @@ import {
 } from "../../../app/firestore/firestoreService";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { toast } from "react-toastify";
-import classes from '../../../css/Form.module.css';
+import classes from "../../../css/Form.module.css";
 import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import { listenToReasons } from "../reasonsActions";
 import { listenToAppointments } from "../appointmentsActions";
+import MyColorPicker from "../../../app/common/form/MyColorPicker";
 
 export default function AppointmentsForm({ match, history }) {
-    
   const dispatch = useDispatch();
   const reasons = useSelector((state) => state.reason.reasons);
   const selectedAppointment = useSelector((state) =>
@@ -33,14 +33,14 @@ export default function AppointmentsForm({ match, history }) {
 
   const initialValues = selectedAppointment ?? {
     hour: "",
-    date: '',
+    date: "",
     name: "",
     reason: "",
   };
 
   const validationSchema = Yup.object({
     hour: Yup.string().required("You must provide a hour"),
-    date: Yup.string().required("You must provide a hour"),
+    date: Yup.string().required("You must provide a date"),
     name: Yup.string().required("You must provide a name"),
     reason: Yup.string().required("You must provide a reason"),
   });
@@ -50,7 +50,6 @@ export default function AppointmentsForm({ match, history }) {
     data: (reasons) => dispatch(listenToReasons(reasons)),
     deps: [dispatch],
   });
-  
 
   useFirestoreDoc({
     shouldExecute: !!match.params.id,
@@ -59,9 +58,9 @@ export default function AppointmentsForm({ match, history }) {
     deps: [match.params.id, dispatch],
   });
 
-  if (loading) return <LoadingComponent content="Loading event..." />;
+  if (loading) return <LoadingComponent content='Loading event...' />;
 
-//   if (error) return <Redirect to="/error" />;
+  //   if (error) return <Redirect to="/error" />;
 
   return (
     <Segment clearing className={classes.formContainer}>
@@ -88,53 +87,53 @@ export default function AppointmentsForm({ match, history }) {
         }}
       >
         {({ isSubmitting, dirty, isValid }) => (
-          <Form className="ui form">
+          <Form className='ui form'>
             <Header
               sub
-              color="teal"
+              color='teal'
               content={
                 selectedAppointment ? "Edit appointment" : "Add appointment"
               }
             />
             <MySelectInput
-              name="reason"
-              placeholder="Reason"
+              name='reason'
+              placeholder='Reason'
               options={reasons}
             />
-            <MyTextInput name="name" placeholder="Name" />
+            <MyTextInput name='name' placeholder='Name' />
             <MyDateInput
-              name="hour"
-              placeholderText="Appointment Hour"
+              name='hour'
+              placeholderText='Appointment Hour'
               timeFormat='HH:mm'
               showTimeSelect
               showTimeSelectOnly
               timeIntervals={15}
               timeCaption='time'
-              dateFormat="HH:mm"
+              dateFormat='HH:mm'
               autoComplete='off'
             />
-                <MyDateInput
+            <MyDateInput
               name='date'
               placeholderText='Appointment date'
               dateFormat='MMMM d, yyyy'
               autoComplete='off'
             />
             <Button
-              type="submit"
-              floated="right"
+              type='submit'
+              floated='right'
               className={classes.formSubmitBtn}
-              content="Submit"
+              content='Submit'
               loading={isSubmitting}
               disabled={!isValid || !dirty || isSubmitting}
             />
             <Button
               disabled={isSubmitting}
-              type="submit"
+              type='submit'
               className={classes.formCancelBtn}
-              floated="right"
-              content="Cancel"
+              floated='right'
+              content='Cancel'
               as={NavLink}
-              to="/appointments"
+              to='/appointments'
             />
           </Form>
         )}

@@ -11,8 +11,11 @@ export default function InventoryList({
   loading,
 }) {
   return (
-    <Segment.Group style={{ marginTop: "50px" }}>
-      <Segment className={classes.DashboardListContainer}>
+    <Segment.Group
+      style={{ marginTop: "50px" }}
+      className={classes.dashboardListContainer}
+    >
+      <Segment>
         <InventoryListTitles
           predicate={predicate}
           setPredicate={setPredicate}
