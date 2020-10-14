@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Segment, Header, Button } from "semantic-ui-react";
 import { NavLink, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -6,41 +6,51 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import MyTextInput from "../../../app/common/form/MyTextInput";
 import useFirestoreDoc from "../../../app/hooks/useFirestoreDoc";
-import { listenToCategoryFromFirestore, updateCategoryInFirestore, addCategoryToFirestore } from "../../../app/firestore/firestoreService";
+import {
+  listenToCategoryFromFirestore,
+  updateCategoryInFirestore,
+  addCategoryToFirestore,
+} from "../../../app/firestore/firestoreService";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { toast } from "react-toastify";
-import classes from '../../../css/Form.module.css';
-import { listenToCategories } from "../inventoryCategoriesActions";
+import classes from "../../../css/Form.module.css";
+import {
+  clearSelectedCategory,
+  listenToSelectedCategory,
+} from "../inventoryCategoriesActions";
 
-export default function InventoryCategoryForm({ match, history }) {
+export default function InventoryCategoryForm({ match, history, location }) {
   const dispatch = useDispatch();
-  const selectedCategory = useSelector((state) =>
-    state.category.categories.find((c) => c.id === match.params.id)
-  );
+  const selectedCategory = useSelector((state) => state.category);
 
   const { loading, error } = useSelector((state) => state.async);
 
+  useEffect(() => {
+    if (location.pathname !== "/createCategory") return;
+    dispatch(clearSelectedCategory());
+  }, [dispatch, location.pathname]);
+
   const initialValues = selectedCategory ?? {
     text: "",
-    value: ''
+    value: "",
   };
 
   const validationSchema = Yup.object({
     text: Yup.string().required("You must provide a category"),
   });
 
-
   useFirestoreDoc({
-    shouldExecute: !!match.params.id,
+    shouldExecute:
+      match.params.id !== selectedCategory?.id &&
+      location.pathname !== "/createCategory",
     query: () => listenToCategoryFromFirestore(match.params.id),
-    data: (category) => dispatch(listenToCategories([category])),
+    data: (category) => dispatch(listenToSelectedCategory(category)),
     deps: [match.params.id, dispatch],
   });
 
-  if (loading)
-  return <LoadingComponent content='Loading event...' />;
+  if (loading) return <LoadingComponent content='Loading event...' />;
 
-if (error) return <Redirect to='/error' />;
+  if (error) return <Redirect to='/error' />;
 
   return (
     <Segment clearing className={classes.formContainer}>
@@ -51,7 +61,7 @@ if (error) return <Redirect to='/error' />;
           try {
             selectedCategory
               ? await updateCategoryInFirestore(values)
-              : await addCategoryToFirestore(values)
+              : await addCategoryToFirestore(values);
             history.push("/inventoryCategories");
           } catch (error) {
             toast.error(error.message);
@@ -60,8 +70,12 @@ if (error) return <Redirect to='/error' />;
         }}
       >
         {({ isSubmitting, dirty, isValid }) => (
-          <Form className='ui form' >
-            <Header sub color='teal' content= {selectedCategory ? 'Edit category' :'Add category' }/>
+          <Form className='ui form'>
+            <Header
+              sub
+              color='teal'
+              content={selectedCategory ? "Edit category" : "Add category"}
+            />
             <MyTextInput name='text' placeholder='Category' />
             <Button
               type='submit'

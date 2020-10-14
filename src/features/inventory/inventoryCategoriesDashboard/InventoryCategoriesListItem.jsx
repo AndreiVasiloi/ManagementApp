@@ -5,9 +5,12 @@ import { Link } from "react-router-dom";
 import { deleteCategoryInFirestore } from '../../../app/firestore/firestoreService';
 import { Button, Dropdown, Modal } from 'react-bootstrap';
 import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
 
 export default function InventoryCategoriesListItem({category}) {
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const { currentUser } = useSelector((state) => state.auth);
+  const isCurrentUserCategories = category?.userUid === currentUser?.uid;
 
   async function handleCancelToggle(categoryId) {
     setConfirmOpen(false);
@@ -18,7 +21,6 @@ export default function InventoryCategoriesListItem({category}) {
     }
   }
 
-  
     return (
         <Segment.Group>
         <Segment textAlign='center' className={classes.inventoryItemContainer}>

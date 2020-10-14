@@ -7,8 +7,6 @@ import InfiniteScroll from "react-infinite-scroller";
 
 export default function InventoryList({
   items,
-  predicate,
-  setPredicate,
   loading,
   getNextItem,
   moreItems,
@@ -20,8 +18,6 @@ export default function InventoryList({
     >
       <Segment>
         <InventoryListTitles
-          predicate={predicate}
-          setPredicate={setPredicate}
           loading={loading}
         />
         {items.length !== 0 && (

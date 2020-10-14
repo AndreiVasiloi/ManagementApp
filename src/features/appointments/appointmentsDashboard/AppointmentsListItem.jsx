@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import React, { useState } from "react";
 import { Button, Dropdown, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -61,7 +62,7 @@ export default function AppointmentsListItem({ appointment }) {
                 <Grid.Column width={2} className={classes.hour}>
                   <Item>
                     <Icon name='clock outline' className={classes.clockIcon} />
-                    <Item.Content>{appointment.displayHour}</Item.Content>
+                    <Item.Content>{format(appointment.hour, "HH:mm")}</Item.Content>
                   </Item>
                 </Grid.Column>
                 <Grid.Column width={2}>

@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Segment, Header, Button } from "semantic-ui-react";
 import { NavLink, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { listenToItems, listenToSelectedItem } from "../inventoryItemsActions";
+import {
+  clearSelectedItem,
+  listenToItems,
+  listenToSelectedItem,
+} from "../inventoryItemsActions";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import MyTextInput from "../../../app/common/form/MyTextInput";
@@ -18,18 +22,21 @@ import {
 } from "../../../app/firestore/firestoreService";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { toast } from "react-toastify";
-import classes from '../../../css/Form.module.css';
+import classes from "../../../css/Form.module.css";
 import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import { listenToCategories } from "../inventoryCategoriesActions";
 
-export default function InventoryItemForm({ match, history }) {
+export default function InventoryItemForm({ match, history, location }) {
   const dispatch = useDispatch();
-  const categories = useSelector(state => state.category.categories);
-  const {selectedItem} = useSelector((state) =>
-    state.item
-  );
+  const categories = useSelector((state) => state.category.categories);
+  const { selectedItem } = useSelector((state) => state.item);
 
   const { loading, error } = useSelector((state) => state.async);
+
+  useEffect(() => {
+    if (location.pathname !== "/createItem") return;
+    dispatch(clearSelectedItem());
+  }, [dispatch, location.pathname]);
 
   const initialValues = selectedItem ?? {
     category: "",
@@ -53,14 +60,15 @@ export default function InventoryItemForm({ match, history }) {
     deps: [dispatch],
   });
 
-
   useFirestoreDoc({
-    shouldExecute: !!match.params.id,
+    shouldExecute:
+      match.params.id !== selectedItem?.id &&
+      location.pathname !== "/createItem",
     query: () => listenToItemFromFirestore(match.params.id),
     data: (item) => dispatch(listenToSelectedItem(item)),
     deps: [match.params.id, dispatch],
   });
-
+console.log(categories);
   if (loading) return <LoadingComponent content='Loading event...' />;
 
   if (error) return <Redirect to='/error' />;
@@ -68,6 +76,7 @@ export default function InventoryItemForm({ match, history }) {
   return (
     <Segment clearing className={classes.formContainer}>
       <Formik
+        enableReinitialize
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
@@ -84,7 +93,11 @@ export default function InventoryItemForm({ match, history }) {
       >
         {({ isSubmitting, dirty, isValid }) => (
           <Form className='ui form'>
-            <Header sub color='teal' content= {selectedItem ? 'Edit item' : 'Add item'}  />
+            <Header
+              sub
+              color='teal'
+              content={selectedItem ? "Edit item" : "Add item"}
+            />
             <MySelectInput
               name='category'
               placeholder='Category'

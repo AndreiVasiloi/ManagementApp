@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Segment, Item, Grid, Popup, Icon } from "semantic-ui-react";
 import { addFilterIcon } from "../inventoryNavActions";
 import classes from "../../../css/Dashboard.module.css";
+import { setSort } from "../inventoryItemsActions";
 
 export default function InventoryListTitles({
-  predicate,
-  setPredicate,
   loading,
 }) {
   const { filterIcon } = useSelector((state) => state.addClass);
+  const { sort } = useSelector((state) => state.item);
   const dispatch = useDispatch();
   return (
     <Segment.Group className={classes.dashboardListElement}>
@@ -19,7 +19,7 @@ export default function InventoryListTitles({
             <Grid.Column width={3}>
               <Item.Content
                 onClick={() => {
-                  setPredicate("sort", "category");
+                  dispatch(setSort("category"))
                   dispatch(addFilterIcon("category"));
                 }}
                 disabled={loading}
@@ -40,7 +40,7 @@ export default function InventoryListTitles({
               <Item>
                 <Item.Content
                   onClick={() => {
-                    setPredicate("sort", "name");
+                    dispatch(setSort("name"))
                     dispatch(addFilterIcon("name"));
                   }}
                   disabled={loading}
@@ -62,7 +62,7 @@ export default function InventoryListTitles({
               <Item>
                 <Item.Content
                   onClick={() => {
-                    setPredicate("sort", "price");
+                    dispatch(setSort("price"))
                     dispatch(addFilterIcon("price"));
                   }}
                   disabled={loading}
@@ -84,7 +84,7 @@ export default function InventoryListTitles({
               <Item>
                 <Item.Content
                   onClick={() => {
-                    setPredicate("sort", "expirationDate");
+                    dispatch(setSort("expirationDate"))
                     dispatch(addFilterIcon("expirationDate"));
                   }}
                   disabled={loading}
@@ -108,7 +108,7 @@ export default function InventoryListTitles({
               <Item>
                 <Item.Content
                   onClick={() => {
-                    setPredicate("sort", "amount");
+                    dispatch(setSort("amount"))
                     dispatch(addFilterIcon("amount"));
                   }}
                   disabled={loading}

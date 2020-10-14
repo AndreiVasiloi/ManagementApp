@@ -13,13 +13,14 @@ import { deleteItemInFirestore } from "../../../app/firestore/firestoreService";
 import { Button, Dropdown, Modal } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import { format } from "date-fns";
 
 export default function InventoryListItem({ item }) {
   const { currentUser } = useSelector((state) => state.auth);
-  const isCurrentUserAppointment = item?.userUid === currentUser?.uid;
+  const isCurrentUserInventory = item?.userUid === currentUser?.uid;
   const [confirmOpen, setConfirmOpen] = useState(false);
   const currentDay = new Date();
-  const itemExpirationDate = new Date(item.displayExpirationDate);
+  const itemExpirationDate = new Date(item.expirationDate);
   const expirationDateDifferenceInTime =
     itemExpirationDate.getTime() - currentDay.getTime();
   const expirationDateDifferenceInDays = Math.floor(
@@ -36,10 +37,9 @@ export default function InventoryListItem({ item }) {
       toast.error(error.message);
     }
   }
-
   return (
     <>
-    {isCurrentUserAppointment && (
+    {isCurrentUserInventory && (
     <Segment.Group className={classes.dashboardListElement}>
       <Segment textAlign='center'>
         <Item.Group>
@@ -56,7 +56,7 @@ export default function InventoryListItem({ item }) {
             </Grid.Column>
             <Grid.Column width={2}>
               <Item>
-                <Item.Content>{item.displayPrice}</Item.Content>
+                <Item.Content>{item.price} RON</Item.Content>
               </Item>
             </Grid.Column>
             <Grid.Column width={4}>
@@ -72,11 +72,11 @@ export default function InventoryListItem({ item }) {
                 >
                   {checkIfExpired ? (
                     <Popup
-                      content={item.displayExpirationDate}
+                      content={item.expirationDate}
                       trigger={<Label basic color='red' content='Expired' />}
                     />
                   ) : (
-                    item.displayExpirationDate
+                    format(item.expirationDate, "MMMM d, yyyy")
                   )}
                 </Item.Content>
               </Item>

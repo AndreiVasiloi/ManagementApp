@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Segment, Header, Button } from "semantic-ui-react";
 import { NavLink} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,18 +10,18 @@ import MyDateInput from "../../../app/common/form/MyDateInput";
 import useFirestoreDoc from "../../../app/hooks/useFirestoreDoc";
 import {
   listenToReasonsFromFirestore,
-  listenToAppointmentsFromFirestore,
   updateAppointmentInFirestore,
   addAppointmentToFirestore,
+  listenToAppointmentFromFirestore
 } from "../../../app/firestore/firestoreService";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { toast } from "react-toastify";
 import classes from "../../../css/Form.module.css";
 import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import { listenToReasons } from "../reasonsActions";
-import { listenToAppointments } from "../appointmentsActions";
+import { clearSelectedAppointment, listenToSelectedAppointment } from "../appointmentsActions";
 
-export default function AppointmentsForm({ match, history }) {
+export default function AppointmentsForm({ match, history, location }) {
   const dispatch = useDispatch();
   const reasons = useSelector((state) => state.reason.reasons);
   const selectedAppointment = useSelector((state) =>
@@ -29,6 +29,11 @@ export default function AppointmentsForm({ match, history }) {
   );
 
   const { loading } = useSelector((state) => state.async);
+
+  useEffect(() => {
+    if (location.pathname !== '/createAppointment') return;
+    dispatch(clearSelectedAppointment());
+  }, [dispatch, location.pathname])
 
   const initialValues = selectedAppointment ?? {
     hour: "",
@@ -51,9 +56,9 @@ export default function AppointmentsForm({ match, history }) {
   });
 
   useFirestoreDoc({
-    shouldExecute: !!match.params.id,
-    query: () => listenToAppointmentsFromFirestore(match.params.id),
-    data: (appointment) => dispatch(listenToAppointments([appointment])),
+    shouldExecute: match.params.id !== selectedAppointment?.id && location.pathname !== '/createAppointment',
+    query: () => listenToAppointmentFromFirestore(match.params.id),
+    data: (appointment) => dispatch(listenToSelectedAppointment(appointment)),
     deps: [match.params.id, dispatch],
   });
 

@@ -1,29 +1,51 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Grid } from "semantic-ui-react";
-import classes from '../../../css/Dashboard.module.css';
+import classes from "../../../css/Dashboard.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import InventoryCategoriesList from "./InventoryCategoriesList";
 import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import { listenToCategoriesFromFirestore } from "../../../app/firestore/firestoreService";
-import { listenToCategories } from "../inventoryCategoriesActions";
+import {
+  fetchCategories,
+  listenToCategories,
+} from "../inventoryCategoriesActions";
 import InventoryCategoriesNavbar from "../inventoryNav/InventoryCategoriesNavbar";
+import { RETAIN_STATE } from "../inventoryConstants";
 
 export default function InventoryCategoriesDashboard() {
-  const { categories } = useSelector((state) => state.category);
+  const limit = 10;
   const dispatch = useDispatch();
+  const { categories, moreCategories, lastVisible, retainState } = useSelector(
+    (state) => state.category
+  );
+  const { loading } = useSelector((state) => state.async);
+  const [loadingInitial, setLoadingInitial] = useState(false);
 
-  useFirestoreCollection({
-    query: () => listenToCategoriesFromFirestore(),
-    data: (categories) => dispatch(listenToCategories(categories)),
-    deps: [dispatch],
-  });
+  useEffect(() => {
+    if (retainState) return;
+    setLoadingInitial(true);
+    dispatch(fetchCategories(limit)).then(() => {
+      setLoadingInitial(false);
+    });
+    return () => {
+      dispatch({ type: RETAIN_STATE });
+    };
+  }, [dispatch, retainState]);
+
+  function handleFetchNextCategories() {
+    dispatch(fetchCategories(limit, lastVisible));
+  }
 
   return (
     <div className={classes.dashboardContainer}>
       <Grid>
         <Grid.Column width={16}>
-        <InventoryCategoriesNavbar/>
-          <InventoryCategoriesList categories={categories} />
+          <InventoryCategoriesNavbar />
+          <InventoryCategoriesList
+            categories={categories}
+            getNextCategory={handleFetchNextCategories}
+            moreCategories={moreCategories}
+          />
         </Grid.Column>
       </Grid>
     </div>
