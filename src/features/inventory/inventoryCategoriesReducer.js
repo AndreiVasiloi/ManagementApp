@@ -6,7 +6,8 @@ import {
   CLEAR_SELECTED_CATEGORY,
   CLEAR_CATEGORIES,
   RETAIN_STATE,
-  FETCH_CATEGORY
+  FETCH_CATEGORY,
+  LISTEN_TO_SELECTED_CATEGORY
 } from "./inventoryConstants";
 
 const initialState = {
@@ -40,18 +41,23 @@ export default function inventoryCategoriesReducer(
         ...state,
         categories: [...state.categories.filter((cat) => cat.key !== payload)],
       };
-    // case FETCH_CATEGORIES:
-    //   return {
-    //     ...state,
-    //     categories: [...state.categories, ...payload.categories],
-    //     moreCategories: payload.moreCategories,
-    //     lastVisible: payload.lastVisible,
-    //   };
+    case FETCH_CATEGORIES:
+      return {
+        ...state,
+        categories: [...state.categories, ...payload.categories],
+        moreCategories: payload.moreCategories,
+        lastVisible: payload.lastVisible,
+      };
       case FETCH_CATEGORY:
         return {
           ...state,
           categories: payload,
         };
+        case LISTEN_TO_SELECTED_CATEGORY:
+          return {
+            ...state,
+            selectedCategory: payload,
+          }
     case CLEAR_SELECTED_CATEGORY:
       return {
         ...state,

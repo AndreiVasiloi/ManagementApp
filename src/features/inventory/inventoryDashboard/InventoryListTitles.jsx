@@ -9,7 +9,6 @@ export default function InventoryListTitles({
   loading,
 }) {
   const { filterIcon } = useSelector((state) => state.addClass);
-  const { sort } = useSelector((state) => state.item);
   const dispatch = useDispatch();
   return (
     <Segment.Group className={classes.dashboardListElement}>

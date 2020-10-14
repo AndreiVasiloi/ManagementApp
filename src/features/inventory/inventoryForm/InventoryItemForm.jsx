@@ -4,7 +4,6 @@ import { NavLink, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   clearSelectedItem,
-  listenToItems,
   listenToSelectedItem,
 } from "../inventoryItemsActions";
 import { Formik, Form } from "formik";
@@ -30,7 +29,6 @@ export default function InventoryItemForm({ match, history, location }) {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.category.categories);
   const { selectedItem } = useSelector((state) => state.item);
-
   const { loading, error } = useSelector((state) => state.async);
 
   useEffect(() => {
@@ -68,7 +66,7 @@ export default function InventoryItemForm({ match, history, location }) {
     data: (item) => dispatch(listenToSelectedItem(item)),
     deps: [match.params.id, dispatch],
   });
-console.log(categories);
+
   if (loading) return <LoadingComponent content='Loading event...' />;
 
   if (error) return <Redirect to='/error' />;

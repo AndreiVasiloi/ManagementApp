@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 
 export default function InventoryCategoriesListItem({category}) {
+
   const [confirmOpen, setConfirmOpen] = useState(false);
   const { currentUser } = useSelector((state) => state.auth);
   const isCurrentUserCategories = category?.userUid === currentUser?.uid;
@@ -22,6 +23,8 @@ export default function InventoryCategoriesListItem({category}) {
   }
 
     return (
+      <>
+      {isCurrentUserCategories && (
         <Segment.Group>
         <Segment textAlign='center' className={classes.inventoryItemContainer}>
           <Item.Group>
@@ -75,6 +78,7 @@ export default function InventoryCategoriesListItem({category}) {
           </Modal.Footer>
         </Modal>
         </Segment>
-      </Segment.Group>
+      </Segment.Group>)}
+      </>
     )
 }

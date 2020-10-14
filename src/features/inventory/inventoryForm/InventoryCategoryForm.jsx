@@ -21,8 +21,7 @@ import {
 
 export default function InventoryCategoryForm({ match, history, location }) {
   const dispatch = useDispatch();
-  const selectedCategory = useSelector((state) => state.category);
-
+  const { selectedCategory } = useSelector((state) => state.category);
   const { loading, error } = useSelector((state) => state.async);
 
   useEffect(() => {
@@ -48,13 +47,14 @@ export default function InventoryCategoryForm({ match, history, location }) {
     deps: [match.params.id, dispatch],
   });
 
-  if (loading) return <LoadingComponent content='Loading event...' />;
+  if (loading) return <LoadingComponent content="Loading event..." />;
 
-  if (error) return <Redirect to='/error' />;
+  if (error) return <Redirect to="/error" />;
 
   return (
     <Segment clearing className={classes.formContainer}>
       <Formik
+        enableReinitialize
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
@@ -70,29 +70,29 @@ export default function InventoryCategoryForm({ match, history, location }) {
         }}
       >
         {({ isSubmitting, dirty, isValid }) => (
-          <Form className='ui form'>
+          <Form className="ui form">
             <Header
               sub
-              color='teal'
+              color="teal"
               content={selectedCategory ? "Edit category" : "Add category"}
             />
-            <MyTextInput name='text' placeholder='Category' />
+            <MyTextInput name="text" placeholder="Category" />
             <Button
-              type='submit'
-              floated='right'
+              type="submit"
+              floated="right"
               className={classes.formSubmitBtn}
-              content='Submit'
+              content="Submit"
               loading={isSubmitting}
               disabled={!isValid || !dirty || isSubmitting}
             />
             <Button
               disabled={isSubmitting}
-              type='submit'
+              type="submit"
               className={classes.formCancelBtn}
-              floated='right'
-              content='Cancel'
+              floated="right"
+              content="Cancel"
               as={NavLink}
-              to='/inventoryCategories'
+              to="/inventoryCategories"
             />
           </Form>
         )}

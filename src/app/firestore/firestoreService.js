@@ -62,12 +62,12 @@ export function getItemsNumberInMonth(predicate) {
 //categories
 
 export function fetchCategoriesFromFirestore( limit, lastDocSnapshot = null) {
-  const itemsRef = db
+  const categoriesRef = db
     .collection("categories")
-    .orderBy('date')
+    .orderBy('value')
     .startAfter(lastDocSnapshot)
     .limit(limit);
-  return itemsRef;
+  return categoriesRef;
 }
 
 export function listenToCategoriesFromFirestore() {
@@ -79,9 +79,11 @@ export function listenToCategoryFromFirestore(categoryId) {
 }
 
 export function addCategoryToFirestore(category) {
+  const user = firebase.auth().currentUser;
   return db.collection("categories").add({
     ...category,
     value: { ...category }.text,
+    userUid: user.uid,
   });
 }
 
@@ -142,7 +144,7 @@ export function getAppointmentsNumberInMonth(predicate) {
 export function fetchReasonsFromFirestore( limit, lastDocSnapshot = null) {
   const itemsRef = db
     .collection("reasons")
-    .orderBy('date')
+    .orderBy('text')
     .startAfter(lastDocSnapshot)
     .limit(limit);
   return itemsRef;
@@ -152,10 +154,16 @@ export function listenToReasonsFromFirestore() {
   return db.collection("reasons");
 }
 
+export function listenToReasonFromFirestore(reasonId) {
+  return db.collection("reasons").doc(reasonId);
+}
+
 export function addReasonToFirestore(reason) {
+  const user = firebase.auth().currentUser;
   return db.collection("reasons").add({
     ...reason,
     value: { ...reason }.text,
+    userUid: user.uid,
   });
 }
 

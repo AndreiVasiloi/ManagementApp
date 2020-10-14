@@ -37,6 +37,7 @@ export default function InventoryListItem({ item }) {
       toast.error(error.message);
     }
   }
+ 
   return (
     <>
     {isCurrentUserInventory && (

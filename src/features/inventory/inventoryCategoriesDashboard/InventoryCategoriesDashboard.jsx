@@ -3,14 +3,10 @@ import { Grid } from "semantic-ui-react";
 import classes from "../../../css/Dashboard.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import InventoryCategoriesList from "./InventoryCategoriesList";
-import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
-import { listenToCategoriesFromFirestore } from "../../../app/firestore/firestoreService";
-import {
-  fetchCategories,
-  listenToCategories,
-} from "../inventoryCategoriesActions";
+import { fetchCategories } from "../inventoryCategoriesActions";
 import InventoryCategoriesNavbar from "../inventoryNav/InventoryCategoriesNavbar";
 import { RETAIN_STATE } from "../inventoryConstants";
+import InventoryListItemPlaceholder from "../inventoryDashboard/InventoryListItemPlaceholder";
 
 export default function InventoryCategoriesDashboard() {
   const limit = 10;
@@ -41,7 +37,14 @@ export default function InventoryCategoriesDashboard() {
       <Grid>
         <Grid.Column width={16}>
           <InventoryCategoriesNavbar />
+          {loadingInitial && (
+            <>
+              <InventoryListItemPlaceholder />
+              <InventoryListItemPlaceholder />
+            </>
+          )}
           <InventoryCategoriesList
+            loading={loading}
             categories={categories}
             getNextCategory={handleFetchNextCategories}
             moreCategories={moreCategories}

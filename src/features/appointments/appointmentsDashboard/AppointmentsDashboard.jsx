@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Grid } from "semantic-ui-react";
-import { listenToAppointmentsFromFirestore } from "../../../app/firestore/firestoreService";
-import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
-import {
-  fetchAppointments,
-  listenToAppointments,
-} from "../appointmentsActions";
+import { fetchAppointments } from "../appointmentsActions";
 import AppointmentsNav from "../appointmentsNav/AppointmentsNav";
 import AppointmentsList from "./AppointmentsList";
 import classes from "../../../css/Dashboard.module.css";
 import { LineCalendar } from "../lineCalendar/LineCalendar";
 import { RETAIN_STATE } from "../../inventory/inventoryConstants";
+import InventoryListItemPlaceholder from "../../inventory/inventoryDashboard/InventoryListItemPlaceholder";
 
 export default function AppointmentsDashboard() {
   const limit = 5;
@@ -25,10 +21,6 @@ export default function AppointmentsDashboard() {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.async);
   const [loadingInitial, setLoadingInitial] = useState(false);
-  // const [predicate, setPredicate] = useState(
-  //   new Map([["startDate", new Date()]])
-  // );
-  // const date = predicate.get("startDate");
   const [text, setText] = useState("");
   const textLowered = text.trim().toLowerCase();
   const filteredAppointments =
@@ -72,6 +64,12 @@ export default function AppointmentsDashboard() {
             <div style={{ marginTop: 40 }}>
               <LineCalendar />
             </div>
+            {loadingInitial && (
+              <>
+                <InventoryListItemPlaceholder />
+                <InventoryListItemPlaceholder />
+              </>
+            )}
             <AppointmentsList
               moreAppointments={moreAppointments}
               loading={loading}
