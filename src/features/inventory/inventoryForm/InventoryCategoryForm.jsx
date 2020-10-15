@@ -16,18 +16,22 @@ import { toast } from "react-toastify";
 import classes from "../../../css/Form.module.css";
 import {
   clearSelectedCategory,
+  listenToCategories,
   listenToSelectedCategory,
 } from "../inventoryCategoriesActions";
 
 export default function InventoryCategoryForm({ match, history, location }) {
   const dispatch = useDispatch();
-  const { selectedCategory } = useSelector((state) => state.category);
+  // const { selectedCategory } = useSelector((state) => state.category);
+  const selectedCategory = useSelector((state) =>
+  state.category.categories.find((c) => c.id === match.params.id)
+);
   const { loading, error } = useSelector((state) => state.async);
 
-  useEffect(() => {
-    if (location.pathname !== "/createCategory") return;
-    dispatch(clearSelectedCategory());
-  }, [dispatch, location.pathname]);
+  // useEffect(() => {
+  //   if (location.pathname !== "/createCategory") return;
+  //   dispatch(clearSelectedCategory());
+  // }, [dispatch, location.pathname]);
 
   const initialValues = selectedCategory ?? {
     text: "",
@@ -39,13 +43,20 @@ export default function InventoryCategoryForm({ match, history, location }) {
   });
 
   useFirestoreDoc({
-    shouldExecute:
-      match.params.id !== selectedCategory?.id &&
-      location.pathname !== "/createCategory",
+    shouldExecute: !!match.params.id,
     query: () => listenToCategoryFromFirestore(match.params.id),
-    data: (category) => dispatch(listenToSelectedCategory(category)),
+    data: (category) => dispatch(listenToCategories([category])),
     deps: [match.params.id, dispatch],
   });
+
+  // useFirestoreDoc({
+  //   shouldExecute:
+  //     match.params.id !== selectedCategory?.id &&
+  //     location.pathname !== "/createCategory",
+  //   query: () => listenToCategoryFromFirestore(match.params.id),
+  //   data: (category) => dispatch(listenToSelectedCategory(category)),
+  //   deps: [match.params.id, dispatch],
+  // });
 
   if (loading) return <LoadingComponent content="Loading event..." />;
 

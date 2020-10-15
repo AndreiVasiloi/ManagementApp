@@ -16,7 +16,10 @@ export default function AppointmentsReasonsList({
       className={classes.dashboardListContainer}
     >
       <Segment>
-        {reasons.length !== 0 && (
+      {reasons.map((reason) => (
+              <AppointmentReasonsListItem reason={reason} key={reason.id} />
+            ))}
+        {/* {reasons.length !== 0 && (
           <InfiniteScroll
             pageStart={0}
             loadMore={getNextReason}
@@ -27,7 +30,7 @@ export default function AppointmentsReasonsList({
               <AppointmentReasonsListItem reason={reason} key={reason.id} />
             ))}
           </InfiniteScroll>
-        )}
+        )} */}
       </Segment>
     </Segment.Group>
   );

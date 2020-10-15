@@ -6,6 +6,8 @@ import classes from "../../../css/Dashboard.module.css";
 import { setSort } from "../inventoryItemsActions";
 
 export default function InventoryListTitles({
+  predicate,
+  setPredicate,
   loading,
 }) {
   const { filterIcon } = useSelector((state) => state.addClass);
@@ -18,7 +20,8 @@ export default function InventoryListTitles({
             <Grid.Column width={3}>
               <Item.Content
                 onClick={() => {
-                  dispatch(setSort("category"))
+                  // dispatch(setSort("category"))
+                  setPredicate("sort", "category");
                   dispatch(addFilterIcon("category"));
                 }}
                 disabled={loading}
@@ -39,7 +42,8 @@ export default function InventoryListTitles({
               <Item>
                 <Item.Content
                   onClick={() => {
-                    dispatch(setSort("name"))
+                    // dispatch(setSort("name"))
+                    setPredicate("sort", "name");
                     dispatch(addFilterIcon("name"));
                   }}
                   disabled={loading}
@@ -61,7 +65,8 @@ export default function InventoryListTitles({
               <Item>
                 <Item.Content
                   onClick={() => {
-                    dispatch(setSort("price"))
+                    setPredicate("sort", "price");
+                    // dispatch(setSort("price"))
                     dispatch(addFilterIcon("price"));
                   }}
                   disabled={loading}
@@ -83,7 +88,8 @@ export default function InventoryListTitles({
               <Item>
                 <Item.Content
                   onClick={() => {
-                    dispatch(setSort("expirationDate"))
+                    setPredicate("sort", "expirationDate");
+                    // dispatch(setSort("expirationDate"))
                     dispatch(addFilterIcon("expirationDate"));
                   }}
                   disabled={loading}
@@ -107,7 +113,8 @@ export default function InventoryListTitles({
               <Item>
                 <Item.Content
                   onClick={() => {
-                    dispatch(setSort("amount"))
+                    // dispatch(setSort("amount"))
+                    setPredicate("sort", "amount");
                     dispatch(addFilterIcon("amount"));
                   }}
                   disabled={loading}

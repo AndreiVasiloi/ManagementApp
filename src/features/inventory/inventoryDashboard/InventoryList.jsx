@@ -7,9 +7,9 @@ import InfiniteScroll from "react-infinite-scroller";
 
 export default function InventoryList({
   items,
-  loading,
-  getNextItem,
-  moreItems,
+  predicate,
+  setPredicate,
+  loading
 }) {
   
   return (
@@ -18,7 +18,15 @@ export default function InventoryList({
       className={classes.dashboardListContainer}
     >
       <Segment>
-        <InventoryListTitles
+      <InventoryListTitles
+          predicate={predicate}
+          setPredicate={setPredicate}
+          loading={loading}
+        />
+        {items.map((item) => (
+          <InventoryListItem item={item} key={item.id} />
+        ))}
+        {/* <InventoryListTitles
           loading={loading}
         />
         {items.length !== 0 && (
@@ -32,7 +40,7 @@ export default function InventoryList({
               <InventoryListItem item={item} key={item.id} />
             ))}
           </InfiniteScroll>
-        )}
+        )} */}
       </Segment>
     </Segment.Group>
   );

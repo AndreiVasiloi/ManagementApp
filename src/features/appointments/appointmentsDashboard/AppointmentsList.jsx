@@ -56,7 +56,13 @@ export default function AppointmentsList({
             <Header content={format(convertDate, "MMMM d, yyyy")} />
           )}
       <Segment>
-        {filteredAppointments.length !== 0 && (
+      {filteredAppointments.map((appointment) => (
+              <AppointmentsListItem
+                appointment={appointment}
+                key={appointment.id}
+              />
+            ))}
+        {/* {filteredAppointments.length !== 0 && (
           <InfiniteScroll
             pageStart={0}
             loadMore={getNextAppointments}
@@ -70,7 +76,7 @@ export default function AppointmentsList({
               />
             ))}
           </InfiniteScroll>
-        )}
+        )} */}
       </Segment>
     </Segment.Group>
   );

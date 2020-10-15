@@ -16,7 +16,13 @@ export default function InventoryCategoriesList({
       className={classes.dashboardListContainer}
     >
       <Segment>
-        {categories.length !== 0 && (
+      {categories.map((category) => (
+              <InventoryCategoriesListItem
+                category={category}
+                key={category.id}
+              />
+            ))}
+        {/* {categories.length !== 0 && (
           <InfiniteScroll
             pageStart={0}
             loadMore={getNextCategory}
@@ -30,7 +36,7 @@ export default function InventoryCategoriesList({
               />
             ))}
           </InfiniteScroll>
-        )}
+        )} */}
       </Segment>
     </Segment.Group>
   );

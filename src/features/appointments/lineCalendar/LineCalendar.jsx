@@ -4,7 +4,7 @@ import { Icon } from "semantic-ui-react";
 import classes from "../../../css/LineCalendar.module.css";
 import { setEndDate, setStartDate } from "../appointmentsActions";
 
-export function LineCalendar({ onNewDate, date, showAllAppointments }) {
+export function LineCalendar({ setPredicate, date, showAllAppointments }) {
   const monthNames = [
     "January",
     "February",
@@ -22,9 +22,9 @@ export function LineCalendar({ onNewDate, date, showAllAppointments }) {
 
   const dayNames = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
   const dispatch = useDispatch();
-  const { startDate } = useSelector((state) => state.appointment);
-  const [year, setYear] = useState(startDate.getFullYear());
-  const [month, setMonth] = useState(startDate.getMonth());
+  // const { startDate } = useSelector((state) => state.appointment);
+  const [year, setYear] = useState(date.getFullYear());
+  const [month, setMonth] = useState(date.getMonth());
   const monthName = monthNames[month];
   const numberOfDays = getDaysInMonth(month + 1, year);
   const days = getDaysAsArray(numberOfDays);
@@ -79,17 +79,18 @@ export function LineCalendar({ onNewDate, date, showAllAppointments }) {
             <button
               key={day}
               onClick={() => {
+                setPredicate('startDate', thisDate)
                 if(showAllAppointments) {
-                  dispatch(setStartDate(thisDate))
-                  dispatch(setEndDate(null))
+                  setPredicate('startDate', thisDate)
+                  setPredicate('endDate', null)
                 }else {
-                  dispatch(setStartDate(thisDate))
-                  dispatch(setEndDate(nextDate))
+                  setPredicate('startDate', thisDate)
+                  setPredicate('endDate', nextDate)
                 }
                
               }}
               className={
-                day === startDate.getDate()
+                day === date.getDate()
                   ? `${classes.day} ${classes.selectedDay}`
                   : `${classes.day}`
               }

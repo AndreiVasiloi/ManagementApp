@@ -13,6 +13,7 @@ import {
   updateAppointmentInFirestore,
   addAppointmentToFirestore,
   listenToAppointmentFromFirestore,
+  listenToAppointmentsFromFirestore,
 } from "../../../app/firestore/firestoreService";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { toast } from "react-toastify";
@@ -21,6 +22,7 @@ import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import { listenToReasons } from "../reasonsActions";
 import {
   clearSelectedAppointment,
+  listenToAppointments,
   listenToSelectedAppointment,
 } from "../appointmentsActions";
 
@@ -33,12 +35,12 @@ export default function AppointmentsForm({ match, history, location }) {
   );
 
   const { loading } = useSelector((state) => state.async);
-  let filteredReasons = [];
-  reasons.map(reason => filteredReasons.push({text: reason.text, id: reason.id, value: reason.value}))
-  useEffect(() => {
-    if (location.pathname !== "/createAppointment") return;
-    dispatch(clearSelectedAppointment());
-  }, [dispatch, location.pathname]);
+  // let filteredReasons = [];
+  // reasons.map(reason => filteredReasons.push({text: reason.text, id: reason.id, value: reason.value}))
+  // useEffect(() => {
+  //   if (location.pathname !== "/createAppointment") return;
+  //   dispatch(clearSelectedAppointment());
+  // }, [dispatch, location.pathname]);
 
   const initialValues = selectedAppointment ?? {
     hour: "",
@@ -61,16 +63,23 @@ export default function AppointmentsForm({ match, history, location }) {
   });
 
   useFirestoreDoc({
-    shouldExecute:
-      match.params.id !== selectedAppointment?.id &&
-      location.pathname !== "/createAppointment",
+    shouldExecute: !!match.params.id,
     query: () => listenToAppointmentFromFirestore(match.params.id),
-    data: (appointment) => dispatch(listenToSelectedAppointment(appointment)),
+    data: (appointment) => dispatch(listenToAppointments([appointment])),
     deps: [match.params.id, dispatch],
   });
 
+  // useFirestoreDoc({
+  //   shouldExecute:
+  //     match.params.id !== selectedAppointment?.id &&
+  //     location.pathname !== "/createAppointment",
+  //   query: () => listenToAppointmentFromFirestore(match.params.id),
+  //   data: (appointment) => dispatch(listenToSelectedAppointment(appointment)),
+  //   deps: [match.params.id, dispatch],
+  // });
+
   if (loading) return <LoadingComponent content='Loading event...' />;
-  console.log(appointments);
+
   return (
     <Segment clearing className={classes.formContainer}>
       <Formik

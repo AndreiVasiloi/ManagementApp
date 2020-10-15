@@ -10,12 +10,14 @@ import {
   listenToReasonFromFirestore,
   updateReasonInFirestore,
   addReasonToFirestore,
+  listenToReasonsFromFirestore,
 } from "../../../app/firestore/firestoreService";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { toast } from "react-toastify";
 import classes from "../../../css/Form.module.css";
 import {
   clearSelectedReason,
+  listenToReasons,
   listenToSelectedReason,
 } from "../reasonsActions";
 import MyNumberInput from "../../../app/common/form/MyNumberInput";
@@ -23,13 +25,16 @@ import MyColorPicker from "../../../app/common/form/MyColorPicker";
 
 export default function AppointmentsReasonsForm({ match, history, location }) {
   const dispatch = useDispatch();
-  const { selectedReason } = useSelector((state) => state.reason);
+  // const { selectedReason } = useSelector((state) => state.reason);
+  const selectedReason = useSelector((state) =>
+  state.reason.reasons.find((c) => c.id === match.params.id)
+);
   const { loading } = useSelector((state) => state.async);
 
-  useEffect(() => {
-    if (location.pathname !== "/createReason") return;
-    dispatch(clearSelectedReason());
-  }, [dispatch, location.pathname]);
+  // useEffect(() => {
+  //   if (location.pathname !== "/createReason") return;
+  //   dispatch(clearSelectedReason());
+  // }, [dispatch, location.pathname]);
 
   const initialValues = selectedReason ?? {
     text: "",
@@ -43,13 +48,20 @@ export default function AppointmentsReasonsForm({ match, history, location }) {
   });
 
   useFirestoreDoc({
-    shouldExecute:
-      match.params.id !== selectedReason?.id &&
-      location.pathname !== "/createReason",
-    query: () => listenToReasonFromFirestore(match.params.id),
-    data: (reason) => dispatch(listenToSelectedReason(reason)),
+    shouldExecute: !!match.params.id,
+    query: () => listenToReasonsFromFirestore(match.params.id),
+    data: (reason) => dispatch(listenToReasons([reason])),
     deps: [match.params.id, dispatch],
   });
+
+  // useFirestoreDoc({
+  //   shouldExecute:
+  //     match.params.id !== selectedReason?.id &&
+  //     location.pathname !== "/createReason",
+  //   query: () => listenToReasonFromFirestore(match.params.id),
+  //   data: (reason) => dispatch(listenToSelectedReason(reason)),
+  //   deps: [match.params.id, dispatch],
+  // });
 
   if (loading) return <LoadingComponent content="Loading event..." />;
 

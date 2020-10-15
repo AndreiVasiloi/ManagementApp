@@ -21,13 +21,19 @@ export function dataFromSnapshot(snapshot) {
 
 //items
 
-export function fetchItemsFromFirestore(sort, limit, lastDocSnapshot = null) {
-  const itemsRef = db
-    .collection("items")
-    .orderBy(sort)
-    .startAfter(lastDocSnapshot)
-    .limit(limit);
-  return itemsRef;
+// export function fetchItemsFromFirestore(sort, limit, lastDocSnapshot = null) {
+//   const itemsRef = db
+//     .collection("items")
+//     .orderBy(sort)
+//     .startAfter(lastDocSnapshot)
+//     .limit(limit);
+//   return itemsRef;
+// }
+
+export function listenToItemsFromFirestore(predicate) {
+  const itemsRef = db.collection("items");
+  var sortBy = predicate.get("sort");
+  return itemsRef.orderBy(sortBy);
 }
 
 export function listenToItemFromFirestore(itemId) {
@@ -61,14 +67,15 @@ export function getItemsNumberInMonth(predicate) {
 
 //categories
 
-export function fetchCategoriesFromFirestore( limit, lastDocSnapshot = null) {
-  const categoriesRef = db
-    .collection("categories")
-    .orderBy('value')
-    .startAfter(lastDocSnapshot)
-    .limit(limit);
-  return categoriesRef;
-}
+// export function fetchCategoriesFromFirestore( limit, lastDocSnapshot = null) {
+//   const categoriesRef = db
+//     .collection("categories")
+//     .orderBy('value')
+//     .startAfter(lastDocSnapshot)
+//     .limit(limit);
+//   return categoriesRef;
+// }
+
 
 export function listenToCategoriesFromFirestore() {
   return db.collection("categories").orderBy("text");
@@ -97,23 +104,38 @@ export function deleteCategoryInFirestore(categoryId) {
 
 //appointments
 
-export function fetchAppointmentsFromFirestore(
-  startDate,
-  endDate,
-  limit,
-  lastDocSnapshot = null
-) {
-  let appointmentsRef = db
-    .collection("appointments")
-    .orderBy("date")
-    .startAfter(lastDocSnapshot)
-    .limit(limit);
-    if(endDate) {
-      return appointmentsRef.where("date", ">=", startDate).where("date", "<=", endDate);
-    }else {
-      return appointmentsRef.where("date", ">=", startDate);
-    }
+// export function fetchAppointmentsFromFirestore(
+//   startDate,
+//   endDate,
+//   limit,
+//   lastDocSnapshot = null
+// ) {
+//   let appointmentsRef = db
+//     .collection("appointments")
+//     .orderBy("date")
+//     .startAfter(lastDocSnapshot)
+//     .limit(limit);
+//     if(endDate) {
+//       return appointmentsRef.where("date", ">=", startDate).where("date", "<=", endDate);
+//     }else {
+//       return appointmentsRef.where("date", ">=", startDate);
+//     }
   
+// }
+
+export function listenToAppointmentsFromFirestore(predicate) {
+  let appointmentsRef = db.collection("appointments").orderBy("date");
+  
+  if(predicate.get("endDate")){
+    return appointmentsRef.where("date", ">=", predicate.get("startDate")).where("date", "<=", predicate.get("endDate"));
+  }else {
+    return appointmentsRef.where("date", ">=", predicate.get("startDate"));
+  }
+  // if (typeof predicate === "object") {
+  //   return appointmentsRef.where("date", ">=", predicate.get("startDate"));
+  // } else {
+  //   return appointmentsRef;
+  // }
 }
 
 export function listenToAppointmentFromFirestore(appointmentId) {
@@ -147,14 +169,14 @@ export function getAppointmentsNumberInMonth(predicate) {
 
 //reasons
 
-export function fetchReasonsFromFirestore( limit, lastDocSnapshot = null) {
-  const itemsRef = db
-    .collection("reasons")
-    .orderBy('text')
-    .startAfter(lastDocSnapshot)
-    .limit(limit);
-  return itemsRef;
-}
+// export function fetchReasonsFromFirestore( limit, lastDocSnapshot = null) {
+//   const itemsRef = db
+//     .collection("reasons")
+//     .orderBy('text')
+//     .startAfter(lastDocSnapshot)
+//     .limit(limit);
+//   return itemsRef;
+// }
 
 export function listenToReasonsFromFirestore() {
   return db.collection("reasons");

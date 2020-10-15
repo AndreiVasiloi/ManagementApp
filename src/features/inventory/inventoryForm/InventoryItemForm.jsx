@@ -4,6 +4,7 @@ import { NavLink, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   clearSelectedItem,
+  listenToItems,
   listenToSelectedItem,
 } from "../inventoryItemsActions";
 import { Formik, Form } from "formik";
@@ -28,13 +29,16 @@ import { listenToCategories } from "../inventoryCategoriesActions";
 export default function InventoryItemForm({ match, history, location }) {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.category.categories);
-  const { selectedItem } = useSelector((state) => state.item);
+  // const { selectedItem } = useSelector((state) => state.item);
+  const selectedItem = useSelector((state) =>
+    state.item.items.find((i) => i.id === match.params.id)
+  );
   const { loading, error } = useSelector((state) => state.async);
 
-  useEffect(() => {
-    if (location.pathname !== "/createItem") return;
-    dispatch(clearSelectedItem());
-  }, [dispatch, location.pathname]);
+  // useEffect(() => {
+  //   if (location.pathname !== "/createItem") return;
+  //   dispatch(clearSelectedItem());
+  // }, [dispatch, location.pathname]);
 
   const initialValues = selectedItem ?? {
     category: "",
@@ -59,13 +63,20 @@ export default function InventoryItemForm({ match, history, location }) {
   });
 
   useFirestoreDoc({
-    shouldExecute:
-      match.params.id !== selectedItem?.id &&
-      location.pathname !== "/createItem",
+    shouldExecute: !!match.params.id,
     query: () => listenToItemFromFirestore(match.params.id),
-    data: (item) => dispatch(listenToSelectedItem(item)),
+    data: (item) => dispatch(listenToItems([item])),
     deps: [match.params.id, dispatch],
-  });
+  })
+
+  // useFirestoreDoc({
+  //   shouldExecute:
+  //     match.params.id !== selectedItem?.id &&
+  //     location.pathname !== "/createItem",
+  //   query: () => listenToItemFromFirestore(match.params.id),
+  //   data: (item) => dispatch(listenToSelectedItem(item)),
+  //   deps: [match.params.id, dispatch],
+  // });
 
   if (loading) return <LoadingComponent content='Loading event...' />;
 
