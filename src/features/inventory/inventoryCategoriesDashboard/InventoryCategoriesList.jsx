@@ -11,8 +11,11 @@ export default function InventoryCategoriesList({
   moreCategories,
 }) {
   return (
-    <Segment.Group style={{ marginTop: "50px" }}>
-      <Segment className={classes.DashboardListContainer}>
+    <Segment.Group
+      style={{ marginTop: "50px" }}
+      className={classes.dashboardListContainer}
+    >
+      <Segment>
         {categories.length !== 0 && (
           <InfiniteScroll
             pageStart={0}

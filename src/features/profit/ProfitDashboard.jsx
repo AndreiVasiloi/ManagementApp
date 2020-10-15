@@ -49,8 +49,9 @@ export default function ProfitDashboard({ match }) {
   const totalPrices = getTotalPrices();
   const totalCosts = getTotalCosts();
   const profit = totalPrices - totalCosts;
-
+  console.log(appointmentsMonth);
   function getPrice(reasontype) {
+    debugger
     const reason = reasons.find((reason) => reason.text === reasontype);
     if (reason !== undefined) {
       return reason.price;

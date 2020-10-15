@@ -25,7 +25,7 @@ export default function InventoryCategoriesListItem({category}) {
     return (
       <>
       {isCurrentUserCategories && (
-        <Segment.Group>
+        <Segment.Group className={classes.dashboardListElement}>
         <Segment textAlign='center' className={classes.inventoryItemContainer}>
           <Item.Group>
             <Grid>

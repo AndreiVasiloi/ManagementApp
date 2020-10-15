@@ -11,8 +11,11 @@ export default function AppointmentsReasonsList({
   moreReasons,
 }) {
   return (
-    <Segment.Group style={{ marginTop: "50px" }}>
-      <Segment className={classes.DashboardListContainer}>
+    <Segment.Group
+      style={{ marginTop: "50px" }}
+      className={classes.dashboardListContainer}
+    >
+      <Segment>
         {reasons.length !== 0 && (
           <InfiniteScroll
             pageStart={0}

@@ -99,6 +99,7 @@ export function deleteCategoryInFirestore(categoryId) {
 
 export function fetchAppointmentsFromFirestore(
   startDate,
+  endDate,
   limit,
   lastDocSnapshot = null
 ) {
@@ -107,7 +108,12 @@ export function fetchAppointmentsFromFirestore(
     .orderBy("date")
     .startAfter(lastDocSnapshot)
     .limit(limit);
-  return appointmentsRef.where("date", ">=", startDate);
+    if(endDate) {
+      return appointmentsRef.where("date", ">=", startDate).where("date", "<=", endDate);
+    }else {
+      return appointmentsRef.where("date", ">=", startDate);
+    }
+  
 }
 
 export function listenToAppointmentFromFirestore(appointmentId) {

@@ -2,9 +2,9 @@ import React, { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "semantic-ui-react";
 import classes from "../../../css/LineCalendar.module.css";
-import { setStartDate } from "../appointmentsActions";
+import { setEndDate, setStartDate } from "../appointmentsActions";
 
-export function LineCalendar({ onNewDate, date }) {
+export function LineCalendar({ onNewDate, date, showAllAppointments }) {
   const monthNames = [
     "January",
     "February",
@@ -70,6 +70,7 @@ export function LineCalendar({ onNewDate, date }) {
     <div className={classes.container}>
       {days.map((day) => {
         const thisDate = new Date(year, month, day);
+        const nextDate = new Date(year, month, day + 1)
         const dateName = dayNames[thisDate.getDay()];
 
         const dayButton = (
@@ -77,7 +78,16 @@ export function LineCalendar({ onNewDate, date }) {
             <div>{dateName}</div>
             <button
               key={day}
-              onClick={() => dispatch(setStartDate(thisDate))}
+              onClick={() => {
+                if(showAllAppointments) {
+                  dispatch(setStartDate(thisDate))
+                  dispatch(setEndDate(null))
+                }else {
+                  dispatch(setStartDate(thisDate))
+                  dispatch(setEndDate(nextDate))
+                }
+               
+              }}
               className={
                 day === startDate.getDate()
                   ? `${classes.day} ${classes.selectedDay}`

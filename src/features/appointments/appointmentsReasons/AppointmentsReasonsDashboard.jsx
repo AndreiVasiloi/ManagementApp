@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Grid } from "semantic-ui-react";
-import { listenToReasonsFromFirestore } from "../../../app/firestore/firestoreService";
-import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import AppointmentsReasonsNav from "../appointmentsNav/AppointmentsReasonsNav";
-import { fetchReasons, listenToReasons } from "../reasonsActions";
+import { fetchReasons } from "../reasonsActions";
 import AppointmentsReasonsList from "./AppointmentsReasonsList";
 import classes from "../../../css/Dashboard.module.css";
 import { RETAIN_STATE } from "../../inventory/inventoryConstants";

@@ -5,7 +5,8 @@ import {
   CLEAR_SELECTED_APPOINTMENT,
   CLEAR_APPOINTMENTS,
   SET_START_DATE,
-  RETAIN_STATE
+  RETAIN_STATE,
+  SET_END_DATE
 } from "./appointmentsConstants";
 
 const initialState = {
@@ -15,6 +16,7 @@ const initialState = {
   selectedAppointment: null,
   lastVisible: null,
   startDate: new Date(),
+  endDate: new Date(),
   retainState: false,
 };
 
@@ -59,6 +61,13 @@ export default function appointmentsReducer(
         moreAppointments: true,
         startDate: payload,
       };
+      case SET_END_DATE:
+        return {
+          ...state,
+          retainState: false,
+          moreAppointments: true,
+          endDate: payload,
+        };
     case RETAIN_STATE:
       return {
         ...state,

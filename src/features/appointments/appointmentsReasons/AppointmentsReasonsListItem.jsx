@@ -24,7 +24,7 @@ export default function AppointmentsReasonsListItem({ reason }) {
   return (
     <>
       {isCurrentUserReasons && (
-        <Segment.Group>
+        <Segment.Group className={classes.dashboardListElement}>
           <Segment
             textAlign="center"
             className={classes.inventoryItemContainer}

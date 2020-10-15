@@ -16,7 +16,6 @@ import { toast } from "react-toastify";
 import classes from "../../../css/Form.module.css";
 import {
   clearSelectedReason,
-  listenToReasons,
   listenToSelectedReason,
 } from "../reasonsActions";
 import MyNumberInput from "../../../app/common/form/MyNumberInput";

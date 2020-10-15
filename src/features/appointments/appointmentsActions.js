@@ -14,15 +14,17 @@ import {
   FETCH_APPOINTMENTS,
   LISTEN_TO_APPOINTMENTS_MONTH,
   LISTEN_TO_SELECTED_APPOINTMENT,
+  SET_END_DATE,
   SET_START_DATE,
 } from "./appointmentsConstants";
 
-export function fetchAppointments( startDate, limit, lastDocSnapshot) {
+export function fetchAppointments( startDate, endDate, limit, lastDocSnapshot) {
   return async function (dispatch) {
     dispatch(asyncActionStart());
     try {
       const snapshot = await fetchAppointmentsFromFirestore(
         startDate,
+        endDate,
         limit,
         lastDocSnapshot
       ).get();
@@ -44,6 +46,13 @@ export function setStartDate(date) {
   return function (dispatch) {
     dispatch(clearAppointments());
     dispatch({ type: SET_START_DATE, payload: date });
+  };
+}
+
+export function setEndDate(date) {
+  return function (dispatch) {
+    dispatch(clearAppointments());
+    dispatch({ type: SET_END_DATE, payload: date });
   };
 }
 

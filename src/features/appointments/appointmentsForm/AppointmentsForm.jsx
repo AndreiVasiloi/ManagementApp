@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Segment, Header, Button } from "semantic-ui-react";
-import { NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
@@ -12,28 +12,33 @@ import {
   listenToReasonsFromFirestore,
   updateAppointmentInFirestore,
   addAppointmentToFirestore,
-  listenToAppointmentFromFirestore
+  listenToAppointmentFromFirestore,
 } from "../../../app/firestore/firestoreService";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { toast } from "react-toastify";
 import classes from "../../../css/Form.module.css";
 import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import { listenToReasons } from "../reasonsActions";
-import { clearSelectedAppointment, listenToSelectedAppointment } from "../appointmentsActions";
+import {
+  clearSelectedAppointment,
+  listenToSelectedAppointment,
+} from "../appointmentsActions";
 
 export default function AppointmentsForm({ match, history, location }) {
   const dispatch = useDispatch();
   const reasons = useSelector((state) => state.reason.reasons);
+  const { appointments } = useSelector((state) => state.appointment);
   const selectedAppointment = useSelector((state) =>
     state.appointment.appointments.find((a) => a.id === match.params.id)
   );
 
   const { loading } = useSelector((state) => state.async);
-
+  let filteredReasons = [];
+  reasons.map(reason => filteredReasons.push({text: reason.text, id: reason.id, value: reason.value}))
   useEffect(() => {
-    if (location.pathname !== '/createAppointment') return;
+    if (location.pathname !== "/createAppointment") return;
     dispatch(clearSelectedAppointment());
-  }, [dispatch, location.pathname])
+  }, [dispatch, location.pathname]);
 
   const initialValues = selectedAppointment ?? {
     hour: "",
@@ -56,27 +61,24 @@ export default function AppointmentsForm({ match, history, location }) {
   });
 
   useFirestoreDoc({
-    shouldExecute: match.params.id !== selectedAppointment?.id && location.pathname !== '/createAppointment',
+    shouldExecute:
+      match.params.id !== selectedAppointment?.id &&
+      location.pathname !== "/createAppointment",
     query: () => listenToAppointmentFromFirestore(match.params.id),
     data: (appointment) => dispatch(listenToSelectedAppointment(appointment)),
     deps: [match.params.id, dispatch],
   });
 
   if (loading) return <LoadingComponent content='Loading event...' />;
-
+  console.log(appointments);
   return (
     <Segment clearing className={classes.formContainer}>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
-          // function getPrice(reasontype) {
-          //   debugger
-          //   const reason = reasons.find(reason => reason.text === reasontype);
-          //   if(reason !== undefined){
-          //     return reason.price;
-          //   }
-          // }
+          console.log(values.date);
+          console.log(values.hour);
           try {
             selectedAppointment
               ? await updateAppointmentInFirestore(values)

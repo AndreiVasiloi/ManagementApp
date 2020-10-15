@@ -11,6 +11,7 @@ export default function InventoryList({
   getNextItem,
   moreItems,
 }) {
+  
   return (
     <Segment.Group
       style={{ marginTop: "50px" }}
