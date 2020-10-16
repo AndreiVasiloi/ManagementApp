@@ -80,6 +80,30 @@ export default function SignedInMenu() {
         <Icon name="percent" /> Profit
       </Nav.Item>
       <Nav.Item
+        onClick={() => dispatch(addActiveClass("clients"))}
+        as={Link}
+        className={
+          activeClass === "clients"
+            ? `${classes.navLink} ${classes.active}`
+            : `${classes.navLink} `
+        }
+        to="/clients"
+      >
+        <Icon name="users" /> Clients
+      </Nav.Item>
+      <Nav.Item
+        onClick={() => dispatch(addActiveClass("expenses"))}
+        as={Link}
+        className={
+          activeClass === "expenses"
+            ? `${classes.navLink} ${classes.active}`
+            : `${classes.navLink} `
+        }
+        to="/expenses"
+      >
+        <Icon name="money bill alternate outline" /> Expenses
+      </Nav.Item>
+      <Nav.Item
         onClick={() => dispatch(addActiveClass("sandbox"))}
         as={Link}
         className={
@@ -90,19 +114,6 @@ export default function SignedInMenu() {
         to="/sandbox"
       >
         Sandbox
-      </Nav.Item>
-      <Nav.Item
-      onClick={() => dispatch(addActiveClass("account"))}
-        as={Link}
-        className={
-          activeClass === "account"
-            ? `${classes.navLink} ${classes.active}`
-            : `${classes.navLink} `
-        }
-        to="/account"
-      >
-        <Icon name="settings" />
-        My Account
       </Nav.Item>
       <Nav.Item
       onClick={() => dispatch(addActiveClass("profile"))}

@@ -9,6 +9,8 @@ import inventoryNavReducer from '../../features/inventory/inventoryNavReducer';
 import appointmentsReducer from '../../features/appointments/appointmentsReducer';
 import reasonsReducer from '../../features/appointments/reasonsReducer';
 import profileReducer from '../../features/profiles/profileReducer';
+import clientsReducer from '../../features/clients/clientsReducer';
+import expensesReducer from '../../features/expenses/expensesReducer';
 
 
 const rootReducer = combineReducers({
@@ -21,7 +23,9 @@ const rootReducer = combineReducers({
     addClass: inventoryNavReducer,
     appointment: appointmentsReducer,
     reason: reasonsReducer,
-    profile: profileReducer
+    profile: profileReducer,
+    client: clientsReducer,
+    expense: expensesReducer
 })
 
 export default rootReducer;

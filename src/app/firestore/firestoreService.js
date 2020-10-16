@@ -203,6 +203,65 @@ export function deleteReasonInFirestore(reasonId) {
   return db.collection("reasons").doc(reasonId).delete();
 }
 
+//Clients
+
+export function listenToClientsFromFirestore() {
+  return db.collection("clients").orderBy('name');
+}
+
+export function listenToClientFromFirestore(clientId) {
+  return db.collection("clients").doc(clientId);
+}
+
+export function addClientToFirestore(client) {
+  const user = firebase.auth().currentUser;
+  return db.collection("clients").add({
+    ...client,
+    userUid: user.uid,
+  });
+}
+
+export function updateClientInFirestore(client) {
+  return db.collection("clients").doc(client.id).update(client);
+}
+
+export function deleteClientInFirestore(clientId) {
+  return db.collection("clients").doc(clientId).delete();
+}
+
+
+
+//Expenses
+
+export function listenToExpensesFromFirestore(predicate) {
+  const itemsRef = db.collection("expenses");
+  var sortBy = predicate.get("sort");
+  return itemsRef.orderBy(sortBy);
+}
+
+export function listenToExpenseFromFirestore(expenseId) {
+  return db.collection("expenses").doc(expenseId);
+}
+
+export function addExpenseToFirestore(expense) {
+  const user = firebase.auth().currentUser;
+  return db.collection("expenses").add({
+    ...expense,
+    creationDate: firebase.firestore.FieldValue.serverTimestamp(),
+    userUid: user.uid,
+  });
+}
+
+export function updateExpenseInFirestore(expense) {
+  return db.collection("expenses").doc(expense.id).update(expense);
+}
+
+export function deleteExpenseInFirestore(expenseId) {
+  return db.collection("expenses").doc(expenseId).delete();
+}
+
+//Profile
+
 export function setUserProfileData(user) {
   return db
     .collection("users")

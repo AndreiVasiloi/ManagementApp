@@ -21,6 +21,10 @@ import AccountPage from "../../features/auth/AccountPage";
 import { useSelector } from "react-redux";
 import LoadingComponent from "./LoadingComponent";
 import ProfilePage from "../../features/profiles/profilePage/ProfilePage";
+import ClientsDashboard from "../../features/clients/clientsDashboard/ClientsDashboard";
+import ExpensesDashboard from "../../features/expenses/expensesDashboard/ExpensesDashboard";
+import ClientsForm from "../../features/clients/clientsForm/ClientsForm";
+import ExpensesForm from "../../features/expenses/expensesForm/ExpensesForm";
 
 function App() {
   const { key } = useLocation();
@@ -42,6 +46,8 @@ function App() {
             <Route path='/inventoryCategories' component={InventoryCategoriesDashboard} />
             <Route path='/appointmentsReasons' component={AppointmentsReasonsDashboard} />
             <Route path='/sandbox' component={Sandbox} />
+            <Route path='/clients' component={ClientsDashboard} />
+            <Route path='/expenses' component={ExpensesDashboard} />
             <Route path='/profit' component={ProfitDashboard} />
             <Route path='/profile/:id' component={ProfilePage} />
             <Route
@@ -62,6 +68,14 @@ function App() {
                <Route
               path={["/createAppointment", "/editAppointment/:id"]}
               component={AppointmentsForm}
+            />
+                <Route
+              path={["/createClient", "/editClient/:id"]}
+              component={ClientsForm}
+            />
+                  <Route
+              path={["/createExpense", "/editExpense/:id"]}
+              component={ExpensesForm}
             />
           </>
         )}
