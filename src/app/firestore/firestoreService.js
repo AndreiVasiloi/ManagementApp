@@ -76,7 +76,6 @@ export function getItemsNumberInMonth(predicate) {
 //   return categoriesRef;
 // }
 
-
 export function listenToCategoriesFromFirestore() {
   return db.collection("categories").orderBy("text");
 }
@@ -120,15 +119,17 @@ export function deleteCategoryInFirestore(categoryId) {
 //     }else {
 //       return appointmentsRef.where("date", ">=", startDate);
 //     }
-  
+
 // }
 
 export function listenToAppointmentsFromFirestore(predicate) {
   let appointmentsRef = db.collection("appointments").orderBy("date");
-  
-  if(predicate.get("endDate")){
-    return appointmentsRef.where("date", ">=", predicate.get("startDate")).where("date", "<=", predicate.get("endDate"));
-  }else {
+
+  if (predicate.get("endDate")) {
+    return appointmentsRef
+      .where("date", ">=", predicate.get("startDate"))
+      .where("date", "<=", predicate.get("endDate"));
+  } else {
     return appointmentsRef.where("date", ">=", predicate.get("startDate"));
   }
   // if (typeof predicate === "object") {
@@ -141,7 +142,6 @@ export function listenToAppointmentsFromFirestore(predicate) {
 export function listenToAppointmentFromFirestore(appointmentId) {
   return db.collection("appointments").doc(appointmentId);
 }
-
 
 export function addAppointmentToFirestore(appointment) {
   const user = firebase.auth().currentUser;
@@ -206,7 +206,7 @@ export function deleteReasonInFirestore(reasonId) {
 //Clients
 
 export function listenToClientsFromFirestore() {
-  return db.collection("clients").orderBy('name');
+  return db.collection("clients").orderBy("name");
 }
 
 export function listenToClientFromFirestore(clientId) {
@@ -228,8 +228,6 @@ export function updateClientInFirestore(client) {
 export function deleteClientInFirestore(clientId) {
   return db.collection("clients").doc(clientId).delete();
 }
-
-
 
 //Expenses
 
@@ -258,6 +256,14 @@ export function updateExpenseInFirestore(expense) {
 
 export function deleteExpenseInFirestore(expenseId) {
   return db.collection("expenses").doc(expenseId).delete();
+}
+
+export function getExpensesNumberInMonth(predicate) {
+  let itemsRef = db.collection("expenses");
+  return itemsRef
+    .where("creationDate", ">=", predicate.get("firstDay"))
+    .where("creationDate", "<=", predicate.get("lastDay"))
+    .orderBy("creationDate");
 }
 
 //Profile

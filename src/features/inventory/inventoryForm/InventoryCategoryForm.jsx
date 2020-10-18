@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Segment, Header, Button } from "semantic-ui-react";
 import { NavLink, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,25 +14,14 @@ import {
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { toast } from "react-toastify";
 import classes from "../../../css/Form.module.css";
-import {
-  clearSelectedCategory,
-  listenToCategories,
-  listenToSelectedCategory,
-} from "../inventoryCategoriesActions";
+import { listenToCategories } from "../inventoryCategoriesActions";
 
 export default function InventoryCategoryForm({ match, history, location }) {
   const dispatch = useDispatch();
-  // const { selectedCategory } = useSelector((state) => state.category);
   const selectedCategory = useSelector((state) =>
-  state.category.categories.find((c) => c.id === match.params.id)
-);
+    state.category.categories.find((c) => c.id === match.params.id)
+  );
   const { loading, error } = useSelector((state) => state.async);
-
-  // useEffect(() => {
-  //   if (location.pathname !== "/createCategory") return;
-  //   dispatch(clearSelectedCategory());
-  // }, [dispatch, location.pathname]);
-
   const initialValues = selectedCategory ?? {
     text: "",
     value: "",
@@ -49,18 +38,9 @@ export default function InventoryCategoryForm({ match, history, location }) {
     deps: [match.params.id, dispatch],
   });
 
-  // useFirestoreDoc({
-  //   shouldExecute:
-  //     match.params.id !== selectedCategory?.id &&
-  //     location.pathname !== "/createCategory",
-  //   query: () => listenToCategoryFromFirestore(match.params.id),
-  //   data: (category) => dispatch(listenToSelectedCategory(category)),
-  //   deps: [match.params.id, dispatch],
-  // });
+  if (loading) return <LoadingComponent content='Loading event...' />;
 
-  if (loading) return <LoadingComponent content="Loading event..." />;
-
-  if (error) return <Redirect to="/error" />;
+  if (error) return <Redirect to='/error' />;
 
   return (
     <Segment clearing className={classes.formContainer}>
@@ -81,29 +61,29 @@ export default function InventoryCategoryForm({ match, history, location }) {
         }}
       >
         {({ isSubmitting, dirty, isValid }) => (
-          <Form className="ui form">
+          <Form className='ui form'>
             <Header
               sub
-              color="teal"
+              color='teal'
               content={selectedCategory ? "Edit category" : "Add category"}
             />
-            <MyTextInput name="text" placeholder="Category" />
+            <MyTextInput name='text' placeholder='Category' />
             <Button
-              type="submit"
-              floated="right"
+              type='submit'
+              floated='right'
               className={classes.formSubmitBtn}
-              content="Submit"
+              content='Submit'
               loading={isSubmitting}
               disabled={!isValid || !dirty || isSubmitting}
             />
             <Button
               disabled={isSubmitting}
-              type="submit"
+              type='submit'
               className={classes.formCancelBtn}
-              floated="right"
-              content="Cancel"
+              floated='right'
+              content='Cancel'
               as={NavLink}
-              to="/inventoryCategories"
+              to='/inventoryCategories'
             />
           </Form>
         )}

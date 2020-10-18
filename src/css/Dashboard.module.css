@@ -1,5 +1,24 @@
 /* containers */
 
+.headerDateContainer {
+    display: flex;
+    width: 25%;
+    justify-content: space-around;
+    color: #858E9D;
+}
+
+.displayDaysIconsContainer {
+    display: flex;
+    justify-content: center;
+    border: 2px solid #14b1ab;
+    border-radius: 20% / 50%;
+    width: 7%;
+    position: relative;
+    float: right;
+    top: 10px;
+    background-color: #fff;
+}
+
 .dashboardContainer {
     margin-left: 200px;
     padding: 3% 2% 0 2% !important;
@@ -100,6 +119,25 @@ box-shadow: none !important;
     text-align: left !important;
     position: relative;
     top: 10px;
+}
+
+.allDaysBtn {
+    border-left: 2px solid  #14b1ab;
+}
+
+.twoDaysIcon {
+    position: relative;
+    top: 2px;
+}
+
+.allDaysIcon {
+    position: relative;
+    left: 2px;
+}
+
+.twoDaysIcon, .allDaysIcon {
+    color: #14b1ab !important;
+    font-size: 1.2em !important;
 }
 
 /* profit */

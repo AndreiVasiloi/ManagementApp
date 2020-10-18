@@ -13,35 +13,21 @@ import {
   updateAppointmentInFirestore,
   addAppointmentToFirestore,
   listenToAppointmentFromFirestore,
-  listenToAppointmentsFromFirestore,
 } from "../../../app/firestore/firestoreService";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { toast } from "react-toastify";
 import classes from "../../../css/Form.module.css";
 import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import { listenToReasons } from "../reasonsActions";
-import {
-  clearSelectedAppointment,
-  listenToAppointments,
-  listenToSelectedAppointment,
-} from "../appointmentsActions";
+import { listenToAppointments } from "../appointmentsActions";
 
 export default function AppointmentsForm({ match, history, location }) {
   const dispatch = useDispatch();
   const reasons = useSelector((state) => state.reason.reasons);
-  const { appointments } = useSelector((state) => state.appointment);
   const selectedAppointment = useSelector((state) =>
     state.appointment.appointments.find((a) => a.id === match.params.id)
   );
-
   const { loading } = useSelector((state) => state.async);
-  // let filteredReasons = [];
-  // reasons.map(reason => filteredReasons.push({text: reason.text, id: reason.id, value: reason.value}))
-  // useEffect(() => {
-  //   if (location.pathname !== "/createAppointment") return;
-  //   dispatch(clearSelectedAppointment());
-  // }, [dispatch, location.pathname]);
-
   const initialValues = selectedAppointment ?? {
     hour: "",
     date: "",
@@ -69,15 +55,6 @@ export default function AppointmentsForm({ match, history, location }) {
     deps: [match.params.id, dispatch],
   });
 
-  // useFirestoreDoc({
-  //   shouldExecute:
-  //     match.params.id !== selectedAppointment?.id &&
-  //     location.pathname !== "/createAppointment",
-  //   query: () => listenToAppointmentFromFirestore(match.params.id),
-  //   data: (appointment) => dispatch(listenToSelectedAppointment(appointment)),
-  //   deps: [match.params.id, dispatch],
-  // });
-
   if (loading) return <LoadingComponent content='Loading event...' />;
 
   return (
@@ -86,8 +63,6 @@ export default function AppointmentsForm({ match, history, location }) {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
-          console.log(values.date);
-          console.log(values.hour);
           try {
             selectedAppointment
               ? await updateAppointmentInFirestore(values)

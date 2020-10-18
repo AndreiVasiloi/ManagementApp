@@ -11,7 +11,10 @@ export default function ExpensesList({
   loading,
 }) {
   return (
-    <Segment.Group className={classes.dashboardListContainer}>
+    <Segment.Group
+      className={classes.dashboardListContainer}
+      style={{ marginTop: "50px" }}
+    >
       <Segment>
         <ExpensesListTitles
           predicate={predicate}

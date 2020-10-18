@@ -2,7 +2,6 @@ import React from "react";
 import { Segment } from "semantic-ui-react";
 import InventoryCategoriesListItem from "./InventoryCategoriesListItem";
 import classes from "../../../css/Dashboard.module.css";
-import InfiniteScroll from "react-infinite-scroller";
 
 export default function InventoryCategoriesList({
   categories,
@@ -16,27 +15,9 @@ export default function InventoryCategoriesList({
       className={classes.dashboardListContainer}
     >
       <Segment>
-      {categories.map((category) => (
-              <InventoryCategoriesListItem
-                category={category}
-                key={category.id}
-              />
-            ))}
-        {/* {categories.length !== 0 && (
-          <InfiniteScroll
-            pageStart={0}
-            loadMore={getNextCategory}
-            hasMore={!loading && moreCategories}
-            initialLoad={false}
-          >
-            {categories.map((category) => (
-              <InventoryCategoriesListItem
-                category={category}
-                key={category.id}
-              />
-            ))}
-          </InfiniteScroll>
-        )} */}
+        {categories.map((category) => (
+          <InventoryCategoriesListItem category={category} key={category.id} />
+        ))}
       </Segment>
     </Segment.Group>
   );

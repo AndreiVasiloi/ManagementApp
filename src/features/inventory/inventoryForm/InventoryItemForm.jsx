@@ -1,12 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Segment, Header, Button } from "semantic-ui-react";
 import { NavLink, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  clearSelectedItem,
-  listenToItems,
-  listenToSelectedItem,
-} from "../inventoryItemsActions";
+import { listenToItems } from "../inventoryItemsActions";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import MyTextInput from "../../../app/common/form/MyTextInput";
@@ -29,17 +25,10 @@ import { listenToCategories } from "../inventoryCategoriesActions";
 export default function InventoryItemForm({ match, history, location }) {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.category.categories);
-  // const { selectedItem } = useSelector((state) => state.item);
   const selectedItem = useSelector((state) =>
     state.item.items.find((i) => i.id === match.params.id)
   );
   const { loading, error } = useSelector((state) => state.async);
-
-  // useEffect(() => {
-  //   if (location.pathname !== "/createItem") return;
-  //   dispatch(clearSelectedItem());
-  // }, [dispatch, location.pathname]);
-
   const initialValues = selectedItem ?? {
     category: "",
     name: "",
@@ -67,16 +56,7 @@ export default function InventoryItemForm({ match, history, location }) {
     query: () => listenToItemFromFirestore(match.params.id),
     data: (item) => dispatch(listenToItems([item])),
     deps: [match.params.id, dispatch],
-  })
-
-  // useFirestoreDoc({
-  //   shouldExecute:
-  //     match.params.id !== selectedItem?.id &&
-  //     location.pathname !== "/createItem",
-  //   query: () => listenToItemFromFirestore(match.params.id),
-  //   data: (item) => dispatch(listenToSelectedItem(item)),
-  //   deps: [match.params.id, dispatch],
-  // });
+  });
 
   if (loading) return <LoadingComponent content='Loading event...' />;
 

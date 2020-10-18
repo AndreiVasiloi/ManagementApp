@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Grid, Icon, List, Segment } from "semantic-ui-react";
 import {
   getAppointmentsNumberInMonth,
-  getItemsNumberInMonth,
+  getExpensesNumberInMonth,
   listenToReasonsFromFirestore,
 } from "../../app/firestore/firestoreService";
 import useFirestoreCollection from "../../app/hooks/useFirestoreCollection";
@@ -12,14 +12,14 @@ import { getAppointmentsMonth } from "../appointments/appointmentsActions";
 import { listenToReasons } from "../appointments/reasonsActions";
 import Chart from "./chart/Chart";
 import { MONTH_NAMES } from "../appointments/appointmentsConstants";
-import { getItemsMonth } from "../inventory/inventoryItemsActions";
+import {getExpensesMonth} from '../expenses/expensesActions';
 import { addActiveClass } from "../inventory/inventoryNavActions";
 import { Button } from "react-bootstrap";
 
 export default function ProfitDashboard({ match }) {
   const { reasons } = useSelector((state) => state.reason);
   const { activeClass } = useSelector((state) => state.addClass);
-  const { itemsMonth } = useSelector((state) => state.item);
+  const { expensesMonth } = useSelector((state) => state.expense);
   const date = new Date();
   const [year, setYear] = useState(date.getFullYear());
   const [month, setMonth] = useState(date.getMonth());
@@ -45,13 +45,12 @@ export default function ProfitDashboard({ match }) {
     price: getPrice(appointment.reason),
   }));
   const getAllPrices = addAppointmentPrice.map((app) => app.price);
-  const getItemsCosts = itemsMonth.map((item) => item.price * item.amount);
+  const getExpensesCosts = expensesMonth.map((expense) => expense.price * expense.amount);
   const totalPrices = getTotalPrices();
   const totalCosts = getTotalCosts();
   const profit = totalPrices - totalCosts;
-  console.log(appointmentsMonth);
+
   function getPrice(reasontype) {
-    debugger
     const reason = reasons.find((reason) => reason.text === reasontype);
     if (reason !== undefined) {
       return reason.price;
@@ -69,8 +68,8 @@ export default function ProfitDashboard({ match }) {
   }
 
   function getTotalCosts() {
-    if (getItemsCosts.length > 0) {
-      return getItemsCosts.reduce(addNumbers);
+    if (getExpensesCosts.length > 0) {
+      return getExpensesCosts.reduce(addNumbers);
     }
   }
 
@@ -106,8 +105,8 @@ export default function ProfitDashboard({ match }) {
   });
 
   useFirestoreCollection({
-    query: () => getItemsNumberInMonth(predicate),
-    data: (itemsMonth) => dispatch(getItemsMonth(itemsMonth)),
+    query: () => getExpensesNumberInMonth(predicate),
+    data: (expensesMonth) => dispatch(getExpensesMonth(expensesMonth)),
     deps: [dispatch, predicate],
   });
 
