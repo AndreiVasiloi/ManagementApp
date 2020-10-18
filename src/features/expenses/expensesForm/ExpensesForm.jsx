@@ -8,9 +8,6 @@ import MyTextInput from "../../../app/common/form/MyTextInput";
 import MyNumberInput from "../../../app/common/form/MyNumberInput";
 import useFirestoreDoc from "../../../app/hooks/useFirestoreDoc";
 import {
-  listenToClientFromFirestore,
-  updateClientInFirestore,
-  addClientToFirestore,
   listenToExpenseFromFirestore,
   updateExpenseInFirestore,
   addExpenseToFirestore,

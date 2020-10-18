@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Segment, Item, Grid, Popup, Icon } from "semantic-ui-react";
 import { addFilterIcon } from "../inventoryNavActions";
 import classes from "../../../css/Dashboard.module.css";
-import { setSort } from "../inventoryItemsActions";
 
 export default function InventoryListTitles({
   setPredicate,
@@ -19,7 +18,6 @@ export default function InventoryListTitles({
             <Grid.Column width={3}>
               <Item.Content
                 onClick={() => {
-                  // dispatch(setSort("category"))
                   setPredicate("sort", "category");
                   dispatch(addFilterIcon("category"));
                 }}
@@ -41,7 +39,6 @@ export default function InventoryListTitles({
               <Item>
                 <Item.Content
                   onClick={() => {
-                    // dispatch(setSort("name"))
                     setPredicate("sort", "name");
                     dispatch(addFilterIcon("name"));
                   }}
@@ -65,7 +62,6 @@ export default function InventoryListTitles({
                 <Item.Content
                   onClick={() => {
                     setPredicate("sort", "price");
-                    // dispatch(setSort("price"))
                     dispatch(addFilterIcon("price"));
                   }}
                   disabled={loading}
@@ -88,7 +84,6 @@ export default function InventoryListTitles({
                 <Item.Content
                   onClick={() => {
                     setPredicate("sort", "expirationDate");
-                    // dispatch(setSort("expirationDate"))
                     dispatch(addFilterIcon("expirationDate"));
                   }}
                   disabled={loading}
@@ -112,7 +107,6 @@ export default function InventoryListTitles({
               <Item>
                 <Item.Content
                   onClick={() => {
-                    // dispatch(setSort("amount"))
                     setPredicate("sort", "amount");
                     dispatch(addFilterIcon("amount"));
                   }}

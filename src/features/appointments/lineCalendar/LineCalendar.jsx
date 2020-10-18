@@ -1,8 +1,6 @@
 import React, { Fragment, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "semantic-ui-react";
 import classes from "../../../css/LineCalendar.module.css";
-import { setEndDate, setStartDate } from "../appointmentsActions";
 
 export function LineCalendar({ setPredicate, date, showAllAppointments }) {
   const monthNames = [
@@ -21,8 +19,6 @@ export function LineCalendar({ setPredicate, date, showAllAppointments }) {
   ];
 
   const dayNames = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
-  const dispatch = useDispatch();
-  // const { startDate } = useSelector((state) => state.appointment);
   const [year, setYear] = useState(date.getFullYear());
   const [month, setMonth] = useState(date.getMonth());
   const monthName = monthNames[month];
@@ -31,11 +27,7 @@ export function LineCalendar({ setPredicate, date, showAllAppointments }) {
   const halfOfMonth = Math.floor(days.length / 2);
 
   function getDaysInMonth(month, year) {
-    // Here January is 1 based
-    //Day 0 is the last day in the previous month
     return new Date(year, month, 0).getDate();
-    // Here January is 0 based
-    // return new Date(year, month+1, 0).getDate();
   }
 
   function getDaysAsArray(lastDay) {

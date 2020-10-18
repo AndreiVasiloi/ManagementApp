@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Grid, Icon, Popup } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import { listenToAppointments } from "../appointmentsActions";
 import AppointmentsNav from "../appointmentsNav/AppointmentsNav";
 import AppointmentsList from "./AppointmentsList";
@@ -9,6 +9,12 @@ import { LineCalendar } from "../lineCalendar/LineCalendar";
 import InventoryListItemPlaceholder from "../../inventory/inventoryDashboard/InventoryListItemPlaceholder";
 import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import { listenToAppointmentsFromFirestore } from "../../../app/firestore/firestoreService";
+import ViewStreamIcon from "@material-ui/icons/ViewStream";
+import ReorderIcon from "@material-ui/icons/Reorder";
+import {
+  Fab,
+  Tooltip,
+} from "@material-ui/core";
 
 export default function AppointmentsDashboard() {
   const { appointments } = useSelector((state) => state.appointment);
@@ -67,30 +73,24 @@ export default function AppointmentsDashboard() {
               </>
             )}
             <div className={classes.displayDaysIconsContainer}>
-              <Popup
-                trigger={
-                  <div
-                    className={classes.twoDaysBtn}
-                    onClick={() => setShowAllAppointments(false)}
-                  >
-                    <Icon name='th large' className={classes.twoDaysIcon} />
-                  </div>
-                }
-                content='View only 2 days'
-                position='top center'
-              />
-              <Popup
-                trigger={
-                  <div
-                    className={classes.allDaysBtn}
-                    onClick={() => setShowAllAppointments(true)}
-                  >
-                    <Icon name='th' className={classes.allDaysIcon} />
-                  </div>
-                }
-                content='View all days'
-                position='top center'
-              />
+              <Tooltip title="View only 2 days">
+                <Fab
+                  size="small"
+                  onClick={() => setShowAllAppointments(false)}
+                  className={classes.twoDaysBtn}
+                >
+                  <ViewStreamIcon className={classes.twoDaysIcon} />
+                </Fab>
+              </Tooltip>
+              <Tooltip title="View all days">
+                <Fab
+                  size="small"
+                  onClick={() => setShowAllAppointments(true)}
+                  className={classes.allDaysBtn}
+                >
+                  <ReorderIcon className={classes.allDaysIcon} />
+                </Fab>
+              </Tooltip>
             </div>
             {Object.entries(groupedAppointments).map((appointment) => (
               <AppointmentsList

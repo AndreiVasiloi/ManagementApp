@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Grid } from "semantic-ui-react";
 import classes from "../../../css/Dashboard.module.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,7 +13,6 @@ export default function InventoryCategoriesDashboard() {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.category);
   const { loading } = useSelector((state) => state.async);
-  const [loadingInitial, setLoadingInitial] = useState(false);
 
   useFirestoreCollection({
     query: () => listenToCategoriesFromFirestore(),
@@ -26,7 +25,7 @@ export default function InventoryCategoriesDashboard() {
       <Grid>
         <Grid.Column width={16}>
           <InventoryCategoriesNavbar />
-          {loadingInitial && (
+          {loading && (
             <>
               <InventoryListItemPlaceholder />
               <InventoryListItemPlaceholder />
