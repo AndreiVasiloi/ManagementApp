@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+import cuid from 'cuid';
 import firebase from "../config/firebase";
 import { setUserProfileData } from "./firestoreService";
 
@@ -12,13 +13,34 @@ export function signOutFirebase() {
   return firebase.auth().signOut();
 }
 
+
+function sendConfirmEmail(email, confirmEmailCode) {
+  // TODO: check if you need to user encodeURIComponent / decodeURIComponent
+  const confirmUrl = `http://localhost:3000/confirmEmail/${email}/${confirmEmailCode}`;
+
+  return firebase.firestore()
+  .collection("mail")
+  .add({
+    to: email,
+    message: {
+      subject: "Confirm email - registration on ManagementApp",
+      text: `Thank you for registering on our app! Please confirm you email by clicking on this url ${confirmUrl}`,
+      html: `Thank you for registering on our app! Please confirm you email by clicking on this <a href="${confirmUrl}"> CONFIRM EMAIL </a>`,
+    },
+  })
+}
+
+
 export async function registerInFirebase(creds) {
   try {
+    const confirmEmailCode = cuid();
     const result = await firebase
       .auth()
       .createUserWithEmailAndPassword(creds.email, creds.password);
     await result.user.updateProfile({ displayName: creds.displayName });
-    return await setUserProfileData(result.user)
+    sendConfirmEmail(creds.email, confirmEmailCode);
+    result.user.confirmEmailCode = confirmEmailCode;
+    return await setUserProfileData(result.user);
   } catch (error) {
     throw error;
   }
@@ -36,7 +58,7 @@ export async function socialLogin(selectedProvider) {
       const result = await firebase.auth().signInWithPopup(provider);
       console.log(result);
       if (result.additionalUserInfo.isNewUser) {
-        await setUserProfileData(result.user);
+        await setUserProfileData(result.user, true);
       }
     } catch (error) {
       toast.error(error.message);

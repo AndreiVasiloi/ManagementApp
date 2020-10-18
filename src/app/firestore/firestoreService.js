@@ -268,16 +268,20 @@ export function getExpensesNumberInMonth(predicate) {
 
 //Profile
 
-export function setUserProfileData(user) {
-  return db
-    .collection("users")
-    .doc(user.uid)
-    .set({
-      displayName: user.displayName,
-      email: user.email,
-      photoURL: user.photoURL || null,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-    });
+export function setUserProfileData(user, isSocialLogin = false) {
+  const userProfile = {
+    displayName: user.displayName,
+    email: user.email,
+    photoURL: user.photoURL || null,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+  };
+
+  if (isSocialLogin === false) {
+    userProfile.hasConfirmedEmail = false;
+    userProfile.confirmEmailCode = user.confirmEmailCode;
+  }
+
+  return db.collection("users").doc(user.uid).set(userProfile);
 }
 
 export function getUserProfile(userId) {
@@ -346,4 +350,35 @@ export function deletePhotoFromCollection(photoId) {
     .collection("photos")
     .doc(photoId)
     .delete();
+}
+
+export function confirmEmail(email, code) {
+  // get user by email & code
+  return db
+    .collection("users")
+    .where("email", "==", email)
+    .where("confirmEmailCode", "==", code)
+    .get()
+    .then((response) => {
+
+      // parse response to get the users
+      const users = response.docs.map((doc) => {
+        const user = doc.data();
+        return { ...user, id: doc.id };
+      });
+
+      // check if any user has the correct email & code
+      if (users.length === 0) {
+        return false; // return not success
+      }
+
+      // update user with confirm email = true
+      return db
+        .collection("users")
+        .doc(users[0].id)
+        .update({ hasConfirmedEmail: true, confirmEmailCode: "" })
+        .then(() => {
+          return true; // return success
+        });
+    });
 }

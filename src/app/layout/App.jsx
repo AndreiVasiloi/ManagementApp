@@ -25,6 +25,7 @@ import ClientsDashboard from "../../features/clients/clientsDashboard/ClientsDas
 import ExpensesDashboard from "../../features/expenses/expensesDashboard/ExpensesDashboard";
 import ClientsForm from "../../features/clients/clientsForm/ClientsForm";
 import ExpensesForm from "../../features/expenses/expensesForm/ExpensesForm";
+import ConfirmEmail from "../../features/auth/ConfirmEmail";
 
 function App() {
   const { key } = useLocation();
@@ -41,6 +42,7 @@ function App() {
         render={() => (
           <>
             <NavBar/>
+            <Route path='/confirmEmail/:email/:code' component={ConfirmEmail} />
             <Route path='/appointments' component={AppointmentsDashboard} />
             <Route path='/inventory' component={InventoryDashboard} />
             <Route path='/inventoryCategories' component={InventoryCategoriesDashboard} />
