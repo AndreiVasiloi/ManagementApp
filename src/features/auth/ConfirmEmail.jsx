@@ -18,7 +18,7 @@ function renderConfirmationEmail(checkState) {
   );
 }
 
-export default function ConfirmEmail({ match, history }) {
+export default function ConfirmEmail({ match }) {
   const { email, code } = match.params; // from url
   const [checkState, setCheckState] = useState({
     isChecking: true, // loading

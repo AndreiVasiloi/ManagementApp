@@ -4,7 +4,7 @@ import AppointmentsListItem from "./AppointmentsListItem";
 import classes from "../../../css/Dashboard.module.css";
 import { format } from "date-fns";
 
-export default function AppointmentsList({ appointments, date, text }) {
+export default function AppointmentsList({ appointments, date }) {
   const currentDay = new Date();
   const convertDate = new Date(date);
   const datesAreOnSameDay = (first, second) =>
@@ -20,24 +20,6 @@ export default function AppointmentsList({ appointments, date, text }) {
       checkDifference === 1
     );
   };
-
-  const textLowered = text.trim().toLowerCase();
-  const filteredAppointments =
-    text === ""
-      ? appointments
-      : appointments.filter((appointment) =>
-          handleFilter(appointment, textLowered)
-        );
-
-  function handleFilter(appointment, text) {
-    const keys = Object.keys(appointment).filter((key) => key !== "id");
-    const values = keys.map((key) => {
-      const value = appointment[key];
-      return value.toString().toLowerCase();
-    });
-
-    return values.some((value) => value.includes(text));
-  }
 
   return (
     <Segment.Group className={classes.dashboardListContainer}>
@@ -58,7 +40,7 @@ export default function AppointmentsList({ appointments, date, text }) {
         </div>
       )}
       <Segment>
-        {filteredAppointments.map((appointment) => (
+        {appointments.map((appointment) => (
           <AppointmentsListItem
             appointment={appointment}
             key={appointment.id}

@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import React, { useState } from "react";
 import { Button, Dropdown, Modal } from "react-bootstrap";
 import { useSelector } from "react-redux";
@@ -29,22 +30,27 @@ export default function AppointmentsListItem({ expense }) {
     <>
       {isCurrentUserExpense && (
         <Segment.Group className={classes.dashboardListElement}>
-          <Segment textAlign='center'>
+          <Segment textAlign="center">
             <Item.Group>
               <Grid>
-                <Grid.Column width={5}>
+                <Grid.Column width={4}>
                   <Item>
                     <Item.Content>{expense.name}</Item.Content>
                   </Item>
                 </Grid.Column>
-                <Grid.Column width={5}>
+                <Grid.Column width={4}>
+                  <Item>
+                    <Item.Content>{expense.price} RON</Item.Content>
+                  </Item>
+                </Grid.Column>
+                <Grid.Column width={4}>
                   <Item>
                     <Item.Content>
-                    {expense.price} RON
+                      {format(expense.purchaseDate, "MMMM d, yyyy")}
                     </Item.Content>
                   </Item>
                 </Grid.Column>
-                <Grid.Column width={5}>
+                <Grid.Column width={3}>
                   <Item>
                     <Item.Content>{expense.amount}</Item.Content>
                   </Item>
@@ -52,10 +58,10 @@ export default function AppointmentsListItem({ expense }) {
                 <Grid.Column width={1}>
                   <Dropdown className={classes.itemDropdown}>
                     <Dropdown.Toggle
-                      variant='success'
+                      variant="success"
                       className={classes.DashboardDropdownButton}
                     >
-                      <Icon name='ellipsis horizontal' />
+                      <Icon name="ellipsis horizontal" />
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                       <Dropdown.Item
@@ -63,14 +69,14 @@ export default function AppointmentsListItem({ expense }) {
                         to={`/editExpense/${expense.id}`}
                         className={classes.edit}
                       >
-                        <Icon name='edit' />
+                        <Icon name="edit" />
                         Edit Expense
                       </Dropdown.Item>
                       <Dropdown.Item
                         className={classes.delete}
                         onClick={() => setConfirmOpen(true)}
                       >
-                        <Icon name='delete' />
+                        <Icon name="delete" />
                         Delete Expense
                       </Dropdown.Item>
                     </Dropdown.Menu>
@@ -84,13 +90,13 @@ export default function AppointmentsListItem({ expense }) {
               </Modal.Body>
               <Modal.Footer>
                 <Button
-                  variant='secondary'
+                  variant="secondary"
                   onClick={() => setConfirmOpen(false)}
                 >
                   Close
                 </Button>
                 <Button
-                  variant='danger'
+                  variant="danger"
                   onClick={() => handleCancelToggle(expense.id)}
                 >
                   Delete expense

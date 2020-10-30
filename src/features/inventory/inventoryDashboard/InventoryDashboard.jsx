@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, Loader } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import InventoryList from "./InventoryList";
 import { useSelector, useDispatch } from "react-redux";
 import InventoryListItemPlaceholder from "./InventoryListItemPlaceholder";
@@ -60,9 +60,6 @@ export default function InventoryDashboard() {
             setPredicate={handleSetPredicate}
             loading={loading}
           />
-        </Grid.Column>
-        <Grid.Column width={10}>
-          <Loader active={loading} />
         </Grid.Column>
       </Grid>
     </div>

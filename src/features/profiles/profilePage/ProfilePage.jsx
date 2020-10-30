@@ -7,6 +7,7 @@ import useFirestoreDoc from '../../../app/hooks/useFirestoreDoc';
 import { getUserProfile } from '../../../app/firestore/firestoreService';
 import { listenToSelectedUserProfile } from '../profileActions';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
+import classes from '../../../css/Dashboard.module.css';
 
 export default function ProfilePage({ match }) {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ export default function ProfilePage({ match }) {
     return <LoadingComponent content='Loading profile...' />;
 
   return (
-    <div style={{marginLeft: 200}}>
+    <div className={classes.dashboardContainer}>
     <Grid>
       <Grid.Column width={16}>
         <ProfileHeader

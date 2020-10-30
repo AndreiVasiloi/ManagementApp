@@ -1,11 +1,11 @@
 import React from "react";
-import { Button, Navbar } from "react-bootstrap";
+import { Navbar } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { FormField, Icon } from "semantic-ui-react";
-import classes from "../../../css/InventoryNavbar.module.css";
+import { Button, FormField, Icon, Input, Popup } from "semantic-ui-react";
+import classes from "../../../css/TopNavbar.module.css";
 
-export default function AppointmentsNav({ setText }) {
+export default function AppointmentsNav({ setText, setShowAllAppointments }) {
   const { responsiveClass } = useSelector((state) => state.addClass);
   const ENTER = 13;
 
@@ -18,7 +18,7 @@ export default function AppointmentsNav({ setText }) {
   return (
     <div>
       <Navbar
-        fixed='top'
+        fixed="top"
         className={
           responsiveClass
             ? `${classes.topNavbar}`
@@ -31,27 +31,69 @@ export default function AppointmentsNav({ setText }) {
           </Navbar.Brand>
         </div>
         <div className={classes.topNavbarRightCol}>
-          <FormField className={`ui icon input ${classes.topNavbarSearch}`}>
-            <input
-              type='text'
-              placeholder='Search...'
+          <FormField className={`ui icon input`}>
+            <Input
+              className={classes.topNavbarSearch}
+              icon={
+                <Icon name="search" color="teal" style={{ marginRight: 5 }} />
+              }
+              size="small"
+              placeholder="Search"
               onKeyPress={handleSearch}
-            />
-            <Icon name='search' className={classes.topNavbarSearchIcon} />
+            ></Input>
           </FormField>
-          <Button
-            className={classes.topNavbarButton}
-            as={NavLink}
-            to='/createAppointment'
+
+          <Button.Group
+            size="small"
+            className={classes.topNavbarChangeAppNumberIconsGroup}
           >
-            Add Appointment
+            <Popup
+              trigger={
+                <Button
+                  size="small"
+                  icon
+                  color="teal"
+                  onClick={() => setShowAllAppointments(false)}
+                >
+                  <Icon name="content" />
+                </Button>
+              }
+              content="Show only 2 days of appointments"
+              position="top center"
+            />
+            <Popup
+              trigger={
+                <Button
+                  size="small"
+                  icon
+                  color="teal"
+                  onClick={() => setShowAllAppointments(true)}
+                >
+                  <Icon name="grid layout" />
+                </Button>
+              }
+              content="Show all days of appointments"
+              position="top center"
+            />
+          </Button.Group>
+          <Button
+            color="teal"
+            icon
+            size="small"
+            className={classes.topNavbarReasonsButton}
+            as={NavLink}
+            to="/appointmentsReasons"
+          >
+            <Icon name="pencil" /> Reasons
           </Button>
           <Button
-            className={classes.topNavbarButton}
+            icon
+            size="small"
+            className={classes.topNavbarAddButton}
             as={NavLink}
-            to='/appointmentsReasons'
+            to="/createAppointment"
           >
-            Manage Reasons
+            <Icon name="add" className={classes.topNavbarAddButtonIcon} />
           </Button>
         </div>
       </Navbar>

@@ -19,16 +19,15 @@
   font-weight: bold;
 }
 
-/* .inventoryNavDropdown {
-  background-color: #14b1ab;
-  border-radius: .28571429rem;
-} */
 
 .topNavbarSearch > input {
-    border:  1px solid #14b1ab !important;
+  margin-right: 10px !important;
+  border:  1px solid #14b1ab !important;
+  height: 33px !important;
+    /* border:  1px solid #14b1ab !important;
     height: 32px!important;
     position: relative;
-    top: 2px;
+    top: 2px; */
 }
 
 .topNavbarSearch > input::placeholder {
@@ -39,34 +38,32 @@
     color: #14b1ab !important;
 }
 
-.topNavbarButton {
-    background-color: #14b1ab !important;
-    border:  1px solid #14b1ab !important;
-    margin-left: 10px;
-    height: 32px!important;
+.topNavbarChangeAppNumberIconsGroup {
+  margin-right: 10px !important;
 }
 
-/* .inventoryNavDropdownTitle > a {
-    color: #fff !important;
-} */
 
-/* .addCatBtnContainer {
-  position: relative !important;
-  left: 71.5% !important;
+.topNavbarReasonsButton {
+  margin: 0 !important;
+  margin-right: 10px !important;
+  background-color:  #14b1ab !important;
 }
 
-.addCatBtn {
+.topNavbarAddButton {
+  background-color:  #14b1ab !important;
+}
 
-  background-color: #14b1ab !important;
-  border: 1px solid #14b1ab;
-} */
+.topNavbarAddButton:hover, .topNavbarReasonsButton:hover {
+  opacity: 0.8 !important;
+}
+
+.topNavbarAddButtonIcon {
+  color: #fff !important;
+}
 
 
 /* icons  */
 
-/* .addIcon {
-  font-size: 30px !important;
-} */
 
 .addText {
   display: none;
@@ -86,5 +83,5 @@
 }
 
 @media screen and (max-width: 700px) {
-  .topNavbar.responsive {margin-top: 324px;}
+  .topNavbar.responsive {margin-top: 499px;}
 }

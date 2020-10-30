@@ -34,8 +34,6 @@
     box-shadow: none !important;
     color: #697686 !important;
     background-color: #fff !important;
-    /* border: 1px solid  #14b1ab !important; */
-    /* box-shadow: 5px 5px  20px #14b1ab !important; */
 }
 
 .changeDateContainer {
@@ -156,6 +154,10 @@ box-shadow: none !important;
 
 .profitMonthsList {
     text-align: left !important;
+}
+
+.chartCalendar {
+    text-align: right !important;
 }
 
 /* media queries */

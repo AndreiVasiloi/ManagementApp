@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import MyTextInput from "../../../app/common/form/MyTextInput";
+import MyDateInput from "../../../app/common/form/MyDateInput";
 import MyNumberInput from "../../../app/common/form/MyNumberInput";
 import useFirestoreDoc from "../../../app/hooks/useFirestoreDoc";
 import {
@@ -26,12 +27,14 @@ export default function ExpensesForm({ match, history }) {
   const initialValues = selectedExpense ?? {
     name: "",
     price: "",
-    amount: ''
+    amount: '', 
+    purchaseDate: ''
   };
 
   const validationSchema = Yup.object({
     name: Yup.string().required("You must provide a name"),
     price: Yup.string().required("You must provide a price"),
+    purchaseDate: Yup.string().required("You must provide a date"),
     amount: Yup.string().required("You must provide a amount"),
   });
 
@@ -72,6 +75,12 @@ export default function ExpensesForm({ match, history }) {
             />
             <MyTextInput name='name' placeholder='Name' />
             <MyNumberInput name='price' placeholder='Price' />
+            <MyDateInput
+              name='purchaseDate'
+              placeholderText='Purchase Date'
+              dateFormat='MMMM d, yyyy'
+              autoComplete='off'
+            />
             <MyNumberInput name='amount' placeholder='Amount' />
             <Button
               type='submit'

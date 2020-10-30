@@ -1,23 +1,28 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Grid, Icon, List, Segment } from "semantic-ui-react";
+import { Grid, Icon, List, Segment, Tab } from "semantic-ui-react";
 import {
-  getAppointmentsNumberInMonth,
-  getExpensesNumberInMonth,
+  getAppointmentsByMonth,
+  getExpensesByMonth,
   listenToReasonsFromFirestore,
 } from "../../app/firestore/firestoreService";
 import useFirestoreCollection from "../../app/hooks/useFirestoreCollection";
 import classes from "../../css/Dashboard.module.css";
 import { getAppointmentsMonth } from "../appointments/appointmentsActions";
 import { listenToReasons } from "../appointments/reasonsActions";
-import Chart from "./chart/Chart";
+import Chart from "./chart/MonthlyChart";
 import { MONTH_NAMES } from "../appointments/appointmentsConstants";
-import {getExpensesMonth} from '../expenses/expensesActions';
+import { getExpensesMonth } from "../expenses/expensesActions";
 import { addActiveClass } from "../inventory/inventoryNavActions";
 import { Button } from "react-bootstrap";
+import MonthlyProfit from "./MonthlyProfit";
+import CustomDatesProfit from "./CustomDatesProfit";
+import AnnualProfit from "./AnnualProfit";
+import ProfitNav from "./profitNav/ProfitNav";
 
 export default function ProfitDashboard({ match }) {
   const { reasons } = useSelector((state) => state.reason);
+  const [showChart, setShowChart] = useState("monthly");
   const { activeClass } = useSelector((state) => state.addClass);
   const { expensesMonth } = useSelector((state) => state.expense);
   const date = new Date();
@@ -30,46 +35,24 @@ export default function ProfitDashboard({ match }) {
   const monthName = MONTH_NAMES[month];
   const fullDateFirstDay = new Date(year, month, firstDayInMonth);
   const fullDateLastDay = new Date(year, month, lastDayInMonth);
+  const [startDate, setStartDate] = useState(fullDateFirstDay);
+  const [endDate, setEndDate] = useState(
+    fullDateLastDay.setDate(fullDateLastDay.getDate() + 1)
+  );
   const dispatch = useDispatch();
   const { appointmentsMonth } = useSelector((state) => state.appointment);
   const [predicate, setPredicate] = useState(
     new Map([
-      ["firstDay", fullDateFirstDay],
-      ["lastDay", fullDateLastDay],
+      ["firstDate", fullDateFirstDay],
+      ["secondDate", fullDateLastDay],
       ["sort", "expirationDate"],
     ])
   );
-
-  const addAppointmentPrice = appointmentsMonth.map((appointment) => ({
-    ...appointment,
-    price: getPrice(appointment.reason),
-  }));
-  const getAllPrices = addAppointmentPrice.map((app) => app.price);
-  const getExpensesCosts = expensesMonth.map((expense) => expense.price * expense.amount);
-  const totalPrices = getTotalPrices();
-  const totalCosts = getTotalCosts();
-  const profit = totalPrices - totalCosts;
 
   function getPrice(reasontype) {
     const reason = reasons.find((reason) => reason.text === reasontype);
     if (reason !== undefined) {
       return reason.price;
-    }
-  }
-
-  function addNumbers(total, num) {
-    return total + num;
-  }
-
-  function getTotalPrices() {
-    if (getAllPrices.length > 0) {
-      return getAllPrices.reduce(addNumbers);
-    }
-  }
-
-  function getTotalCosts() {
-    if (getExpensesCosts.length > 0) {
-      return getExpensesCosts.reduce(addNumbers);
     }
   }
 
@@ -87,16 +70,59 @@ export default function ProfitDashboard({ match }) {
     return days;
   }
 
+  function calculateProfit(appointments, expenses) {
+    const addAppointmentPrice = appointments.map((appointment) => ({
+      ...appointment,
+      price: getPrice(appointment.reason),
+    }));
+    const getAllPrices = addAppointmentPrice.map((app) => app.price);
+    const getExpensesCosts = expenses.map(
+      (expense) => expense.price * expense.amount
+    );
+    const totalAppointmentsPrices =
+      getAllPrices.length > 0 &&
+      getAllPrices.reduce((total, num) => total - num);
+    const totalCosts =
+      getExpensesCosts.length > 0 &&
+      getExpensesCosts.reduce((total, num) => total - num);
+    if (!isNaN(totalAppointmentsPrices) && !isNaN(totalCosts)) {
+      return totalAppointmentsPrices - totalCosts;
+    }
+  }
+
   function handleSetPredicate(key, value) {
     setPredicate(new Map(predicate.set(key, value)));
   }
 
-  useFirestoreCollection({
-    query: () => getAppointmentsNumberInMonth(predicate),
-    data: (appointmentsMonth) =>
-      dispatch(getAppointmentsMonth(appointmentsMonth)),
-    deps: [dispatch, predicate],
-  });
+  function displayChart(chart) {
+    if (chart === "monthly") {
+      return (
+        <MonthlyProfit
+          setMonth={setMonth}
+          month={month}
+          year={year}
+          fullDateFirstDay={fullDateFirstDay}
+          fullDateLastDay={fullDateLastDay}
+          days={days}
+          profit={calculateProfit}
+        />
+      );
+    } else if (chart === "annual") {
+      return (
+        <AnnualProfit
+          profit={calculateProfit}
+        />
+      );
+    } else {
+      return (
+        <CustomDatesProfit
+          daysInMonth={getDaysInMonth}
+          daysAsArray={getDaysAsArray}
+          profit={calculateProfit}
+        />
+      );
+    }
+  }
 
   useFirestoreCollection({
     query: () => listenToReasonsFromFirestore(),
@@ -105,79 +131,19 @@ export default function ProfitDashboard({ match }) {
   });
 
   useFirestoreCollection({
-    query: () => getExpensesNumberInMonth(predicate),
+    query: () => getExpensesByMonth(predicate),
     data: (expensesMonth) => dispatch(getExpensesMonth(expensesMonth)),
     deps: [dispatch, predicate],
   });
 
   return (
-    <>
-      <div className={classes.dashboardContainer}>
-        <Segment>
-          <Grid>
-            <Grid.Column width={3}>
-              <List className={classes.profitMonthsList}>
-                {MONTH_NAMES.map((month) => (
-                  <List.Item
-                    key={month}
-                    onClick={() => {
-                      setMonth(MONTH_NAMES.indexOf(month));
-                      dispatch(addActiveClass(month));
-                    }}
-                    className={
-                      activeClass === month
-                        ? `${classes.monthProfit} ${classes.activeMonth}`
-                        : `${classes.monthProfit} `
-                    }
-                  >
-                    {month}
-                  </List.Item>
-                ))}
-              </List>
-            </Grid.Column>
-            <Grid.Column width={3}>
-              <div className={classes.yearContainer}>
-                <div className={classes.changeDateContainer}>
-                  <div className={classes.prevYear}>
-                    <Icon
-                      name="angle double left"
-                      onClick={() => setYear(year - 1)}
-                    />
-                  </div>
-                  <div className={classes.yearText}>
-                    <p>{year}</p>
-                  </div>
-                  <div className={classes.nextYear}>
-                    <Icon
-                      name="angle double right"
-                      onClick={() => setYear(year + 1)}
-                    />
-                  </div>
-                </div>
-                <div className={classes.changeDateBtnContainer}>
-                  <Button
-                  className={classes.changeDateBtn}
-                    onClick={() => {
-                      handleSetPredicate("firstDay", fullDateFirstDay);
-                      handleSetPredicate("lastDay", fullDateLastDay);
-                    }}
-                  >
-                    Change date
-                  </Button>
-                </div>
-              </div>
-              <div className={classes.profitText}>
-                Your profit on {monthName} is {profit}
-              </div>
-            </Grid.Column>
-            <Grid.Column width={10}>
-              <div className={classes.chartContainer}>
-                <Chart month={appointmentsMonth} days={days} />
-              </div>
-            </Grid.Column>
-          </Grid>
-        </Segment>
-      </div>
-    </>
+    <div className={classes.dashboardContainer}>
+      <Grid>
+        <Grid.Column width={16}>
+          <ProfitNav setShowChart={setShowChart} />
+          {displayChart(showChart)}
+        </Grid.Column>
+      </Grid>
+    </div>
   );
 }

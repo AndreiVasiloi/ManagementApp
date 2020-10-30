@@ -36,7 +36,7 @@ export default function InventoryItemForm({ match, history, location }) {
     expirationDate: "",
     amount: "",
   };
-
+  const newCategories = categories.map(categories => ({value: categories.value, text: categories.text, id: categories.id}))
   const validationSchema = Yup.object({
     category: Yup.string().required("You must provide a category"),
     name: Yup.string().required("You must provide a name"),
@@ -90,7 +90,7 @@ export default function InventoryItemForm({ match, history, location }) {
             <MySelectInput
               name='category'
               placeholder='Category'
-              options={categories}
+              options={newCategories}
             />
             <MyTextInput name='name' placeholder='Name' />
             <MyNumberInput name='price' placeholder='Price' />

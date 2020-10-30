@@ -21,19 +21,14 @@ export function dataFromSnapshot(snapshot) {
 
 //items
 
-// export function fetchItemsFromFirestore(sort, limit, lastDocSnapshot = null) {
-//   const itemsRef = db
-//     .collection("items")
-//     .orderBy(sort)
-//     .startAfter(lastDocSnapshot)
-//     .limit(limit);
-//   return itemsRef;
-// }
-
 export function listenToItemsFromFirestore(predicate) {
   const itemsRef = db.collection("items");
   var sortBy = predicate.get("sort");
   return itemsRef.orderBy(sortBy);
+}
+
+export function listenToItemsFromFirestoreForExpirationDate() {
+  return db.collection("items");
 }
 
 export function listenToItemFromFirestore(itemId) {
@@ -46,6 +41,8 @@ export function addItemToFirestore(item) {
     ...item,
     creationDate: firebase.firestore.FieldValue.serverTimestamp(),
     userUid: user.uid,
+    emailStatus: false,
+    userEmail: user.email,
   });
 }
 
@@ -66,15 +63,6 @@ export function getItemsNumberInMonth(predicate) {
 }
 
 //categories
-
-// export function fetchCategoriesFromFirestore( limit, lastDocSnapshot = null) {
-//   const categoriesRef = db
-//     .collection("categories")
-//     .orderBy('value')
-//     .startAfter(lastDocSnapshot)
-//     .limit(limit);
-//   return categoriesRef;
-// }
 
 export function listenToCategoriesFromFirestore() {
   return db.collection("categories").orderBy("text");
@@ -103,25 +91,6 @@ export function deleteCategoryInFirestore(categoryId) {
 
 //appointments
 
-// export function fetchAppointmentsFromFirestore(
-//   startDate,
-//   endDate,
-//   limit,
-//   lastDocSnapshot = null
-// ) {
-//   let appointmentsRef = db
-//     .collection("appointments")
-//     .orderBy("date")
-//     .startAfter(lastDocSnapshot)
-//     .limit(limit);
-//     if(endDate) {
-//       return appointmentsRef.where("date", ">=", startDate).where("date", "<=", endDate);
-//     }else {
-//       return appointmentsRef.where("date", ">=", startDate);
-//     }
-
-// }
-
 export function listenToAppointmentsFromFirestore(predicate) {
   let appointmentsRef = db.collection("appointments").orderBy("date");
 
@@ -132,11 +101,6 @@ export function listenToAppointmentsFromFirestore(predicate) {
   } else {
     return appointmentsRef.where("date", ">=", predicate.get("startDate"));
   }
-  // if (typeof predicate === "object") {
-  //   return appointmentsRef.where("date", ">=", predicate.get("startDate"));
-  // } else {
-  //   return appointmentsRef;
-  // }
 }
 
 export function listenToAppointmentFromFirestore(appointmentId) {
@@ -159,24 +123,32 @@ export function deleteAppointmentInFirestore(appointmentId) {
   return db.collection("appointments").doc(appointmentId).delete();
 }
 
-export function getAppointmentsNumberInMonth(predicate) {
+export function getAppointmentsByMonth(predicate) {
   let appointmentsRef = db.collection("appointments");
   return appointmentsRef
-    .where("date", ">=", predicate.get("firstDay"))
-    .where("date", "<=", predicate.get("lastDay"))
+    .where("date", ">=", predicate.get("firstDate"))
+    .where("date", "<=", predicate.get("secondDate"))
+    .orderBy("date");
+}
+
+export function getAppointmentsByYear(predicate) {
+  let appointmentsRef = db.collection("appointments");
+  return appointmentsRef
+    .where("date", ">=", predicate.get("firstDate"))
+    .where("date", "<=", predicate.get("secondDate"))
+    .orderBy("date");
+}
+
+export function getAppointmentsByCustomDates(predicate) {
+  
+  let appointmentsRef = db.collection("appointments");
+  return appointmentsRef
+    .where("date", ">=", predicate.get("firstDate"))
+    .where("date", "<=", predicate.get("secondDate"))
     .orderBy("date");
 }
 
 //reasons
-
-// export function fetchReasonsFromFirestore( limit, lastDocSnapshot = null) {
-//   const itemsRef = db
-//     .collection("reasons")
-//     .orderBy('text')
-//     .startAfter(lastDocSnapshot)
-//     .limit(limit);
-//   return itemsRef;
-// }
 
 export function listenToReasonsFromFirestore() {
   return db.collection("reasons");
@@ -258,12 +230,28 @@ export function deleteExpenseInFirestore(expenseId) {
   return db.collection("expenses").doc(expenseId).delete();
 }
 
-export function getExpensesNumberInMonth(predicate) {
+export function getExpensesByMonth(predicate) {
   let itemsRef = db.collection("expenses");
   return itemsRef
-    .where("creationDate", ">=", predicate.get("firstDay"))
-    .where("creationDate", "<=", predicate.get("lastDay"))
-    .orderBy("creationDate");
+    .where("purchaseDate", ">=", predicate.get("firstDate"))
+    .where("purchaseDate", "<=", predicate.get("secondDate"))
+    .orderBy("purchaseDate");
+}
+
+export function getExpensesByYear(predicate) {
+  let itemsRef = db.collection("expenses");
+  return itemsRef
+    .where("purchaseDate", ">=", predicate.get("firstDate"))
+    .where("purchaseDate", "<=", predicate.get("secondDate"))
+    .orderBy("purchaseDate");
+}
+
+export function getExpensesByCustomDates(predicate) {
+  let itemsRef = db.collection("expenses");
+  return itemsRef
+    .where("purchaseDate", ">=", predicate.get("firstDate"))
+    .where("purchaseDate", "<=", predicate.get("secondDate"))
+    .orderBy("purchaseDate");
 }
 
 //Profile
@@ -360,7 +348,6 @@ export function confirmEmail(email, code) {
     .where("confirmEmailCode", "==", code)
     .get()
     .then((response) => {
-
       // parse response to get the users
       const users = response.docs.map((doc) => {
         const user = doc.data();
@@ -382,3 +369,4 @@ export function confirmEmail(email, code) {
         });
     });
 }
+

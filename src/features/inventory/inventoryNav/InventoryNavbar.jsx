@@ -1,7 +1,7 @@
 import React from "react";
-import { Navbar, Button } from "react-bootstrap";
-import classes from "../../../css/InventoryNavbar.module.css";
-import { FormField, Icon } from "semantic-ui-react";
+import { Navbar } from "react-bootstrap";
+import classes from "../../../css/TopNavbar.module.css";
+import { Button, FormField, Icon, Input } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -32,27 +32,35 @@ export default function InventoryNavbar({ setText }) {
           </Navbar.Brand>
         </div>
         <div className={classes.topNavbarRightCol}>
-        <FormField className={`ui icon input ${classes.topNavbarSearch}`}>
-            <input
-              type="text"
-              placeholder="Search..."
+        <FormField className={`ui icon input`}>
+            <Input
+              className={classes.topNavbarSearch}
+              icon={
+                <Icon name="search" color="teal" style={{ marginRight: 5 }} />
+              }
+              size="small"
+              placeholder="Search"
               onKeyPress={handleSearch}
-            />
-            <Icon name="search" className={classes.topNavbarSearchIcon} />
+            ></Input>
           </FormField>
           <Button
-            className={classes.topNavbarButton}
-            as={NavLink}
-            to="/createItem"
-          >
-            Add Item
-          </Button>
-          <Button
-            className={classes.topNavbarButton}
+            color="teal"
+            icon
+            size="small"
+            className={classes.topNavbarReasonsButton}
             as={NavLink}
             to="/inventoryCategories"
           >
-            Manage Categories
+            <Icon name="archive" /> Categories
+          </Button>
+          <Button
+            icon
+            size="small"
+            className={classes.topNavbarAddButton}
+            as={NavLink}
+            to="/createItem"
+          >
+            <Icon name="add" className={classes.topNavbarAddButtonIcon} />
           </Button>
         </div>
       </Navbar>

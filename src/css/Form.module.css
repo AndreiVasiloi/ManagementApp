@@ -18,3 +18,10 @@
   border: 2px solid #14b1ab !important;
   color: #14b1ab !important;
 }
+
+@media screen and (max-width: 700px) {
+  .formContainer {
+    margin: 45px 0 0 0 !important;
+    width: 90% !important;
+  }
+}

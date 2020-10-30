@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { closeModal } from "../../app/common/modals/modalReducer";
 import { signInWithEmail } from "../../app/firestore/firebaseService";
 import SocialLogin from "./SocialLogin";
+import firebase from "../../app/config/firebase";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
@@ -21,9 +22,21 @@ export default function LoginForm() {
         })}
         onSubmit={async (values, { setSubmitting, setErrors }) => {
           try {
-            await signInWithEmail(values);
-            setSubmitting(false);
-            dispatch(closeModal());
+            const queryUsers = firebase.firestore().collection("users");
+             await queryUsers.get().then((querySnapshot) => {
+              querySnapshot.forEach((doc) => {
+                const userEmail = doc.data().email;
+                const hasConfirmedEmail = doc.data().hasConfirmedEmail;
+                if(userEmail === values.email && hasConfirmedEmail === true) {
+                  signInWithEmail(values);
+                  setSubmitting(false);
+                  dispatch(closeModal());
+                }else {
+                  setErrors({ auth: "Please confirm your email address first." });
+                  setSubmitting(false);
+                }
+              });
+            });
           } catch (error) {
             setErrors({ auth: 'Problem with username or password' });
             setSubmitting(false);

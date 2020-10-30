@@ -9,12 +9,6 @@ import { LineCalendar } from "../lineCalendar/LineCalendar";
 import InventoryListItemPlaceholder from "../../inventory/inventoryDashboard/InventoryListItemPlaceholder";
 import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import { listenToAppointmentsFromFirestore } from "../../../app/firestore/firestoreService";
-import ViewStreamIcon from "@material-ui/icons/ViewStream";
-import ReorderIcon from "@material-ui/icons/Reorder";
-import {
-  Fab,
-  Tooltip,
-} from "@material-ui/core";
 
 export default function AppointmentsDashboard() {
   const { appointments } = useSelector((state) => state.appointment);
@@ -22,8 +16,6 @@ export default function AppointmentsDashboard() {
   const dispatch = useDispatch();
   const [showAllAppointments, setShowAllAppointments] = useState(false);
   const [text, setText] = useState("");
-  const groupedAppointments = groupedObj(appointments, "date");
-
   const [predicate, setPredicate] = useState(
     new Map([
       ["startDate", new Date()],
@@ -31,6 +23,25 @@ export default function AppointmentsDashboard() {
     ])
   );
   const date = predicate.get("startDate");
+
+  const textLowered = text.trim().toLowerCase();
+  const filteredAppointments =
+    text === ""
+      ? appointments
+      : appointments.filter((appointment) =>
+          handleFilter(appointment, textLowered)
+        );
+  const groupedAppointments = groupedObj(filteredAppointments, "date");
+
+  function handleFilter(appointment, text) {
+    const keys = Object.keys(appointment).filter((key) => key !== "id");
+    const values = keys.map((key) => {
+      const value = appointment[key];
+      return value.toString().toLowerCase();
+    });
+
+    return values.some((value) => value.includes(text));
+  }
 
   function handleSetPredicate(key, value) {
     setPredicate(new Map(predicate.set(key, value)));
@@ -58,7 +69,10 @@ export default function AppointmentsDashboard() {
       <div className={classes.dashboardContainer}>
         <Grid>
           <Grid.Column width={16}>
-            <AppointmentsNav setText={setText} />
+            <AppointmentsNav
+              setText={setText}
+              setShowAllAppointments={setShowAllAppointments}
+            />
             <div style={{ marginTop: 40 }}>
               <LineCalendar
                 showAllAppointments={showAllAppointments}
@@ -72,26 +86,6 @@ export default function AppointmentsDashboard() {
                 <InventoryListItemPlaceholder />
               </>
             )}
-            <div className={classes.displayDaysIconsContainer}>
-              <Tooltip title="View only 2 days">
-                <Fab
-                  size="small"
-                  onClick={() => setShowAllAppointments(false)}
-                  className={classes.twoDaysBtn}
-                >
-                  <ViewStreamIcon className={classes.twoDaysIcon} />
-                </Fab>
-              </Tooltip>
-              <Tooltip title="View all days">
-                <Fab
-                  size="small"
-                  onClick={() => setShowAllAppointments(true)}
-                  className={classes.allDaysBtn}
-                >
-                  <ReorderIcon className={classes.allDaysIcon} />
-                </Fab>
-              </Tooltip>
-            </div>
             {Object.entries(groupedAppointments).map((appointment) => (
               <AppointmentsList
                 key={appointment[0]}

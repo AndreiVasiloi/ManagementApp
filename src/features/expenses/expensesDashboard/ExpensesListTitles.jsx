@@ -15,7 +15,7 @@ export default function ExpensesListTitles({
       <Segment textAlign="center" className={classes.inventoryTitlesContainer}>
         <Item.Group>
           <Grid>
-            <Grid.Column width={5}>
+            <Grid.Column width={4}>
               <Item.Content
                 onClick={() => {
                   setPredicate("sort", "name");
@@ -35,7 +35,7 @@ export default function ExpensesListTitles({
                 />
               </Item.Content>
             </Grid.Column>
-            <Grid.Column width={5}>
+            <Grid.Column width={4}>
               <Item>
                 <Item.Content
                   onClick={() => {
@@ -57,7 +57,29 @@ export default function ExpensesListTitles({
                 </Item.Content>
               </Item>
             </Grid.Column>
-            <Grid.Column width={5}>
+            <Grid.Column width={4}>
+              <Item>
+                <Item.Content
+                  onClick={() => {
+                    setPredicate("sort", "purchaseDate");
+                    dispatch(addFilterIcon("purchaseDate"));
+                  }}
+                  disabled={loading}
+                >
+                  <Popup
+                    trigger={
+                      <Item.Header>
+                        PURCHASE DATE
+                        {filterIcon === "purchaseDate" && <Icon name="caret down" />}
+                      </Item.Header>
+                    }
+                    content="Sort items by purchase date"
+                    position="top center"
+                  />
+                </Item.Content>
+              </Item>
+            </Grid.Column>
+            <Grid.Column width={3}>
               <Item>
                 <Item.Content
                   onClick={() => {

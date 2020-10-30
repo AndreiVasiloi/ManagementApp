@@ -1,14 +1,15 @@
 import React from "react";
-import { Navbar, Button } from "react-bootstrap";
-import classes from "../../../css/InventoryNavbar.module.css";
+import { Navbar } from "react-bootstrap";
+import classes from "../../../css/TopNavbar.module.css";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Button, Icon } from "semantic-ui-react";
 
 export default function InventoryCategoriesNavbar() {
   const { responsiveClass } = useSelector((state) => state.addClass);
   return (
     <Navbar
-      fixed='top'
+      fixed="top"
       className={
         responsiveClass
           ? `${classes.topNavbar}`
@@ -16,18 +17,28 @@ export default function InventoryCategoriesNavbar() {
       }
     >
       <div className={classes.topNavbarLeftCol}>
-        <Navbar.Brand className={classes.topNavbarBrand} href='#home'>
+        <Navbar.Brand className={classes.topNavbarBrand} href="#home">
           Manage categories
         </Navbar.Brand>
       </div>
       <div className={classes.topNavbarRightCol}>
         <Button
-          variant='primary'
+          icon
+          size="small"
+          className={classes.topNavbarAddButton}
           as={NavLink}
-          to='/createCategory'
-          className={classes.topNavbarButton}
+          to="/inventory"
         >
-          Add
+          <Icon name="undo" className={classes.topNavbarAddButtonIcon} />
+        </Button>
+        <Button
+          icon
+          size="small"
+          className={classes.topNavbarAddButton}
+          as={NavLink}
+          to="/createCategory"
+        >
+          <Icon name="add" className={classes.topNavbarAddButtonIcon} />
         </Button>
       </div>
     </Navbar>

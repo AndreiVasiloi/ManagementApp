@@ -17,6 +17,12 @@ export function signInUser(user) {
 export function verifyAuth() {
   return function (dispatch) {
     return firebase.auth().onAuthStateChanged((user) => {
+      // const queryUsers = firebase.firestore().collection('users');
+      // queryUsers.get().then((querySnapshot) => {
+      //   querySnapshot.forEach((doc) => {
+      //     console.log(doc.data())
+      //   })
+      // });
       if (user) {
         dispatch(signInUser(user));
         const profileRef = getUserProfile(user.uid);

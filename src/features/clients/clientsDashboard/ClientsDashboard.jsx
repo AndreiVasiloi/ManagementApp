@@ -37,7 +37,7 @@ export default function ClientsDashboard() {
     data: (clients) => dispatch(listenToClients(clients)),
     deps: [dispatch],
   });
-console.log(clients);
+
   return (
     <>
       <div className={classes.dashboardContainer}>

@@ -34,7 +34,9 @@ export default function AppointmentsForm({ match, history, location }) {
     name: "",
     reason: "",
   };
+  const newReasons = reasons.map(reason => ({value: reason.value, text: reason.text, id: reason.id}))
 
+console.log(newReasons);
   const validationSchema = Yup.object({
     hour: Yup.string().required("You must provide a hour"),
     date: Yup.string().required("You must provide a date"),
@@ -56,7 +58,6 @@ export default function AppointmentsForm({ match, history, location }) {
   });
 
   if (loading) return <LoadingComponent content='Loading event...' />;
-
   return (
     <Segment clearing className={classes.formContainer}>
       <Formik
@@ -86,7 +87,7 @@ export default function AppointmentsForm({ match, history, location }) {
             <MySelectInput
               name='reason'
               placeholder='Reason'
-              options={reasons}
+              options={newReasons}
             />
             <MyTextInput name='name' placeholder='Name' />
             <MyDateInput

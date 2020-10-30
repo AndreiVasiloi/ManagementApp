@@ -1,8 +1,9 @@
 import React from "react";
-import { Navbar, Button } from "react-bootstrap";
-import classes from "../../../css/InventoryNavbar.module.css";
+import { Navbar } from "react-bootstrap";
+import classes from "../../../css/TopNavbar.module.css";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Button, Icon } from "semantic-ui-react";
 
 export default function AppointmentsReasonsNav() {
   const { responsiveClass } = useSelector((state) => state.addClass);
@@ -22,12 +23,22 @@ export default function AppointmentsReasonsNav() {
       </div>
       <div className={classes.topNavbarRightCol}>
         <Button
-          variant='primary'
+          icon
+          size="small"
+          className={classes.topNavbarAddButton}
           as={NavLink}
-          to='/createReason'
-          className={classes.topNavbarButton}
+          to="/appointments"
         >
-          Add
+          <Icon name="undo" className={classes.topNavbarAddButtonIcon} />
+        </Button>
+        <Button
+          icon
+          size="small"
+          className={classes.topNavbarAddButton}
+          as={NavLink}
+          to="/createReason"
+        >
+          <Icon name="add" className={classes.topNavbarAddButtonIcon} />
         </Button>
       </div>
     </Navbar>

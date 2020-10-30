@@ -1,5 +1,7 @@
 .container {
   display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
   background-color: #fff;
   padding: 5px;
   justify-content: center;
@@ -54,3 +56,8 @@
   grid-gap: 2px;
 }
 
+@media screen and (max-width: 700px) {
+  .container {
+    margin: 45px 0 0 0;
+  }
+}
