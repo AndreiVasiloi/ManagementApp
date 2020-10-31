@@ -22,6 +22,7 @@ export default function MonthlyProfit({
   profit,
 }) {
   const dispatch = useDispatch();
+  const { currentUser } = useSelector((state) => state.auth);
   const firstDate = new Date(fullDateFirstDay);
   const secondDate = new Date(fullDateLastDay);
   const { appointmentsMonth } = useSelector((state) => state.appointment);
@@ -33,10 +34,18 @@ export default function MonthlyProfit({
     ])
   );
 
-  const appointmentsDates = appointmentsMonth.map(
+  const currentUserAppointments = appointmentsMonth.filter(
+    (appointment) => appointment?.userUid === currentUser?.uid
+  );
+
+  const currentUserExpenses = expensesMonth.filter(
+    (expense) => expense?.userUid === currentUser?.uid
+  );
+
+  const appointmentsDates = currentUserAppointments.map(
     (appointment) => new Date(appointment.date)
   );
-  const expensesDates = expensesMonth.map(
+  const expensesDates = currentUserExpenses.map(
     (expense) => new Date(expense.purchaseDate)
   );
 
@@ -93,7 +102,7 @@ export default function MonthlyProfit({
         <Statistic>
           <Statistic.Label>Profit</Statistic.Label>
           <Statistic.Value>
-            {profit(appointmentsMonth, expensesMonth)}
+            {profit(currentUserAppointments, currentUserExpenses)}
           </Statistic.Value>
         </Statistic>
         <MonthlyChart

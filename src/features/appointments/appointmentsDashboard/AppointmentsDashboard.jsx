@@ -11,6 +11,7 @@ import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import { listenToAppointmentsFromFirestore } from "../../../app/firestore/firestoreService";
 
 export default function AppointmentsDashboard() {
+  const { currentUser } = useSelector((state) => state.auth);
   const { appointments } = useSelector((state) => state.appointment);
   const { loading } = useSelector((state) => state.async);
   const dispatch = useDispatch();
@@ -25,10 +26,13 @@ export default function AppointmentsDashboard() {
   const date = predicate.get("startDate");
 
   const textLowered = text.trim().toLowerCase();
+  const currentUserAppointments = appointments.filter(
+    (appointment) => appointment?.userUid === currentUser?.uid
+  );
   const filteredAppointments =
     text === ""
-      ? appointments
-      : appointments.filter((appointment) =>
+      ? currentUserAppointments
+      : currentUserAppointments.filter((appointment) =>
           handleFilter(appointment, textLowered)
         );
   const groupedAppointments = groupedObj(filteredAppointments, "date");

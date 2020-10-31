@@ -94,13 +94,18 @@ export function deleteCategoryInFirestore(categoryId) {
 export function listenToAppointmentsFromFirestore(predicate) {
   let appointmentsRef = db.collection("appointments").orderBy("date");
 
-  if (predicate.get("endDate")) {
-    return appointmentsRef
-      .where("date", ">=", predicate.get("startDate"))
-      .where("date", "<=", predicate.get("endDate"));
-  } else {
-    return appointmentsRef.where("date", ">=", predicate.get("startDate"));
+  if(predicate !== undefined) {
+    if (predicate.get("endDate")) {
+      return appointmentsRef
+        .where("date", ">=", predicate.get("startDate"))
+        .where("date", "<=", predicate.get("endDate"));
+    } else {
+      return appointmentsRef.where("date", ">=", predicate.get("startDate"));
+    }
+  }else {
+    return appointmentsRef;
   }
+ 
 }
 
 export function listenToAppointmentFromFirestore(appointmentId) {

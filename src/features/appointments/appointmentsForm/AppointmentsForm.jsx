@@ -13,6 +13,7 @@ import {
   updateAppointmentInFirestore,
   addAppointmentToFirestore,
   listenToAppointmentFromFirestore,
+  listenToAppointmentsFromFirestore,
 } from "../../../app/firestore/firestoreService";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { toast } from "react-toastify";
@@ -23,7 +24,9 @@ import { listenToAppointments } from "../appointmentsActions";
 
 export default function AppointmentsForm({ match, history, location }) {
   const dispatch = useDispatch();
+  const { currentUser } = useSelector((state) => state.auth);
   const reasons = useSelector((state) => state.reason.reasons);
+  const { appointments } = useSelector((state) => state.appointment);
   const selectedAppointment = useSelector((state) =>
     state.appointment.appointments.find((a) => a.id === match.params.id)
   );
@@ -34,9 +37,21 @@ export default function AppointmentsForm({ match, history, location }) {
     name: "",
     reason: "",
   };
-  const newReasons = reasons.map(reason => ({value: reason.value, text: reason.text, id: reason.id}))
+  const currentUserReasons = reasons.filter(
+    (reason) => reason?.userUid === currentUser?.uid
+  );
 
-console.log(newReasons);
+  const currentUserAppointments = appointments.filter(
+    (appointment) => appointment?.userUid === currentUser?.uid
+  );
+
+  const newReasons = currentUserReasons.map((reason) => ({
+    value: reason.value,
+    text: reason.text,
+    id: reason.id,
+  }));
+
+
   const validationSchema = Yup.object({
     hour: Yup.string().required("You must provide a hour"),
     date: Yup.string().required("You must provide a date"),
@@ -55,6 +70,12 @@ console.log(newReasons);
     query: () => listenToAppointmentFromFirestore(match.params.id),
     data: (appointment) => dispatch(listenToAppointments([appointment])),
     deps: [match.params.id, dispatch],
+  });
+
+  useFirestoreCollection({
+    query: () => listenToAppointmentsFromFirestore(),
+    data: (appointments) => dispatch(listenToAppointments(appointments)),
+    deps: [dispatch],
   });
 
   if (loading) return <LoadingComponent content='Loading event...' />;

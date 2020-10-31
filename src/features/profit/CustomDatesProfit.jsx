@@ -19,7 +19,8 @@ export default function CustomDatesProfit({
   profit,
 }) {
   const dispatch = useDispatch();
-  const [showCalendar, setShowCalendar] = useState(true);
+  const { currentUser } = useSelector((state) => state.auth);
+  const [showCalendar, setShowCalendar] = useState(false);
   const date = new Date();
   const year = date.getFullYear();
   const month = date.getMonth();
@@ -45,10 +46,18 @@ export default function CustomDatesProfit({
   const diffInDays = differenceInDays(new Date(endDate), new Date(startDate));
   const daysLength = Array.from(Array(diffInDays).keys());
 
-  const appointmentsDates = appointmentsCustomDate.map(
+  const currentUserAppointments = appointmentsCustomDate.filter(
+    (appointment) => appointment?.userUid === currentUser?.uid
+  );
+
+  const currentUserExpenses = expensesCustomDate.filter(
+    (expense) => expense?.userUid === currentUser?.uid
+  );
+
+  const appointmentsDates = currentUserAppointments.map(
     (appointment) => new Date(appointment.date)
   );
-  const expensesDates = expensesCustomDate.map(
+  const expensesDates = currentUserExpenses.map(
     (expense) => new Date(expense.purchaseDate)
   );
 
@@ -116,7 +125,7 @@ export default function CustomDatesProfit({
         <Statistic>
           <Statistic.Label>Profit</Statistic.Label>
           <Statistic.Value>
-            {profit(appointmentsCustomDate, expensesCustomDate)}
+            {profit(currentUserAppointments, currentUserExpenses)}
           </Statistic.Value>
         </Statistic>
         <CustomDatesChart

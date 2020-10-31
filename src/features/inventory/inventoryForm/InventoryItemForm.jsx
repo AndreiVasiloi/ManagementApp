@@ -24,6 +24,7 @@ import { listenToCategories } from "../inventoryCategoriesActions";
 
 export default function InventoryItemForm({ match, history, location }) {
   const dispatch = useDispatch();
+  const { currentUser } = useSelector((state) => state.auth);
   const categories = useSelector((state) => state.category.categories);
   const selectedItem = useSelector((state) =>
     state.item.items.find((i) => i.id === match.params.id)
@@ -36,7 +37,15 @@ export default function InventoryItemForm({ match, history, location }) {
     expirationDate: "",
     amount: "",
   };
-  const newCategories = categories.map(categories => ({value: categories.value, text: categories.text, id: categories.id}))
+  const newCategories = categories.map((categories) => ({
+    value: categories.value,
+    text: categories.text,
+    id: categories.id,
+    userUid: categories.userUid,
+  }));
+  const currentUserCategories = newCategories.filter(
+    (category) => category?.userUid === currentUser?.uid
+  );
   const validationSchema = Yup.object({
     category: Yup.string().required("You must provide a category"),
     name: Yup.string().required("You must provide a name"),
@@ -90,7 +99,7 @@ export default function InventoryItemForm({ match, history, location }) {
             <MySelectInput
               name='category'
               placeholder='Category'
-              options={newCategories}
+              options={currentUserCategories}
             />
             <MyTextInput name='name' placeholder='Name' />
             <MyNumberInput name='price' placeholder='Price' />

@@ -13,6 +13,7 @@ import classes from "../../css/Dashboard.module.css";
 
 export default function AnnualProfit({ profit }) {
   const dispatch = useDispatch();
+  const { currentUser } = useSelector((state) => state.auth);
   const currentDate = new Date();
   const [year, setYear] = useState(currentDate.getFullYear());
   const firstDate = new Date(year, 0, 1);
@@ -26,10 +27,19 @@ export default function AnnualProfit({ profit }) {
       ["sort", "expirationDate"],
     ])
   );
-  const appointmentsDates = appointmentsYear.map(
+
+  const currentUserAppointments = appointmentsYear.filter(
+    (appointment) => appointment?.userUid === currentUser?.uid
+  );
+
+  const currentUserExpenses = expensesYear.filter(
+    (expense) => expense?.userUid === currentUser?.uid
+  );
+
+  const appointmentsDates = currentUserAppointments.map(
     (appointment) => new Date(appointment.date)
   );
-  const expensesDates = expensesYear.map(
+  const expensesDates = currentUserExpenses.map(
     (expense) => new Date(expense.purchaseDate)
   );
 
@@ -74,7 +84,7 @@ export default function AnnualProfit({ profit }) {
         <Statistic>
           <Statistic.Label>Profit</Statistic.Label>
           <Statistic.Value>
-            {profit(appointmentsYear, expensesYear)}
+            {profit(currentUserAppointments, currentUserExpenses)}
           </Statistic.Value>
         </Statistic>
         <AnnualChart
