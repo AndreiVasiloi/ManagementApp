@@ -51,7 +51,6 @@ export default function AppointmentsForm({ match, history, location }) {
     id: reason.id,
   }));
 
-
   const validationSchema = Yup.object({
     hour: Yup.string().required("You must provide a hour"),
     date: Yup.string().required("You must provide a date"),
@@ -78,7 +77,7 @@ export default function AppointmentsForm({ match, history, location }) {
     deps: [dispatch],
   });
 
-  if (loading) return <LoadingComponent content='Loading event...' />;
+  if (loading) return <LoadingComponent content="Loading event..." />;
   return (
     <Segment clearing className={classes.formContainer}>
       <Formik
@@ -86,10 +85,21 @@ export default function AppointmentsForm({ match, history, location }) {
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
           try {
-            selectedAppointment
-              ? await updateAppointmentInFirestore(values)
-              : await addAppointmentToFirestore(values);
-            history.push("/appointments");
+            const searchDuplicateAppointment = currentUserAppointments.filter(
+              (appointment) =>
+                appointment.hour.getHours() === values.hour.getHours() &&
+                appointment.hour.getMinutes() === values.hour.getMinutes() &&
+                appointment.date.getTime() === values.date.getTime()
+            );
+            if (searchDuplicateAppointment.length === 0) {
+              selectedAppointment
+                ? await updateAppointmentInFirestore(values)
+                : await addAppointmentToFirestore(values);
+              history.push("/appointments");
+            } else {
+              toast.error("Appointment already made at the same time");
+              setSubmitting(false);
+            }
           } catch (error) {
             toast.error(error.message);
             setSubmitting(false);
@@ -97,53 +107,53 @@ export default function AppointmentsForm({ match, history, location }) {
         }}
       >
         {({ isSubmitting, dirty, isValid }) => (
-          <Form className='ui form'>
+          <Form className="ui form">
             <Header
               sub
-              color='teal'
+              color="teal"
               content={
                 selectedAppointment ? "Edit appointment" : "Add appointment"
               }
             />
             <MySelectInput
-              name='reason'
-              placeholder='Reason'
+              name="reason"
+              placeholder="Reason"
               options={newReasons}
             />
-            <MyTextInput name='name' placeholder='Name' />
+            <MyTextInput name="name" placeholder="Name" />
             <MyDateInput
-              name='hour'
-              placeholderText='Appointment Hour'
-              timeFormat='HH:mm'
+              name="hour"
+              placeholderText="Appointment Hour"
+              timeFormat="HH:mm"
               showTimeSelect
               showTimeSelectOnly
               timeIntervals={15}
-              timeCaption='time'
-              dateFormat='HH:mm'
-              autoComplete='off'
+              timeCaption="time"
+              dateFormat="HH:mm"
+              autoComplete="off"
             />
             <MyDateInput
-              name='date'
-              placeholderText='Appointment date'
-              dateFormat='MMMM d, yyyy'
-              autoComplete='off'
+              name="date"
+              placeholderText="Appointment date"
+              dateFormat="MMMM d, yyyy"
+              autoComplete="off"
             />
             <Button
-              type='submit'
-              floated='right'
+              type="submit"
+              floated="right"
               className={classes.formSubmitBtn}
-              content='Submit'
+              content="Submit"
               loading={isSubmitting}
               disabled={!isValid || !dirty || isSubmitting}
             />
             <Button
               disabled={isSubmitting}
-              type='submit'
+              type="submit"
               className={classes.formCancelBtn}
-              floated='right'
-              content='Cancel'
+              floated="right"
+              content="Cancel"
               as={NavLink}
-              to='/appointments'
+              to="/appointments"
             />
           </Form>
         )}

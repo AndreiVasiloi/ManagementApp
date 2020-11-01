@@ -10,7 +10,7 @@ import { signInWithEmail } from "../../app/firestore/firebaseService";
 import SocialLogin from "./SocialLogin";
 import firebase from "../../app/config/firebase";
 
-export default function LoginForm() {
+export default function LoginForm({history}) {
   const dispatch = useDispatch();
   return (
     <ModalWrapper size='mini' header='Sign in'>
@@ -31,6 +31,7 @@ export default function LoginForm() {
                   signInWithEmail(values);
                   setSubmitting(false);
                   dispatch(closeModal());
+                  history.push('/appointments')
                 }else {
                   setErrors({ auth: "Please confirm your email address first." });
                   setSubmitting(false);
