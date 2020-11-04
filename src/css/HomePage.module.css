@@ -1,144 +1,429 @@
 .homePage::after {
-    display: flex;
-    align-items: center;
-    background-image: url('../images/homePage.jpg') !important;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100vh;
-    content: "";
-    opacity: 0.8;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -1;  
-  }
-  
-  .homePage {
-      position: relative
-  }
-  
-  .loginForm {
-      width: 300px;
-      margin: auto;
-  }
-  
-  .loginButton, .registerButton {
-    background-color: #006a71!important;
-    width: 300px;
-    border: 2px solid #006a71!important;
-    box-sizing: border-box;
-    color: #fff;
-    opacity: 1!important;
-  }
-  
-  .loginButton:hover, .registerButton:hover {
-    background-color: #006a71!important;
-    border: 2px solid #006a71;
-    color: #fff;
-    opacity: 0.8!important;
-  }
-  
-  .loginButton:active, .registerButton:active {
-    outline: 0!important;
-    box-shadow: none!important;
-    background-color: #006a71!important;
-  }
-  
-  .registerButton {
-    margin-left: 10px;
-  }
-  
-  
-  .socialButtonLogin {
-    display: flex;
-    box-sizing: border-box;
-  }
-  
-  .facebookLogin, .googleLogin {
-    width: 150px;
-    text-align: center;
-    text-decoration: none;
-    margin: 5px 2px;
-  }
-  
-  .facebookLogin {
-    background-color: #3B5998;
-    color: white;
-    border: 2px solid #3B5998;
-  }
-  
-  .googleLogin {
-    background-color: #dd4b39;
-    color: white;
-    border: 2px solid #dd4b39;
-  }
-  
-  .socialButtonsText {
-    text-align: center;
-    margin-top: 10px;
-    color: #006a71;
-    font-weight: bold;
-  }
-  
-  .facebookLogin:hover {
-    background-color: #3B5998;
-    color: white;
-    border: 2px solid #3B5998;
-    opacity: 0.8;
-  }
-  
-  .googleLogin:hover {
-    background-color: #dd4b39;
-    color: white;
-    border: 2px solid #dd4b39;
-    opacity: 0.8;
-  }
-  
-  .signupText {
-    display: flex;
-    margin-left: 3px;
-    font-size: 15px;
-    font-weight: bold;
-  }
-  
-  .signupTextFirstP {
-    color: #006a71;
-  }
-  
-  .signupTextSecondP {
-    color: #006a71;
-    margin-left: 10px;
-  }
-  
-  .loginFormContainer {
-    width: 350px;
-    height: 300px;
-    background-color: #fff;
-    margin: 0 auto;
-    position: relative;
-    top: 100px;
-    border-radius: 10px;
-  }
+  display: flex;
+  align-items: center;
+  background-image: url("../images/homePage.jpg") !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  content: "";
+  opacity: 0.8;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}
 
-  .input {
-    /* width: 300px; */
-    border: none;
-    border-bottom: 2px solid #006a71;
-    background-color: transparent;
+.homePage {
+  position: relative;
+}
+
+.loginForm {
+  width: 300px;
+  margin: auto;
+}
+
+.loginButton,
+.registerButton {
+  background-color: #006a71 !important;
+  width: 300px;
+  border: 2px solid #006a71 !important;
+  box-sizing: border-box;
+  color: #fff;
+  opacity: 1 !important;
+}
+
+.loginButton:hover,
+.registerButton:hover {
+  background-color: #006a71 !important;
+  border: 2px solid #006a71;
+  color: #fff;
+  opacity: 0.8 !important;
+}
+
+.loginButton:active,
+.registerButton:active {
+  outline: 0 !important;
+  box-shadow: none !important;
+  background-color: #006a71 !important;
+}
+
+.registerButton {
+  margin-left: 10px;
+}
+
+.socialButtonLogin {
+  display: flex;
+  box-sizing: border-box;
+}
+
+.facebookLogin,
+.googleLogin {
+  width: 150px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+
+.facebookLogin {
+  background-color: #3b5998;
+  color: white;
+  border: 2px solid #3b5998;
+}
+
+.googleLogin {
+  background-color: #dd4b39;
+  color: white;
+  border: 2px solid #dd4b39;
+}
+
+.socialButtonsText {
+  text-align: center;
+  margin-top: 10px;
+  color: #006a71;
+  font-weight: bold;
+}
+
+.facebookLogin:hover {
+  background-color: #3b5998;
+  color: white;
+  border: 2px solid #3b5998;
+  opacity: 0.8;
+}
+
+.googleLogin:hover {
+  background-color: #dd4b39;
+  color: white;
+  border: 2px solid #dd4b39;
+  opacity: 0.8;
+}
+
+.signupText {
+  display: flex;
+  margin-left: 3px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.signupTextFirstP {
+  color: #006a71;
+}
+
+.signupTextSecondP {
+  color: #006a71;
+  margin-left: 10px;
+}
+
+.loginFormContainer {
+  width: 350px;
+  height: 300px;
+  background-color: #fff;
+  margin: 0 auto;
+  position: relative;
+  top: 100px;
+  border-radius: 10px;
+}
+
+.input {
+  /* width: 300px; */
+  border: none;
+  border-bottom: 2px solid #006a71;
+  background-color: transparent;
 }
 
 .input:focus {
-    border: none;
-    border-bottom: 2px solid #006a71;
-    outline: 0;
-    box-shadow: none;
-    background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #006a71;
+  outline: 0;
+  box-shadow: none;
+  background-color: transparent;
 }
 
 .input::placeholder {
-    font-weight: bold;
-    color: #006a71;
+  font-weight: bold;
+  color: #006a71;
+}
+
+/* .homePageNavContainer {
+  background-color: #14b1ab !important;
+} */
+
+.homePageNavLink {
+  color: #fff !important;
+}
+
+.homePageNavRegisterButton {
+  background-color: #fff !important;
+  color: #14b1ab !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.homePageNavRegisterButton:hover {
+  box-shadow: none !important;
+  border: none !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+}
+
+/* .descriptionContainer {
+  display: flex;
+  align-items: center;
+}
+
+.leftCol {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 90vh;
+}
+
+.leftColTextContainer {
+  text-align: center;
+} */
+
+/* .rightCol {
+  align-items: center;
+  background-image: url("../images/homePage.jpg") !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 50%;
+  content: "";
+  top: 0;
+  left: 1;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+} */
+
+/* Paragraphs */
+
+.homeParagraph {
+  color: #8f8f8f;
+}
+
+/* Buttons */
+
+.registerButtonContent {
+  margin: 5% 3% 5% 0 !important;
+  background-color: #fff !important;
+  color: #14b1ab !important;
+  width: 170px !important;
+}
+
+.registerButtonContent:hover {
+  box-shadow: none !important;
+  border: none !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+}
+
+/* Containers */
+
+.containerFluid{
+  padding: 7% 15% ;
+  /* padding: 3% 15%; */
+ 
+}
+
+/* Sections */
+
+.coloredSection {
+  background-color:  #14b1ab ;
+  color: #fff;
+}
+
+.whiteSection {
+  background-color: #fff;
+}
+
+/* NAV  */
+
+.homePageNavContainer {
+  padding: 0 0 4.5rem !important;
+}
+
+.homePageNavBrand {
+  font-family: "Ubuntu";
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fff !important;
+}
+
+.homePageNavItem {
+  padding: 0 18px !important;
+}
+
+.homePageNavLink {
+  font-size: 1.2rem;
+  font-family: "Montserrat-Light";
+  color: #e7e6e6 !important;
+}
+
+.homePageNavLink > a {
+  padding: 0 18px !important;
+}
+
+.homePageNavLink:hover {
+  color: #fff !important;
+}
+
+/* Title Section */
+
+#title {
+  background-color: #14b1ab;
+  color: #fff;
+  text-align: left;
+}
+
+#title .containerFluid {
+  padding: 3% 15% 19.4%;
+}
+
+/* Title Image */
+
+.titleImage {
+  width: 60%;
+  position: absolute;
+  right: 30%;
+}
+
+/* Headings */
+
+.bigHeading {
+  font-family: "Montserrat-Black";
+  font-size: 3.5rem;
+  line-height: 1.5;
+}
+
+.sectionHeading {
+  font-size: 3rem;
+  line-height: 1.5;
+}
+
+/* Buttons  */
+
+.titleButton:hover {
+  color:#14b1ab !important;
+}
+
+/* Features */
+
+#features {
+  position: relative;
+  text-align: center;
+}
+
+.featureContainer {
+  padding: 10% !important;
+}
+
+.featureTitle {
+  font-size: 1.5rem;
+}
+
+.featureBox {
+  padding: 4.5% !important;
+}
+
+.featuresIcon {
+  margin-bottom: 1rem !important;
+}
+
+.featuresIcon:hover {
+  opacity: 0.8 !important;
+}
+
+/* Testimonials */
+
+#testimonials {
+  text-align: center;
+}
+
+.testimonialImage {
+  width: 10%;
+  border-radius: 100%;
+  margin-right: 20px;
+}
+
+.testimonialText {
+  font-size: 3rem;
+  line-height: 1.5;
+}
+
+.testimonialItemContainer {
+  padding: 70px !important;
+}
+
+.testimonialItemContainer > h2 {
+  margin: 0 auto;
+  width: 70%;
+}
+
+.testimonialName {
+margin: auto 0;
+}
+
+.testimonialImageContainer {
+  margin-top: 10px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+
+/* Examples */
+
+#examples {
+  padding: 100px;
+  text-align: center;
+}
+
+.examplesImage {
+  width: 200px;
+  height: 200px;
+}
+
+.examplesImage:hover {
+  width: 150%;
+  height: 150%;
+}
+
+.examplesColumn {
+  padding: 3% 2% !important;
+}
+
+/* CTA */
+
+#cta {
+  text-align: center;
+}
+
+/* Footer */
+
+#footer {
+  text-align: center;
+}
+
+.footerIcon {
+  color: #000 !important;
+  margin: 20px 10px !important;
+}
+
+
+
+@media (max-width: 1028px) {
+
+  #title {
+    text-align: center;
+
+  }
+
+  .titleImage {
+    position: static;
+  }
 }

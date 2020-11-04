@@ -1,9 +1,12 @@
 import React from "react";
-import { Button } from "semantic-ui-react";
+import { Button, Image } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
 import { closeModal } from "../../app/common/modals/modalReducer";
 import { socialLogin } from "../../app/firestore/firebaseService";
 import { useHistory } from "react-router-dom";
+import googleIcon from "../../images/google-icon.svg";
+import facebookIcon from "../../images/facebook.png";
+import classes from "../../css/AuthForm.module.css";
 
 export default function SocialLogin() {
   const dispatch = useDispatch();
@@ -11,15 +14,39 @@ export default function SocialLogin() {
   function handleSocialLogin(provider) {
     dispatch(closeModal());
     socialLogin(provider);
-    history.push('/appointments')
+    history.push("/appointments");
   }
 
   return (
     <>
-      <Button
+      <div className={classes.socialLoginButtonsContainer}>
+        <div
+          className={classes.socialLoginButton}
+          onClick={() => handleSocialLogin("google")}
+        >
+          <img
+            className={classes.socialLoginIcon}
+            src={googleIcon}
+            alt='google icon'
+          />
+        </div>
+        <div
+          className={classes.socialLoginButton}
+          onClick={() => {
+            handleSocialLogin("facebook");
+          }}
+        >
+          <img
+            className={classes.socialLoginIcon}
+            src={facebookIcon}
+            alt='facebook icon'
+          />
+        </div>
+      </div>
+
+      {/* <Button
         onClick={() => {
           handleSocialLogin("facebook")
-
         }}
         icon='facebook'
         fluid
@@ -33,7 +60,7 @@ export default function SocialLogin() {
         fluid
         color='google plus'
         content='Login with Google'
-      />
+      /> */}
     </>
   );
 }
