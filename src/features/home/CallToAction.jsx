@@ -1,18 +1,16 @@
 import React from "react";
 import { Container, Modal } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 import { Button } from "semantic-ui-react";
+import { closeModal, openModal } from "../../app/common/modals/modalReducer";
 import classes from "../../css/HomePage.module.css";
 import LoginForm from "../auth/LoginForm";
 import RegisterForm from "../auth/RegisterForm";
 
 export default function CallToAction({
-  handleShowLoginModal,
-  handleShowRegisterModal,
-  handleCloseLoginModal,
-  handleCloseRegisterModal,
-  showLoginModal,
-  showRegisterModal,
+  showModal, formToDisplay ,setFormToDisplay
 }) {
+  const dispatch = useDispatch();
   return (
     <>
       <Container fluid className={classes.containerFluid}>
@@ -23,14 +21,17 @@ export default function CallToAction({
           content='Try for free'
           size='huge'
           className={classes.registerButtonContent}
-          onClick={handleShowRegisterModal}
+          onClick={() => {
+            dispatch(openModal(true));
+            setFormToDisplay("register");
+          }}
         />
       </Container>
-      <Modal show={showRegisterModal} onHide={handleCloseRegisterModal}>
+      <Modal show={showModal} onHide={() => dispatch(closeModal(false))}>
         <Modal.Header closeButton>
           <Modal.Title>REGISTER</Modal.Title>
         </Modal.Header>
-        <RegisterForm />
+        {formToDisplay === "login" ? <LoginForm /> : <RegisterForm />}
       </Modal>
     </>
   );

@@ -11,30 +11,21 @@ import Footer from "./Footer";
 import { useSelector } from "react-redux";
 
 export default function HomePage() {
-  const {showLoginModal} = useSelector((state) => state.modals);
-  const {showRegisterModal} = useSelector((state) => state.modals);
-  // const [showLoginModal, setShowLoginModal] = useState(false);
-  // const [showRegisterModal, setShowRegisterModal] = useState(false);
-  // const handleCloseLoginModal = () => setShowLoginModal(false);
-  // const handleShowLoginModal = () => setShowLoginModal(true);
-  // const handleCloseRegisterModal = () => setShowRegisterModal(false);
-  // const handleShowRegisterModal = () => setShowRegisterModal(true);
+  const [formToDisplay, setFormToDisplay] = useState();
+  const { showModal } = useSelector((state) => state.modals);
   return (
     <>
       <section className={classes.coloredSection} id={classes.title}>
         <Container fluid className={classes.containerFluid}>
           <HomePageNavBar
-            // handleShowLoginModal={handleShowLoginModal}
-            // handleCloseLoginModal={handleCloseLoginModal}
-            showLoginModal={showLoginModal}
-            // handleShowRegisterModal={handleShowRegisterModal}
-            // handleCloseRegisterModal={handleCloseRegisterModal}
-            showRegisterModal={showRegisterModal}
+            formToDisplay={formToDisplay}
+            setFormToDisplay={setFormToDisplay}
+            showModal={showModal}
           />
           <Title
-            // handleShowRegisterModal={handleShowRegisterModal}
-            // handleCloseRegisterModal={handleCloseRegisterModal}
-            showRegisterModal={showRegisterModal}
+            formToDisplay={formToDisplay}
+            setFormToDisplay={setFormToDisplay}
+            showModal={showModal}
           />
         </Container>
       </section>
@@ -49,12 +40,9 @@ export default function HomePage() {
       </section>
       <section className={classes.coloredSection} id={classes.cta}>
         <CallToAction
-          // handleShowLoginModal={handleShowLoginModal}
-          // handleCloseLoginModal={handleCloseLoginModal}
-          showLoginModal={showLoginModal}
-          // handleShowRegisterModal={handleShowRegisterModal}
-          // handleCloseRegisterModal={handleCloseRegisterModal}
-          showRegisterModal={showRegisterModal}
+          formToDisplay={formToDisplay}
+          setFormToDisplay={setFormToDisplay}
+          showModal={showModal}
         />
       </section>
       <footer className={classes.whiteSection} id={classes.footer}>

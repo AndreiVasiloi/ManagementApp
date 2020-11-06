@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import MyTextInput from "../../app/common/form/MyTextInput";
 import { Button, Divider, Header, Label } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
-// import { closeModal } from "../../app/common/modals/modalReducer";
+import { closeModal } from "../../app/common/modals/modalReducer";
 import { signInWithEmail } from "../../app/firestore/firebaseService";
 import SocialLogin from "./SocialLogin";
 import firebase from "../../app/config/firebase";
@@ -32,7 +32,7 @@ export default function LoginForm() {
               if (userEmail === values.email && hasConfirmedEmail === true) {
                 signInWithEmail(values);
                 setSubmitting(false);
-                // dispatch(closeModal());
+                dispatch(closeModal());
                 history.push("/appointments");
               } else {
                 setErrors({ auth: "Please confirm your email address first." });
