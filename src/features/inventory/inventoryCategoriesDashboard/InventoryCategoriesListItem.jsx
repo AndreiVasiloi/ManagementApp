@@ -56,14 +56,14 @@ export default function InventoryCategoriesListItem({category}) {
                     className={classes.delete}
                   >
                     <Icon name='delete' />
-                    Delete Item
+                    Delete Category
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
               </Grid.Column>
             </Grid>
           </Item.Group>
-          <Modal show={confirmOpen}>
+          <Modal show={confirmOpen} onHide={() => setConfirmOpen(false)}>
           <Modal.Body>Do you really want to delete this category?</Modal.Body>
           <Modal.Footer>
             <Button variant='secondary' onClick={() => setConfirmOpen(false)}>
@@ -73,7 +73,7 @@ export default function InventoryCategoriesListItem({category}) {
               variant='danger'
               onClick={() => handleCancelToggle(category.id)}
             >
-              Delete item
+              Delete category
             </Button>
           </Modal.Footer>
         </Modal>

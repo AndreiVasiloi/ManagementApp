@@ -3,15 +3,16 @@ import { Button, Modal, Nav, Navbar } from "react-bootstrap";
 import LoginForm from "../../auth/LoginForm";
 import RegisterForm from "../../auth/RegisterForm";
 import classes from "../../../css/HomePage.module.css";
+import { useDispatch } from "react-redux";
+import {
+  closeLoginModal,
+  closeRegisterModal,
+  openLoginModal,
+  openRegisterModal,
+} from "../../../app/common/modals/modalReducer";
 
-export default function HomePageNavBar({
-  handleShowLoginModal,
-  handleShowRegisterModal,
-  handleCloseLoginModal,
-  handleCloseRegisterModal,
-  showLoginModal,
-  showRegisterModal
-}) {
+export default function HomePageNavBar({ showLoginModal, showRegisterModal }) {
+  const dispatch = useDispatch();
   return (
     <>
       <Navbar
@@ -31,26 +32,32 @@ export default function HomePageNavBar({
             </Nav.Link>
             <Nav.Link
               className={classes.homePageNavLink}
-              onClick={handleShowLoginModal}
+              onClick={() => dispatch(openLoginModal(true))}
             >
               Login
             </Nav.Link>
             <Button
               className={classes.homePageNavRegisterButton}
-              onClick={handleShowRegisterModal}
+              onClick={() => dispatch(openRegisterModal(true))}
             >
               Register
             </Button>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Modal show={showLoginModal} onHide={handleCloseLoginModal}>
+      <Modal
+        show={showLoginModal}
+        onHide={() => dispatch(closeLoginModal(false))}
+      >
         <Modal.Header closeButton>
           <Modal.Title>LOGIN</Modal.Title>
         </Modal.Header>
         <LoginForm />
       </Modal>
-      <Modal show={showRegisterModal} onHide={handleCloseRegisterModal}>
+      <Modal
+        show={showRegisterModal}
+        onHide={() => dispatch(closeRegisterModal(false))}
+      >
         <Modal.Header closeButton>
           <Modal.Title>REGISTER</Modal.Title>
         </Modal.Header>

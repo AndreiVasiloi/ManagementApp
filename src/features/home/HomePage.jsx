@@ -8,29 +8,32 @@ import Testimonials from "./Testimonials";
 import Examples from "./Examples";
 import CallToAction from "./CallToAction";
 import Footer from "./Footer";
+import { useSelector } from "react-redux";
 
-export default function HomePage({ history }) {
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showRegisterModal, setShowRegisterModal] = useState(false);
-  const handleCloseLoginModal = () => setShowLoginModal(false);
-  const handleShowLoginModal = () => setShowLoginModal(true);
-  const handleCloseRegisterModal = () => setShowRegisterModal(false);
-  const handleShowRegisterModal = () => setShowRegisterModal(true);
+export default function HomePage() {
+  const {showLoginModal} = useSelector((state) => state.modals);
+  const {showRegisterModal} = useSelector((state) => state.modals);
+  // const [showLoginModal, setShowLoginModal] = useState(false);
+  // const [showRegisterModal, setShowRegisterModal] = useState(false);
+  // const handleCloseLoginModal = () => setShowLoginModal(false);
+  // const handleShowLoginModal = () => setShowLoginModal(true);
+  // const handleCloseRegisterModal = () => setShowRegisterModal(false);
+  // const handleShowRegisterModal = () => setShowRegisterModal(true);
   return (
     <>
       <section className={classes.coloredSection} id={classes.title}>
         <Container fluid className={classes.containerFluid}>
           <HomePageNavBar
-            handleShowLoginModal={handleShowLoginModal}
-            handleCloseLoginModal={handleCloseLoginModal}
+            // handleShowLoginModal={handleShowLoginModal}
+            // handleCloseLoginModal={handleCloseLoginModal}
             showLoginModal={showLoginModal}
-            handleShowRegisterModal={handleShowRegisterModal}
-            handleCloseRegisterModal={handleCloseRegisterModal}
+            // handleShowRegisterModal={handleShowRegisterModal}
+            // handleCloseRegisterModal={handleCloseRegisterModal}
             showRegisterModal={showRegisterModal}
           />
           <Title
-            handleShowRegisterModal={handleShowRegisterModal}
-            handleCloseRegisterModal={handleCloseRegisterModal}
+            // handleShowRegisterModal={handleShowRegisterModal}
+            // handleCloseRegisterModal={handleCloseRegisterModal}
             showRegisterModal={showRegisterModal}
           />
         </Container>
@@ -46,11 +49,11 @@ export default function HomePage({ history }) {
       </section>
       <section className={classes.coloredSection} id={classes.cta}>
         <CallToAction
-          handleShowLoginModal={handleShowLoginModal}
-          handleCloseLoginModal={handleCloseLoginModal}
+          // handleShowLoginModal={handleShowLoginModal}
+          // handleCloseLoginModal={handleCloseLoginModal}
           showLoginModal={showLoginModal}
-          handleShowRegisterModal={handleShowRegisterModal}
-          handleCloseRegisterModal={handleCloseRegisterModal}
+          // handleShowRegisterModal={handleShowRegisterModal}
+          // handleCloseRegisterModal={handleCloseRegisterModal}
           showRegisterModal={showRegisterModal}
         />
       </section>

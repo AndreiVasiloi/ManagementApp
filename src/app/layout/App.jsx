@@ -10,7 +10,6 @@ import ProfitDashboard from "../../features/profit/ProfitDashboard";
 import InventoryItemForm from "../../features/inventory/inventoryForm/InventoryItemForm";
 import InventoryCategoryForm from "../../features/inventory/inventoryForm/InventoryCategoryForm";
 import Sandbox from "../../features/sandbox/Sandbox";
-import ModalManager from "../common/modals/ModalManager";
 import {ToastContainer} from 'react-toastify';
 import ErrorComponent from "../common/errors/ErrorComponent";
 import InventoryCategoriesDashboard from "../../features/inventory/inventoryCategoriesDashboard/InventoryCategoriesDashboard";
@@ -34,7 +33,6 @@ function App() {
   if (!initialized) return <LoadingComponent content='Loading app...' />
   return (
     <>
-      <ModalManager />
       <ToastContainer  position='bottom-right' hideProgressBar />
       <Route path='/' exact component={HomePage} />
       <Route

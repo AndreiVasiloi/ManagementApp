@@ -1,6 +1,6 @@
 import React from "react";
 import InventoryListItem from "./InventoryListItem";
-import { Segment } from "semantic-ui-react";
+import { Header, Segment } from "semantic-ui-react";
 import InventoryListTitles from "./InventoryListTitles";
 import classes from "../../../css/Dashboard.module.css";
 
@@ -21,9 +21,16 @@ export default function InventoryList({
           setPredicate={setPredicate}
           loading={loading}
         />
-        {items.map((item) => (
-          <InventoryListItem item={item} key={item.id} />
-        ))}
+        {items.length > 0 ? (
+          items.map((item) => <InventoryListItem item={item} key={item.id} />)
+        ) : (
+          <Header
+            size='huge'
+            textAlign='center'
+            color='teal'
+            content='No items to display'
+          />
+        )}
       </Segment>
     </Segment.Group>
   );

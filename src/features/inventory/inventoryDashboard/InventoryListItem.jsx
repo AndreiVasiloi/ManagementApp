@@ -45,19 +45,14 @@ export default function InventoryListItem({ item }) {
       <Segment textAlign='center'>
         <Item.Group>
           <Grid>
-            <Grid.Column width={3}>
+            <Grid.Column width={4}>
               <Item>
                 <Item.Content>{item.category}</Item.Content>
               </Item>
             </Grid.Column>
-            <Grid.Column width={3}>
+            <Grid.Column width={4}>
               <Item>
                 <Item.Content>{item.name}</Item.Content>
-              </Item>
-            </Grid.Column>
-            <Grid.Column width={2}>
-              <Item>
-                <Item.Content>{item.price} RON</Item.Content>
               </Item>
             </Grid.Column>
             <Grid.Column width={4}>
@@ -116,7 +111,7 @@ export default function InventoryListItem({ item }) {
             </Grid.Column>
           </Grid>
         </Item.Group>
-        <Modal show={confirmOpen}>
+        <Modal show={confirmOpen} onHide={() => setConfirmOpen(false)} >
           <Modal.Body>Do you really want to delete this item?</Modal.Body>
           <Modal.Footer>
             <Button variant='secondary' onClick={() => setConfirmOpen(false)}>

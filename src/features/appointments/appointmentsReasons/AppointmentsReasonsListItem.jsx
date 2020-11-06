@@ -76,14 +76,14 @@ export default function AppointmentsReasonsListItem({ reason }) {
                         onClick={() => setConfirmOpen(true)}
                       >
                         <Icon name="delete" />
-                        Delete Item
+                        Delete Reason
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
                 </Grid.Column>
               </Grid>
             </Item.Group>
-            <Modal show={confirmOpen}>
+            <Modal show={confirmOpen} onHide={() => setConfirmOpen(false)}>
               <Modal.Body>Do you really want to delete this reason?</Modal.Body>
               <Modal.Footer>
                 <Button
@@ -96,7 +96,7 @@ export default function AppointmentsReasonsListItem({ reason }) {
                   variant="danger"
                   onClick={() => handleCancelToggle(reason.id)}
                 >
-                  Delete item
+                  Delete reason
                 </Button>
               </Modal.Footer>
             </Modal>

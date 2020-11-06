@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Grid } from "semantic-ui-react";
+import { Grid, Header } from "semantic-ui-react";
 import { listenToAppointments } from "../appointmentsActions";
 import AppointmentsNav from "../appointmentsNav/AppointmentsNav";
 import AppointmentsList from "./AppointmentsList";
@@ -90,15 +90,24 @@ export default function AppointmentsDashboard() {
                 <InventoryListItemPlaceholder />
               </>
             )}
-            {Object.entries(groupedAppointments).map((appointment) => (
-              <AppointmentsList
-                key={appointment[0]}
-                text={text}
-                loading={loading}
-                date={appointment[0]}
-                appointments={appointment[1]}
+            {Object.keys(groupedAppointments).length > 0 ? (
+              Object.entries(groupedAppointments).map((appointment) => (
+                <AppointmentsList
+                  key={appointment[0]}
+                  text={text}
+                  loading={loading}
+                  date={appointment[0]}
+                  appointments={appointment[1]}
+                />
+              ))
+            ) : (
+              <Header
+                size='huge'
+                textAlign='center'
+                color='teal'
+                content='No appointments to display'
               />
-            ))}
+            )}
           </Grid.Column>
         </Grid>
       </div>

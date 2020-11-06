@@ -15,7 +15,7 @@ export default function InventoryListTitles({
       <Segment textAlign="center" className={classes.inventoryTitlesContainer}>
         <Item.Group>
           <Grid>
-            <Grid.Column width={3}>
+            <Grid.Column width={4}>
               <Item.Content
                 onClick={() => {
                   setPredicate("sort", "category");
@@ -35,7 +35,7 @@ export default function InventoryListTitles({
                 />
               </Item.Content>
             </Grid.Column>
-            <Grid.Column width={3}>
+            <Grid.Column width={4}>
               <Item>
                 <Item.Content
                   onClick={() => {
@@ -52,28 +52,6 @@ export default function InventoryListTitles({
                       </Item.Header>
                     }
                     content="Sort items by name"
-                    position="top center"
-                  />
-                </Item.Content>
-              </Item>
-            </Grid.Column>
-            <Grid.Column width={2}>
-              <Item>
-                <Item.Content
-                  onClick={() => {
-                    setPredicate("sort", "price");
-                    dispatch(addFilterIcon("price"));
-                  }}
-                  disabled={loading}
-                >
-                  <Popup
-                    trigger={
-                      <Item.Header>
-                        PRICE{" "}
-                        {filterIcon === "price" && <Icon name="caret down" />}
-                      </Item.Header>
-                    }
-                    content="Sort items by price"
                     position="top center"
                   />
                 </Item.Content>

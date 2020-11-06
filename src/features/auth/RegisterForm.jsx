@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import MyTextInput from "../../app/common/form/MyTextInput";
 import { Button, Divider, Label } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
-import { closeModal } from "../../app/common/modals/modalReducer";
+// import { closeModal } from "../../app/common/modals/modalReducer";
 import { registerInFirebase } from "../../app/firestore/firebaseService";
 import classes from '../../css/AuthForm.module.css';
 import SocialLogin from "./SocialLogin";
@@ -24,7 +24,7 @@ export default function RegisterForm() {
         try {
           await registerInFirebase(values);
           setSubmitting(false);
-          dispatch(closeModal());
+          // dispatch(closeModal());
         } catch (error) {
           setErrors({auth: error.message})
           setSubmitting(false);

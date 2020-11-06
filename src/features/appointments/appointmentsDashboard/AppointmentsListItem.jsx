@@ -99,14 +99,14 @@ export default function AppointmentsListItem({ appointment }) {
                         onClick={() => setConfirmOpen(true)}
                       >
                         <Icon name='delete' />
-                        Delete Item
+                        Delete Appointment
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
                 </Grid.Column>
               </Grid>
             </Item.Group>
-            <Modal show={confirmOpen}>
+            <Modal show={confirmOpen} onHide={() => setConfirmOpen(false)}>
               <Modal.Body>
                 Do you really want to delete this appointment?
               </Modal.Body>
@@ -121,7 +121,7 @@ export default function AppointmentsListItem({ appointment }) {
                   variant='danger'
                   onClick={() => handleCancelToggle(appointment.id)}
                 >
-                  Delete item
+                  Delete appointment
                 </Button>
               </Modal.Footer>
             </Modal>

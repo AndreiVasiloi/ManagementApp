@@ -37,9 +37,8 @@ export default function SignedInMenu() {
       <Nav.Item
         as={Link}
         className={`${classes.navLink} ${classes.navLinkHeader}`}
-        to="/"
+        to={`/profile/${currentUserProfile?.id}`}
       >
-        {/* <Icon name="user" /> */}
         <Image avatar spaced='right' src={currentUserProfile?.photoURL || '/assets/user.png'} />
         {currentUserProfile?.displayName}
       </Nav.Item>

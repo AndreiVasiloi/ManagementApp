@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Row, Card } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import classes from "../../css/HomePage.module.css";
 import appointmentsImage from "../../images/appointments.png";
 import appointmentsSmallImage from "../../images/appointmentsSmall.png";

@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Image } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
-import { closeModal } from "../../app/common/modals/modalReducer";
+// import { closeModal } from "../../app/common/modals/modalReducer";
 import { socialLogin } from "../../app/firestore/firebaseService";
 import { useHistory } from "react-router-dom";
 import googleIcon from "../../images/google-icon.svg";
@@ -12,7 +12,7 @@ export default function SocialLogin() {
   const dispatch = useDispatch();
   const history = useHistory();
   function handleSocialLogin(provider) {
-    dispatch(closeModal());
+    // dispatch(closeModal());
     socialLogin(provider);
     history.push("/appointments");
   }

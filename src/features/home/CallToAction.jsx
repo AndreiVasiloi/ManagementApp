@@ -20,24 +20,12 @@ export default function CallToAction({
           Find the Best Tool for Your Business Today.
         </h3>
         <Button
-          content='Login'
-          size='huge'
-          className={classes.registerButtonContent}
-          onClick={handleShowLoginModal}
-        />
-        <Button
           content='Try for free'
           size='huge'
           className={classes.registerButtonContent}
           onClick={handleShowRegisterModal}
         />
       </Container>
-      <Modal show={showLoginModal} onHide={handleCloseLoginModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>LOGIN</Modal.Title>
-        </Modal.Header>
-        <LoginForm />
-      </Modal>
       <Modal show={showRegisterModal} onHide={handleCloseRegisterModal}>
         <Modal.Header closeButton>
           <Modal.Title>REGISTER</Modal.Title>

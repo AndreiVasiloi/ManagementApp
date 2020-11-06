@@ -78,7 +78,7 @@ export default function AppointmentsListItem({ client }) {
                 </Grid.Column>
               </Grid>
             </Item.Group>
-            <Modal show={confirmOpen}>
+            <Modal show={confirmOpen} onHide={() => setConfirmOpen(false)}>
               <Modal.Body>
                 Do you really want to delete this client?
               </Modal.Body>
@@ -93,7 +93,7 @@ export default function AppointmentsListItem({ client }) {
                   variant='danger'
                   onClick={() => handleCancelToggle(client.id)}
                 >
-                  Delete item
+                  Delete client
                 </Button>
               </Modal.Footer>
             </Modal>

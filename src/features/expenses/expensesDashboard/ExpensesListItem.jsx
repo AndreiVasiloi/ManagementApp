@@ -84,7 +84,7 @@ export default function AppointmentsListItem({ expense }) {
                 </Grid.Column>
               </Grid>
             </Item.Group>
-            <Modal show={confirmOpen}>
+            <Modal show={confirmOpen} onHide={() => setConfirmOpen(false)}>
               <Modal.Body>
                 Do you really want to delete this expense?
               </Modal.Body>

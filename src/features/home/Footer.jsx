@@ -10,7 +10,7 @@ export default function Footer() {
       <Icon name='twitter' size='large'  className={classes.footerIcon}/>
       <Icon name='instagram' size='large'  className={classes.footerIcon}/>
       <Icon name='envelope' size='large'  className={classes.footerIcon}/>
-      <p className={classes.homeParagraph}>© Copyright 2018 TinDog</p>
+      <p className={classes.homeParagraph}>© Copyright 2020 Reverto</p>
     </Container>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Grid, Header, Segment, Statistic } from "semantic-ui-react";
+import { Button, Header, Segment, Statistic } from "semantic-ui-react";
 import classes from "../../css/Dashboard.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Calendar } from "react-calendar";
