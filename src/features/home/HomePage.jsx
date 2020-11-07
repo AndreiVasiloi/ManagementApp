@@ -10,7 +10,7 @@ import CallToAction from "./CallToAction";
 import Footer from "./Footer";
 import { useSelector } from "react-redux";
 
-export default function HomePage() {
+export default function HomePage({history}) {
   const [formToDisplay, setFormToDisplay] = useState();
   const { showModal } = useSelector((state) => state.modals);
   return (

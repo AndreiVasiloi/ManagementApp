@@ -9,7 +9,7 @@ import AppointmentsDashboard from "../../features/appointments/appointmentsDashb
 import ProfitDashboard from "../../features/profit/ProfitDashboard";
 import InventoryItemForm from "../../features/inventory/inventoryForm/InventoryItemForm";
 import InventoryCategoryForm from "../../features/inventory/inventoryForm/InventoryCategoryForm";
-import Sandbox from "../../features/sandbox/Sandbox";
+// import Sandbox from "../../features/sandbox/Sandbox";
 import {ToastContainer} from 'react-toastify';
 import ErrorComponent from "../common/errors/ErrorComponent";
 import InventoryCategoriesDashboard from "../../features/inventory/inventoryCategoriesDashboard/InventoryCategoriesDashboard";
@@ -45,7 +45,7 @@ function App() {
             <Route path='/inventory' component={InventoryDashboard} />
             <Route path='/inventoryCategories' component={InventoryCategoriesDashboard} />
             <Route path='/appointmentsReasons' component={AppointmentsReasonsDashboard} />
-            <Route path='/sandbox' component={Sandbox} />
+            {/* <Route path='/sandbox' component={Sandbox} /> */}
             <Route path='/clients' component={ClientsDashboard} />
             <Route path='/expenses' component={ExpensesDashboard} />
             <Route path='/profit' component={ProfitDashboard} />

@@ -3,11 +3,12 @@ import { Button, Modal, Nav, Navbar } from "react-bootstrap";
 import LoginForm from "../../auth/LoginForm";
 import RegisterForm from "../../auth/RegisterForm";
 import classes from "../../../css/HomePage.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   closeModal,
   openModal,
 } from "../../../app/common/modals/modalReducer";
+import { useHistory } from "react-router-dom";
 
 export default function HomePageNavBar({
   showModal,
@@ -15,7 +16,8 @@ export default function HomePageNavBar({
   setFormToDisplay,
 }) {
   const dispatch = useDispatch();
-
+  const history = useHistory();
+  const { authenticated } = useSelector((state) => state.auth);
   return (
     <>
       <Navbar
@@ -36,8 +38,12 @@ export default function HomePageNavBar({
             <Nav.Link
               className={classes.homePageNavLink}
               onClick={() => {
-                dispatch(openModal(true));
-                setFormToDisplay("login");
+                if(authenticated) {
+                  history.push('/appointments')
+                }else {
+                  dispatch(openModal(true));
+                  setFormToDisplay("login");
+                }
               }}
             >
               Login

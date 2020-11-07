@@ -22,7 +22,7 @@ import classes from "../../../css/Form.module.css";
 import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import { listenToCategories } from "../inventoryCategoriesActions";
 
-export default function InventoryItemForm({ match, history, location }) {
+export default function InventoryItemForm({ match, history }) {
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.auth);
   const categories = useSelector((state) => state.category.categories);
@@ -36,15 +36,18 @@ export default function InventoryItemForm({ match, history, location }) {
     expirationDate: "",
     amount: "",
   };
-  const newCategories = categories.map((categories) => ({
+
+  const currentUserCategories = categories.filter(
+    (category) => category?.userUid === currentUser?.uid
+  );
+
+  const newCategories = currentUserCategories.map((categories) => ({
     value: categories.value,
     text: categories.text,
     id: categories.id,
-    userUid: categories.userUid,
   }));
-  const currentUserCategories = newCategories.filter(
-    (category) => category?.userUid === currentUser?.uid
-  );
+
+
   const validationSchema = Yup.object({
     category: Yup.string().required("You must provide a category"),
     name: Yup.string().required("You must provide a name"),
@@ -97,7 +100,7 @@ export default function InventoryItemForm({ match, history, location }) {
             <MySelectInput
               name='category'
               placeholder='Category'
-              options={currentUserCategories}
+              options={newCategories}
             />
             <MyTextInput name='name' placeholder='Name' />
             <MyDateInput

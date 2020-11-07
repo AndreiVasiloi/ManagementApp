@@ -102,7 +102,7 @@ export default function SignedInMenu() {
       >
         <Icon name="money bill alternate outline" /> Expenses
       </Nav.Item>
-      <Nav.Item
+      {/* <Nav.Item
         onClick={() => dispatch(addActiveClass("sandbox"))}
         as={Link}
         className={
@@ -113,7 +113,7 @@ export default function SignedInMenu() {
         to="/sandbox"
       >
         Sandbox
-      </Nav.Item>
+      </Nav.Item> */}
       <Nav.Item
       onClick={() => dispatch(addActiveClass("profile"))}
         as={Link}

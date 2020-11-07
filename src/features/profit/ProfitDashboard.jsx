@@ -1,20 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Grid, Icon, List, Segment, Tab } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import {
-  getAppointmentsByMonth,
   getExpensesByMonth,
   listenToReasonsFromFirestore,
 } from "../../app/firestore/firestoreService";
 import useFirestoreCollection from "../../app/hooks/useFirestoreCollection";
 import classes from "../../css/Dashboard.module.css";
-import { getAppointmentsMonth } from "../appointments/appointmentsActions";
 import { listenToReasons } from "../appointments/reasonsActions";
-import Chart from "./chart/MonthlyChart";
-import { MONTH_NAMES } from "../appointments/appointmentsConstants";
 import { getExpensesMonth } from "../expenses/expensesActions";
-import { addActiveClass } from "../inventory/inventoryNavActions";
-import { Button } from "react-bootstrap";
 import MonthlyProfit from "./MonthlyProfit";
 import CustomDatesProfit from "./CustomDatesProfit";
 import AnnualProfit from "./AnnualProfit";
@@ -23,25 +17,17 @@ import ProfitNav from "./profitNav/ProfitNav";
 export default function ProfitDashboard({ match }) {
   const { reasons } = useSelector((state) => state.reason);
   const [showChart, setShowChart] = useState("monthly");
-  const { activeClass } = useSelector((state) => state.addClass);
-  const { expensesMonth } = useSelector((state) => state.expense);
   const date = new Date();
-  const [year, setYear] = useState(date.getFullYear());
+  const [year] = useState(date.getFullYear());
   const [month, setMonth] = useState(date.getMonth());
   const numberOfDays = getDaysInMonth(month + 1, year);
   const days = getDaysAsArray(numberOfDays);
   const firstDayInMonth = days[0];
   const lastDayInMonth = days[days.length - 1];
-  const monthName = MONTH_NAMES[month];
   const fullDateFirstDay = new Date(year, month, firstDayInMonth);
   const fullDateLastDay = new Date(year, month, lastDayInMonth);
-  const [startDate, setStartDate] = useState(fullDateFirstDay);
-  const [endDate, setEndDate] = useState(
-    fullDateLastDay.setDate(fullDateLastDay.getDate() + 1)
-  );
   const dispatch = useDispatch();
-  const { appointmentsMonth } = useSelector((state) => state.appointment);
-  const [predicate, setPredicate] = useState(
+  const [predicate] = useState(
     new Map([
       ["firstDate", fullDateFirstDay],
       ["secondDate", fullDateLastDay],
@@ -49,8 +35,8 @@ export default function ProfitDashboard({ match }) {
     ])
   );
 
-  function getPrice(reasontype) {
-    const reason = reasons.find((reason) => reason.text === reasontype);
+  function getPrice(reasonType) {
+    const reason = reasons.find((reason) => reason.text === reasonType);
     if (reason !== undefined) {
       return reason.price;
     }
@@ -81,7 +67,7 @@ export default function ProfitDashboard({ match }) {
     );
     const totalAppointmentsPrices =
       getAllPrices.length > 0 &&
-      getAllPrices.reduce((total, num) => total - num);
+      getAllPrices.reduce((total, num) => total + num);
     const totalCosts =
       getExpensesCosts.length > 0 &&
       getExpensesCosts.reduce((total, num) => total - num);
@@ -90,9 +76,6 @@ export default function ProfitDashboard({ match }) {
     }
   }
 
-  function handleSetPredicate(key, value) {
-    setPredicate(new Map(predicate.set(key, value)));
-  }
 
   function displayChart(chart) {
     if (chart === "monthly") {

@@ -2,9 +2,14 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 import classes from "../../css/HomePage.module.css";
 import appointmentsImage from "../../images/appointments.png";
-import appointmentsSmallImage from "../../images/appointmentsSmall.png";
 import inventoryImage from "../../images/inventory.png";
 import profitImage from "../../images/profit.png";
+// import appointmentsBig from '../../images/appointmentsBig.png';
+// import appointmentsImageBig from "../../images/appointmentsBig.png";
+// import inventoryImageSmall from "../../images/inventorySmall.png";
+// import inventoryImageBig from "../../images/inventoryBig.png";
+// import profitImageSmall from "../../images/profitSmall.png";
+// import profitImageBig from "../../images/profitBig.png";
 import ModalImage from "react-modal-image";
 
 export default function Examples() {
@@ -19,7 +24,7 @@ export default function Examples() {
           <h3>Appointments</h3>
           <ModalImage
             small={appointmentsImage}
-            large={appointmentsSmallImage}
+            large={appointmentsImage}
             hideDownload={true}
             hideZoom={true}
           />
@@ -27,8 +32,8 @@ export default function Examples() {
         <Col lg={4} md={6} className={classes.examplesColumn}>
         <h3>Inventory</h3>
         <ModalImage
-            small={appointmentsImage}
-            large={appointmentsSmallImage}
+            small={inventoryImage}
+            large={inventoryImage}
             hideDownload={true}
             hideZoom={true}
           />
@@ -36,13 +41,12 @@ export default function Examples() {
         <Col lg={4} className={classes.examplesColumn}>
         <h3>Profit</h3>
         <ModalImage
-            small={appointmentsImage}
-            large={appointmentsSmallImage}
+            small={profitImage}
+            large={profitImage}
             hideDownload={true}
             hideZoom={true}
           />
         </Col>
-        <h4>and more...</h4>
       </Row>
     </>
   );
