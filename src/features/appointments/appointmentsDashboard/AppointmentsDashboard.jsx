@@ -77,7 +77,7 @@ export default function AppointmentsDashboard() {
               setText={setText}
               setShowAllAppointments={setShowAllAppointments}
             />
-            <div style={{ marginTop: 40 }}>
+            <div className={classes.calendar}>
               <LineCalendar
                 showAllAppointments={showAllAppointments}
                 date={date}

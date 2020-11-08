@@ -28,7 +28,7 @@ export default function ConfirmEmail({ match }) {
           <Header textAlign="center" size="huge">
             Thank you for your registration {currentUserProfile?.displayName}.
           </Header>
-          <Header size="medium">Please enjoy our app.</Header>
+          <Header size="medium" textAlign="center">Please enjoy our app.</Header>
         </>
       );
     }

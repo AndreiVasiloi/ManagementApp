@@ -17,22 +17,20 @@ export default function InventoryNavbar({ setText }) {
   }
 
   return (
-    <div>
-      <Navbar
-        fixed="top"
-        className={
-          responsiveClass
-            ? `${classes.topNavbar}`
-            : `${classes.topNavbar} ${classes.responsive}`
-        }
-      >
-        <div className={classes.topNavbarLeftCol}>
+    <Navbar
+      fixed="top"
+      className={
+        responsiveClass
+          ? `${classes.topNavbar}`
+          : `${classes.topNavbar} ${classes.responsive}`
+      }
+    >
+      <div className={classes.topNavbarInventoryContainer}>
+        <div className={classes.topNavbarInventoryLeftCol}>
           <Navbar.Brand className={classes.topNavbarBrand} href="#home">
             Inventory
           </Navbar.Brand>
-        </div>
-        <div className={classes.topNavbarRightCol}>
-        <FormField className={`ui icon input`}>
+          <FormField className={`ui icon input ${classes.topNavbarInventoryForm}`}>
             <Input
               className={classes.topNavbarSearch}
               icon={
@@ -43,6 +41,8 @@ export default function InventoryNavbar({ setText }) {
               onKeyPress={handleSearch}
             ></Input>
           </FormField>
+        </div>
+        <div className={classes.topNavbarInventoryRightCol}>
           <Button
             color="teal"
             icon
@@ -63,7 +63,7 @@ export default function InventoryNavbar({ setText }) {
             <Icon name="add" className={classes.topNavbarAddButtonIcon} />
           </Button>
         </div>
-      </Navbar>
-    </div>
+      </div>
+    </Navbar>
   );
 }

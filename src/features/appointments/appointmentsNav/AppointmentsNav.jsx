@@ -16,22 +16,20 @@ export default function AppointmentsNav({ setText, setShowAllAppointments }) {
     }
   }
   return (
-    <div>
-      <Navbar
-        fixed="top"
-        className={
-          responsiveClass
-            ? `${classes.topNavbar}`
-            : `${classes.topNavbar} ${classes.responsive}`
-        }
-      >
-        <div className={classes.topNavbarLeftCol}>
+    <Navbar
+      fixed="top"
+      className={
+        responsiveClass
+          ? `${classes.topNavbar}`
+          : `${classes.topNavbar} ${classes.responsive}`
+      }
+    >
+      <div className={classes.topNavbarAppointmentsContainer}>
+        <div className={classes.topNavbarAppointmentsLeftCol}>
           <Navbar.Brand className={classes.topNavbarBrand}>
             Appointments
           </Navbar.Brand>
-        </div>
-        <div className={classes.topNavbarRightCol}>
-          <FormField className={`ui icon input`}>
+          <FormField className={`ui icon input ${classes.topNavbarAppointmentsForm}`}>
             <Input
               className={classes.topNavbarSearch}
               icon={
@@ -42,7 +40,8 @@ export default function AppointmentsNav({ setText, setShowAllAppointments }) {
               onKeyPress={handleSearch}
             ></Input>
           </FormField>
-
+        </div>
+        <div className={classes.topNavbarAppointmentsRightCol}>
           <Button.Group
             size="small"
             className={classes.topNavbarChangeAppNumberIconsGroup}
@@ -96,7 +95,7 @@ export default function AppointmentsNav({ setText, setShowAllAppointments }) {
             <Icon name="add" className={classes.topNavbarAddButtonIcon} />
           </Button>
         </div>
-      </Navbar>
-    </div>
+      </div>
+    </Navbar>
   );
 }

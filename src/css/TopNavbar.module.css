@@ -5,12 +5,20 @@
   border-bottom: 2px solid #14b1ab;
 }
 
-.topNavbarLeftCol {
- flex: 20%;
+.topNavbarAppointmentsContainer, .topNavbarInventoryContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.topNavbarRightCol {
-  flex: 80%;
+.topNavbarAppointmentsLeftCol, .topNavbarInventoryLeftCol {
+ flex-grow: 2;
+}
+
+.topNavbarAppointmentsRightCol {
+  /* flex: 15%;
+  text-align: right; */
   text-align: right;
 }
 
@@ -19,15 +27,15 @@
   font-weight: bold;
 }
 
+.topNavbarAppointmentsForm, .topNavbarInventoryForm {
+  float: right !important;
+}
 
 .topNavbarSearch > input {
   margin-right: 10px !important;
   border:  1px solid #14b1ab !important;
   height: 33px !important;
-    /* border:  1px solid #14b1ab !important;
-    height: 32px!important;
-    position: relative;
-    top: 2px; */
+
 }
 
 .topNavbarSearch > input::placeholder {
@@ -73,12 +81,63 @@
   .topNavbar {
     margin: 55px 0 0 0;
   }
-  .topNavbarLeftCol {
-    flex: 20%;
+  /* .topNavbarLeftCol {
+    flex: 60%;
   }
   .topNavbarRightCol {
-    flex: 80%;
+    flex: 40%;
    
+  } */
+}
+
+@media screen and (max-width: 620px) {
+  .topNavbar {
+    margin: 55px 0 0 0;
+  }
+  .topNavbarLeftCol {
+    
+  }
+  /* .topNavbarRightCol {
+    flex: none
+   
+  } */
+}
+
+@media screen and (max-width: 375px) {
+  .topNavbar {
+    margin: 55px 0 0 0;
+  }
+ .topNavbarAppointmentsContainer {
+  flex-direction: column;
+ }
+
+.topNavbarAppointmentsForm {
+  width:56%;
+}
+
+ .topNavbarAppointmentsRightCol {
+  text-align: left;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .topNavbar {
+    margin: 55px 0 0 0;
+  }
+ .topNavbarAppointmentsContainer {
+  flex-direction: column;
+ }
+
+.topNavbarAppointmentsForm {
+  width:58.5%;
+}
+
+.topNavbarBrand {
+margin-right: -10px ;
+}
+
+ .topNavbarAppointmentsRightCol {
+  text-align: left;
   }
 }
 

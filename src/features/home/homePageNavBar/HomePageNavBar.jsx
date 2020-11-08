@@ -24,6 +24,7 @@ export default function HomePageNavBar({
         collapseOnSelect
         expand='lg'
         className={classes.homePageNavContainer}
+        variant="dark"
       >
         <Navbar.Brand href='#home' className={classes.homePageNavBrand}>
           reverto

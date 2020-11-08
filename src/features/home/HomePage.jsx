@@ -45,7 +45,7 @@ export default function HomePage({history}) {
           showModal={showModal}
         />
       </section>
-      <footer className={classes.whiteSection} id={classes.footer}>
+      <footer className={`${classes.whiteSection} ${classes.footer}`} id='footer'>
         <Footer />
       </footer>
     </>

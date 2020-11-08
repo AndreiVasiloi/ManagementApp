@@ -23,7 +23,7 @@ export default function MonthlyChart({ appointmentsDates, expensesDates, days}) 
     );
     data.push({
       name: days[i],
-      appointments: filteredAppointments.length,
+      receipts: filteredAppointments.length,
       expenses: filteredExpenses.length
     });
   }
@@ -41,7 +41,7 @@ export default function MonthlyChart({ appointmentsDates, expensesDates, days}) 
     <YAxis />
     <Tooltip />
     <Legend />
-    <Line type="monotone" dataKey="appointments" stroke="#8884d8" />
+    <Line type="monotone" dataKey="receipts" stroke="#8884d8" />
     <Line type="monotone" dataKey="expenses" stroke="#af2d2d" />
   </LineChart>
     </ResponsiveContainer>

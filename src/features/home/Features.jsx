@@ -9,9 +9,9 @@ export default function Features() {
       <Row className={classes.featureContainer}>
         <Col lg={4} className={classes.featureBox}>
           <Icon
-            name='check circle'
-            size='huge'
-            color='teal'
+            name="check circle"
+            size="huge"
+            color="teal"
             className={classes.featuresIcon}
           />
           <h3 className={classes.featureTitle}>Easy to use.</h3>
@@ -21,9 +21,9 @@ export default function Features() {
         </Col>
         <Col lg={4} className={classes.featureBox}>
           <Icon
-            name='bullseye'
-            size='huge'
-            color='teal'
+            name="bullseye"
+            size="huge"
+            color="teal"
             className={classes.featuresIcon}
           />
           <h3 className={classes.featureTitle}>Elite Clientele</h3>
@@ -33,14 +33,14 @@ export default function Features() {
         </Col>
         <Col lg={4} className={classes.featureBox}>
           <Icon
-            name='heart'
-            size='huge'
-            color='teal'
+            name="heart"
+            size="huge"
+            color="teal"
             className={classes.featuresIcon}
           />
-          <h3 className={classes.featureTitle}>Guaranteed to work.</h3>
+          <h3 className={classes.featureTitle}>Guaranteed to help.</h3>
           <p className={classes.homeParagraph}>
-          Lorem Ipsum is simply dummy text.
+            You can see the whole business as a whole.
           </p>
         </Col>
       </Row>

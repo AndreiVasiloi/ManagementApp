@@ -15,7 +15,7 @@ export function signOutFirebase() {
 
 function sendConfirmEmail(email, confirmEmailCode) {
   // TODO: check if you need to user encodeURIComponent / decodeURIComponent
-  const confirmUrl = `http://localhost:3000/confirmEmail/${email}/${confirmEmailCode}`;
+  const confirmUrl = `https://managementapp-d440e.firebaseapp.com/confirmEmail/${email}/${confirmEmailCode}`;
 
   return firebase
     .firestore()

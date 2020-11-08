@@ -12,42 +12,42 @@ export default function Testimonials() {
     <Carousel activeIndex={index} onSelect={handleSelect}>
       <Carousel.Item className={classes.testimonialItemContainer}>
         <h2 className={classes.testimonialText}>
-        Reverto is the most valuable business resource we have EVER tryed.
+          "Reverto has got everything I need. It's incredible. The service was
+          excellent. If you aren't sure, always go for Reverto.
         </h2>
         <div className={classes.testimonialImageContainer}>
-        <img
-          className={classes.testimonialImage}
-          src='https://randomuser.me/api/portraits/men/22.jpg'
-          alt='First slide'
-        />
-        <em className={classes.testimonialName}> Rick Y, New York</em>
-        </div>
-     
-      </Carousel.Item>
-      <Carousel.Item className={classes.testimonialItemContainer}>
-        <h2 className={classes.testimonialText}>
-        Fantastic, I'm totally blown away by Reverto.
-        </h2>
-        <div className={classes.testimonialImageContainer}>
-        <img
-          className={classes.testimonialImage}
-          src='https://randomuser.me/api/portraits/men/16.jpg'
-          alt='Second slide'
-        />
-        <em className={classes.testimonialName}>Jack F, L.A.</em>
+          <img
+            className={classes.testimonialImage}
+            src="https://randomuser.me/api/portraits/men/22.jpg"
+            alt="First slide"
+          />
+          <em className={classes.testimonialName}> Rick Y, New York</em>
         </div>
       </Carousel.Item>
       <Carousel.Item className={classes.testimonialItemContainer}>
         <h2 className={classes.testimonialText}>
-        This is unbelievable. After using Reverto my buisness skyrocketed!
+          I use Reverto often. Reverto has really helped our business.
         </h2>
         <div className={classes.testimonialImageContainer}>
-        <img
-          className={classes.testimonialImage}
-          src='https://randomuser.me/api/portraits/women/20.jpg'
-          alt='Third slide'
-        />
-        <em className={classes.testimonialName}>Jessie E, London</em>
+          <img
+            className={classes.testimonialImage}
+            src="https://randomuser.me/api/portraits/men/16.jpg"
+            alt="Second slide"
+          />
+          <em className={classes.testimonialName}>Jack F, L.A.</em>
+        </div>
+      </Carousel.Item>
+      <Carousel.Item className={classes.testimonialItemContainer}>
+        <h2 className={classes.testimonialText}>
+          Thanks guys, keep up the good work! I can't say enough about Reverto.
+        </h2>
+        <div className={classes.testimonialImageContainer}>
+          <img
+            className={classes.testimonialImage}
+            src="https://randomuser.me/api/portraits/women/20.jpg"
+            alt="Third slide"
+          />
+          <em className={classes.testimonialName}>Julia Y, London</em>
         </div>
       </Carousel.Item>
     </Carousel>

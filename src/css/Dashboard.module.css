@@ -126,6 +126,10 @@ box-shadow: none !important;
     color: #14b1ab !important;
 }
 
+.calendar {
+    margin-top: 40px;
+}
+
 /* profit */
 
 .changeDateBtn {
@@ -169,6 +173,31 @@ box-shadow: none !important;
     .DashboardDropdownButton {
         position: relative;
         right: 10px;
+    }
+
+    .calendar{
+        margin-top: 40px;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    .calendar {
+        margin-top: 80px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .calendar {
+        margin-top: 100px;
+    }
+    .dashboardListContainer {
+        margin-top: 70px !important;
+    }
+  }
+
+  @media screen and (max-width: 485px) {
+    .dashboardListContainer {
+        margin-top: 90px !important;
     }
   }
 

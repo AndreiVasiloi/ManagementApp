@@ -5,7 +5,7 @@ import 'firebase/auth';
 import 'firebase/storage'
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCGhDBcr4njhV_Q-_Sp0ErIwec460lQpYk",
+    apiKey: process.env.REACT_APP_API_KEY,
     authDomain: "managementapp-d440e.firebaseapp.com",
     databaseURL: "https://managementapp-d440e.firebaseio.com",
     projectId: "managementapp-d440e",

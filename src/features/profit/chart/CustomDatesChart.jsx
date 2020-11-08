@@ -30,7 +30,7 @@ export default function RangeChart({
     );
     data.push({
       name: format(result, "MMM d"),
-      appointments: filteredAppointments.length,
+      receipts: filteredAppointments.length,
       expenses: filteredExpenses.length,
     });
   }
@@ -48,7 +48,7 @@ export default function RangeChart({
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="appointments" stroke="#8884d8" />
+        <Line type="monotone" dataKey="receipts" stroke="#8884d8" />
         <Line type="monotone" dataKey="expenses" stroke="#af2d2d" />
       </LineChart>
     </ResponsiveContainer>
