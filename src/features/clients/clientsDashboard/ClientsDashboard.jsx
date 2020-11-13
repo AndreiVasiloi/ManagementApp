@@ -28,7 +28,8 @@ export default function ClientsDashboard() {
 
   function handleFilter(client, text) {
     const keys = Object.keys(client).filter((key) => key !== "id");
-    const values = keys.map((key) => {
+    const keysWithoutUid = keys.filter(key => key !== 'userUid');
+    const values = keysWithoutUid.map((key) => {
       const value = client[key];
       return value.toString().toLowerCase();
     });

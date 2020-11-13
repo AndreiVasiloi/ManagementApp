@@ -29,6 +29,7 @@ export default function AppointmentsDashboard() {
   const currentUserAppointments = appointments.filter(
     (appointment) => appointment?.userUid === currentUser?.uid
   );
+
   const filteredAppointments =
     text === ""
       ? currentUserAppointments
@@ -39,11 +40,11 @@ export default function AppointmentsDashboard() {
 
   function handleFilter(appointment, text) {
     const keys = Object.keys(appointment).filter((key) => key !== "id");
-    const values = keys.map((key) => {
+    const keysWithoutUid = keys.filter(key => key !== 'userUid');
+    const values = keysWithoutUid.map((key) => {
       const value = appointment[key];
       return value.toString().toLowerCase();
     });
-
     return values.some((value) => value.includes(text));
   }
 

@@ -30,7 +30,8 @@ export default function InventoryDashboard() {
 
   function handleFilter(item, text) {
     const keys = Object.keys(item).filter((key) => key !== "id");
-    const values = keys.map((key) => {
+    const keysWithoutUid = keys.filter(key => key !== 'userUid');
+    const values = keysWithoutUid.map((key) => {
       const value = item[key];
       return value.toString().toLowerCase();
     });
