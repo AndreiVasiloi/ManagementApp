@@ -12,8 +12,10 @@ export default function Testimonials() {
     <Carousel activeIndex={index} onSelect={handleSelect}>
       <Carousel.Item className={classes.testimonialItemContainer}>
         <h2 className={classes.testimonialText}>
-          "Reverto has got everything I need. It's incredible. The service was
-          excellent. If you aren't sure, always go for Reverto.
+          <q>
+            Reverto has got everything I need. It's incredible. The service was
+            excellent. If you aren't sure, always go for Reverto.
+          </q>
         </h2>
         <div className={classes.testimonialImageContainer}>
           <img
@@ -26,7 +28,7 @@ export default function Testimonials() {
       </Carousel.Item>
       <Carousel.Item className={classes.testimonialItemContainer}>
         <h2 className={classes.testimonialText}>
-          I use Reverto often. Reverto has really helped our business.
+          <q>I use Reverto often. Reverto has really helped our business.</q>
         </h2>
         <div className={classes.testimonialImageContainer}>
           <img
@@ -39,7 +41,10 @@ export default function Testimonials() {
       </Carousel.Item>
       <Carousel.Item className={classes.testimonialItemContainer}>
         <h2 className={classes.testimonialText}>
-          Thanks guys, keep up the good work! I can't say enough about Reverto.
+          <q>
+            Thanks guys, keep up the good work! I can't say enough about
+            Reverto.
+          </q>
         </h2>
         <div className={classes.testimonialImageContainer}>
           <img

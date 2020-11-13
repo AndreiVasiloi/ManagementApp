@@ -1,12 +1,22 @@
-import React from "react";
-import { Navbar } from "react-bootstrap";
+import React, { useState } from "react";
+import { Modal, Navbar } from "react-bootstrap";
 import classes from "../../../css/TopNavbar.module.css";
 import { Button, FormField, Icon, Input } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
+import { listenToCategoriesFromFirestore } from "../../../app/firestore/firestoreService";
+import { listenToCategories } from "../inventoryCategoriesActions";
 
 export default function InventoryNavbar({ setText }) {
   const { responsiveClass } = useSelector((state) => state.addClass);
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const dispatch = useDispatch();
+  const { currentUser } = useSelector((state) => state.auth);
+  const categories = useSelector((state) => state.category.categories);
+  const currentUserCategories = categories.filter(
+    (category) => category?.userUid === currentUser?.uid
+  );
   const ENTER = 13;
 
   function handleSearch(event) {
@@ -15,6 +25,12 @@ export default function InventoryNavbar({ setText }) {
       setText(value);
     }
   }
+
+  useFirestoreCollection({
+    query: () => listenToCategoriesFromFirestore(),
+    data: (categories) => dispatch(listenToCategories(categories)),
+    deps: [dispatch],
+  });
 
   return (
     <Navbar
@@ -30,7 +46,9 @@ export default function InventoryNavbar({ setText }) {
           <Navbar.Brand className={classes.topNavbarBrand} href="#home">
             Inventory
           </Navbar.Brand>
-          <FormField className={`ui icon input ${classes.topNavbarInventoryForm}`}>
+          <FormField
+            className={`ui icon input ${classes.topNavbarInventoryForm}`}
+          >
             <Input
               className={classes.topNavbarSearch}
               icon={
@@ -53,17 +71,41 @@ export default function InventoryNavbar({ setText }) {
           >
             <Icon name="archive" /> Categories
           </Button>
-          <Button
-            icon
-            size="small"
-            className={classes.topNavbarAddButton}
-            as={NavLink}
-            to="/createItem"
-          >
-            <Icon name="add" className={classes.topNavbarAddButtonIcon} />
-          </Button>
+          {currentUserCategories.length > 0 ? (
+            <Button
+              icon
+              size="small"
+              className={classes.topNavbarAddButton}
+              as={NavLink}
+              to="/createItem"
+            >
+              <Icon name="add" className={classes.topNavbarAddButtonIcon} />
+            </Button>
+          ) : (
+            <Button
+              icon
+              size="small"
+              className={classes.topNavbarAddButton}
+              onClick={() => setConfirmOpen(true)}
+            >
+              <Icon name="add" className={classes.topNavbarAddButtonIcon} />
+            </Button>
+          )}
         </div>
       </div>
+      <Modal show={confirmOpen} onHide={() => setConfirmOpen(false)}>
+        <Modal.Body>
+          Please add some categories for your items first.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setConfirmOpen(false)}>
+            Close
+          </Button>
+          <Button color='teal' as={NavLink} to="/inventoryCategories">
+            go to categories
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Navbar>
   );
 }

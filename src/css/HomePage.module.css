@@ -347,7 +347,7 @@
 .testimonialImage {
   width: 10%;
   border-radius: 100%;
-  margin-right: 20px;
+  margin: 5px auto;
 }
 
 .testimonialText {
@@ -373,6 +373,7 @@ margin: auto 0;
   display: flex;
   align-content: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 
@@ -414,7 +415,17 @@ margin: auto 0;
   margin: 20px 10px !important;
 }
 
+.facebookIcon:hover {
+  color: #3b5998 !important;
+}
 
+.linkedinIcon:hover {
+  color: #0e76a8 !important; 
+}
+
+.envelopeIcon:hover {
+  color: #FCAE1E !important;
+}
 
 @media (max-width: 1028px) {
 

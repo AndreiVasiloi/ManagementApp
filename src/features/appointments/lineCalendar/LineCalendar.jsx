@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { Icon } from "semantic-ui-react";
+import { Icon, Popup } from "semantic-ui-react";
 import classes from "../../../css/LineCalendar.module.css";
 
 export function LineCalendar({ setPredicate, date, showAllAppointments }) {
@@ -62,7 +62,7 @@ export function LineCalendar({ setPredicate, date, showAllAppointments }) {
     <div className={classes.container}>
       {days.map((day) => {
         const thisDate = new Date(year, month, day);
-        const nextDate = new Date(year, month, day + 1)
+        const nextDate = new Date(year, month, day + 1);
         const dateName = dayNames[thisDate.getDay()];
 
         const dayButton = (
@@ -71,15 +71,14 @@ export function LineCalendar({ setPredicate, date, showAllAppointments }) {
             <button
               key={day}
               onClick={() => {
-                setPredicate('startDate', thisDate)
-                if(showAllAppointments) {
-                  setPredicate('startDate', thisDate)
-                  setPredicate('endDate', null)
-                }else {
-                  setPredicate('startDate', thisDate)
-                  setPredicate('endDate', nextDate)
+                setPredicate("startDate", thisDate);
+                if (showAllAppointments) {
+                  setPredicate("startDate", thisDate);
+                  setPredicate("endDate", null);
+                } else {
+                  setPredicate("startDate", thisDate);
+                  setPredicate("endDate", nextDate);
                 }
-               
               }}
               className={
                 day === date.getDate()
@@ -106,25 +105,49 @@ export function LineCalendar({ setPredicate, date, showAllAppointments }) {
                   </div>
                 </div>
                 <div className={classes.changeDateContainer}>
-                  <div className={classes.prevYear}>
-                    <Icon
-                      name="angle double left"
-                      onClick={() => setYear(year - 1)}
+                  <div className={classes.calendarChangeDateIcons}>
+                    <Popup
+                      trigger={
+                        <Icon
+                          name="angle double left"
+                          onClick={() => setYear(year - 1)}
+                        />
+                      }
+                      content="previous year"
+                      position="top center"
                     />
                   </div>
-                  <div className={classes.prevMonth}>
-                    <Icon
-                      name="angle left"
-                      onClick={() => changeMonth("prev")}
+                  <div className={classes.calendarChangeDateIcons}>
+                    <Popup
+                      trigger={
+                        <Icon
+                          name="angle left"
+                          onClick={() => changeMonth("prev")}
+                        />
+                      }
+                      content="previous month"
+                      position="top center"
                     />
                   </div>
-                  <div className={classes.nextMonth}>
-                    <Icon name="angle right" onClick={changeMonth} />
+                  <div className={classes.calendarChangeDateIcons}>
+                    <Popup
+                      trigger={
+                        <Icon name="angle right" onClick={changeMonth} />
+                      }
+                      content="next month"
+                      position="top center"
+                    />
                   </div>
-                  <div className={classes.nextYear}>
-                    <Icon
-                      name="angle double right"
-                      onClick={() => setYear(year + 1)}
+                  <div className={classes.calendarChangeDateIcons}>
+                    <Popup
+                      trigger={
+                        <Icon
+                          name="angle double right"
+                          onClick={() => setYear(year + 1)}
+                        />
+                      }
+                      content="next year"
+                      position="top center"
                     />
                   </div>
                 </div>

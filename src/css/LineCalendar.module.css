@@ -56,6 +56,10 @@
   grid-gap: 2px;
 }
 
+.calendarChangeDateIcons {
+  cursor: pointer;
+}
+
 @media screen and (max-width: 700px) {
   .container {
     margin: 45px 0 0 0;

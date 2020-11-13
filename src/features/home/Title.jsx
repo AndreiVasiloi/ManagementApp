@@ -12,6 +12,8 @@ export default function Title({
   showModal, formToDisplay ,setFormToDisplay
 }) {
   const dispatch = useDispatch();
+  const loginTitle = 'LOGIN';
+  const registerTitle = 'REGISTER';
   return (
     <>
       <Row>
@@ -39,7 +41,7 @@ export default function Title({
       </Row>
       <Modal show={showModal} onHide={() => dispatch(closeModal(false))}>
         <Modal.Header closeButton>
-          <Modal.Title>REGISTER</Modal.Title>
+        <Modal.Title>{formToDisplay === "login" ? loginTitle : registerTitle}</Modal.Title> 
         </Modal.Header>
         {formToDisplay === "login" ? <LoginForm /> : <RegisterForm />}
       </Modal>

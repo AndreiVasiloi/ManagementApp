@@ -6,11 +6,28 @@ import classes from "../../css/HomePage.module.css";
 export default function Footer() {
   return (
     <Container fluid className={classes.containerFluid}>
-      <Icon name='facebook f' size='large' className={classes.footerIcon}/>
-      <Icon name='twitter' size='large'  className={classes.footerIcon}/>
-      <Icon name='instagram' size='large'  className={classes.footerIcon}/>
-      <Icon name='envelope' size='large'  className={classes.footerIcon}/>
-      <p className={classes.homeParagraph}>© Copyright 2020 Reverto</p>
+      <a href='https://www.facebook.com/andrei.vasiloi/' target='_blank' rel='noreferrer noopener'>
+        <Icon
+          name="facebook f"
+          size="large"
+          className={`${classes.footerIcon} ${classes.facebookIcon}`}
+        />
+      </a>
+      <a href='https://www.linkedin.com/in/andrei-vasiloi/' target='_blank' rel='noreferrer noopener'>
+      <Icon
+        name="linkedin square"
+        size="large"
+        className={`${classes.footerIcon} ${classes.linkedinIcon}`}
+      />
+      </a>
+      <a href='a' target='_blank' rel='noreferrer noopener'>
+      <Icon
+        name="envelope"
+        size="large"
+        className={`${classes.footerIcon} ${classes.envelopeIcon}`}
+      />
+      </a>
+      <p className={classes.homeParagraph}>© Copyright 2020 Andrei Vasiloi</p>
     </Container>
   );
 }

@@ -37,61 +37,99 @@ function sendConfirmEmail(email, confirmEmailCode) {
             <title>Document</title>
           </head>
         
-          <body style="background-color: #f3f3f3; padding: 1% 5%">
-            <div style="width: 50%; margin: 0 auto">
-              <div style="background-color: #006a71; text-align: center; padding: 5%">
-                <img src="https://i.ibb.co/SXzSRSV/confirm-Email2.png" alt="Confirm" />
-              </div>
-              <div
-                style="
-                  text-align: center;
-                  background-color: #fff;
-                  margin-top: -35px;
-                  padding: 5%;
-                "
-              >
-                <h1
+          <body style="background-color: #f3f3f3">
+            <div style="
+            margin-top: 5%;
+        ">
+              <div style="display: flex; flex-direction: column; align-items: center">
+                <div
                   style="
-                    font-family: 'Arial Black', Gadget, sans-serif;
-                    color: #4c4c4c;
-                    font-size: 50px;
+                    background-color: #006a71;
+                    width: 80%;
+                    padding: 3% 0;
+                    text-align: center;
                   "
                 >
-                  Email Confirmation
-                </h1>
-                <p style="margin: 0 auto; color: #8d8d8d; font-size: 30px">
-                  Hey, you\`re almost ready to start enjoying Reverto.
-                </p>
-                <p style="margin: 0 auto; color: #8d8d8d; font-size: 30px">
-                  Simply click the big turquoise button below to verify your email
-                  address.
-                </p>
-                <a href="${confirmUrl}" target="_blank">
-                  <button
+                  <img
+                    src="https://i.ibb.co/SXzSRSV/confirm-Email2.png"
+                    alt="Confirm"
+                    style="max-width: 35%; height: auto"
+                  />
+                </div>
+                <div
+                  style="
+                    background-color: #fff;
+                    width: 80%;
+                    text-align: center;
+                    padding: 3%;
+                    box-sizing: border-box;
+                  "
+                >
+                  <h1
                     style="
-                      background-color: #14b1ab;
-                      color: #fff;
-                      border-radius: 50px;
-                      height: 50px;
-                      width: 200px;
-                      border: none;
-                      margin-top: 20px;
+                      font-family: 'Arial Black', Gadget, sans-serif;
+                      color: #4c4c4c;
+                      font-size: 2.5vw;
                     "
                   >
-                    Verify email address
-                  </button>
-                </a>
+                    Email Confirmation
+                  </h1>
+                  <p style="margin: 0 auto; color: #8d8d8d; font-size: 1.5vw">
+                    Hey, you\`re almost ready to start enjoying Reverto.
+                  </p>
+                  <p style="margin: 0 auto; color: #8d8d8d; font-size: 1.5vw">
+                    Simply click the big turquoise button below to verify your email
+                    address.
+                  </p>
+                  <a href="${confirmUrl}" target="_blank">
+                    <button
+                      style="
+                        background-color: #14b1ab;
+                        color: #fff;
+                        border-radius: 50px;
+                        text-align: center;
+                        height: 2.5vw;
+                        width: 15vw;
+                        border: none;
+                        margin:20px auto 0 auto;
+                      "
+                    >
+                      <p style="font-size: 1vw; margin: 0 auto">Verify email address</p>
+                    </button>
+                  </a>
+                </div>
               </div>
+              <h1
+                style="
+                  font-family: 'Arial Black', Gadget, sans-serif;
+                  color: #797979;
+                  text-align: center;
+                "
+              >
+                Stay in touch
+              </h1>
+              <h4
+                style="
+                  text-align: center;
+                  color: #8d8d8d;
+                  font-family: 'Arial Black', Gadget, sans-serif;
+                "
+              >
+                Email sent by Andrei Vasiloi
+              </h4>
+              <h4
+                style="
+                  text-align: center;
+                  color: #8d8d8d;
+                  font-family: 'Arial Black', Gadget, sans-serif;
+                "
+              >
+                © Copyright 2020 Andrei Vasiloi
+              </h4>
             </div>
-            <h1
-              style="font-family: 'Comic Sans MS', cursive, sans-serif; color: #797979; text-align: center;"
-            >
-              Stay in touch
-            </h1>
-            <h4 style='text-align: center; color: #8d8d8d;'>Email sent by Reverto</h4>
-            <h4 style='text-align: center; color: #8d8d8d;'>© Copyright 2020 Reverto</h4>
           </body>
         </html>
+        
         `,
       },
     });

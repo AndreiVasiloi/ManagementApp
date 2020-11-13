@@ -13,6 +13,10 @@ export default function AppointmentsReasonsDashboard() {
   const dispatch = useDispatch();
   const { reasons } = useSelector((state) => state.reason);
   const { loading } = useSelector((state) => state.async);
+  const { currentUser } = useSelector((state) => state.auth);
+  const currentUserReasons = reasons.filter(
+    (reason) => reason?.userUid === currentUser?.uid
+  );
 
   useFirestoreCollection({
     query: () => listenToReasonsFromFirestore(),
@@ -32,7 +36,7 @@ export default function AppointmentsReasonsDashboard() {
                 <InventoryListItemPlaceholder />
               </>
             )}
-            <AppointmentsReasonsList reasons={reasons} loading={loading} />
+            <AppointmentsReasonsList reasons={currentUserReasons} loading={loading} />
           </Grid.Column>
         </Grid>
       </div>

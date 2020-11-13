@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Header, Icon, Segment, Statistic } from "semantic-ui-react";
+import {
+  Button,
+  Header,
+  Icon,
+  Popup,
+  Segment,
+  Statistic,
+} from "semantic-ui-react";
 import {
   getAppointmentsByYear,
   getExpensesByYear,
@@ -68,7 +75,17 @@ export default function AnnualProfit({ profit }) {
         <Header textAlign="center">
           {year}
           <Header.Subheader>
-            <Icon name="angle double left" onClick={() => setYear(year - 1)} />
+            <Popup
+              trigger={
+                <Icon
+                  className={classes.changeProfitDateIcon}
+                  name="angle double left"
+                  onClick={() => setYear(year - 1)}
+                />
+              }
+              content="previous year"
+              position="top center"
+            />
             <Button
               size="mini"
               color="teal"
@@ -78,7 +95,17 @@ export default function AnnualProfit({ profit }) {
                 handleSetPredicate("secondDate", secondDate);
               }}
             />
-            <Icon name="angle double right" onClick={() => setYear(year + 1)} />
+            <Popup
+              trigger={
+                <Icon
+                  className={classes.changeProfitDateIcon}
+                  name="angle double right"
+                  onClick={() => setYear(year + 1)}
+                />
+              }
+              content="next year"
+              position="top center"
+            />
           </Header.Subheader>
         </Header>
         <Statistic>

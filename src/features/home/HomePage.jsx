@@ -10,7 +10,7 @@ import CallToAction from "./CallToAction";
 import Footer from "./Footer";
 import { useSelector } from "react-redux";
 
-export default function HomePage({history}) {
+export default function HomePage({ history }) {
   const [formToDisplay, setFormToDisplay] = useState();
   const { showModal } = useSelector((state) => state.modals);
   return (
@@ -29,14 +29,14 @@ export default function HomePage({history}) {
           />
         </Container>
       </section>
-      <section className={classes.whiteSection} id={classes.features}>
-        <Features />
+      <section className={classes.whiteSection} id={classes.examples}>
+        <Examples />
       </section>
       <section className={classes.coloredSection} id={classes.testimonials}>
         <Testimonials />
       </section>
-      <section className={classes.whiteSection} id={classes.examples}>
-        <Examples />
+      <section className={classes.whiteSection} id={classes.features}>
+        <Features />
       </section>
       <section className={classes.coloredSection} id={classes.cta}>
         <CallToAction
@@ -45,7 +45,10 @@ export default function HomePage({history}) {
           showModal={showModal}
         />
       </section>
-      <footer className={`${classes.whiteSection} ${classes.footer}`} id='footer'>
+      <footer
+        className={`${classes.whiteSection} ${classes.footer}`}
+        id="footer"
+      >
         <Footer />
       </footer>
     </>

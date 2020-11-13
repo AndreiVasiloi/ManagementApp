@@ -12,13 +12,17 @@ import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 export default function InventoryDashboard() {
   const dispatch = useDispatch();
   const { items } = useSelector((state) => state.item);
+  const { currentUser } = useSelector((state) => state.auth);
+  const currentUserItems = items.filter(
+    (item) => item?.userUid === currentUser?.uid
+  );
   const { loading } = useSelector((state) => state.async);
   const [text, setText] = useState("");
   const textLowered = text.trim().toLowerCase();
   const filteredItems =
     text === ""
-      ? items
-      : items.filter((item) => handleFilter(item, textLowered));
+      ? currentUserItems
+      : currentUserItems.filter((item) => handleFilter(item, textLowered));
 
   const [predicate, setPredicate] = useState(
     new Map([["sort", "expirationDate"]])

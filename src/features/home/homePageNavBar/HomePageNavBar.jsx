@@ -18,6 +18,8 @@ export default function HomePageNavBar({
   const dispatch = useDispatch();
   const history = useHistory();
   const { authenticated } = useSelector((state) => state.auth);
+  const loginTitle = 'LOGIN';
+  const registerTitle = 'REGISTER';
   return (
     <>
       <Navbar
@@ -66,7 +68,7 @@ export default function HomePageNavBar({
         onHide={() => dispatch(closeModal(false))}
       >
         <Modal.Header closeButton>
-          <Modal.Title>LOGIN</Modal.Title>
+            <Modal.Title>{formToDisplay === "login" ? loginTitle : registerTitle}</Modal.Title> 
         </Modal.Header>
         {formToDisplay === "login" ? <LoginForm /> : <RegisterForm />}
       </Modal>

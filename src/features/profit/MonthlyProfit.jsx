@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Button, Header, Icon, Segment, Statistic } from "semantic-ui-react";
+import {
+  Button,
+  Header,
+  Icon,
+  Popup,
+  Segment,
+  Statistic,
+} from "semantic-ui-react";
 import { MONTH_NAMES } from "../appointments/appointmentsConstants";
 import { useDispatch, useSelector } from "react-redux";
 import useFirestoreCollection from "../../app/hooks/useFirestoreCollection";
@@ -78,10 +85,17 @@ export default function MonthlyProfit({
           {monthName}
           <Header.Subheader>{year}</Header.Subheader>
           <Header.Subheader>
-            <Icon
-              name="angle left"
-              onClick={() => setMonth(month - 1)}
-              disabled={month === 0}
+            <Popup
+              trigger={
+                <Icon
+                  className={classes.changeProfitDateIcon}
+                  name="angle left"
+                  onClick={() => setMonth(month - 1)}
+                  disabled={month === 0}
+                />
+              }
+              content="previous month"
+              position="top center"
             />
             <Button
               size="mini"
@@ -92,10 +106,17 @@ export default function MonthlyProfit({
                 handleSetPredicate("secondDate", secondDate);
               }}
             />
-            <Icon
-              name="angle right"
-              onClick={() => setMonth(month + 1)}
-              disabled={month === 11}
+            <Popup
+              trigger={
+                <Icon
+                  className={classes.changeProfitDateIcon}
+                  name="angle right"
+                  onClick={() => setMonth(month + 1)}
+                  disabled={month === 11}
+                />
+              }
+              content="next month"
+              position="top center"
             />
           </Header.Subheader>
         </Header>

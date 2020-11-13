@@ -11,6 +11,8 @@ export default function CallToAction({
   showModal, formToDisplay ,setFormToDisplay
 }) {
   const dispatch = useDispatch();
+  const loginTitle = 'LOGIN';
+  const registerTitle = 'REGISTER';
   return (
     <>
       <Container fluid className={classes.containerFluid}>
@@ -29,7 +31,7 @@ export default function CallToAction({
       </Container>
       <Modal show={showModal} onHide={() => dispatch(closeModal(false))}>
         <Modal.Header closeButton>
-          <Modal.Title>REGISTER</Modal.Title>
+        <Modal.Title>{formToDisplay === "login" ? loginTitle : registerTitle}</Modal.Title> 
         </Modal.Header>
         {formToDisplay === "login" ? <LoginForm /> : <RegisterForm />}
       </Modal>

@@ -13,6 +13,10 @@ export default function InventoryCategoriesDashboard() {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.category);
   const { loading } = useSelector((state) => state.async);
+  const { currentUser } = useSelector((state) => state.auth);
+  const currentUserCategories = categories.filter(
+    (category) => category?.userUid === currentUser?.uid
+  );
 
   useFirestoreCollection({
     query: () => listenToCategoriesFromFirestore(),
@@ -31,7 +35,7 @@ export default function InventoryCategoriesDashboard() {
               <InventoryListItemPlaceholder />
             </>
           )}
-          <InventoryCategoriesList loading={loading} categories={categories} />
+          <InventoryCategoriesList loading={loading} categories={currentUserCategories} />
         </Grid.Column>
       </Grid>
     </div>
