@@ -9,37 +9,39 @@ export default function AppointmentsReasonsNav() {
   const { responsiveClass } = useSelector((state) => state.addClass);
   return (
     <Navbar
-      fixed='top'
+      fixed="top"
       className={
         responsiveClass
           ? `${classes.topNavbar}`
           : `${classes.topNavbar} ${classes.responsive}`
       }
     >
-      <div className={classes.topNavbarLeftCol}>
-        <Navbar.Brand className={classes.topNavbarBrand} href='#home'>
-          Manage reasons
-        </Navbar.Brand>
-      </div>
-      <div className={classes.topNavbarRightCol}>
-        <Button
-          icon
-          size="small"
-          className={classes.topNavbarAddButton}
-          as={NavLink}
-          to="/appointments"
-        >
-          <Icon name="undo" className={classes.topNavbarAddButtonIcon} />
-        </Button>
-        <Button
-          icon
-          size="small"
-          className={classes.topNavbarAddButton}
-          as={NavLink}
-          to="/createReason"
-        >
-          <Icon name="add" className={classes.topNavbarAddButtonIcon} />
-        </Button>
+      <div className={classes.topNavbarReasonsContainer}>
+        <div className={classes.topNavbarReasonsLeftCol}>
+          <Navbar.Brand className={classes.topNavbarBrand} href="#home">
+            Manage reasons
+          </Navbar.Brand>
+        </div>
+        <div className={classes.topNavbarReasonsRightCol}>
+          <Button
+            icon
+            size="small"
+            className={classes.topNavbarAddButton}
+            as={NavLink}
+            to="/appointments"
+          >
+            <Icon name="undo" className={classes.topNavbarAddButtonIcon} />
+          </Button>
+          <Button
+            icon
+            size="small"
+            className={classes.topNavbarAddButton}
+            as={NavLink}
+            to="/createReason"
+          >
+            <Icon name="add" className={classes.topNavbarAddButtonIcon} />
+          </Button>
+        </div>
       </div>
     </Navbar>
   );

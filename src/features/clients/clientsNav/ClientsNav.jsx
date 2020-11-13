@@ -18,39 +18,41 @@ export default function ClientsNav({ setText }) {
   return (
     <div>
       <Navbar
-        fixed='top'
+        fixed="top"
         className={
           responsiveClass
             ? `${classes.topNavbar}`
             : `${classes.topNavbar} ${classes.responsive}`
         }
       >
-        <div className={classes.topNavbarLeftCol}>
-          <Navbar.Brand className={classes.topNavbarBrand}>
-            Clients
-          </Navbar.Brand>
-        </div>
-        <div className={classes.topNavbarRightCol}>
-          <FormField className={`ui icon input`}>
-          <Input
-              className={classes.topNavbarSearch}
-              icon={
-                <Icon name="search" color="teal" style={{ marginRight: 5 }} />
-              }
+        <div className={classes.topNavbarClientsContainer}>
+          <div className={classes.topNavbarClientsLeftCol}>
+            <Navbar.Brand className={classes.topNavbarBrand}>
+              Clients
+            </Navbar.Brand>
+          </div>
+          <div className={classes.topNavbarClientsRightCol}>
+            <FormField className={`ui icon input ${classes.clientsForm}`}>
+              <Input
+                className={classes.topNavbarSearch}
+                icon={
+                  <Icon name="search" color="teal" style={{ marginRight: 5 }} />
+                }
+                size="small"
+                placeholder="Search"
+                onKeyPress={handleSearch}
+              ></Input>
+            </FormField>
+            <Button
+              icon
               size="small"
-              placeholder="Search"
-              onKeyPress={handleSearch}
-            ></Input>
-          </FormField>
-          <Button
-            icon
-            size="small"
-            className={classes.topNavbarAddButton}
-            as={NavLink}
-            to="/createClient"
-          >
-            <Icon name="add" className={classes.topNavbarAddButtonIcon} />
-          </Button>
+              className={classes.topNavbarAddButton}
+              as={NavLink}
+              to="/createClient"
+            >
+              <Icon name="add" className={classes.topNavbarAddButtonIcon} />
+            </Button>
+          </div>
         </div>
       </Navbar>
     </div>

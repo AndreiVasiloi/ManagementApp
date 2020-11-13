@@ -12,13 +12,17 @@ import { listenToClientsFromFirestore } from "../../../app/firestore/firestoreSe
 export default function ClientsDashboard() {
   const dispatch = useDispatch();
   const { clients } = useSelector((state) => state.client);
+  const { currentUser } = useSelector((state) => state.auth);
+  const currentUserClients = clients.filter(
+    (client) => client?.userUid === currentUser?.uid
+  );
   const { loading } = useSelector((state) => state.async);
   const [text, setText] = useState("");
   const textLowered = text.trim().toLowerCase();
   const filteredClients =
     text === ""
-      ? clients
-      : clients.filter((client) =>
+      ? currentUserClients
+      : currentUserClients.filter((client) =>
           handleFilter(client, textLowered)
         );
 

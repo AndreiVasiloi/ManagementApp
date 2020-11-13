@@ -12,14 +12,18 @@ import { listenToExpensesFromFirestore } from "../../../app/firestore/firestoreS
 export default function ClientsDashboard() {
   const dispatch = useDispatch();
   const { expenses } = useSelector((state) => state.expense);
+  const { currentUser } = useSelector((state) => state.auth);
+  const currentUserExpenses = expenses.filter(
+    (expense) => expense?.userUid === currentUser?.uid
+  );
   const { loading } = useSelector((state) => state.async);
   const [text, setText] = useState("");
   const textLowered = text.trim().toLowerCase();
   const [predicate, setPredicate] = useState(new Map([["sort", "name"]]));
   const filteredExpenses =
     text === ""
-      ? expenses
-      : expenses.filter((expense) => handleFilter(expense, textLowered));
+      ? currentUserExpenses
+      : currentUserExpenses.filter((expense) => handleFilter(expense, textLowered));
 
   function handleFilter(expense, text) {
     const keys = Object.keys(expense).filter((key) => key !== "id");

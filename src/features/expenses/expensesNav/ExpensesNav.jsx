@@ -18,39 +18,41 @@ export default function ExpensesNav({ setText }) {
   return (
     <div>
       <Navbar
-        fixed='top'
+        fixed="top"
         className={
           responsiveClass
             ? `${classes.topNavbar}`
             : `${classes.topNavbar} ${classes.responsive}`
         }
       >
-        <div className={classes.topNavbarLeftCol}>
-          <Navbar.Brand className={classes.topNavbarBrand}>
-            Expenses
-          </Navbar.Brand>
-        </div>
-        <div className={classes.topNavbarRightCol}>
-          <FormField className={`ui icon input`}>
-          <Input
-              className={classes.topNavbarSearch}
-              icon={
-                <Icon name="search" color="teal" style={{ marginRight: 5 }} />
-              }
+        <div className={classes.topNavbarExpensesContainer}>
+          <div className={classes.topNavbarExpensesLeftCol}>
+            <Navbar.Brand className={classes.topNavbarBrand}>
+              Expenses
+            </Navbar.Brand>
+          </div>
+          <div className={classes.topNavbarExpensesRightCol}>
+            <FormField className={`ui icon input`}>
+              <Input
+                className={classes.topNavbarSearch}
+                icon={
+                  <Icon name="search" color="teal" style={{ marginRight: 5 }} />
+                }
+                size="small"
+                placeholder="Search"
+                onKeyPress={handleSearch}
+              ></Input>
+            </FormField>
+            <Button
+              icon
               size="small"
-              placeholder="Search"
-              onKeyPress={handleSearch}
-            ></Input>
-          </FormField>
-          <Button
-            icon
-            size="small"
-            className={classes.topNavbarAddButton}
-            as={NavLink}
-            to="/createExpense"
-          >
-            <Icon name="add" className={classes.topNavbarAddButtonIcon} />
-          </Button>
+              className={classes.topNavbarAddButton}
+              as={NavLink}
+              to="/createExpense"
+            >
+              <Icon name="add" className={classes.topNavbarAddButtonIcon} />
+            </Button>
+          </div>
         </div>
       </Navbar>
     </div>

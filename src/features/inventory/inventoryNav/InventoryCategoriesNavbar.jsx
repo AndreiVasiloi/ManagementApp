@@ -16,30 +16,32 @@ export default function InventoryCategoriesNavbar() {
           : `${classes.topNavbar} ${classes.responsive}`
       }
     >
-      <div className={classes.topNavbarLeftCol}>
-        <Navbar.Brand className={classes.topNavbarBrand} href="#home">
-          Manage categories
-        </Navbar.Brand>
-      </div>
-      <div className={classes.topNavbarRightCol}>
-        <Button
-          icon
-          size="small"
-          className={classes.topNavbarAddButton}
-          as={NavLink}
-          to="/inventory"
-        >
-          <Icon name="undo" className={classes.topNavbarAddButtonIcon} />
-        </Button>
-        <Button
-          icon
-          size="small"
-          className={classes.topNavbarAddButton}
-          as={NavLink}
-          to="/createCategory"
-        >
-          <Icon name="add" className={classes.topNavbarAddButtonIcon} />
-        </Button>
+      <div className={classes.topNavbarCategoriesContainer}>
+        <div className={classes.topNavbarCategoriesLeftCol}>
+          <Navbar.Brand className={classes.topNavbarBrand} href="#home">
+            Manage categories
+          </Navbar.Brand>
+        </div>
+        <div className={classes.topNavbarCategoriesRightCol}>
+          <Button
+            icon
+            size="small"
+            className={classes.topNavbarAddButton}
+            as={NavLink}
+            to="/inventory"
+          >
+            <Icon name="undo" className={classes.topNavbarAddButtonIcon} />
+          </Button>
+          <Button
+            icon
+            size="small"
+            className={classes.topNavbarAddButton}
+            as={NavLink}
+            to="/createCategory"
+          >
+            <Icon name="add" className={classes.topNavbarAddButtonIcon} />
+          </Button>
+        </div>
       </div>
     </Navbar>
   );
