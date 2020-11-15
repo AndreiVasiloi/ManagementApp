@@ -30,16 +30,14 @@ export default function MonthlyProfit({
 }) {
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.auth);
-  const firstDate = new Date(fullDateFirstDay);
-  const secondDate = new Date(fullDateLastDay);
+  const firstDate = new Date(fullDateFirstDay); // 1 oct
+  const secondDate = new Date(fullDateLastDay); // 31 oct
   const { appointmentsMonth } = useSelector((state) => state.appointment);
   const { expensesMonth } = useSelector((state) => state.expense);
-  const [predicate, setPredicate] = useState(
-    new Map([
-      ["firstDate", firstDate],
-      ["secondDate", secondDate],
-    ])
-  );
+  const predicate = new Map([
+    ["firstDate", firstDate],
+    ["secondDate", secondDate],
+  ]);
 
   const currentUserAppointments = appointmentsMonth.filter(
     (appointment) => appointment?.userUid === currentUser?.uid
@@ -56,23 +54,23 @@ export default function MonthlyProfit({
     (expense) => new Date(expense.purchaseDate)
   );
 
-  const monthName = MONTH_NAMES.reduce(() => MONTH_NAMES[month]);
+  const monthName = MONTH_NAMES[month];
 
   function handleSetPredicate(key, value) {
-    setPredicate(new Map(predicate.set(key, value)));
+    // setPredicate(new Map(predicate.set(key, value)));
   }
 
   useFirestoreCollection({
     query: () => getAppointmentsByMonth(predicate),
     data: (appointmentsMonth) =>
       dispatch(getAppointmentsMonth(appointmentsMonth)),
-    deps: [dispatch, predicate],
+    deps: [dispatch, month],
   });
 
   useFirestoreCollection({
     query: () => getExpensesByMonth(predicate),
     data: (expensesMonth) => dispatch(getExpensesMonth(expensesMonth)),
-    deps: [dispatch, predicate],
+    deps: [dispatch, month],
   });
 
   return (
@@ -90,7 +88,9 @@ export default function MonthlyProfit({
                 <Icon
                   className={classes.changeProfitDateIcon}
                   name="angle left"
-                  onClick={() => setMonth(month - 1)}
+                  onClick={() => {
+                    setMonth(month - 1);
+                  }}
                   disabled={month === 0}
                 />
               }
@@ -111,7 +111,9 @@ export default function MonthlyProfit({
                 <Icon
                   className={classes.changeProfitDateIcon}
                   name="angle right"
-                  onClick={() => setMonth(month + 1)}
+                  onClick={() => {
+                    setMonth(month + 1);
+                  }}
                   disabled={month === 11}
                 />
               }
