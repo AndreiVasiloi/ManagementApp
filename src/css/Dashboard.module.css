@@ -173,10 +173,40 @@
 
 /* media queries */
 
+@media screen and (max-width: 990px) {
+.appointmentsNameContent {
+  text-align: center !important;
+}
+}
+
+@media screen and (max-width: 850px) {
+  .headerDateContainer {
+    width: 30%;
+}
+}
+
+@media screen and (max-width: 800px) {
+  .calendar {
+    margin-top: 80px;
+  }
+}
+
 @media screen and (max-width: 768px) {
     .appointmentsName {
         text-align: center !important;
     }
+
+    .appointmentsModalContainer {
+      position: relative;
+      right: 53%;
+      top: 5px;
+      margin-top: 5px;
+  }
+
+  .headerDateContainer {
+    width: 35%;
+}
+
   }
   
 
@@ -194,12 +224,6 @@
   }
 }
 
-@media screen and (max-width: 800px) {
-  .calendar {
-    margin-top: 80px;
-  }
-}
-
 @media screen and (max-width: 600px) {
   .calendar {
     margin-top: 100px;
@@ -209,17 +233,12 @@
   }
 }
 
-@media screen and (max-width: 485px) {
-  .dashboardListContainer {
-    margin-top: 90px !important;
-  }
-}
 
 @media screen and (max-width: 540px) {
 
     .appointmentsModalContainer {
         position: relative;
-        right: 240px;
+        right: 50%;
         top: 5px;
         margin-top: 5px;
     }
@@ -234,11 +253,18 @@
 
 }
 
+@media screen and (max-width: 485px) {
+  .dashboardListContainer {
+    margin-top: 90px !important;
+  }
+}
+
+
 @media screen and (max-width: 414px) {
 
     .appointmentsModalContainer {
         position: relative;
-        right: 150px;
+        right: 45%;
         top: 5px;
         margin-top: 5px;
     }
@@ -257,7 +283,7 @@
 
     .appointmentsModalContainer {
         position: relative;
-        right: 130px;
+        right: 40%;
         top: 5px;
         margin-top: 5px;
     }
@@ -276,7 +302,7 @@
 
     .appointmentsModalContainer {
         position: relative;
-        right: 100px;
+        right: 40%;
         top: 5px;
         margin-top: 5px;
     }
@@ -295,7 +321,7 @@
 
     .appointmentsModalContainer {
         position: relative;
-        right: 100px;
+        right: 40%;
         top: 5px;
         margin-top: 5px;
     }
@@ -306,6 +332,11 @@
 
     .headerDateContainer {
         width: 55%;
+    }
+
+    .appointmentsReasonColor {
+     position: relative;
+     top: 25%;
     }
 
 }

@@ -89,6 +89,7 @@ function sendConfirmEmail(email, name) {
                         font-family: 'Arial Black', Gadget, sans-serif;
                         color: #797979;
                         text-align: center;
+                        margin: 0 auto;
                       "
                     >
                       Have a nice day!
@@ -102,6 +103,7 @@ function sendConfirmEmail(email, name) {
                         text-align: center;
                         color: #8d8d8d;
                         font-family: 'Arial Black', Gadget, sans-serif;
+                        margin: 0 auto;
                       "
                     >
                       Email sent by Andrei Vasiloi
@@ -115,6 +117,7 @@ function sendConfirmEmail(email, name) {
                         text-align: center;
                         color: #8d8d8d;
                         font-family: 'Arial Black', Gadget, sans-serif;
+                        margin: 0 auto;
                       "
                     >
                       © Copyright 2020 Andrei Vasiloi
@@ -128,7 +131,7 @@ function sendConfirmEmail(email, name) {
         </body>
       </html>
       
-      `
+      `,
     },
   });
 }

@@ -71,9 +71,9 @@ export default function AppointmentsListItem({ appointment }) {
                       </Item.Content>
                     </Item>
                   </Col>
-                  <Col lg={6} xs={4} md={5}>
+                  <Col lg={6} xs={4} md={5} className={classes.appointmentsNameContainer}>
                     <Item className={classes.appointmentsName}>
-                      <Item.Content>{appointment.name}</Item.Content>
+                      <Item.Content className={classes.appointmentsNameContent}>{appointment.name}</Item.Content>
                     </Item>
                   </Col>
                   <Col lg={2} xs={4} md={3} className={classes.appointmentsReasonContainer}>
