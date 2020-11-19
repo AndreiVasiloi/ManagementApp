@@ -20,10 +20,8 @@ export default function SignedInMenu() {
   async function handleSignOut() {
     try {
       await signOutFirebase();
-      history.push('/')
-    } catch (error) {
-      
-    }
+      history.push("/");
+    } catch (error) {}
   }
 
   return (
@@ -39,11 +37,18 @@ export default function SignedInMenu() {
         className={`${classes.navLink} ${classes.navLinkHeader}`}
         to={`/profile/${currentUserProfile?.id}`}
       >
-        <Image avatar spaced='right' src={currentUserProfile?.photoURL || '/assets/user.png'} />
+        <Image
+          avatar
+          spaced="right"
+          src={currentUserProfile?.photoURL || "/assets/user.png"}
+        />
         {currentUserProfile?.displayName}
       </Nav.Item>
       <Nav.Item
-        onClick={() => dispatch(addActiveClass("appointments"))}
+        onClick={() => {
+          dispatch(addActiveClass("appointments"));
+          dispatch(addResponsiveClass(!responsiveClass));
+        }}
         as={Link}
         className={
           activeClass === "appointments"
@@ -55,7 +60,10 @@ export default function SignedInMenu() {
         <Icon name="book" /> Appointments
       </Nav.Item>
       <Nav.Item
-        onClick={() => dispatch(addActiveClass("inventory"))}
+        onClick={() => {
+          dispatch(addActiveClass("inventory"));
+          dispatch(addResponsiveClass(!responsiveClass));
+        }}
         as={Link}
         className={
           activeClass === "inventory"
@@ -67,7 +75,10 @@ export default function SignedInMenu() {
         <Icon name="archive" /> Inventory
       </Nav.Item>
       <Nav.Item
-        onClick={() => dispatch(addActiveClass("profit"))}
+        onClick={() => {
+          dispatch(addActiveClass("profit"));
+          dispatch(addResponsiveClass(!responsiveClass));
+        }}
         as={Link}
         className={
           activeClass === "profit"
@@ -79,7 +90,10 @@ export default function SignedInMenu() {
         <Icon name="percent" /> Profit
       </Nav.Item>
       <Nav.Item
-        onClick={() => dispatch(addActiveClass("clients"))}
+        onClick={() => {
+          dispatch(addActiveClass("clients"));
+          dispatch(addResponsiveClass(!responsiveClass));
+        }}
         as={Link}
         className={
           activeClass === "clients"
@@ -91,7 +105,10 @@ export default function SignedInMenu() {
         <Icon name="users" /> Clients
       </Nav.Item>
       <Nav.Item
-        onClick={() => dispatch(addActiveClass("expenses"))}
+        onClick={() => {
+          dispatch(addActiveClass("expenses"));
+          dispatch(addResponsiveClass(!responsiveClass));
+        }}
         as={Link}
         className={
           activeClass === "expenses"
@@ -115,7 +132,10 @@ export default function SignedInMenu() {
         Sandbox
       </Nav.Item> */}
       <Nav.Item
-      onClick={() => dispatch(addActiveClass("profile"))}
+        onClick={() => {
+          dispatch(addActiveClass("profile"));
+          dispatch(addResponsiveClass(!responsiveClass));
+        }}
         as={Link}
         className={
           activeClass === "profile"

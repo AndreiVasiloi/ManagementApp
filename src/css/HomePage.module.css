@@ -167,39 +167,6 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
 }
 
-/* .descriptionContainer {
-  display: flex;
-  align-items: center;
-}
-
-.leftCol {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-  height: 90vh;
-}
-
-.leftColTextContainer {
-  text-align: center;
-} */
-
-/* .rightCol {
-  align-items: center;
-  background-image: url("../images/homePage.jpg") !important;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100vh;
-  width: 50%;
-  content: "";
-  top: 0;
-  left: 1;
-  bottom: 0;
-  right: 0;
-  position: absolute;
-  z-index: -1;
-} */
 
 /* Paragraphs */
 
@@ -294,14 +261,9 @@
 
 /* Headings */
 
-.bigHeading {
+.bigHeading, .sectionHeading {
   font-family: "Montserrat-Black";
   font-size: 3.5rem;
-  line-height: 1.5;
-}
-
-.sectionHeading {
-  font-size: 3rem;
   line-height: 1.5;
 }
 
@@ -406,6 +368,10 @@ margin: auto 0;
 
 /* Footer */
 
+.footerLink {
+  text-decoration: none !important;
+}
+
 .footer {
   text-align: center;
 }
@@ -436,5 +402,21 @@ margin: auto 0;
 
   .titleImage {
     position: static;
+  }
+}
+
+
+@media (max-width: 320px) {
+  .examplesTitleColumn {
+    margin-top: -20px;
+  }
+
+  .sectionHeading {
+    font-size: 2.5rem;
+    line-height: 1.5;
+  }
+
+  .testimonialText {
+    font-size: 1.5rem;
   }
 }

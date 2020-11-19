@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  Button,
   Header,
   Icon,
   Popup,
@@ -27,13 +26,11 @@ export default function AnnualProfit({ profit }) {
   const secondDate = new Date(year, 11, 31);
   const { appointmentsYear } = useSelector((state) => state.appointment);
   const { expensesYear } = useSelector((state) => state.expense);
-  const [predicate, setPredicate] = useState(
-    new Map([
-      ["firstDate", firstDate],
-      ["secondDate", secondDate],
-      ["sort", "expirationDate"],
-    ])
-  );
+  const predicate = new Map([
+    ["firstDate", firstDate],
+    ["secondDate", secondDate],
+    ["sort", "expirationDate"],
+  ]);
 
   const currentUserAppointments = appointmentsYear.filter(
     (appointment) => appointment?.userUid === currentUser?.uid
@@ -50,20 +47,16 @@ export default function AnnualProfit({ profit }) {
     (expense) => new Date(expense.purchaseDate)
   );
 
-  function handleSetPredicate(key, value) {
-    setPredicate(new Map(predicate.set(key, value)));
-  }
-
   useFirestoreCollection({
     query: () => getAppointmentsByYear(predicate),
     data: (appointmentsYear) => dispatch(getAppointmentsYear(appointmentsYear)),
-    deps: [dispatch, predicate],
+    deps: [dispatch, year],
   });
 
   useFirestoreCollection({
     query: () => getExpensesByYear(predicate),
     data: (expensesYear) => dispatch(getExpensesYear(expensesYear)),
-    deps: [dispatch, predicate],
+    deps: [dispatch, year],
   });
 
   return (
@@ -86,15 +79,6 @@ export default function AnnualProfit({ profit }) {
               content="previous year"
               position="top center"
             />
-            <Button
-              size="mini"
-              color="teal"
-              content="update year"
-              onClick={() => {
-                handleSetPredicate("firstDate", firstDate);
-                handleSetPredicate("secondDate", secondDate);
-              }}
-            />
             <Popup
               trigger={
                 <Icon
@@ -111,7 +95,9 @@ export default function AnnualProfit({ profit }) {
         <Statistic>
           <Statistic.Label>Profit</Statistic.Label>
           <Statistic.Value>
-            {profit(currentUserAppointments, currentUserExpenses)}
+            {profit(currentUserAppointments, currentUserExpenses) === undefined
+              ? "0"
+              : profit(currentUserAppointments, currentUserExpenses)}
           </Statistic.Value>
         </Statistic>
         <AnnualChart

@@ -22,6 +22,10 @@
   color: #ACADAD;
 }
 
+.day:hover, .calendarChangeDateIcons:hover {
+  cursor: pointer;
+}
+
 .day:focus {
   border: none;
   outline: none;

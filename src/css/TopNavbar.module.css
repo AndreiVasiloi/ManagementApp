@@ -29,8 +29,7 @@
 
 .topNavbarAppointmentsRightCol,
 .topNavbarReasonsRightCol,
-.topNavbarCategoriesRightCol
-.topNavbarProfitRightCol,
+.topNavbarCategoriesRightCol .topNavbarProfitRightCol,
 .topNavbarClientsRightCol,
 .topNavbarExpensesRightCol {
   text-align: right;
@@ -46,17 +45,23 @@
   float: right !important;
 }
 
-.topNavbarSearch > input {
+.topNavbarSearch > input,
+.topNavbarClientsSearch > input,
+.topNavbarExpensesSearch > input {
   margin-right: 10px !important;
   border: 1px solid #14b1ab !important;
   height: 33px !important;
 }
 
-.topNavbarSearch > input::placeholder {
+.topNavbarSearch > input::placeholder,
+.topNavbarClientsSearch > input::placeholder,
+.topNavbarExpensesSearch > input::placeholder {
   color: #14b1ab !important;
 }
 
-.topNavbarSearchIcon {
+.topNavbarSearchIcon,
+.topNavbarClientsSearch,
+.topNavbarExpensesSearch {
   color: #14b1ab !important;
 }
 
@@ -141,7 +146,7 @@
 
 @media screen and (max-width: 360px) {
   .topNavbarExpensesContainer {
-    flex-direction: column;
+    /* flex-direction: column; */
     justify-content: center;
     align-items: center;
   }
@@ -149,15 +154,65 @@
 
 @media screen and (max-width: 335px) {
   .topNavbarClientsContainer {
-    flex-direction: column;
+    /* flex-direction: column; */
     justify-content: center;
     align-items: center;
   }
 }
 
-
 @media screen and (max-width: 700px) {
   .topNavbar.responsive {
     margin-top: 499px;
   }
+}
+
+@media screen and (max-width: 280px) {
+  .topNavbar.responsive {
+    margin-top: 450px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .topNavbar.responsive {
+    margin-top: 450px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .topNavbar.responsive {
+    margin-top: 450px;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .topNavbar.responsive {
+    margin-top: 445px;
+  }
+}
+
+
+
+
+@media screen and (max-width: 320px) {
+  .topNavbarBrand {
+    font-size: 1rem;
+  }
+
+  .topNavbarSearch {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .topNavbarClientsSearch, .topNavbarExpensesSearch {
+    width: 90%;
+  }
+
+  .clientsForm, .expensesForm {
+    width: 70%;
+  }
+
+  .topNavbarExpensesRightCol {
+    margin-left: -10px;
+  }
+
 }

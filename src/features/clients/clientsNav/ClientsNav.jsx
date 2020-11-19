@@ -34,7 +34,7 @@ export default function ClientsNav({ setText }) {
           <div className={classes.topNavbarClientsRightCol}>
             <FormField className={`ui icon input ${classes.clientsForm}`}>
               <Input
-                className={classes.topNavbarSearch}
+                className={classes.topNavbarClientsSearch}
                 icon={
                   <Icon name="search" color="teal" style={{ marginRight: 5 }} />
                 }

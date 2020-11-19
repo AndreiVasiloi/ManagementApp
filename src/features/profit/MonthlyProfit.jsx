@@ -1,12 +1,5 @@
-import React, { useState } from "react";
-import {
-  Button,
-  Header,
-  Icon,
-  Popup,
-  Segment,
-  Statistic,
-} from "semantic-ui-react";
+import React from "react";
+import { Header, Icon, Popup, Segment, Statistic } from "semantic-ui-react";
 import { MONTH_NAMES } from "../appointments/appointmentsConstants";
 import { useDispatch, useSelector } from "react-redux";
 import useFirestoreCollection from "../../app/hooks/useFirestoreCollection";
@@ -56,10 +49,6 @@ export default function MonthlyProfit({
 
   const monthName = MONTH_NAMES[month];
 
-  function handleSetPredicate(key, value) {
-    // setPredicate(new Map(predicate.set(key, value)));
-  }
-
   useFirestoreCollection({
     query: () => getAppointmentsByMonth(predicate),
     data: (appointmentsMonth) =>
@@ -81,7 +70,6 @@ export default function MonthlyProfit({
       <Segment>
         <Header textAlign="center">
           {monthName}
-          <Header.Subheader>{year}</Header.Subheader>
           <Header.Subheader>
             <Popup
               trigger={
@@ -97,15 +85,7 @@ export default function MonthlyProfit({
               content="previous month"
               position="top center"
             />
-            <Button
-              size="mini"
-              color="teal"
-              content="update month"
-              onClick={() => {
-                handleSetPredicate("firstDate", firstDate);
-                handleSetPredicate("secondDate", secondDate);
-              }}
-            />
+            {year}
             <Popup
               trigger={
                 <Icon
@@ -125,7 +105,9 @@ export default function MonthlyProfit({
         <Statistic>
           <Statistic.Label>Profit</Statistic.Label>
           <Statistic.Value>
-            {profit(currentUserAppointments, currentUserExpenses)}
+            {profit(currentUserAppointments, currentUserExpenses) === undefined
+              ? "0"
+              : profit(currentUserAppointments, currentUserExpenses)}
           </Statistic.Value>
         </Statistic>
         <MonthlyChart

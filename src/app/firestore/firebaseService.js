@@ -32,7 +32,7 @@ function sendConfirmEmail(email, confirmEmailCode) {
             <title>Email Template</title>
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           </head>
-          <body style="margin: 0; padding: 0;background-color: #f3f3f3">
+          <body style="margin: 0; padding: 0; background-color: #f3f3f3">
             <table
               align="center"
               border="0"
@@ -44,10 +44,8 @@ function sendConfirmEmail(email, confirmEmailCode) {
               <tr>
                 <td align="center" bgcolor="#006a71" style="padding: 20px 0 20px 0">
                   <img
-                    src="https://i.ibb.co/SXzSRSV/confirm-Email2.png"
+                    src="https://i.ibb.co/b54MVX1/confirm-Email.png"
                     alt="Creating Email Magic."
-                    width="200"
-                    height="140"
                     style="display: block"
                   />
                 </td>
@@ -65,10 +63,10 @@ function sendConfirmEmail(email, confirmEmailCode) {
                       <td>
                         <h1
                           style="
-                          text-align: center;
+                            text-align: center;
                             font-family: 'Arial Black', Gadget, sans-serif;
                             color: #4c4c4c;
-                            font-size: 2.5vw;
+                            font-weight: bold;
                           "
                         >
                           Email Confirmation
@@ -77,28 +75,52 @@ function sendConfirmEmail(email, confirmEmailCode) {
                     </tr>
                     <tr>
                       <td style="padding: 20px 0 30px 0">
-                        <p style="margin: 0; color: #8d8d8d; font-size: 1.5vw; text-align: center;">
-                          Hey, you\`re almost ready to start enjoying Reverto.<br> Simply
-                          click the big turquoise button below to verify your email
-                          address.
+                        <p
+                          style="
+                            margin: 0;
+                            color: #8d8d8d;
+                            font-size: 130%;
+                            text-align: center;
+                          "
+                        >
+                          Hey, you\`re almost ready to start enjoying Reverto.<br />
+                          Simply click the big turquoise button below to verify your
+                          email address.
                         </p>
                       </td>
                     </tr>
                     <tr>
-                      <td style="text-align: center;">
-                        <button
-                          style="
-                            background-color: #14b1ab;
-                            color: #fff;
-                            border-radius: 50px;
-                            height: 2.5vw;
-                            width: 15vw;
-                            border: none;
-                            margin: 20px auto 0 auto;
-                          "
+                      <td style="text-align: center">
+                        <table
+                          border="0"
+                          cellpadding="0"
+                          cellspacing="0"
+                          width="100%"
+                          style="border-collapse: collapse"
                         >
-                          Verify email address
-                        </button>
+                          <tr>
+                            <td style="font-size: 0; line-height: 0;" width="20"></td>
+                            <td  width="260" align="center">
+                              <a href="${confirmUrl}" style="text-decoration: none; text-align: center">
+                                <button
+                                  style="
+                                  margin: 0 auto;
+                                    background-color: #14b1ab;
+                                    color: #fff;
+                                    border-radius: 50px;
+                                    height: 40px;
+                                    width: 40%;
+                                    border: none;
+                                    margin: 20px auto 0 auto;
+                                  "
+                                >
+                                  Verify email address
+                                </button>
+                              </a>
+                            </td>
+                            <td style="font-size: 0; line-height: 0;" width="20"></td>
+                          </tr>
+                        </table>
                       </td>
                     </tr>
                   </table>
@@ -116,40 +138,40 @@ function sendConfirmEmail(email, confirmEmailCode) {
                     <tr>
                       <td>
                         <h1
-                        style="
-                          font-family: 'Arial Black', Gadget, sans-serif;
-                          color: #797979;
-                          text-align: center;
-                        "
-                      >
-                        Stay in touch
-                      </h1>
+                          style="
+                            font-family: 'Arial Black', Gadget, sans-serif;
+                            color: #797979;
+                            text-align: center;
+                          "
+                        >
+                          Stay in touch
+                        </h1>
                       </td>
                     </tr>
                     <tr>
                       <td>
                         <h4
-                        style="
-                          text-align: center;
-                          color: #8d8d8d;
-                          font-family: 'Arial Black', Gadget, sans-serif;
-                        "
-                      >
-                        Email sent by Andrei Vasiloi
-                      </h4>
+                          style="
+                            text-align: center;
+                            color: #8d8d8d;
+                            font-family: 'Arial Black', Gadget, sans-serif;
+                          "
+                        >
+                          Email sent by Andrei Vasiloi
+                        </h4>
                       </td>
                     </tr>
                     <tr>
                       <td>
                         <h4
-                        style="
-                          text-align: center;
-                          color: #8d8d8d;
-                          font-family: 'Arial Black', Gadget, sans-serif;
-                        "
-                      >
-                        © Copyright 2020 Andrei Vasiloi
-                      </h4>
+                          style="
+                            text-align: center;
+                            color: #8d8d8d;
+                            font-family: 'Arial Black', Gadget, sans-serif;
+                          "
+                        >
+                          © Copyright 2020 Andrei Vasiloi
+                        </h4>
                       </td>
                     </tr>
                   </table>

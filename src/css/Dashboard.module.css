@@ -1,207 +1,316 @@
 /* containers */
 
 .headerDateContainer {
-    display: flex;
-    width: 25%;
-    justify-content: space-around;
-    color: #858E9D;
+  display: flex;
+  width: 25%;
+  justify-content: space-around;
+  color: #858e9d;
 }
 
 .displayDaysIconsContainer {
-    float: right;
-    position: relative;
-    margin-top: 10px ;
-    z-index: 1;
+  float: right;
+  position: relative;
+  margin-top: 10px;
+  z-index: 1;
 }
 
 .dashboardContainer {
-    margin-left: 200px;
-    padding: 3% 2% 0 2% !important;
+  margin-left: 200px;
+  padding: 3% 2% 0 2% !important;
 }
 
 .dashboardListContainer {
-    border: none !important;
-    box-shadow: none !important;
- }
+  border: none !important;
+  box-shadow: none !important;
+}
 
 .inventoryTitlesContainer {
-    font-weight: bold;
-    color: #14b1ab;
+  font-weight: bold;
+  color: #14b1ab;
 }
 
 .dashboardListElement {
-    border: none !important;
-    box-shadow: none !important;
-    color: #697686 !important;
-    background-color: #fff !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #697686 !important;
+  background-color: #fff !important;
 }
 
 .changeDateContainer {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 }
 
 .chartContainer {
-    position: relative;
-    left: 50px;
+  position: relative;
+  left: 50px;
 }
 
 .changeDateBtnContainer {
-    text-align: center;
+  text-align: center;
 }
 
 /* dashboard dropdown button */
 
 .edit {
-    position: relative;
-    color: #14b1ab;
+  position: relative;
+  color: #14b1ab;
 }
 
-
 .delete {
-    position: relative;
-    color: #ff414d;
+  position: relative;
+  color: #ff414d;
 }
 
 .DashboardDropdownButton::after {
-content: none!important;
+  content: none !important;
 }
 
 .DashboardDropdownButton {
-    background-color: transparent!important;
-    border: none!important;
-    color:  #14b1ab!important;
-    outline: 0 !important;
+  background-color: transparent !important;
+  border: none !important;
+  color: #14b1ab !important;
+  outline: 0 !important;
 }
 
-.DashboardDropdownButton:focus, .DashboardDropdownButton:active {
-border: none !important;
-outline: none !important;
-box-shadow: none !important;
+.DashboardDropdownButton:focus,
+.DashboardDropdownButton:active {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* expired or not */
 
 .expirationDateRed {
-    color: red;
+  color: red;
 }
 
 .expirationDateBlack {
-    color: black;
+  color: black;
 }
 
 /* appointments */
 
 .reasonHeader {
-    color: #ACADAd !important; 
+  color: #acadad !important;
 }
 
 .itemDropdown {
-    text-align: right !important;
+  text-align: right !important;
 }
 
 .hour {
-    border-right: 4px solid  #14b1ab;
+  border-right: 4px solid #14b1ab;
 }
 
 .clockIcon {
-    color: #14b1ab !important;
+  color: #14b1ab !important;
 }
 
 .appointmentsName {
-    text-align: left !important;
-    position: relative;
-    top: 10px;
+  text-align: left !important;
+  position: relative;
+  top: 10px;
 }
 
-.allDaysBtn, .twoDaysBtn {
-   background-color:#fff !important;
+.allDaysBtn,
+.twoDaysBtn {
+  background-color: #fff !important;
 }
 
 .allDaysBtn {
-    margin-left: 10px !important;
+  margin-left: 10px !important;
 }
 
-.twoDaysIcon, .allDaysIcon {
-    color: #14b1ab !important;
+.twoDaysIcon,
+.allDaysIcon {
+  color: #14b1ab !important;
 }
 
 .calendar {
-    margin-top: 40px;
+  margin-top: 40px;
 }
 
 /* profit */
 
 .changeProfitDateIcon {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .changeDateBtn {
-    background-color: #14b1ab !important;
-    border:  1px solid #14b1ab !important;
-    margin-left: 10px;
-    height: 32px!important;
+  background-color: #14b1ab !important;
+  border: 1px solid #14b1ab !important;
+  margin-left: 10px;
+  height: 32px !important;
 }
 
-.changeDateBtn:focus, .changeDateBtn:active {
-    outline: none;
-    box-shadow: none;
+.changeDateBtn:focus,
+.changeDateBtn:active {
+  outline: none;
+  box-shadow: none;
 }
 
 .activeMonth {
-    color: #14b1ab;
-    font-weight: bold;
-    width: 50%;
+  color: #14b1ab;
+  font-weight: bold;
+  width: 50%;
 }
 
 .profitText {
-    position: relative;
-    top: 100px;
-    text-align: center;
+  position: relative;
+  top: 100px;
+  text-align: center;
 }
 
 .profitMonthsList {
-    text-align: left !important;
+  text-align: left !important;
 }
 
 .chartCalendar {
-    text-align: right !important;
+  text-align: right !important;
 }
 
 /* media queries */
 
+@media screen and (max-width: 768px) {
+    .appointmentsName {
+        text-align: center !important;
+    }
+  }
+  
+
 @media screen and (max-width: 700px) {
-    .dashboardContainer {
-      margin: 45px 0 0 0;
-    }
-    .DashboardDropdownButton {
+  .dashboardContainer {
+    margin: 45px 0 0 0;
+  }
+  .DashboardDropdownButton {
+    position: relative;
+    right: 10px;
+  }
+
+  .calendar {
+    margin-top: 40px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .calendar {
+    margin-top: 80px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .calendar {
+    margin-top: 100px;
+  }
+  .dashboardListContainer {
+    margin-top: 70px !important;
+  }
+}
+
+@media screen and (max-width: 485px) {
+  .dashboardListContainer {
+    margin-top: 90px !important;
+  }
+}
+
+@media screen and (max-width: 540px) {
+
+    .appointmentsModalContainer {
         position: relative;
-        right: 10px;
+        right: 240px;
+        top: 5px;
+        margin-top: 5px;
     }
 
-    .calendar{
-        margin-top: 40px;
+    .appointmentsReasonContainer {
+        margin-top: 5px;
     }
-  }
 
-  @media screen and (max-width: 800px) {
-    .calendar {
-        margin-top: 80px;
+    .headerDateContainer {
+        width: 40%;
     }
-  }
 
-  @media screen and (max-width: 600px) {
-    .calendar {
-        margin-top: 100px;
-    }
-    .dashboardListContainer {
-        margin-top: 70px !important;
-    }
-  }
+}
 
-  @media screen and (max-width: 485px) {
-    .dashboardListContainer {
-        margin-top: 90px !important;
+@media screen and (max-width: 414px) {
+
+    .appointmentsModalContainer {
+        position: relative;
+        right: 150px;
+        top: 5px;
+        margin-top: 5px;
     }
-  }
+
+    .appointmentsReasonContainer {
+        margin-top: 5px;
+    }
+
+    .headerDateContainer {
+        width: 55%;
+    }
+
+}
+
+@media screen and (max-width: 375px) {
+
+    .appointmentsModalContainer {
+        position: relative;
+        right: 130px;
+        top: 5px;
+        margin-top: 5px;
+    }
+
+    .appointmentsReasonContainer {
+        margin-top: 5px;
+    }
+
+    .headerDateContainer {
+        width: 55%;
+    }
+
+}
+
+@media screen and (max-width: 320px) {
+
+    .appointmentsModalContainer {
+        position: relative;
+        right: 100px;
+        top: 5px;
+        margin-top: 5px;
+    }
+
+    .appointmentsReasonContainer {
+        margin-top: 5px;
+    }
+
+    .headerDateContainer {
+        width: 55%;
+    }
+
+}
+
+@media screen and (max-width: 280px) {
+
+    .appointmentsModalContainer {
+        position: relative;
+        right: 100px;
+        top: 5px;
+        margin-top: 5px;
+    }
+
+    .appointmentsReasonContainer {
+        margin-top: 5px;
+    }
+
+    .headerDateContainer {
+        width: 55%;
+    }
+
+}
+
+
+
+
 

@@ -32,9 +32,9 @@ export default function ExpensesNav({ setText }) {
             </Navbar.Brand>
           </div>
           <div className={classes.topNavbarExpensesRightCol}>
-            <FormField className={`ui icon input`}>
+            <FormField className={`ui icon input ${classes.expensesForm}`}>
               <Input
-                className={classes.topNavbarSearch}
+                className={classes.topNavbarExpensesSearch}
                 icon={
                   <Icon name="search" color="teal" style={{ marginRight: 5 }} />
                 }

@@ -36,12 +36,10 @@ export default function CustomDatesProfit({
   );
   const { appointmentsCustomDate } = useSelector((state) => state.appointment);
   const { expensesCustomDate } = useSelector((state) => state.expense);
-  const [predicate, setPredicate] = useState(
-    new Map([
-      ["firstDate", startDate],
-      ["secondDate", endDate],
-    ])
-  );
+  const predicate = new Map([
+    ["firstDate", startDate],
+    ["secondDate", endDate],
+  ]);
 
   const diffInDays = differenceInDays(new Date(endDate), new Date(startDate));
   const daysLength = Array.from(Array(diffInDays).keys());
@@ -61,22 +59,18 @@ export default function CustomDatesProfit({
     (expense) => new Date(expense.purchaseDate)
   );
 
-  function handleSetPredicate(key, value) {
-    setPredicate(new Map(predicate.set(key, value)));
-  }
-
   useFirestoreCollection({
     query: () => getAppointmentsByCustomDates(predicate),
     data: (appointmentsCustomDate) =>
       dispatch(getAppointmentsCustomDate(appointmentsCustomDate)),
-    deps: [dispatch, predicate],
+    deps: [dispatch, startDate, endDate],
   });
 
   useFirestoreCollection({
     query: () => getExpensesByCustomDates(predicate),
     data: (expensesCustomDates) =>
       dispatch(getExpensesCustomDates(expensesCustomDates)),
-    deps: [dispatch, predicate],
+    deps: [dispatch, startDate, endDate],
   });
 
   return (
@@ -85,30 +79,19 @@ export default function CustomDatesProfit({
       className={classes.dashboardListContainer}
     >
       <Segment>
-        <div style={{textAlign: "center"}}>
-        <Header>
-          <Header.Subheader>
-            {format(startDate, "MMMM d, yyyy")} -{" "}
-            {format(endDate, "MMMM d, yyyy")}
-          </Header.Subheader>
-        </Header>
-        <Button.Group>
-        <Button
+        <div style={{ textAlign: "center" }}>
+          <Header>
+            <Header.Subheader>
+              {format(startDate, "MMMM d, yyyy")} -{" "}
+              {format(endDate, "MMMM d, yyyy")}
+            </Header.Subheader>
+          </Header>
+          <Button
             size="mini"
             color="teal"
             content="show calendar"
             onClick={() => setShowCalendar(!showCalendar)}
           />
-          <Button
-            size="mini"
-            color="teal"
-            content="update"
-            onClick={() => {
-              handleSetPredicate("firstDate", startDate);
-              handleSetPredicate("secondDate", endDate);
-            }}
-          />
-        </Button.Group>
         </div>
         <div className={classes.chartCalendar}>
           {showCalendar && (
@@ -116,16 +99,18 @@ export default function CustomDatesProfit({
               onChange={(date) => {
                 setStartDate(date[0]);
                 setEndDate(new Date(date[1].setDate(date[1].getDate() + 1)));
+                setShowCalendar(!showCalendar);
               }}
               selectRange={true}
             />
           )}
-    
         </div>
         <Statistic>
           <Statistic.Label>Profit</Statistic.Label>
           <Statistic.Value>
-            {profit(currentUserAppointments, currentUserExpenses)}
+            {profit(currentUserAppointments, currentUserExpenses) === undefined
+              ? "0"
+              : profit(currentUserAppointments, currentUserExpenses)}
           </Statistic.Value>
         </Statistic>
         <CustomDatesChart
