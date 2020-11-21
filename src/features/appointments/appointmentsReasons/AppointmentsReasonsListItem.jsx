@@ -3,7 +3,7 @@ import { Button, Col, Container, Dropdown, Modal, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Grid, Icon, Item, Segment } from "semantic-ui-react";
+import { Icon, Item, Segment } from "semantic-ui-react";
 import { deleteReasonInFirestore } from "../../../app/firestore/firestoreService";
 import classes from "../../../css/Dashboard.module.css";
 

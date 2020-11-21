@@ -20,13 +20,18 @@ export default function RegisterForm() {
         password: Yup.string().required(),
       })}
       onSubmit={async (values, { setSubmitting, setErrors }) => {
-        try {
-          await registerInFirebase(values);
-          setSubmitting(false);
-          dispatch(closeModal());
-        } catch (error) {
-          setErrors({ auth: error.message });
-          setSubmitting(false);
+
+        if (values.confirmPassword === values.password) {
+          try {
+            await registerInFirebase(values);
+            setSubmitting(false);
+            dispatch(closeModal());
+          } catch (error) {
+            setErrors({ auth: error.message });
+            setSubmitting(false);
+          }
+        } else {
+          setErrors({ auth: "Passwords don`t match" });
         }
       }}
     >
@@ -38,6 +43,11 @@ export default function RegisterForm() {
             <MyTextInput
               name='password'
               placeholder='Password'
+              type='password'
+            />
+              <MyTextInput
+              name='confirmPassword'
+              placeholder='Confirm Password'
               type='password'
             />
             {errors.auth && (

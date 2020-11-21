@@ -50,8 +50,6 @@ export default function ConfirmEmail({ match }) {
   return (
     <div className={classes.dashboardContainer}>
       <ConfirmEmailNavbar />
-      {/* <div>Email: {email}</div>
-      <div>Code: {code}</div> */}
       {renderConfirmationEmail(checkState)}
     </div>
   );

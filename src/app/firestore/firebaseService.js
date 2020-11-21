@@ -221,7 +221,6 @@ export async function socialLogin(selectedProvider) {
 }
 
 export function updateUserPassword(creds) {
-  debugger;
   const user = firebase.auth().currentUser;
   return user.updatePassword(creds.newPassword1);
 }

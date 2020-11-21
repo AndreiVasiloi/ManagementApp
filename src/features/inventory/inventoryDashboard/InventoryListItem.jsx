@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Segment, Item, Grid, Icon, Popup, Label } from "semantic-ui-react";
+import { Segment, Item, Icon, Popup, Label } from "semantic-ui-react";
 import classes from "../../../css/Dashboard.module.css";
 import { Link } from "react-router-dom";
 import { deleteItemInFirestore } from "../../../app/firestore/firestoreService";
