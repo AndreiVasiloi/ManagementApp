@@ -2,6 +2,7 @@ import React from "react";
 import { Header, Segment } from "semantic-ui-react";
 import InventoryCategoriesListItem from "./InventoryCategoriesListItem";
 import classes from "../../../css/Dashboard.module.css";
+import InventoryCategoriesListTitles from "./InventoryCategoriesListTitles";
 
 export default function InventoryCategoriesList({ categories }) {
   return (
@@ -10,6 +11,7 @@ export default function InventoryCategoriesList({ categories }) {
       className={classes.dashboardListContainer}
     >
       <Segment>
+        <InventoryCategoriesListTitles />
         {categories.length > 0 ? (
           categories.map((category) => (
             <InventoryCategoriesListItem
@@ -19,10 +21,10 @@ export default function InventoryCategoriesList({ categories }) {
           ))
         ) : (
           <Header
-            size='huge'
-            textAlign='center'
-            color='teal'
-            content='No categories to display'
+            size="huge"
+            textAlign="center"
+            color="teal"
+            content="No categories to display"
           />
         )}
       </Segment>

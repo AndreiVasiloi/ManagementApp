@@ -37,19 +37,19 @@ export default function InventoryListItem({ item }) {
         <Segment.Group className={classes.dashboardListElement}>
           <Segment textAlign="center">
             <Item.Group>
-              <Container fluid>
+              <Container fluid >
                 <Row>
-                  <Col>
+                  <Col lg={3} xs={3}>
                     <Item>
-                      <Item.Content>{item.category}</Item.Content>
+                      <Item.Content className={classes.inventoryText}>{item.category}</Item.Content>
                     </Item>
                   </Col>
-                  <Col>
+                  <Col lg={3} xs={3}>
                     <Item>
-                      <Item.Content>{item.name}</Item.Content>
+                      <Item.Content className={classes.inventoryText}>{item.name}</Item.Content>
                     </Item>
                   </Col>
-                  <Col>
+                  <Col lg={3} xs={2}>
                     <Item>
                       <Item.Content
                         className={
@@ -64,7 +64,7 @@ export default function InventoryListItem({ item }) {
                           <Popup
                             content={item.expirationDate}
                             trigger={
-                              <Label basic color="red" content="Expired" />
+                              <Label basic color="red" content="Expired" className={classes.inventoryLabel}/>
                             }
                           />
                         ) : (
@@ -73,12 +73,12 @@ export default function InventoryListItem({ item }) {
                       </Item.Content>
                     </Item>
                   </Col>
-                  <Col>
-                    <Item>
-                      <Item.Content>{item.amount} / buc.</Item.Content>
+                  <Col lg={2} xs={2}>
+                    <Item className={classes.inventoryAmountText}>
+                      <Item.Content className={classes.inventoryText}>{item.amount} / buc.</Item.Content>
                     </Item>
                   </Col>
-                  <Col>
+                  <Col lg={1} xs={1}>
                     <Dropdown>
                       <Dropdown.Toggle
                         variant="success"

@@ -64,25 +64,26 @@ export default function AppointmentsListItem({ appointment }) {
                       </Item.Content>
                     </Item>
                   </Col>
-                  <Col lg={2} xs={4} md={1}>
+                  <Col lg={1} xs={4} md={1}>
                     <Item className={classes.labelItem}>
                       <Item.Content>
                         <Label size="big" className={classes.label}>{getNameFirstLetters}</Label>
                       </Item.Content>
                     </Item>
                   </Col>
-                  <Col lg={6} xs={4} md={5} className={classes.appointmentsNameContainer}>
+                  <Col lg={2} xs={4} md={5} className={classes.appointmentsNameContainer}>
                     <Item className={classes.appointmentsName}>
                       <Item.Content className={classes.appointmentsNameContent}>{appointment.name}</Item.Content>
                     </Item>
                   </Col>
-                  <Col lg={2} xs={4} md={3} className={classes.appointmentsReasonContainer}>
+                  <Col lg={7} xs={4} md={3} className={classes.appointmentsReasonContainer}>
                     <Item>
                       <Item.Content>
                         <Item.Header className={classes.reasonHeader}>
                           REASON
                         </Item.Header>
                         <Item.Description
+                        className={classes.reasonHeaderText}
                           style={{ color: `${getReasonColor}` }}
                         >
                           {appointment.reason}
@@ -105,7 +106,7 @@ export default function AppointmentsListItem({ appointment }) {
                           className={classes.edit}
                         >
                           <Icon name="edit" />
-                          Edit Item
+                          Edit Appointment
                         </Dropdown.Item>
                         <Dropdown.Item
                           className={classes.delete}

@@ -12,9 +12,9 @@ export default function InventoryListTitles({ setPredicate, loading }) {
     <Segment.Group className={classes.dashboardListElement}>
       <Segment textAlign="center" className={classes.inventoryTitlesContainer}>
         <Item.Group>
-          <Container>
+          <Container fluid className={classes.inventoryTitles} >
             <Row>
-              <Col>
+              <Col lg={3} xs={3}>
                 <Item.Content
                   onClick={() => {
                     setPredicate("sort", "category");
@@ -36,7 +36,7 @@ export default function InventoryListTitles({ setPredicate, loading }) {
                   />
                 </Item.Content>
               </Col>
-              <Col>
+              <Col lg={3} xs={3}>
                 <Item>
                   <Item.Content
                     onClick={() => {
@@ -58,7 +58,7 @@ export default function InventoryListTitles({ setPredicate, loading }) {
                   </Item.Content>
                 </Item>
               </Col>
-              <Col>
+              <Col lg={3} xs={3}>
                 <Item>
                   <Item.Content
                     onClick={() => {
@@ -69,8 +69,8 @@ export default function InventoryListTitles({ setPredicate, loading }) {
                   >
                     <Popup
                       trigger={
-                        <Item.Header>
-                          EXPIRATION DATE{" "}
+                        <Item.Header className={classes.inventoryTitleDate}>
+                          EXPIRATION DATE
                           {filterIcon === "expirationDate" && (
                             <Icon name="caret down" />
                           )}
@@ -82,7 +82,7 @@ export default function InventoryListTitles({ setPredicate, loading }) {
                   </Item.Content>
                 </Item>
               </Col>
-              <Col>
+              <Col lg={2} xs={2}>
                 <Item>
                   <Item.Content
                     onClick={() => {
@@ -93,7 +93,7 @@ export default function InventoryListTitles({ setPredicate, loading }) {
                   >
                     <Popup
                       trigger={
-                        <Item.Header>
+                        <Item.Header className={classes.inventoryTitleAmount}>
                           AMOUNT{" "}
                           {filterIcon === "amount" && (
                             <Icon name="caret down" />
@@ -106,7 +106,7 @@ export default function InventoryListTitles({ setPredicate, loading }) {
                   </Item.Content>
                 </Item>
               </Col>
-              <Col></Col>
+              <Col lg={1} xs={1}></Col>
             </Row>
           </Container>
         </Item.Group>

@@ -32,16 +32,18 @@ export default function AppointmentsReasonsListItem({ reason }) {
             <Item.Group>
               <Container fluid>
                 <Row>
-                  <Col>
+                  <Col lg={4} xs={4} className={classes.reasonsContent}>
                     <Item>
-                      <Item.Content>{reason.text}</Item.Content>
+                      <Item.Content className={classes.reasonsContentText}>{reason.text}</Item.Content>
                     </Item>
                   </Col>
-                  <Col>
+                  <Col lg={3} xs={2} className={classes.reasonsContent}>
                     <Item className={classes.appointmentsReasonColor}>
                       <Item.Content>
                         <div
+                        className={classes.appointmentsReasonColorDisplay}
                           style={{
+                            margin: '0 auto',
                             width: "20px",
                             height: "20px",
                             backgroundColor: `${reason.reasonColor.hex}`,
@@ -50,12 +52,12 @@ export default function AppointmentsReasonsListItem({ reason }) {
                       </Item.Content>
                     </Item>
                   </Col>
-                  <Col>
+                  <Col lg={4} xs={4} className={classes.reasonsContent}>
                     <Item>
-                      <Item.Content>{reason.price} RON</Item.Content>
+                      <Item.Content className={classes.reasonsContentText} >{reason.price} RON</Item.Content>
                     </Item>
                   </Col>
-                  <Col>
+                  <Col lg={1} xs={1}>
                     <Dropdown>
                       <Dropdown.Toggle
                         variant="success"
@@ -70,7 +72,7 @@ export default function AppointmentsReasonsListItem({ reason }) {
                           className={classes.edit}
                         >
                           <Icon name="edit" />
-                          Edit Item
+                          Edit Reason
                         </Dropdown.Item>
                         <Dropdown.Item
                           className={classes.delete}

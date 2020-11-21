@@ -94,6 +94,11 @@
 
 .reasonHeader {
   color: #acadad !important;
+  text-align: left !important;
+}
+
+.reasonHeaderText {
+  text-align: left !important;
 }
 
 .itemDropdown {
@@ -277,6 +282,35 @@
         width: 55%;
     }
 
+    .appointmentsNameContent {
+      position: relative;
+      bottom:10px;
+    }
+
+    .inventoryText {
+      font-size: 0.7rem;
+    }
+
+    .inventoryLabel {
+      font-size:0.7rem !important;
+      position: relative;
+      right: 15px;
+    }
+
+    .inventoryTitles {
+      font-size: 0.7rem;
+    }
+
+    .inventoryTitleDate, .inventoryTitleAmount {
+      position: relative;
+      right: 20px;
+    }
+
+    .inventoryAmountText {
+      position: relative;
+      left: 10px;
+    }
+
 }
 
 @media screen and (max-width: 375px) {
@@ -296,6 +330,35 @@
         width: 55%;
     }
 
+    .appointmentsNameContent {
+      position: relative;
+      bottom:10px;
+    }
+
+    .inventoryText {
+      font-size: 0.5rem;
+    }
+
+    .inventoryLabel {
+      font-size:0.5rem !important;
+      position: relative;
+      right: 15px;
+    }
+
+    .inventoryTitles {
+      font-size: 0.5rem;
+    }
+
+    .inventoryTitleDate, .inventoryTitleAmount {
+      position: relative;
+      right: 20px;
+    }
+
+    .inventoryAmountText {
+      position: relative;
+      left: 10px;
+    }
+
 }
 
 @media screen and (max-width: 320px) {
@@ -313,6 +376,11 @@
 
     .headerDateContainer {
         width: 55%;
+    }
+
+    .appointmentsNameContent {
+      position: relative;
+      bottom:10px;
     }
 
 }
@@ -337,6 +405,49 @@
     .appointmentsReasonColor {
      position: relative;
      top: 25%;
+    }
+
+    .reasonsTitles, .reasonsContent {
+      font-size: 0.7rem !important;
+    }
+
+    .appointmentsReasonColorDisplay {
+      width: 10px !important;
+      height: 10px !important;
+    }
+
+    .reasonsContentText {
+      position: relative;
+      top: 6px;
+    }
+
+    .appointmentsNameContent {
+      position: relative;
+      bottom:10px;
+    }
+
+    .inventoryText {
+      font-size: 0.5rem;
+    }
+
+    .inventoryLabel {
+      font-size:0.5rem !important;
+      position: relative;
+      right: 15px;
+    }
+
+    .inventoryTitles {
+      font-size: 0.5rem;
+    }
+
+    .inventoryTitleDate, .inventoryTitleAmount {
+      position: relative;
+      right: 20px;
+    }
+
+    .inventoryAmountText {
+      position: relative;
+      left: 10px;
     }
 
 }
