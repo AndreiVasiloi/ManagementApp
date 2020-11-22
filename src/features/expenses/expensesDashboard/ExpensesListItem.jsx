@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import React, { useState } from "react";
-import { Button, Dropdown, Modal } from "react-bootstrap";
+import { Button, Col, Container, Dropdown, Modal, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -32,57 +32,59 @@ export default function AppointmentsListItem({ expense }) {
         <Segment.Group className={classes.dashboardListElement}>
           <Segment textAlign="center">
             <Item.Group>
-              <Grid>
-                <Grid.Column width={4}>
-                  <Item>
-                    <Item.Content>{expense.name}</Item.Content>
-                  </Item>
-                </Grid.Column>
-                <Grid.Column width={4}>
-                  <Item>
-                    <Item.Content>{expense.price} RON</Item.Content>
-                  </Item>
-                </Grid.Column>
-                <Grid.Column width={4}>
-                  <Item>
-                    <Item.Content>
-                      {format(expense.purchaseDate, "MMMM d, yyyy")}
-                    </Item.Content>
-                  </Item>
-                </Grid.Column>
-                <Grid.Column width={3}>
-                  <Item>
-                    <Item.Content>{expense.amount}</Item.Content>
-                  </Item>
-                </Grid.Column>
-                <Grid.Column width={1}>
-                  <Dropdown className={classes.itemDropdown}>
-                    <Dropdown.Toggle
-                      variant="success"
-                      className={classes.DashboardDropdownButton}
-                    >
-                      <Icon name="ellipsis horizontal" />
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item
-                        as={Link}
-                        to={`/editExpense/${expense.id}`}
-                        className={classes.edit}
+              <Container fluid className={classes.expensesList}>
+                <Row>
+                  <Col lg={3} xs={2}>
+                    <Item className={classes.expensesName}>
+                      <Item.Content>{expense.name}</Item.Content>
+                    </Item>
+                  </Col>
+                  <Col lg={2} xs={2}>
+                    <Item className={classes.expensesPrice}>
+                      <Item.Content>{expense.price}</Item.Content>
+                    </Item>
+                  </Col>
+                  <Col lg={3} xs={3}>
+                    <Item className={classes.expensesDate}>
+                      <Item.Content>
+                        {format(expense.purchaseDate, "MMMM d, yyyy")}
+                      </Item.Content>
+                    </Item>
+                  </Col>
+                  <Col lg={3} xs={3}>
+                    <Item className={classes.expensesAmount}>
+                      <Item.Content>{expense.amount}</Item.Content>
+                    </Item>
+                  </Col>
+                  <Col lg={1} xs={1}>
+                    <Dropdown className={classes.itemDropdown}>
+                      <Dropdown.Toggle
+                        variant="success"
+                        className={classes.DashboardDropdownButton}
                       >
-                        <Icon name="edit" />
-                        Edit Expense
-                      </Dropdown.Item>
-                      <Dropdown.Item
-                        className={classes.delete}
-                        onClick={() => setConfirmOpen(true)}
-                      >
-                        <Icon name="delete" />
-                        Delete Expense
-                      </Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
-                </Grid.Column>
-              </Grid>
+                        <Icon name="ellipsis horizontal" />
+                      </Dropdown.Toggle>
+                      <Dropdown.Menu>
+                        <Dropdown.Item
+                          as={Link}
+                          to={`/editExpense/${expense.id}`}
+                          className={classes.edit}
+                        >
+                          <Icon name="edit" />
+                          Edit Expense
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                          className={classes.delete}
+                          onClick={() => setConfirmOpen(true)}
+                        >
+                          <Icon name="delete" />
+                          Delete Expense
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  </Col>
+                </Row>
+              </Container>
             </Item.Group>
             <Modal show={confirmOpen} onHide={() => setConfirmOpen(false)}>
               <Modal.Body>

@@ -28,8 +28,6 @@ export default function ProfileContent({ profile, isCurrentUser }) {
 
   return (
     <Tab
-      menu={{ fluid: true, vertical: true }}
-      menuPosition='right'
       panes={panes}
     />
   );

@@ -27,7 +27,7 @@ export default function ExpensesNav({ setText }) {
       >
         <div className={classes.topNavbarExpensesContainer}>
           <div className={classes.topNavbarExpensesLeftCol}>
-            <Navbar.Brand className={classes.topNavbarBrand}>
+            <Navbar.Brand className={`${classes.topNavbarBrand} ${classes.expensesBrand}`}>
               Expenses
             </Navbar.Brand>
           </div>

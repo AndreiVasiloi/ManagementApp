@@ -137,6 +137,8 @@
   margin-top: 40px;
 }
 
+/* Clients */
+
 /* profit */
 
 .changeProfitDateIcon {
@@ -179,15 +181,15 @@
 /* media queries */
 
 @media screen and (max-width: 990px) {
-.appointmentsNameContent {
-  text-align: center !important;
-}
+  .appointmentsNameContent {
+    text-align: center !important;
+  }
 }
 
 @media screen and (max-width: 850px) {
   .headerDateContainer {
     width: 30%;
-}
+  }
 }
 
 @media screen and (max-width: 800px) {
@@ -197,23 +199,21 @@
 }
 
 @media screen and (max-width: 768px) {
-    .appointmentsName {
-        text-align: center !important;
-    }
+  .appointmentsName {
+    text-align: center !important;
+  }
 
-    .appointmentsModalContainer {
-      position: relative;
-      right: 53%;
-      top: 5px;
-      margin-top: 5px;
+  .appointmentsModalContainer {
+    position: relative;
+    right: 53%;
+    top: 5px;
+    margin-top: 5px;
   }
 
   .headerDateContainer {
     width: 35%;
-}
-
   }
-  
+}
 
 @media screen and (max-width: 700px) {
   .dashboardContainer {
@@ -238,24 +238,21 @@
   }
 }
 
-
 @media screen and (max-width: 540px) {
+  .appointmentsModalContainer {
+    position: relative;
+    right: 50%;
+    top: 5px;
+    margin-top: 5px;
+  }
 
-    .appointmentsModalContainer {
-        position: relative;
-        right: 50%;
-        top: 5px;
-        margin-top: 5px;
-    }
+  .appointmentsReasonContainer {
+    margin-top: 5px;
+  }
 
-    .appointmentsReasonContainer {
-        margin-top: 5px;
-    }
-
-    .headerDateContainer {
-        width: 40%;
-    }
-
+  .headerDateContainer {
+    width: 40%;
+  }
 }
 
 @media screen and (max-width: 485px) {
@@ -264,195 +261,273 @@
   }
 }
 
-
 @media screen and (max-width: 414px) {
+  .appointmentsModalContainer {
+    position: relative;
+    right: 45%;
+    top: 5px;
+    margin-top: 5px;
+  }
 
-    .appointmentsModalContainer {
-        position: relative;
-        right: 45%;
-        top: 5px;
-        margin-top: 5px;
-    }
+  .appointmentsReasonContainer {
+    margin-top: 5px;
+  }
 
-    .appointmentsReasonContainer {
-        margin-top: 5px;
-    }
+  .headerDateContainer {
+    width: 55%;
+  }
 
-    .headerDateContainer {
-        width: 55%;
-    }
+  .appointmentsNameContent {
+    position: relative;
+    bottom: 10px;
+  }
 
-    .appointmentsNameContent {
-      position: relative;
-      bottom:10px;
-    }
+  .inventoryText {
+    font-size: 0.7rem;
+  }
 
-    .inventoryText {
-      font-size: 0.7rem;
-    }
+  .inventoryLabel {
+    font-size: 0.7rem !important;
+    position: relative;
+    right: 15px;
+  }
 
-    .inventoryLabel {
-      font-size:0.7rem !important;
-      position: relative;
-      right: 15px;
-    }
+  .inventoryTitles {
+    font-size: 0.7rem;
+  }
 
-    .inventoryTitles {
-      font-size: 0.7rem;
-    }
+  .inventoryTitleDate,
+  .inventoryTitleAmount {
+    position: relative;
+    right: 20px;
+  }
 
-    .inventoryTitleDate, .inventoryTitleAmount {
-      position: relative;
-      right: 20px;
-    }
+  .inventoryAmountText {
+    position: relative;
+    left: 10px;
+  }
 
-    .inventoryAmountText {
-      position: relative;
-      left: 10px;
-    }
+  .clientsTitles,
+  .clientsListItems,
+  .expensesTitles,
+  .expensesList {
+    font-size: 0.5rem;
+  }
 
+  .clientsPhone,
+  .clientsEmail,
+  .expensesAmount,
+  .expensesPrice,
+  .expensesName {
+    position: relative;
+    top: 10px;
+  }
+
+  .clientsName,
+  .expensesDate {
+    position: relative;
+    top: 5px;
+  }
 }
 
 @media screen and (max-width: 375px) {
+  .appointmentsModalContainer {
+    position: relative;
+    right: 40%;
+    top: 5px;
+    margin-top: 5px;
+  }
 
-    .appointmentsModalContainer {
-        position: relative;
-        right: 40%;
-        top: 5px;
-        margin-top: 5px;
-    }
+  .appointmentsReasonContainer {
+    margin-top: 5px;
+  }
 
-    .appointmentsReasonContainer {
-        margin-top: 5px;
-    }
+  .headerDateContainer {
+    width: 55%;
+  }
 
-    .headerDateContainer {
-        width: 55%;
-    }
+  .appointmentsNameContent {
+    position: relative;
+    bottom: 10px;
+  }
 
-    .appointmentsNameContent {
-      position: relative;
-      bottom:10px;
-    }
+  .inventoryText {
+    font-size: 0.5rem;
+  }
 
-    .inventoryText {
-      font-size: 0.5rem;
-    }
+  .inventoryLabel {
+    font-size: 0.5rem !important;
+    position: relative;
+    right: 15px;
+  }
 
-    .inventoryLabel {
-      font-size:0.5rem !important;
-      position: relative;
-      right: 15px;
-    }
+  .inventoryTitles {
+    font-size: 0.5rem;
+  }
 
-    .inventoryTitles {
-      font-size: 0.5rem;
-    }
+  .inventoryTitleDate,
+  .inventoryTitleAmount {
+    position: relative;
+    right: 20px;
+  }
 
-    .inventoryTitleDate, .inventoryTitleAmount {
-      position: relative;
-      right: 20px;
-    }
+  .inventoryAmountText {
+    position: relative;
+    left: 10px;
+  }
 
-    .inventoryAmountText {
-      position: relative;
-      left: 10px;
-    }
+  .clientsTitles,
+  .clientsListItems,
+  .expensesTitles,
+  .expensesList {
+    font-size: 0.5rem;
+  }
 
+  .clientsPhone,
+  .clientsEmail,
+  .expensesAmount,
+  .expensesPrice,
+  .expensesName {
+    position: relative;
+    top: 10px;
+  }
+
+  .clientsName,
+  .expensesDate {
+    position: relative;
+    top: 5px;
+  }
 }
 
 @media screen and (max-width: 320px) {
+  .appointmentsModalContainer {
+    position: relative;
+    right: 40%;
+    top: 5px;
+    margin-top: 5px;
+  }
 
-    .appointmentsModalContainer {
-        position: relative;
-        right: 40%;
-        top: 5px;
-        margin-top: 5px;
-    }
+  .appointmentsReasonContainer {
+    margin-top: 5px;
+  }
 
-    .appointmentsReasonContainer {
-        margin-top: 5px;
-    }
+  .headerDateContainer {
+    width: 55%;
+  }
 
-    .headerDateContainer {
-        width: 55%;
-    }
+  .appointmentsNameContent {
+    position: relative;
+    bottom: 10px;
+  }
 
-    .appointmentsNameContent {
-      position: relative;
-      bottom:10px;
-    }
+  .clientsTitles,
+  .clientsListItems,
+  .expensesTitles,
+  .expensesList {
+    font-size: 0.5rem;
+  }
 
+  .clientsPhone,
+  .clientsEmail,
+  .expensesAmount,
+  .expensesPrice,
+  .expensesName {
+    position: relative;
+    top: 10px;
+  }
+
+  .clientsName,
+  .expensesDate {
+    position: relative;
+    top: 5px;
+  }
 }
 
 @media screen and (max-width: 280px) {
+  .appointmentsModalContainer {
+    position: relative;
+    right: 40%;
+    top: 5px;
+    margin-top: 5px;
+  }
 
-    .appointmentsModalContainer {
-        position: relative;
-        right: 40%;
-        top: 5px;
-        margin-top: 5px;
-    }
+  .appointmentsReasonContainer {
+    margin-top: 5px;
+  }
 
-    .appointmentsReasonContainer {
-        margin-top: 5px;
-    }
+  .headerDateContainer {
+    width: 55%;
+  }
 
-    .headerDateContainer {
-        width: 55%;
-    }
+  .appointmentsReasonColor {
+    position: relative;
+    top: 25%;
+  }
 
-    .appointmentsReasonColor {
-     position: relative;
-     top: 25%;
-    }
+  .reasonsTitles,
+  .reasonsContent {
+    font-size: 0.7rem !important;
+  }
 
-    .reasonsTitles, .reasonsContent {
-      font-size: 0.7rem !important;
-    }
+  .appointmentsReasonColorDisplay {
+    width: 10px !important;
+    height: 10px !important;
+  }
 
-    .appointmentsReasonColorDisplay {
-      width: 10px !important;
-      height: 10px !important;
-    }
+  .reasonsContentText {
+    position: relative;
+    top: 6px;
+  }
 
-    .reasonsContentText {
-      position: relative;
-      top: 6px;
-    }
+  .appointmentsNameContent {
+    position: relative;
+    bottom: 10px;
+  }
 
-    .appointmentsNameContent {
-      position: relative;
-      bottom:10px;
-    }
+  .inventoryText {
+    font-size: 0.5rem;
+  }
 
-    .inventoryText {
-      font-size: 0.5rem;
-    }
+  .inventoryLabel {
+    font-size: 0.5rem !important;
+    position: relative;
+    right: 15px;
+  }
 
-    .inventoryLabel {
-      font-size:0.5rem !important;
-      position: relative;
-      right: 15px;
-    }
+  .inventoryTitles {
+    font-size: 0.5rem;
+  }
 
-    .inventoryTitles {
-      font-size: 0.5rem;
-    }
+  .inventoryTitleDate,
+  .inventoryTitleAmount {
+    position: relative;
+    right: 20px;
+  }
 
-    .inventoryTitleDate, .inventoryTitleAmount {
-      position: relative;
-      right: 20px;
-    }
+  .inventoryAmountText {
+    position: relative;
+    left: 10px;
+  }
 
-    .inventoryAmountText {
-      position: relative;
-      left: 10px;
-    }
+  .clientsTitles,
+  .clientsListItems,
+  .expensesTitles,
+  .expensesList {
+    font-size: 0.5rem;
+  }
 
+  .clientsPhone,
+  .clientsEmail,
+  .expensesAmount,
+  .expensesPrice,
+  .expensesName {
+    position: relative;
+    top: 10px;
+  }
+
+  .clientsName,
+  .expensesDate {
+    position: relative;
+    top: 5px;
+  }
 }
-
-
-
-
-

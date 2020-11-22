@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { Grid, Header, Button, Tab } from 'semantic-ui-react';
 import { format } from 'date-fns';
 import ProfileForm from './ProfileForm';
+import classes from '../../../css/ProfilePage.module.css';
 
 export default function AboutTab({ profile, isCurrentUser }) {
   const [editMode, setEditMode] = useState(false);
   return (
-    <Tab.Pane>
+    <Tab.Pane className={classes.aboutTab}>
       <Grid>
         <Grid.Column width={16}>
           <Header

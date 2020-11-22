@@ -1,0 +1,32 @@
+@media screen and (max-width: 411px) {
+    .photoButton {
+        font-size: 0.8rem !important;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .photoButton {
+        font-size: 0.7rem !important;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .photoButton {
+        font-size: 0.6rem !important;
+    }
+}
+
+@media screen and (max-width: 280px) {
+    .aboutTab {
+        font-size: 0.8rem !important;
+    }
+    .photoButton {
+        font-size: 0.5rem !important;
+    }
+}
+
+
+
+
+
+

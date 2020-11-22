@@ -144,12 +144,38 @@
   }
 }
 
+
+
+
+@media screen and (max-width: 700px) {
+  .topNavbar.responsive {
+    margin-top: 499px;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .topNavbar.responsive {
+    margin-top: 445px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .topNavbar.responsive {
+    margin-top: 445px;
+  }
+}
+
 @media screen and (max-width: 360px) {
   .topNavbarExpensesContainer {
     /* flex-direction: column; */
     justify-content: center;
     align-items: center;
   }
+
+.expensesBrand {
+  font-size: 1rem;
+}
+
 }
 
 @media screen and (max-width: 335px) {
@@ -160,40 +186,12 @@
   }
 }
 
-@media screen and (max-width: 700px) {
-  .topNavbar.responsive {
-    margin-top: 499px;
-  }
-}
-
-@media screen and (max-width: 280px) {
-  .topNavbar.responsive {
-    margin-top: 450px;
-  }
-}
-
 @media screen and (max-width: 320px) {
-  .topNavbar.responsive {
-    margin-top: 450px;
-  }
-}
 
-@media screen and (max-width: 375px) {
-  .topNavbar.responsive {
-    margin-top: 450px;
-  }
-}
-
-@media screen and (max-width: 414px) {
   .topNavbar.responsive {
     margin-top: 445px;
   }
-}
 
-
-
-
-@media screen and (max-width: 320px) {
   .topNavbarBrand {
     font-size: 1rem;
   }
@@ -215,4 +213,10 @@
     margin-left: -10px;
   }
 
+}
+
+@media screen and (max-width: 280px) {
+  .topNavbar.responsive {
+    margin-top: 445px;
+  }
 }
