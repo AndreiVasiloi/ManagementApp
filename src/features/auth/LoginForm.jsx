@@ -2,7 +2,7 @@ import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import MyTextInput from "../../app/common/form/MyTextInput";
-import { Button, Divider, Label } from "semantic-ui-react";
+import { Button, Divider, Header, Label } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
 import { closeModal } from "../../app/common/modals/modalReducer";
 import { signInWithEmail } from "../../app/firestore/firebaseService";
@@ -10,6 +10,7 @@ import SocialLogin from "./SocialLogin";
 import firebase from "../../app/config/firebase";
 import classes from "../../css/AuthForm.module.css";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
@@ -46,18 +47,25 @@ export default function LoginForm() {
       }}
     >
       {({ isSubmitting, isValid, dirty, errors }) => (
-        <Form className='ui form'>
+        <Form className="ui form">
           <div className={classes.authFormContainer}>
-            <MyTextInput name='email' placeholder='Email Address' />
+            <MyTextInput name="email" placeholder="Email Address" />
             <MyTextInput
-              name='password'
-              placeholder='Password'
-              type='password'
+              name="password"
+              placeholder="Password"
+              type="password"
             />
+            <Header
+              as={Link}
+              to="/forgotPassword"
+              className={classes.forgotPasswordLink}
+            >
+              Forgot Password?
+            </Header>
             {errors.auth && (
               <Label
                 basic
-                color='red'
+                color="red"
                 style={{ marginBottom: 10 }}
                 content={errors.auth}
               />
@@ -66,11 +74,11 @@ export default function LoginForm() {
               className={classes.authSubmitButton}
               loading={isSubmitting}
               disabled={!isValid || !dirty || isSubmitting}
-              type='submit'
+              type="submit"
               fluid
-              size='large'
-              color='teal'
-              content='Login'
+              size="large"
+              color="teal"
+              content="Login"
             />
             <Divider horizontal className={classes.dividerText}>
               Or login with

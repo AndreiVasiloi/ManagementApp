@@ -54,10 +54,10 @@ export default function InventoryListItem({ item }) {
                       <Item.Content
                         className={
                           checkIfExpired
-                            ? `${classes.expirationDateRed}`
+                            ? `${classes.expirationDateRed} ${classes.inventoryText}`
                             : checkIfIsAboutToExpire
-                            ? `${classes.expirationDateRed}`
-                            : `${classes.expirationDateBlack}`
+                            ? `${classes.expirationDateRed} ${classes.inventoryText}`
+                            : `${classes.expirationDateBlack} ${classes.inventoryText}`
                         }
                       >
                         {checkIfExpired ? (
@@ -75,7 +75,7 @@ export default function InventoryListItem({ item }) {
                   </Col>
                   <Col lg={2} xs={2}>
                     <Item className={classes.inventoryAmountText}>
-                      <Item.Content className={classes.inventoryText}>{item.amount} / buc.</Item.Content>
+                      <Item.Content className={classes.inventoryText}>{item.amount}</Item.Content>
                     </Item>
                   </Col>
                   <Col lg={1} xs={1}>

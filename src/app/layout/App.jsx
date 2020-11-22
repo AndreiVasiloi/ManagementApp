@@ -25,6 +25,8 @@ import ExpensesDashboard from "../../features/expenses/expensesDashboard/Expense
 import ClientsForm from "../../features/clients/clientsForm/ClientsForm";
 import ExpensesForm from "../../features/expenses/expensesForm/ExpensesForm";
 import ConfirmEmail from "../../features/auth/ConfirmEmail";
+import ForgotPassword from "../../features/auth/ForgotPassword";
+import ChangePassword from "../../features/auth/ChangePassword";
 
 function App() {
   const { key } = useLocation();
@@ -35,6 +37,9 @@ function App() {
     <>
       <ToastContainer  position='bottom-right' hideProgressBar />
       <Route path='/' exact component={HomePage} />
+      <Route path='/forgotPassword' component={ForgotPassword} />
+      <Route path='/changePassword' component={ChangePassword} />
+      {/* <Route path='/confirmEmail' component={ConfirmEmail} /> */}
       <Route
         path={"/(.+)"}
         render={() => (

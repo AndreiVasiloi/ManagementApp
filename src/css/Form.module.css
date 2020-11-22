@@ -7,6 +7,13 @@
   width: 80% !important;
 }
 
+.forgotPasswordFormContainer {
+  width: 50% !important;
+  margin: 0 auto !important;
+  position: relative;
+  top: 100px;
+}
+
 .formSubmitBtn {
   background-color: #14b1ab !important;
   border: 2px solid #14b1ab !important;
@@ -22,6 +29,10 @@
 @media screen and (max-width: 700px) {
   .formContainer {
     margin: 45px 0 0 0 !important;
+    width: 90% !important;
+  }
+
+  .forgotPasswordFormContainer {
     width: 90% !important;
   }
 }

@@ -25,7 +25,7 @@ export default function ConfirmEmail({ match }) {
     if (checkState.hasConfirmed) {
       return (
         <>
-          <Header textAlign="center" size="huge">
+          <Header textAlign="center" size="huge" style={{marginTop:'200px'}}>
             Thank you for your registration {currentUserProfile?.displayName}.
           </Header>
           <Header size="medium" textAlign="center">Please enjoy our app.</Header>
@@ -34,7 +34,7 @@ export default function ConfirmEmail({ match }) {
     }
 
     return (
-      <Header textAlign="center" size="huge" color="red">
+      <Header textAlign="center" size="huge" color="red" style={{marginTop:'200px'}}>
         You code is not correct. Please check again or contact the admin:
         andrei_vasiloi@yahoo.com
       </Header>

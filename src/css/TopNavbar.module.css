@@ -155,13 +155,13 @@
 
 @media screen and (max-width: 414px) {
   .topNavbar.responsive {
-    margin-top: 445px;
+    margin-top: 440px;
   }
 }
 
 @media screen and (max-width: 375px) {
   .topNavbar.responsive {
-    margin-top: 445px;
+    margin-top: 440px;
   }
 }
 
@@ -189,7 +189,7 @@
 @media screen and (max-width: 320px) {
 
   .topNavbar.responsive {
-    margin-top: 445px;
+    margin-top: 440px;
   }
 
   .topNavbarBrand {
@@ -217,6 +217,6 @@
 
 @media screen and (max-width: 280px) {
   .topNavbar.responsive {
-    margin-top: 445px;
+    margin-top: 440px;
   }
 }

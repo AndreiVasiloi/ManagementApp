@@ -5,6 +5,7 @@
 
 .authSubmitButton {
     border-radius: 30px !important;
+    margin-top: 10px !important;
 }
 
 .socialLoginButtonsContainer {
@@ -31,4 +32,13 @@
 
 .dividerText {
     color: #697686 !important;
+}
+
+.forgotPasswordLink {
+    font-size:1rem !important;    
+    text-decoration: none !important;
+}
+
+.resetPasswordContainer {
+    margin: auto !important;
 }

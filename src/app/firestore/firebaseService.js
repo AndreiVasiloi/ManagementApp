@@ -13,6 +13,7 @@ export function signOutFirebase() {
   return firebase.auth().signOut();
 }
 
+
 function sendConfirmEmail(email, confirmEmailCode) {
   // TODO: check if you need to user encodeURIComponent / decodeURIComponent
   const confirmUrl = `https://managementapp-d440e.firebaseapp.com/confirmEmail/${email}/${confirmEmailCode}`;
@@ -197,6 +198,17 @@ export async function registerInFirebase(creds) {
     sendConfirmEmail(creds.email, confirmEmailCode);
     result.user.confirmEmailCode = confirmEmailCode;
     return await setUserProfileData(result.user);
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function resetPassword(creds) {
+  
+  try {
+    var auth = firebase.auth();
+    var emailAddress = creds.email;
+    auth.sendPasswordResetEmail(emailAddress)
   } catch (error) {
     throw error;
   }

@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import MyTextInput from "../../../app/common/form/MyTextInput";
-import MyNumberInput from "../../../app/common/form/MyNumberInput";
 import useFirestoreDoc from "../../../app/hooks/useFirestoreDoc";
 import {
   listenToClientFromFirestore,
@@ -70,7 +69,7 @@ export default function ClientsForm({ match, history }) {
             />
             <MyTextInput name='name' placeholder='Name' />
             <MyTextInput name='email' placeholder='Email Address' />
-            <MyNumberInput name='phoneNumber' placeholder='Phone Number' />
+            <MyTextInput name='phoneNumber' placeholder='Phone Number' />
             <Button
               type='submit'
               floated='right'
