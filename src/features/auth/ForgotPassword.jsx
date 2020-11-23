@@ -7,9 +7,12 @@ import MyTextInput from "../../app/common/form/MyTextInput";
 import { resetPassword } from "../../app/firestore/firebaseService";
 import classes from "../../css/Form.module.css";
 import { Link } from "react-router-dom";
+import { closeModal } from "../../app/common/modals/modalReducer";
+import { useDispatch } from "react-redux";
 
 export default function ForgotPassword() {
   const history = useHistory();
+  const dispatch = useDispatch();
   return (
     <Formik
       initialValues={{ email: "" }}
@@ -20,6 +23,7 @@ export default function ForgotPassword() {
         try {
           await resetPassword(values);
           setSubmitting(false);
+          dispatch(closeModal());
           history.push("/");
         } catch (error) {
           setErrors({ auth: error.message });

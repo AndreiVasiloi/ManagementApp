@@ -35,7 +35,7 @@ export default function ExpensesForm({ match, history }) {
     name: Yup.string().required("You must provide a name"),
     price: Yup.string().required("You must provide a price"),
     purchaseDate: Yup.string().required("You must provide a date"),
-    amount: Yup.string().required("You must provide a amount"),
+    amount: Yup.string().required("You must provide an amount"),
   });
 
   useFirestoreDoc({

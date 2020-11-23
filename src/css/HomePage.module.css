@@ -302,6 +302,10 @@
 
 /* Testimonials */
 
+.carouselContainer {
+  min-height: 500px !important;
+}
+
 #testimonials {
   text-align: center;
 }

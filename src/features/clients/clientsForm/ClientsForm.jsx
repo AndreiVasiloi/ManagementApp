@@ -27,9 +27,13 @@ export default function ClientsForm({ match, history }) {
     phoneNumber: "",
     email: ''
   };
-
+  const phoneRegex = RegExp(
+    /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
+  );
   const validationSchema = Yup.object({
     name: Yup.string().required("You must provide a name"),
+    phoneNumber: Yup.string().matches(phoneRegex, "Invalid phone").required("You must provide a phone number"),
+    email: Yup.string().required("You must provide an email address").email(),
   });
 
   useFirestoreDoc({

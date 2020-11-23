@@ -9,7 +9,7 @@ export default function Testimonials() {
     setIndex(selectedIndex);
   };
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect}>
+    <Carousel activeIndex={index} onSelect={handleSelect} className={classes.carouselContainer}>
       <Carousel.Item className={classes.testimonialItemContainer}>
         <h2 className={classes.testimonialText}>
           <q>

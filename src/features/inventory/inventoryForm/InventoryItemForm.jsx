@@ -51,8 +51,8 @@ export default function InventoryItemForm({ match, history }) {
   const validationSchema = Yup.object({
     category: Yup.string().required("You must provide a category"),
     name: Yup.string().required("You must provide a name"),
-    expirationDate: Yup.string().required(),
-    amount: Yup.string().required(),
+    expirationDate: Yup.string().required("You must provide a date"),
+    amount: Yup.string().required("You must provide an amount"),
   });
 
   useFirestoreCollection({

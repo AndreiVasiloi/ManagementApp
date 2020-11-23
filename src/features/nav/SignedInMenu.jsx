@@ -76,21 +76,6 @@ export default function SignedInMenu() {
       </Nav.Item>
       <Nav.Item
         onClick={() => {
-          dispatch(addActiveClass("profit"));
-          dispatch(addResponsiveClass(!responsiveClass));
-        }}
-        as={Link}
-        className={
-          activeClass === "profit"
-            ? `${classes.navLink} ${classes.active}`
-            : `${classes.navLink} `
-        }
-        to="/profit"
-      >
-        <Icon name="percent" /> Profit
-      </Nav.Item>
-      <Nav.Item
-        onClick={() => {
           dispatch(addActiveClass("clients"));
           dispatch(addResponsiveClass(!responsiveClass));
         }}
@@ -118,6 +103,21 @@ export default function SignedInMenu() {
         to="/expenses"
       >
         <Icon name="money bill alternate outline" /> Expenses
+      </Nav.Item>
+      <Nav.Item
+        onClick={() => {
+          dispatch(addActiveClass("profit"));
+          dispatch(addResponsiveClass(!responsiveClass));
+        }}
+        as={Link}
+        className={
+          activeClass === "profit"
+            ? `${classes.navLink} ${classes.active}`
+            : `${classes.navLink} `
+        }
+        to="/profit"
+      >
+        <Icon name="percent" /> Profit
       </Nav.Item>
       {/* <Nav.Item
         onClick={() => dispatch(addActiveClass("sandbox"))}

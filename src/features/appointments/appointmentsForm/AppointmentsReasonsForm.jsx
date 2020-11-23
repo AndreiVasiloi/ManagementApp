@@ -33,6 +33,7 @@ export default function AppointmentsReasonsForm({ match, history, location }) {
 
   const validationSchema = Yup.object({
     text: Yup.string().required("You must provide a reason"),
+    price: Yup.string().required("You must provide a price"),
   });
 
   useFirestoreDoc({
@@ -71,7 +72,7 @@ export default function AppointmentsReasonsForm({ match, history, location }) {
             />
             <MyTextInput name='text' placeholder='Reason' />
             <MyNumberInput name='price' placeholder='Price' />
-            <Header content='Pick a reason color' />
+            <Header content='Pick a reason color for displaying your text' />
             <MyColorPicker name='reasonColor' />
             <Button
               type='submit'
