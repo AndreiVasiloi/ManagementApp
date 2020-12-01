@@ -5,9 +5,9 @@ import AppointmentsReasonsNav from "../appointmentsNav/AppointmentsReasonsNav";
 import { listenToReasons } from "../reasonsActions";
 import AppointmentsReasonsList from "./AppointmentsReasonsList";
 import classes from "../../../css/Dashboard.module.css";
-import InventoryListItemPlaceholder from "../../inventory/inventoryDashboard/InventoryListItemPlaceholder";
 import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import { listenToReasonsFromFirestore } from "../../../app/firestore/firestoreService";
+import Placeholder from "../../../app/common/placeholders/Placeholder/Placeholder";
 
 export default function AppointmentsReasonsDashboard() {
   const dispatch = useDispatch();
@@ -32,8 +32,7 @@ export default function AppointmentsReasonsDashboard() {
             <AppointmentsReasonsNav />
             {loading && (
               <>
-                <InventoryListItemPlaceholder />
-                <InventoryListItemPlaceholder />
+                <Placeholder />
               </>
             )}
             <AppointmentsReasonsList reasons={currentUserReasons} loading={loading} />

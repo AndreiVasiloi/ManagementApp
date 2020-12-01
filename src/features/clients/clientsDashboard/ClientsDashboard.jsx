@@ -5,7 +5,7 @@ import { listenToClients } from "../clientsActions";
 import ClientsNav from "../clientsNav/ClientsNav";
 import ClientsList from "./ClientsList";
 import classes from "../../../css/Dashboard.module.css";
-import InventoryListItemPlaceholder from "../../inventory/inventoryDashboard/InventoryListItemPlaceholder";
+import Placeholder from "../../../app/common/placeholders/Placeholder/Placeholder";
 import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import { listenToClientsFromFirestore } from "../../../app/firestore/firestoreService";
 
@@ -51,8 +51,7 @@ export default function ClientsDashboard() {
             <ClientsNav setText={setText} />
             {loading && (
               <>
-                <InventoryListItemPlaceholder />
-                <InventoryListItemPlaceholder />
+                <Placeholder />
               </>
             )}
             <ClientsList clients={filteredClients} />

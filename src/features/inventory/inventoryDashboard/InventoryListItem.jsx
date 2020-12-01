@@ -62,7 +62,7 @@ export default function InventoryListItem({ item }) {
                       >
                         {checkIfExpired ? (
                           <Popup
-                            content={item.expirationDate}
+                            content={format(item.expirationDate, "MMMM d, yyyy")}
                             trigger={
                               <Label basic color="red" content="Expired" className={classes.inventoryLabel}/>
                             }

@@ -5,7 +5,7 @@ import { listenToExpenses } from "../expensesActions";
 import ExpensesNav from "../expensesNav/ExpensesNav";
 import ExpensesList from "./ExpensesList";
 import classes from "../../../css/Dashboard.module.css";
-import InventoryListItemPlaceholder from "../../inventory/inventoryDashboard/InventoryListItemPlaceholder";
+import Placeholder from "../../../app/common/placeholders/Placeholder/Placeholder";
 import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import { listenToExpensesFromFirestore } from "../../../app/firestore/firestoreService";
 
@@ -54,8 +54,7 @@ export default function ClientsDashboard() {
             <ExpensesNav setText={setText} />
             {loading && (
               <>
-                <InventoryListItemPlaceholder />
-                <InventoryListItemPlaceholder />
+                <Placeholder />
               </>
             )}
             <ExpensesList

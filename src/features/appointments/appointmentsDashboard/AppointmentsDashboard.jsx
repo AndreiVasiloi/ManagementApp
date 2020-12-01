@@ -6,9 +6,9 @@ import AppointmentsNav from "../appointmentsNav/AppointmentsNav";
 import AppointmentsList from "./AppointmentsList";
 import classes from "../../../css/Dashboard.module.css";
 import { LineCalendar } from "../lineCalendar/LineCalendar";
-import InventoryListItemPlaceholder from "../../inventory/inventoryDashboard/InventoryListItemPlaceholder";
 import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import { listenToAppointmentsFromFirestore } from "../../../app/firestore/firestoreService";
+import Placeholder from "../../../app/common/placeholders/Placeholder/Placeholder";
 
 export default function AppointmentsDashboard() {
   const { currentUser } = useSelector((state) => state.auth);
@@ -17,10 +17,13 @@ export default function AppointmentsDashboard() {
   const dispatch = useDispatch();
   const [showAllAppointments, setShowAllAppointments] = useState(false);
   const [text, setText] = useState("");
+  const today = new Date(new Date().getFullYear(),new Date().getMonth() , new Date().getDate());
+  const tomorrow = new Date(new Date().getFullYear(),new Date().getMonth() , new Date().getDate());
+  tomorrow.setDate(tomorrow.getDate() + 1)
   const [predicate, setPredicate] = useState(
     new Map([
-      ["startDate", new Date()],
-      ["endDate", new Date()],
+      ["startDate", today],
+      ["endDate", tomorrow],
     ])
   );
   const date = predicate.get("startDate");
@@ -68,7 +71,7 @@ export default function AppointmentsDashboard() {
       return prev;
     }, {});
   }
-
+debugger
   return (
     <>
       <div className={classes.dashboardContainer}>
@@ -87,8 +90,7 @@ export default function AppointmentsDashboard() {
             </div>
             {loading && (
               <>
-                <InventoryListItemPlaceholder />
-                <InventoryListItemPlaceholder />
+                <Placeholder />
               </>
             )}
             {Object.keys(groupedAppointments).length > 0 ? (

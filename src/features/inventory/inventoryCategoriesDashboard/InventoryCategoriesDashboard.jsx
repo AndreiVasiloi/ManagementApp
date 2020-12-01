@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import InventoryCategoriesList from "./InventoryCategoriesList";
 import { listenToCategories } from "../inventoryCategoriesActions";
 import InventoryCategoriesNavbar from "../inventoryNav/InventoryCategoriesNavbar";
-import InventoryListItemPlaceholder from "../inventoryDashboard/InventoryListItemPlaceholder";
+import Placeholder from "../../../app/common/placeholders/Placeholder/Placeholder";
 import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import { listenToCategoriesFromFirestore } from "../../../app/firestore/firestoreService";
 
@@ -31,8 +31,7 @@ export default function InventoryCategoriesDashboard() {
           <InventoryCategoriesNavbar />
           {loading && (
             <>
-              <InventoryListItemPlaceholder />
-              <InventoryListItemPlaceholder />
+              <Placeholder />
             </>
           )}
           <InventoryCategoriesList loading={loading} categories={currentUserCategories} />

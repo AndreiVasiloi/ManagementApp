@@ -9,6 +9,7 @@ import Examples from "./Examples";
 import CallToAction from "./CallToAction";
 import Footer from "./Footer";
 import { useSelector } from "react-redux";
+import ScrollToTop from "react-scroll-to-top";
 
 export default function HomePage({ history }) {
   const [formToDisplay, setFormToDisplay] = useState();
@@ -17,6 +18,7 @@ export default function HomePage({ history }) {
     <>
       <section className={classes.coloredSection} id={classes.title}>
         <Container fluid className={classes.containerFluid}>
+          <ScrollToTop smooth color='#14b1ab'/>
           <HomePageNavBar
             formToDisplay={formToDisplay}
             setFormToDisplay={setFormToDisplay}

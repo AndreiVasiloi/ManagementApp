@@ -139,6 +139,16 @@
 
 /* Clients */
 
+.clientsPhoneLink, .clientsEmailLink {
+  text-decoration: none;
+  color: #697686;
+}
+
+.clientsPhoneLink:hover, .clientsEmailLink:hover {
+  text-decoration: none;
+  color: #697686;
+}
+
 /* profit */
 
 .changeProfitDateIcon {

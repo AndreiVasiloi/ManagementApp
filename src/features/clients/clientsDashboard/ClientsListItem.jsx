@@ -40,12 +40,16 @@ export default function AppointmentsListItem({ client }) {
                   </Col>
                   <Col lg={3} xs={4}>
                     <Item className={classes.clientsPhone}>
-                      <Item.Content>{client.phoneNumber}</Item.Content>
+                      <a href={`tel:${client.phone}`} className={classes.clientsPhoneLink}>
+                        <Item.Content>{client.phoneNumber}</Item.Content>
+                      </a>
                     </Item>
                   </Col>
                   <Col lg={5} xs={5}>
                     <Item className={classes.clientsEmail}>
-                      <Item.Content>{client.email}</Item.Content>
+                      <a href={`mailto:${client.email}`} className={classes.clientsEmailLink}>
+                        <Item.Content>{client.email}</Item.Content>
+                      </a>
                     </Item>
                   </Col>
                   <Col lg={1} xs={1}>

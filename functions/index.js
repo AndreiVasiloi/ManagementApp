@@ -162,7 +162,7 @@ exports.sendWarningEmail = functions.pubsub
   });
 
 exports.clearOlderEmails = functions.pubsub
-  .schedule("every monday 12:00")
+  .schedule("every day 12:00")
   .timeZone("Europe/Bucharest")
   .onRun(async () => {
     mailRef = db.collection("mail");

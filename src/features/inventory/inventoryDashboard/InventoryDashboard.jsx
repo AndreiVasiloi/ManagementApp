@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Grid } from "semantic-ui-react";
 import InventoryList from "./InventoryList";
 import { useSelector, useDispatch } from "react-redux";
-import InventoryListItemPlaceholder from "./InventoryListItemPlaceholder";
+import Placeholder from "../../../app/common/placeholders/Placeholder/Placeholder";
 import { listenToItems } from "../inventoryItemsActions";
 import classes from "../../../css/Dashboard.module.css";
 import InventoryNavbar from "../inventoryNav/InventoryNavbar";
@@ -55,8 +55,7 @@ export default function InventoryDashboard() {
           <InventoryNavbar setText={setText} />
           {loading && (
             <>
-              <InventoryListItemPlaceholder />
-              <InventoryListItemPlaceholder />
+              <Placeholder />
             </>
           )}
           <InventoryList
